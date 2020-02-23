@@ -1,0 +1,49 @@
+aurora_thermometer:
+  sequence:
+    - condition: state
+      entity_id: var.mode
+      state: 'home'
+    - service: light.turn_on
+      data_template:
+        entity_id: light.nanoleaf
+        effect: >
+          {% if state_attr('weather.home', 'temperature') <= -32 %}
+            Level 9 Cold
+          {% elif state_attr('weather.home', 'temperature') <= -28 %}
+            Level 8 Cold
+          {% elif state_attr('weather.home', 'temperature') <= -24 %}
+            Level 7 Cold
+          {% elif state_attr('weather.home', 'temperature') <= -20 %}
+            Level 6 Cold
+          {% elif state_attr('weather.home', 'temperature') <= -16 %}
+            Level 5 Cold
+          {% elif state_attr('weather.home', 'temperature') <= -12 %}
+            Level 4 Cold
+          {% elif state_attr('weather.home', 'temperature') <= -8 %}
+            Level 3 Cold
+          {% elif state_attr('weather.home', 'temperature') <= -4 %}
+            Level 2 Cold
+          {% elif state_attr('weather.home', 'temperature') <= 0 %}
+            Level 1 Cold
+          {% elif state_attr('weather.home', 'temperature') <= 4  %}
+            Level 1 Hot
+          {% elif state_attr('weather.home', 'temperature') <= 8 %}
+            Level 2 Hot
+          {% elif state_attr('weather.home', 'temperature') <= 16 %}
+            Level 3 Hot
+          {% elif state_attr('weather.home', 'temperature') <= 20 %}
+            Level 4 Hot
+          {% elif state_attr('weather.home', 'temperature') <= 24 %}
+            Level 5 Hot
+          {% elif state_attr('weather.home', 'temperature') <= 28 %}
+            Level 6 Hot
+          {% elif state_attr('weather.home', 'temperature') <= 32 %}
+            Level 7 Hot
+          {% elif state_attr('weather.home', 'temperature') <= 36 %}
+            Level 8 Hot
+          {% elif state_attr('weather.home', 'temperature') > 36 %}
+            Level 9 Hot
+          {% else %}
+            Error
+          {% endif %}
+        brightness: "{{ states('sensor.aurora_brightness_map')|int + 50 }}"

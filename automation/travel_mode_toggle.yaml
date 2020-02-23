@@ -1,0 +1,123 @@
+- alias: Travel bike mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_bike
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.travel_transit
+          - input_boolean.travel_drive
+          - input_boolean.travel_walk
+          - input_boolean.travel_uber
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode
+        option: "Bike"
+        
+- alias: Travel transit mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_transit
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.travel_bike
+          - input_boolean.travel_drive
+          - input_boolean.travel_walk
+          - input_boolean.travel_uber
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode
+        option: "Transit"
+        
+- alias: Travel uber mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_uber
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.travel_bike
+          - input_boolean.travel_drive
+          - input_boolean.travel_walk
+          - input_boolean.travel_transit
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode
+        option: "Uber"
+        
+- alias: Travel walk mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_walk
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.travel_transit
+          - input_boolean.travel_drive
+          - input_boolean.travel_bike
+          - input_boolean.travel_uber
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode
+        option: "Walk"
+        
+- alias: Travel drive mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_drive
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.travel_transit
+          - input_boolean.travel_bike
+          - input_boolean.travel_walk
+          - input_boolean.travel_uber
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode
+        option: "Drive"
+        
+- alias: Travel none mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_drive
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.travel_transit
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.travel_walk
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.travel_bike
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.travel_uber
+        to: "off"
+  condition:
+    condition: template
+    value_template: "{{ is_state('input_boolean.travel_walk','off') and is_state('input_boolean.travel_drive','off') and is_state('input_boolean.travel_transit','off') and is_state('input_boolean.travel_bike','off') and is_state('input_boolean.travel_uber','off') }}"
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "{{trigger.entity_id}}"
+        
+- alias: input select travel switches
+  trigger:
+      - platform: state
+        entity_id: input_select.travel_mode
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "input_boolean.travel_{{ states('input_select.travel_mode') | lower }}"

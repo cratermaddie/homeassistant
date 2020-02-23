@@ -1,0 +1,6 @@
+lost_iphone:
+  sequence:
+    - service: icloud.play_sound
+      data:
+        account: cratermaddie
+        device_name: madisonsiphone

@@ -1,0 +1,25 @@
+cancel_nap:
+  sequence:
+    - service: script.turn_off
+      data:
+        entity_id: script.set_nap
+    - service: script.turn_off
+      data:
+        entity_id: script.snooze
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Bedroom"
+        scene_name: "Energize"
+    - service: var.set
+      data:
+        entity_id: var.mode
+        value: "home"
+    - service: input_boolean.turn_on
+      data:
+        entity_id: inpout_boolean.awake
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.aurora_brightness
+        option: "Bright"
+    - service: automation.trigger
+      entity_id: automation.aurora_controller

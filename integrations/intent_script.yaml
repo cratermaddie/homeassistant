@@ -1,0 +1,3 @@
+AutoAlarmTime:
+  speech:
+    text: The alarm time is {{ states(sensor.auto_alarm_time_display) }}.

@@ -1,0 +1,26 @@
+- alias: Send iOS notification when battery is low
+  trigger:
+    platform: state
+    entity_id: sensor.charge_battery_trigger
+    to: "True"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sensor.battery_state
+        state: 'Not Charging'
+      - condition: numeric_state
+        entity_id: sensor.battery_level
+        below: 85
+      - condition: template
+        value_template: "{{ as_timestamp(states.sensor.battery_state.last_changed) > as_timestamp(state_attr('automation.send_ios_notification_when_battery_is_low','last_triggered')) }}"
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data_template:
+        message: "Your battery is at {{ states('sensor.battery_level') }}%. You may want to charge it before {{ state_attr('calendar.personal_trigger','message') }}."
+        data:
+          apns_headers:
+            'apns-collapse-id': 'charge-reminder'
+          push:
+            sound: 'low_power.caf'
+            thread-id: 'charge-reminder'

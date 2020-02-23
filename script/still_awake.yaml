@@ -1,0 +1,6 @@
+still_awake:
+  sequence:
+    - service: var.set
+      data:
+        entity_id: var.time_asleep
+        value: "{{ now().timestamp() }}"

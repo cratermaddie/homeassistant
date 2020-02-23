@@ -1,0 +1,31 @@
+- alias: Send notification if I have not taken my e
+  trigger:
+    - platform: state
+      entity_id: sensor.google_cal_leave_trigger
+      to: "True"
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_select.travel_mode
+      state: 'Transit'
+    - condition: state
+      entity_id: input_boolean.staying_home
+      state: 'off'
+    - condition: template
+      value_template: "{{ 'YES' in states('sensor.cubs_result') }}"
+  action:
+    - delay:
+        minutes: 2
+    - condition: state
+      entity_id: input_select.travel_mode
+      state: 'Transit'
+    - service: notify.mobile_app_madisons_iphone
+      data:
+        message: "Note: There is a cubs game today."
+        data:
+          apns_headers:
+            'apns-collapse-id': 'cubs-reminder'
+          push:
+            thread-id: "cubs-reminder"
+            sound: 'ballgame.wav'

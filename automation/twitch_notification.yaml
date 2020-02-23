@@ -1,0 +1,24 @@
+- alias: Send notification when twitch streamer goes live
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: sensor.hatfilms,sensor.upisnotjump,sensor.squidgame,sensor.yogscast
+    to: streaming
+  condition:
+    condition: state
+    entity_id: var.mode
+    state: 'home'
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data_template:
+        message: >
+          {{ trigger.from_state.attributes.friendly_name }} is live!
+        data:
+          apns_headers:
+            'apns-collapse-id': '{{ trigger.from_state.attributes.friendly_name }}-reminder'
+          attachment:
+            url: '{{ trigger.from_state.attributes.entity_picture }}'
+            hide-thumbnail: false
+          push:
+            thread-id: "twitch-notification"
+            sound: 'film.wav'

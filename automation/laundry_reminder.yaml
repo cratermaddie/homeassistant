@@ -1,0 +1,24 @@
+- alias: Send notification if I need to do laundry
+  trigger:
+    - platform: state
+      entity_id: sensor.laundry_reminder_trigger
+      to: "True"
+    - platform: zone
+      entity_id: device_tracker.madisons_iphone_app
+      zone: zone.home
+      event: enter
+  condition:
+    condition: state
+    entity_id: input_boolean.laundry_reminder
+    state: 'on'
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data:
+        message: "Don't forget to do laundry!"
+        data:
+          apns_headers:
+            'apns-collapse-id': 'laundry-reminder'
+          push:
+            category: "washer"
+            thread-id: "laundry-reminder"
+            sound: 'wash.wav'

@@ -1,0 +1,15 @@
+- alias: Mailbox notification
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.wyzesense_779ad318
+      to: 'on'
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data_template:
+        message: "Mailbox has been opened!"
+        data:
+          apns_headers:
+            'apns-collapse-id': 'mailbox-reminder'
+          push:
+            thread-id: 'mailbox-reminder'
+            sound: 'mail.wav'

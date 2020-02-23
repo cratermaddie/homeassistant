@@ -1,0 +1,25 @@
+mode:
+  initial_value: "home"
+  friendly_name: 'Mode'
+  icon: mdi:home-account
+temp:
+  friendly_name: 'Temp'
+  icon: mdi:progress-wrench
+aurora_temp:
+  friendly_name: 'Aurora Value'
+  icon: mdi:cube-unfolded
+nap_duration:
+  friendly_name: 'Nap Duration'
+  icon: mdi:sleep
+volume_temp:
+  friendly_name: 'Volume Value'
+  icon: mdi:volume-high
+query_home:
+  friendly_name: 'Query Home'
+  icon: mdi:google-home
+alarm_time:
+  friendly_name: 'Alarm Time'
+  icon: mdi:alarm
+time_asleep:
+  friendly_name: 'Time Asleep'
+  icon: mdi:hotel

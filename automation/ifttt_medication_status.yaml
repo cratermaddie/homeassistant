@@ -1,0 +1,13 @@
+- alias: Mark meds taken
+  trigger:
+    -  platform: event
+       event_type: ifttt_webhook_received
+       event_data:
+         action: meds_service
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: DISMISS_MEDS
+  action:
+    service: counter.increment
+    entity_id: counter.meds_counter

@@ -1,0 +1,38 @@
+bedtime_2:
+  sequence:
+    - condition: state
+      entity_id: var.mode
+      state: 'home'
+    - service: switch.turn_off
+      entity_id: switch.air_freshener
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Bedroom"
+        scene_name: "Bedtime"
+    - service: light.turn_on
+      data:
+        entity_id: light.nanoleaf
+        effect: Bedtime
+    - service: media_player.turn_on
+      entity_id: media_player.bedroom_speaker
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'idle') }}"
+    - service: var.set
+      data:
+        entity_id: var.volume_temp
+        value_template: "{{ state_attr('media_player.bedroom_speaker', 'volume_level')| float | round(2)}}"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.bedroom_speaker
+        volume_level: 0.8
+    - service: tts.google_translate_say
+      entity_id: media_player.bedroom_speaker
+      data:
+        message: 'Time to go to bed.'
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'playing') }}"
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'idle') }}"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.bedroom_speaker
+        volume_level: "{{ states('var.volume_temp')| float }}"
+    - service: media_player.turn_off
+      entity_id: media_player.bedroom_speaker

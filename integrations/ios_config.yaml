@@ -1,0 +1,58 @@
+push:
+  categories:
+    - name: Package
+      identifier: 'package'
+      actions:
+        - identifier: 'DISMISS_PACKAGE'
+          title: 'Dismiss Notification'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: true
+    - name: Meds
+      identifier: 'meds'
+      actions:
+        - identifier: 'DISMISS_MEDS'
+          title: 'Taken'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: false
+    - name: Estrogen
+      identifier: 'estrogen'
+      actions:
+        - identifier: 'DISMISS_E'
+          title: 'Taken'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: false
+    - name: Washer
+      identifier: 'washer'
+      actions:
+        - identifier: 'START_WASHER'
+          title: 'Started washer'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: false
+    - name: Dryer
+      identifier: 'dryer'
+      actions:
+        - identifier: 'START_DRYER'
+          title: 'Started dryer'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: false
+    - name: Laundry done
+      identifier: 'laundry-done'
+      actions:
+        - identifier: 'LAUNDRY_DONE'
+          title: 'Done'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: false
+    - name: Refill pills
+      identifier: 'refill-pills'
+      actions:
+        - identifier: 'REFILL_PILLS'
+          title: 'Refilled'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: false

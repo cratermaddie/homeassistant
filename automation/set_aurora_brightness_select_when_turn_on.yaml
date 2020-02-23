@@ -1,0 +1,15 @@
+#- alias: Set aurora brightness select when turn on
+#  trigger:
+#    platform: state
+#    entity_id: light.nanoleaf
+#    to: 'on'
+#  action:
+#    service: input_select.select_option
+#    data_template:
+#      entity_id: input_select.aurora_brightness
+#      option: >-
+#        {% if is_state("sun.sun", "above_horizon") %}
+#          Bright
+#        {% else %}
+#          Dim
+#        {% endif %}

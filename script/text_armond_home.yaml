@@ -1,0 +1,10 @@
+text_armond_home:
+  sequence:
+    - condition: 'state'
+      entity_id: input_boolean.text_armond
+      state: 'on'
+    - service: notify.twilio
+      data_template:
+        message: 'Madison made it home safe!'
+        target:
+          - !secret armond_phone

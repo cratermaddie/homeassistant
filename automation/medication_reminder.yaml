@@ -1,0 +1,31 @@
+- alias: Send notification if I have not taken my medication
+  trigger:
+    - platform: time
+      at: '19:00:00'
+    - platform: time
+      at: '22:00:00'
+    - platform: zone
+      entity_id: device_tracker.madisons_iphone_app
+      zone: zone.home
+      event: enter
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.meds_status
+      state: 'off'
+    - condition: time
+      after: '18:59:59'
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data:
+        message: "Take your meds!"
+        data:
+          apns_headers:
+            'apns-collapse-id': 'medication-reminder'
+          push:
+            category: "meds"
+            thread-id: "medication-reminder"
+            sound: 'medical.wav'
+          action_data: 
+            id: "meds"

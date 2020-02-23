@@ -1,0 +1,5 @@
+turn_on_pc:
+  sequence:
+    - service: wake_on_lan.send_magic_packet
+      data:
+        mac: !secret desktop_mac

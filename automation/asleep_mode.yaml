@@ -1,0 +1,12 @@
+- alias: Set mode to asleep 2 hours after going to bed
+  trigger:
+    platform: state
+    entity_id: var.mode
+    to: 'sleep'
+    for:
+      hours: 2
+  action:
+    - service: switch.turn_off
+      entity_id: switch.diffuser
+    - service: switch.turn_on
+      entity_id: switch.diffuser

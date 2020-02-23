@@ -1,0 +1,23 @@
+- alias: Set travel mode
+  trigger:
+      - platform: event
+        event_type: ifttt_webhook_received
+        event_data:
+          action: transit_walk_service
+      - platform: event
+        event_type: ifttt_webhook_received
+        event_data:
+          action: transit_drive_service
+      - platform: event
+        event_type: ifttt_webhook_received
+        event_data:
+          action: transit_transit_service
+      - platform: event
+        event_type: ifttt_webhook_received
+        event_data:
+          action: transit_bike_service
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode
+        option: "{{ trigger.event.data.action.split('_')[1] | title }}"

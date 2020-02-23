@@ -1,0 +1,9 @@
+turn_off_pc:
+  sequence:
+    - condition: 'state'
+      entity_id: input_boolean.dont_shutdown
+      state: 'off'
+    - service: hassio.addon_stdin
+      data:
+        addon: core_rpc_shutdown
+        input: desktop

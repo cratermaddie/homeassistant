@@ -1,0 +1,11 @@
+- alias: Set aurora mode
+  trigger:
+      platform: event
+      event_type: ifttt_webhook_received
+      event_data:
+        action: aurora_service
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.aurora_mode
+        option: "{{ trigger.event.data.mode | title }}"

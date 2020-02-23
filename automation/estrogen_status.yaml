@@ -1,0 +1,14 @@
+- alias: Mark estrogen taken
+  trigger:
+    -  platform: event
+       event_type: ifttt_webhook_received
+       event_data:
+         action: estrogen_service
+    - platform: event
+      event_type: ios.notification_action_fired
+      event_data:
+        actionName: DISMISS_E
+  action:
+    service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.estrogen_status

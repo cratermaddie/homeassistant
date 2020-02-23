@@ -1,0 +1,8 @@
+- alias: Increment pill box counter when opened
+  trigger:
+    platform: state
+    entity_id: binary_sensor.pills
+    to: 'on'
+  action:
+    service: counter.increment
+    entity_id: counter.meds_counter

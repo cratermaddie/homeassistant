@@ -1,0 +1,9 @@
+goodnight_e:
+  sequence:
+    - condition: state
+      entity_id: input_boolean.estrogen_status
+      state: 'off'
+    - service: tts.google_translate_say
+      entity_id: media_player.bedroom_speaker
+      data_template:
+        message: "You still need to take your estrogen."

@@ -1,0 +1,13 @@
+- alias: Set aurora brightness based on brightness map
+  trigger:
+    - platform: state
+      entity_id: sensor.aurora_brightness_map
+  condition:
+    condition: state
+    entity_id: var.mode
+    state: 'home'
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: light.nanoleaf
+        brightness: "{{ states('sensor.aurora_brightness_map') }}"

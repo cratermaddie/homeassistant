@@ -1,0 +1,39 @@
+- alias: Bedtime notification
+  trigger:
+    - platform: state
+      entity_id: sensor.bedtime_trigger
+      to: 'True'
+    - platform: time
+      at: "23:00:00"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.bedtime
+        state: 'off'
+      - condition: state
+        entity_id: var.mode
+        state: 'home'
+      - condition: state
+        entity_id: input_boolean.staying_up
+        state: 'off'
+      - condition: numeric_state
+        entity_id: sensor.uptime
+        above: 0.2
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.bedtime
+    - service: script.bedtime_1
+    - delay:
+        minutes: 30
+    - condition: state
+      entity_id: input_boolean.staying_up
+      state: 'off'
+    - service: script.bedtime_2
+    - delay:
+        minutes: 30
+    - condition: state
+      entity_id: input_boolean.staying_up
+      state: 'off'
+    - service: script.bedtime_3

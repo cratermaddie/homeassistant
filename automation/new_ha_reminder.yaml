@@ -1,0 +1,19 @@
+- alias: Update Available Notification
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.updater
+      to: 'on'
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data_template:
+        message: "Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version') }} is available."
+        data:
+          apns_headers:
+            'apns-collapse-id': 'new-ha-version-reminder'
+          push:
+            thread-id: 'new-ha-version-reminder'
+            sound: '3rdParty_Success_Haptic.caf'
+    - service: persistent_notification.create
+      data_template:
+        message: "Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version') }} is available."
+        title: "New Home Assistant Version!"

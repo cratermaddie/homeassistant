@@ -1,0 +1,11 @@
+bedtime_3:
+  sequence:
+    - condition: state
+      entity_id: var.mode
+      state: 'home'
+    - service: light.turn_off
+      entity_id:
+        - light.living_room_4
+        - light.dining_area_4
+        - light.entry_way_2
+    - service: script.turn_off_pc

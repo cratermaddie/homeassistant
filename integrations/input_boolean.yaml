@@ -1,0 +1,47 @@
+meds_status:
+  name: Medication status
+  icon: mdi:pill
+google_cal_travel_reminder:
+  name: Google Calendar Leave Reminder
+  icon: mdi:bell-ring
+dont_shutdown:
+  name: Don't Shutdown PC
+  icon: mdi:desktop-tower-monitor
+staying_home:
+  name: Staying Home
+  icon: mdi:home-import-outline
+bedtime:
+  name: Bedtime notification sent
+  icon: mdi:sleep
+alarm_manual_mode:
+  name: Manual Alarm
+  icon: mdi:alarm
+awake:
+  name: Awake
+  icon: mdi:eye
+staying_up:
+  name: Staying up
+  icon: mdi:alarm-note-off
+text_brianna:
+  name: Text Brianna
+  icon: mdi:message-text-outline
+text_laura:
+  name: Text Laura
+  icon: mdi:message-text-outline
+text_mom:
+  name: Text Mom
+  icon: mdi:message-text-outline
+text_armond:
+  name: Text Armond
+  icon: mdi:message-text-outline
+estrogen_status:
+  name: Estrogen Status
+  icon: mdi:needle
+laundry_reminder:
+  name: Laundry reminder
+  icon: mdi:washing-machine
+travel_transit:
+travel_bike:
+travel_walk:
+travel_drive:
+travel_uber:

@@ -1,0 +1,13 @@
+set_hue_scene:
+  alias: "Set Scene:"
+  sequence:
+    - service: hue.hue_activate_scene
+      data_template:
+        group_name: "{{ states('input_select.hue_room') }}"
+        scene_name: "{{ states('input_select.hue_scene') }}"
+    - service: input_select.select_option
+      data:
+        entity_id:
+          - input_select.hue_room
+          - input_select.hue_scene
+        option: ""

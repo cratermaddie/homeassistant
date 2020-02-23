@@ -1,0 +1,7 @@
+reset_estrogen:
+  sequence:
+    - condition: time
+      weekday:
+        - thu
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.estrogen_status

@@ -1,0 +1,284 @@
+- platform: comed_hourly_pricing
+  monitored_feeds:
+    - type: five_minute
+    - type: current_hour_average
+    
+- platform: yr
+
+- platform: youtube
+  channel_id: UC7A_dLnSAjl7uROCdoNyjzg
+  
+- platform: youtube
+  channel_id: UCH-_hzb2ILSCo9ftVSnrCIQ
+  
+- platform: youtube
+  channel_id: UCFLwN7vRu8M057qJF8TsBaA
+  
+- platform: youtube
+  channel_id: UCzwUf6paImIBVK6fEVeHNRQ
+
+- platform: email
+  email: !secret email
+  password: !secret email_password
+  show_all: true
+
+- platform: feedparser
+  name: Cubs Game
+  feed_url: 'http://feeds.feedburner.com/isthereacubsgametoday?format=xml'
+  show_topn: 1
+  inclusions:
+    - title
+
+- platform: xbox_live
+  api_key: !secret xbox_api_key
+  xuid:
+    - 2533274831546174
+
+- platform: uptime
+
+- platform: google_geocode_custom
+  calendar: calendar.personal_trigger
+  api_key: !secret google_geocode_key
+
+- platform: twitch
+  client_id: !secret twitch_id
+  channels:
+    - Yogscast
+    - SquidGame
+    - UpIsNotJump
+    - HatFilms
+    - vidiotsOffical
+  
+- platform: steam_online
+  api_key: !secret steam_key
+  accounts:
+    - '76561197991761979'
+    
+- platform: google_travel_time
+  name: Transit To Next Cal Event
+  scan_interval:
+    days: 9999
+  api_key: !secret google_maps_api_key
+  origin: device_tracker.madisons_iphone_app
+  destination: sensor.google_cal_location
+  options:
+    mode: transit
+    
+- platform: google_travel_time
+  name: Bike To Next Cal Event
+  scan_interval:
+    days: 9999
+  api_key: !secret google_maps_api_key
+  origin: device_tracker.madisons_iphone_app
+  destination: sensor.google_cal_location
+  options:
+    mode: bicycling
+    
+- platform: google_travel_time
+  name: Drive To Next Cal Event
+  scan_interval:
+    days: 9999
+  api_key: !secret google_maps_api_key
+  origin: device_tracker.madisons_iphone_app
+  destination: sensor.google_cal_location
+  options:
+    mode: driving
+    
+- platform: google_travel_time
+  name: Walk To Next Cal Event
+  scan_interval:
+    days: 9999
+  api_key: !secret google_maps_api_key
+  origin: device_tracker.madisons_iphone_app
+  destination: sensor.google_cal_location
+  options:
+    mode: walking
+    
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /home
+    - type: memory_free
+    
+- platform: darksky
+  api_key: !secret dark_sky_key
+  forecast:
+    - 0
+    - 1
+  monitored_conditions:
+    - precip_probability
+    - wind_speed
+    - apparent_temperature_high
+    - apparent_temperature_low
+    - temperature_high
+    - temperature_low
+    - summary
+    
+- platform: time_date
+  display_options:
+    - 'time'
+    
+- platform: scrape
+  resource: https://www.brainyquote.com/quote_of_the_day
+  select: ".p-qotd.bqPhotoDefault.bqPhotoDefaultFw.img-responsive"
+  attribute: "alt"
+  
+  
+- platform: template
+  sensors:
+    daily_quote:
+      value_template: "{% for line in states('sensor.web_scrape').split('-') %}{% if not loop.last %}{{ line }}{% endif %}{% endfor %}"
+      entity_id: sensor.web_scrape
+      
+    timer_running:
+      value_template: "{{ is_state('timer.laundry','active') or is_state('timer.dryer','active') }}"
+      entity_id:
+        - timer.laundry
+        - timer.dryer
+      
+    cubs_result:
+      value_template: "{{ state_attr('sensor.cubs_game','entries') }}"
+      entity_id: sensor.cubs_game
+      
+    cubs_game_ts:
+      value_template: >
+        {{ as_timestamp(strptime((states('sensor.cubs_result') | replace('nd.','') | replace('rd.','') | replace('th.','') | replace('st.','')+"2020"),"[{'title': 'Is There a Cubs Game Today? Today is %A, %B %d YES AT %I:%M %p'}]%Y")) }}
+      
+    travel_to_next_event:
+      value_template: >
+        {% if is_state('input_select.travel_mode', 'Drive') %}
+          {{ states('sensor.drive_to_next_cal_event') }}
+        {% elif is_state('input_select.travel_mode', 'Walk') %}
+          {{ states('sensor.walk_to_next_cal_event') }}
+        {% elif is_state('input_select.travel_mode', 'Transit') %}
+          {{ states('sensor.transit_to_next_cal_event') }}
+        {% else %}
+          {{ states('sensor.bike_to_next_cal_event') }}
+        {% endif %}
+      entity_id:
+        - sensor.drive_to_next_cal_event
+        - sensor.walk_to_next_cal_event
+        - sensor.transit_to_next_cal_event
+        - sensor.bike_to_next_cal_event
+      
+    google_cal_location:
+      value_template: >-
+        {% if (is_state_attr("calendar.personal_trigger", "location", "unknown") or (state_attr("calendar.personal_trigger", "start_time") == None) or is_state("input_boolean.staying_home","on") or (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%d') | int != now().day and distance('sensor.google_geocode', 'device_tracker.madisons_iphone_app') < 1) or (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%d') | int != now().day and now().hour < 20)) %}
+          451 W Melrose St, Chicago, IL 60657
+        {% else %}
+          {{ state_attr("calendar.personal_trigger", "location") }}
+        {% endif %}
+      entity_id:
+        - calendar.personal_trigger
+        - input_boolean.staying_home
+        
+    google_cal_time:
+      value_template: >-
+        {% if is_state_attr("calendar.personal_trigger", "start_time", "unknown") or (state_attr("calendar.personal_trigger", "start_time") == None) %}
+          {{ as_timestamp(strptime(((now().timestamp()+86400) | timestamp_custom('%b %d %Y 09:00')),'%b %d %Y %H:%M')) }}
+        {% else %}
+          {{ as_timestamp(state_attr("calendar.personal_trigger", "start_time")) }}
+        {% endif %}
+      entity_id: calendar.personal_trigger
+
+    google_cal_leave_ts:
+      value_template: >-
+         {% if is_state_attr("calendar.personal_trigger", "start_time", "unknown") or (state_attr("calendar.personal_trigger", "start_time") == None) %}
+           9999999999999999999999999
+         {% else %}
+           {{ (as_timestamp(state_attr("calendar.personal_trigger", "start_time"))) - ((states('sensor.travel_to_next_event') | int) * 60 + 1200) }}
+         {% endif %}
+      entity_id: sensor.travel_to_next_event
+
+    google_cal_leave_trigger:
+      value_template: >-
+        {{ now().timestamp() >= (states('sensor.google_cal_leave_ts') | int ) }}
+      entity_id: sensor.time
+      
+    charge_battery_trigger:
+      value_template: >-
+        {{ now().timestamp() >= ((states('sensor.google_cal_leave_ts') |int ) - (states('sensor.battery_level') | int * 60)) }}
+      entity_id: sensor.time
+      
+    laundry_reminder_trigger:
+      value_template: >-
+        {{ now().timestamp() >= ((states("sensor.auto_alarm_time_ts") | int) - (6*1800)) }}
+      entity_id: sensor.time
+
+    auto_alarm_time_ts:
+      value_template: >-
+        {% if as_timestamp(state_attr("calendar.personal_trigger", "start_time")) != None %}
+        {% if is_state('input_boolean.staying_home','off') %}
+        {% set auto_time = as_timestamp(state_attr("calendar.personal_trigger", "start_time")) - (states('sensor.travel_to_next_event') | int * 60 + 15) - (4*1800) %}
+        {% else %}
+        {% set auto_time = as_timestamp(state_attr("calendar.personal_trigger", "start_time")) - (4*1800) %}
+        {% endif %}
+        {% else %}
+        {% set auto_time = (as_timestamp(strptime(((now().timestamp()+86400)|timestamp_custom('%b %d %Y 09:00')),'%b %d %Y %H:%M'))|int) %}        
+        {% endif %}
+        {% if now().hour > 7 %}
+        {% set default_time = (as_timestamp(strptime(((now().timestamp()+86400)|timestamp_custom('%b %d %Y 09:00')),'%b %d %Y %H:%M'))|int) %}        
+        {% else %}
+        {% set default_time = (as_timestamp(strptime(((now().timestamp())|timestamp_custom('%b %d %Y 09:00')),'%b %d %Y %H:%M'))|int) %}
+        {% endif %}
+
+        {% if auto_time > default_time %}
+        {{ default_time }}
+        {% else %}
+        {{ auto_time }}
+        {% endif %}
+      entity_id:
+        - sensor.travel_to_next_event
+        - input_boolean.staying_home
+        - calendar.personal_trigger
+        - sensor.time
+      
+    auto_alarm_time_display:
+      value_template: >-
+        {% if is_state('input_boolean.bedtime','on') or is_state('input_boolean.awake','off') or is_state('input_boolean.staying_up','on') %}
+        {{ states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-H:%M')}}
+        {% else %}
+        {{ states('sensor.bedtime_ts') | int | timestamp_custom('%-H:%M')}}
+        {% endif %}
+      entity_id:
+        - sensor.auto_alarm_time_ts
+        - sensor.bedtime_ts
+        - input_boolean.bedtime
+        - input_boolean.staying_up
+        - input_boolean.awake
+    
+    bedtime_ts:
+      value_template: '{{ (states("sensor.auto_alarm_time_ts") | int) - (18*1800) }}'
+      entity_id: calendar.personal_trigger
+        
+    bedtime_trigger:
+      value_template: '{{ now().timestamp() >= states("sensor.bedtime_ts") | int }}'
+      entity_id: sensor.time
+      
+    travel_update_trigger:
+      value_template: "{{ now().timestamp() >= ( now().timestamp() + ((as_timestamp(state_attr('calendar.personal_trigger','start_time'))-now().timestamp())/2) ) }}"
+      
+    auto_alarm_trigger:
+      value_template: '{{ now().timestamp() >= (states("sensor.auto_alarm_time_ts") | int) }}'
+      entity_id: sensor.time
+      
+    days_on_estrogen:
+      value_template: '{{ (now().timestamp() - as_timestamp("2019-3-13 00:00:00")) | timestamp_custom("%j") }}'
+      unit_of_measurement: 'Days'
+      entity_id: sensor.time
+      
+    days_until_cruise:
+      value_template: '{{ (now().timestamp() - as_timestamp("2020-4-19 00:00:00")) | timestamp_custom("%j") }}'
+      unit_of_measurement: 'Days'
+      entity_id: sensor.time
+      
+    aurora_brightness_map:
+      value_template: >
+        {% set mapper =
+          { 'Bright':'130',
+            'Dim':'53',
+            'Off':'0'} %}
+        {% set state = states('input_select.aurora_brightness') %}
+        {% set num = mapper[state] if state in mapper %}
+        {{ num }}
+      entity_id: input_select.aurora_brightness

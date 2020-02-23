@@ -1,0 +1,6 @@
+- alias: Set aurora effects list on startup
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - service: rest_command.set_aurora_effects

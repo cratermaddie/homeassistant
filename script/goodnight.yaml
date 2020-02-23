@@ -1,0 +1,79 @@
+goodnight:
+  sequence:
+    - service: script.turn_off_pc
+    - service: script.update_travel_time
+    - service: homeassistant.update_entity
+      entity_id: sensor.web_scrape
+    - service: media_player.turn_on
+      entity_id: media_player.bedroom_speaker
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'idle') }}"
+      timeout: "00:01:00"
+    - service: var.set
+      data:
+        entity_id: var.volume_temp
+        value_template: "{{ state_attr('media_player.bedroom_speaker', 'volume_level') | float | round(2) }}"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.bedroom_speaker
+        volume_level: 0.4
+    - service: script.goodnight_meds
+    - wait_template: "{{ states('counter.meds_counter') | int %2 == 0}}"
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.meds_status
+    - service: script.goodnight_e
+    - wait_template: "{{ is_state('input_boolean.estrogen_status', 'on') }}"
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_4
+        brightness: 26
+        rgb_color: [255,43,0]
+    - service: script.goodnight_tomorrow_summary
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'playing') }}"
+      timeout: "00:02:00"
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'idle') }}"
+      timeout: "00:02:00"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.bedroom_speaker
+        volume_level: 0.25
+    - service: var.set
+      data:
+        entity_id: var.mode
+        value: "sleep"
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.awake
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.meds_status
+    - service: script.reset_estrogen
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.bedtime
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.staying_up
+    - service: switch.turn_off
+      entity_id: switch.air_freshener
+    - service: light.turn_off
+      entity_id:
+        - light.living_room_4
+        - light.bedroom_4
+        - light.nanoleaf
+        - light.entry_way_2
+        - light.bathroom_6
+        - light.bedroom_closet_2
+        - light.kitchen_4
+        - light.dining_area_4
+        - light.coat_closet_2
+    - service: script.turn_off_tv
+    - service: script.turn_off_vanity
+    - service: var.set
+      data:
+        entity_id: var.time_asleep
+        value_template: '{{ now().timestamp() | int }}'
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.bedroom_speaker
+        media_content_id: 'https://storage.googleapis.com/relaxation-sounds/babbling_brook_3600.mp3'
+        media_content_type: 'music'

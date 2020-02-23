@@ -1,0 +1,11 @@
+- alias: Set mode to home when I get home
+  trigger:
+    platform: zone
+    entity_id: device_tracker.madisons_iphone_app
+    zone: zone.home
+    event: enter
+  action:
+    service: var.set
+    data:
+      entity_id: var.mode
+      value: "home"

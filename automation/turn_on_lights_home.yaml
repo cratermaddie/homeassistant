@@ -1,0 +1,24 @@
+- alias: Turn on lights when I get home at night
+  initial_state: true
+  trigger:
+    platform: zone
+    entity_id: device_tracker.madisons_iphone_app
+    zone: zone.home
+    event: enter
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  action:
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Bedroom"
+        scene_name: "Relax"
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Living room"
+        scene_name: "Relax"
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Entry way"
+        scene_name: "Bright"

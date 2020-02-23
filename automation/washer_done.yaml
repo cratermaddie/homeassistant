@@ -1,0 +1,15 @@
+- alias: Send notification when washing machine is done
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.laundry
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data:
+        message: "Washing machine is done!"
+        data:
+          push:
+            category: "dryer"
+            thread-id: "laundry-reminder"
+            sound: 'buzzer.wav'

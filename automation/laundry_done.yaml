@@ -1,0 +1,9 @@
+- alias: Mark laundry done
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: LAUNDRY_DONE
+  action:
+    service: input_boolean.turn_off
+    entity_id: input_boolean.laundry_reminder

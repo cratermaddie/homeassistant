@@ -1,0 +1,9 @@
+- alias: Set laundry done
+  trigger:
+      - platform: event
+        event_type: ifttt_webhook_received
+        event_data:
+          action: laundry_done_service
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.laundry_reminder

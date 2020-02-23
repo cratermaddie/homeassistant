@@ -1,0 +1,10 @@
+text_laura_home:
+  sequence:
+    - condition: 'state'
+      entity_id: input_boolean.text_laura
+      state: 'on'
+    - service: notify.twilio
+      data_template:
+        message: 'Maddie made it home safe!'
+        target:
+          - !secret laura_phone

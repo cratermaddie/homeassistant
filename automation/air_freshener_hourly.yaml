@@ -1,0 +1,11 @@
+- alias: Toggle air freshener hourly when home
+  trigger:
+    platform: time_pattern
+    hours: '*'
+  condition:
+    condition: state
+    entity_id: var.mode
+    state: 'home'
+  action:
+    service: homeassistant.toggle
+    entity_id: switch.air_freshener

@@ -1,0 +1,9 @@
+- alias: Reset pills counter
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: REFILL_PILLS
+  action:
+    - service: counter.reset
+      entity_id: counter.meds_counter

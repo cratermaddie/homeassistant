@@ -1,0 +1,8 @@
+goodnight_meds:
+  sequence:
+    - condition: template
+      value_template: "{{ (states('counter.meds_counter') | int % 2) != 0 }}"
+    - service: tts.google_translate_say
+      entity_id: media_player.bedroom_speaker
+      data_template:
+        message: "You still need to take your meds."

@@ -1,0 +1,11 @@
+- alias: Set mode to away when I leave
+  trigger:
+    platform: zone
+    entity_id: device_tracker.madisons_iphone_app
+    zone: zone.home
+    event: leave
+  action:
+    service: var.set
+    data:
+      entity_id: var.mode
+      value: "away"
