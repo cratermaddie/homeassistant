@@ -1,0 +1,27 @@
+# Ignore folders
+.storage
+.cloud
+custom_components
+deps
+node-red
+tts
+www/community
+
+# Ignore files
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
+google_calendars.yaml
+zone.yaml
+automation/leave_notification.yaml
+www/images/wifi-qr.png
+.HA_VERSION
+.uuid
+abodepy_cache.pickle
+aircast.xml
+fitbit.conf
+home-assistant.log
+home-assistant_v2.db
+ideas.txt
+SERVICE_ACCOUNT.json
+.google.token

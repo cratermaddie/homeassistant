@@ -1,0 +1,154 @@
+homeassistant:
+  name: Home
+  latitude: !secret home_lat
+  longitude: !secret home_lon
+  elevation: 0
+  unit_system: metric
+  time_zone: America/Chicago
+
+default_config:
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+recorder:
+  db_url: !secret db_url
+  purge_keep_days: 367
+
+http:
+  base_url: !secret base_url
+
+tts:
+  - platform: google_translate
+    base_url: !secret local_base_url
+    
+group: !include groups.yaml
+automation: !include_dir_merge_list automation
+script: !include_dir_merge_named script
+scene: !include scenes.yaml
+zone: !include integrations/zone.yaml
+sensor: !include integrations/sensor.yaml
+ios: !include integrations/ios_config.yaml
+input_select: !include integrations/input_select.yaml
+device_tracker: !include integrations/device_tracker.yaml
+input_boolean: !include integrations/input_boolean.yaml
+notify: !include integrations/notify.yaml
+switch: !include integrations/switch.yaml
+var: !include integrations/var.yaml
+
+#alarm_control_panel:
+#  - platform: manual
+  
+input_datetime:
+  manual_alarm:
+    has_date: false
+    has_time: true
+    
+timer:
+  laundry:
+    duration: '00:49:00'
+  dryer:
+    duration: '00:45:00'
+    
+updater:
+  include_used_components: true
+  
+logger:
+  default: debug
+  
+browser_mod:
+  devices:
+    ebd9cb56-e768f3d4:
+      name: Desktop
+      camera: true
+    c2208e85-9429800f:
+      name: Madison's iPhone
+  
+binary_sensor:
+  - platform: wyzesense
+    device: auto
+  
+discovery:
+
+camera:
+  - platform: generic
+    name: WYZE Cam
+    still_image_url: !secret wyze_still_image
+    stream_source: !secret wyze_rtsp
+    
+twilio:
+  account_sid: !secret twilio_sid
+  auth_token: !secret twilio_token
+
+microsoft_face:
+  api_key: !secret microsoft_face_api_key
+  azure_region: northcentralus
+  
+image_processing:
+  - platform: microsoft_face_detect
+    scan_interval: 9999
+    source:
+      - entity_id: camera.wyze_cam
+  - platform: microsoft_face_identify
+    group: all
+    scan_interval: 9999
+    source:
+      - entity_id: camera.wyze_cam
+
+google:
+  client_id: !secret google_id
+  client_secret: !secret google_secret
+
+spotify:
+  client_id: !secret spotify_id
+  client_secret: !secret spotify_secret
+
+light:
+  - platform: nanoleaf
+    host: !secret nanoleaf_ip
+    token: !secret nanoleaf_token
+    
+icloud:
+  - username: !secret email
+    password: !secret apple_password
+    
+vacuum:
+  - platform: roomba
+    name: 'Dustin'
+    host: !secret roomba_ip
+    username: !secret roomba_username
+    password: !secret roomba_password
+    
+google_assistant:
+  service_account: !include SERVICE_ACCOUNT.json
+  project_id: !secret google_assistant_project_id
+  report_state: true
+  exposed_domains:
+     - script
+     
+counter:
+  meds_counter:
+    minimum: 0
+    
+conversation:
+  intents: !include integrations/intent.yaml
+  
+intent_script: !include integrations/intent_script.yaml
+
+rest_command:
+  set_aurora_effects:
+    url: !secret input_select_set_options
+    method: POST
+    headers:
+      content-type: application/json
+      Authorization: !secret bearer_token
+    content_type: application/json
+    payload: >-
+      {
+        "entity_id": "input_select.aurora_effects",
+        "options": [
+      {%- for effect in state_attr('light.nanoleaf','effect_list') %}
+        "{{ effect }}"{% if not loop.last %}, {% endif %}
+      {%- endfor %}
+        ]
+      }
