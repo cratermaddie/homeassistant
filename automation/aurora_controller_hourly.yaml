@@ -1,7 +1,11 @@
 - alias: Aurora Controller Hourly
   trigger:
-    platform: time_pattern
-    hours: '*'
+    - platform: time_pattern
+      hours: '*'
+    - platform: zone
+      entity_id: device_tracker.madisons_iphone_app
+      zone: zone.home
+      event: enter
   condition:
     condition: and
     conditions:

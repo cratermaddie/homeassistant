@@ -22,10 +22,10 @@ tts:
   - platform: google_translate
     base_url: !secret local_base_url
     
-group: !include groups.yaml
+#group: !include groups.yaml
 automation: !include_dir_merge_list automation
 script: !include_dir_merge_named script
-scene: !include scenes.yaml
+#scene: !include scenes.yaml
 zone: !include integrations/zone.yaml
 sensor: !include integrations/sensor.yaml
 ios: !include integrations/ios_config.yaml

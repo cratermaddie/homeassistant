@@ -36,6 +36,12 @@
 
 - platform: uptime
 
+- platform: keep_notes_sensor
+  name: "keep_sensor"
+  username: !secret email
+  password: !secret email_password
+  list_id: !secret google_keep_id
+
 - platform: google_geocode_custom
   calendar: calendar.personal_trigger
   api_key: !secret google_geocode_key
