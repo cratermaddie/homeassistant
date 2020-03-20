@@ -30,7 +30,7 @@ hue_room:
     - "Entry way"
     - "Bathroom"
   initial: ""
-  icon: mdi:codepen
+  icon: mdi:floor-plan
   
 travel_mode:
   name: Travel Mode

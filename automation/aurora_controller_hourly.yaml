@@ -16,7 +16,7 @@
       entity_id: input_boolean.awake
       state: 'on'
     - condition: state
-      entity_id: automation.bedtime_notification
+      entity_id: input_boolean.bedtime
       state: 'off'
   action:
     - service: var.set

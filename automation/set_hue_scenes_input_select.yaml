@@ -1,0 +1,141 @@
+- alias: Set hue scenes input select when room changes to bedroom
+  trigger:
+    platform: state
+    entity_id: input_select.hue_room
+  condition:
+    condition: state
+    entity_id: input_select.hue_room
+    state: Bedroom
+  action:
+    service: input_select.set_options
+    data_template:
+      entity_id: input_select.hue_scene
+      options:
+        - ""
+        - Savanna sunset
+        - Tropical twilight
+        - Artic aurora
+        - Spring blossom
+        - Relax
+        - Read
+        - Concentrate
+        - Energize
+        - Bright
+        - Dimmed
+        - Nightlight
+        - Bedtime
+        - Filming
+        
+- alias: Set hue scenes input select when room changes to living room
+  trigger:
+    platform: state
+    entity_id: input_select.hue_room
+  condition:
+    condition: state
+    entity_id: input_select.hue_room
+    state: Living room
+  action:
+    service: input_select.set_options
+    data_template:
+      entity_id: input_select.hue_scene
+      options:
+        - ""
+        - Savanna sunset
+        - Tropical twilight
+        - Artic aurora
+        - Spring blossom
+        - Relax
+        - Read
+        - Concentrate
+        - Energize
+        - Bright
+        - Dimmed
+        - Nightlight
+        - Filming
+        
+- alias: Set hue scenes input select when room changes to bathroom
+  trigger:
+    platform: state
+    entity_id: input_select.hue_room
+  condition:
+    condition: state
+    entity_id: input_select.hue_room
+    state: Bathroom
+  action:
+    service: input_select.set_options
+    data_template:
+      entity_id: input_select.hue_scene
+      options:
+        - ""
+        - Bright
+        - Dimmed
+        - Nightlight
+        
+- alias: Set hue scenes input select when room changes to entry way
+  trigger:
+    platform: state
+    entity_id: input_select.hue_room
+  condition:
+    condition: state
+    entity_id: input_select.hue_room
+    state: Entry way
+  action:
+    service: input_select.set_options
+    data_template:
+      entity_id: input_select.hue_scene
+      options:
+        - ""
+        - Bright
+        - Dimmed
+        - Nightlight
+        
+- alias: Set hue scenes input select when room changes to dining area
+  trigger:
+    platform: state
+    entity_id: input_select.hue_room
+  condition:
+    condition: state
+    entity_id: input_select.hue_room
+    state: Dining area
+  action:
+    service: input_select.set_options
+    data_template:
+      entity_id: input_select.hue_scene
+      options:
+        - ""
+        - Bright
+        - Dimmed
+        - Nightlight
+        
+- alias: Set hue scenes input select when room changes to kitchen
+  trigger:
+    platform: state
+    entity_id: input_select.hue_room
+  condition:
+    condition: state
+    entity_id: input_select.hue_room
+    state: Kitchen
+  action:
+    service: input_select.set_options
+    data_template:
+      entity_id: input_select.hue_scene
+      options:
+        - ""
+        - Bright
+        - Dimmed
+        - Nightlight
+        
+- alias: Set hue scenes input select when room changes to empty
+  trigger:
+    platform: state
+    entity_id: input_select.hue_room
+  condition:
+    condition: state
+    entity_id: input_select.hue_room
+    state: ""
+  action:
+    service: input_select.set_options
+    data_template:
+      entity_id: input_select.hue_scene
+      options:
+        - ""

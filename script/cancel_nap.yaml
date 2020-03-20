@@ -17,6 +17,9 @@ cancel_nap:
     - service: input_boolean.turn_on
       data:
         entity_id: inpout_boolean.awake
+    - service: input_boolean.turn_off
+      data:
+        entity_id: inpout_boolean.sleeping_in
     - service: input_select.select_option
       data:
         entity_id: input_select.aurora_brightness

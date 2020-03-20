@@ -1,4 +1,4 @@
-- alias: Send notification if I have not taken my e
+- alias: Send notification if I there is a cubs cage
   trigger:
     - platform: state
       entity_id: sensor.google_cal_leave_trigger

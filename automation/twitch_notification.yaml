@@ -5,9 +5,13 @@
     entity_id: sensor.hatfilms,sensor.upisnotjump,sensor.squidgame,sensor.yogscast
     to: streaming
   condition:
-    condition: state
-    entity_id: var.mode
-    state: 'home'
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: var.mode
+        state: 'home'
+      - condition: template
+        value_template: "{{ ((as_timestamp(state_attr('calendar.personal_trigger','start_time'))) - (states('sensor.travel_to_next_event') | int * 60)) - (now().timestamp()) >= 3600 }}"
   action:
     - service: notify.mobile_app_madisons_iphone
       data_template:

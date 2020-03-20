@@ -19,11 +19,19 @@
       - condition: state
         entity_id: input_boolean.text_armond
         state: 'on'
+      - condition: state
+        entity_id: input_boolean.text_claire
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.text_krista
+        state: 'on'
   action:
     - service: script.text_brianna_home
     - service: script.text_laura_home
     - service: script.text_mom_home
     - service: script.text_armond_home
+    - service: script.text_claire_home
+    - service: script.text_krista_home
     - service: input_boolean.turn_off
       entity_id: input_boolean.text_brianna
     - service: input_boolean.turn_off
@@ -32,3 +40,7 @@
       entity_id: input_boolean.text_mom
     - service: input_boolean.turn_off
       entity_id: input_boolean.text_armond
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.text_claire
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.text_krista

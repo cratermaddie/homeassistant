@@ -1,0 +1,30 @@
+- alias: send notification when new case of covid-19
+  trigger:
+    - platform: state
+      entity_id: sensor.worldwide_confirmed
+    - platform: state
+      entity_id: sensor.us_confirmed
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: >
+          {{ trigger.to_state.state|int > trigger.from_state.state|int }}
+      - condition: template
+        value_template: >
+          {{ not (is_state('var.mode','sleep') or is_state('var.mode','asleep')) }}
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data_template:
+        message: >-
+          {% if "Worldwide" in trigger.from_state.attributes.friendly_name %}
+            {{ trigger.to_state.state|int - trigger.from_state.state|int }} new worldwide confirmed Covid-19 case{{ "s" if ((trigger.to_state.state|int - trigger.from_state.state|int) > 1) }}
+          {% else %}
+            {{ trigger.to_state.state|int - trigger.from_state.state|int }} new U.S. confirmed Covid-19 case{{ "s" if ((trigger.to_state.state|int - trigger.from_state.state|int) > 1) }}
+          {% endif %}
+        data:
+          apns_headers:
+            'apns-collapse-id': 'covid-reminder'
+          push:
+            sound: 'middle_9_short_double_low.caf'
+            thread-id: 'covid-reminder'

@@ -10,3 +10,5 @@ sleeping_in:
       entity_id: light.nanoleaf
     - service: input_boolean.turn_off
       entity_id: input_boolean.awake
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.sleeping_in

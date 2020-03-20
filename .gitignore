@@ -25,3 +25,5 @@ home-assistant_v2.db
 ideas.txt
 SERVICE_ACCOUNT.json
 .google.token
+gtfs/google_transit.zip
+gtfs/google_transit.sqlite

@@ -17,10 +17,10 @@
 - platform: youtube
   channel_id: UCzwUf6paImIBVK6fEVeHNRQ
 
-- platform: email
-  email: !secret email
-  password: !secret email_password
-  show_all: true
+#- platform: email
+#  email: !secret email
+#  password: !secret email_password
+#  show_all: true
 
 - platform: feedparser
   name: Cubs Game
@@ -28,6 +28,17 @@
   show_topn: 1
   inclusions:
     - title
+    
+#- platform: lyft
+#  client_id: !secret lyft_client_id
+#  client_secret: !secret lyft_client_secret
+
+- platform: gtfs
+  origin: 4867
+  destination: 1108
+  data: google_transit.zip
+  name: 'Bus to work'
+  include_tomorrow: true
 
 - platform: xbox_live
   api_key: !secret xbox_api_key
@@ -37,10 +48,16 @@
 - platform: uptime
 
 - platform: keep_notes_sensor
-  name: "keep_sensor"
+  name: "Shopping"
   username: !secret email
   password: !secret email_password
-  list_id: !secret google_keep_id
+  list_id: !secret google_keep_shopping_id
+  
+- platform: keep_notes_sensor
+  name: "Todo"
+  username: !secret email
+  password: !secret email_password
+  list_id: !secret google_keep_todo_id
 
 - platform: google_geocode_custom
   calendar: calendar.personal_trigger
@@ -124,10 +141,10 @@
   display_options:
     - 'time'
     
-- platform: scrape
-  resource: https://www.brainyquote.com/quote_of_the_day
-  select: ".p-qotd.bqPhotoDefault.bqPhotoDefaultFw.img-responsive"
-  attribute: "alt"
+#- platform: scrape
+#  resource: https://www.brainyquote.com/quote_of_the_day
+#  select: ".p-qotd.bqPhotoDefault.bqPhotoDefaultFw.img-responsive"
+#  attribute: "alt"
   
   
 - platform: template
@@ -169,7 +186,7 @@
       
     google_cal_location:
       value_template: >-
-        {% if (is_state_attr("calendar.personal_trigger", "location", "unknown") or (state_attr("calendar.personal_trigger", "start_time") == None) or is_state("input_boolean.staying_home","on") or (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%d') | int != now().day and distance('sensor.google_geocode', 'device_tracker.madisons_iphone_app') < 1) or (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%d') | int != now().day and now().hour < 20)) %}
+        {% if (is_state_attr("calendar.personal_trigger", "location", "unknown") or (is_state_attr("calendar.personal_trigger", "start_time", None)) or is_state("input_boolean.staying_home","on") or (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%d') | int != now().day and distance('sensor.google_geocode', 'device_tracker.madisons_iphone_app') < 1) or (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%d') | int != now().day and now().hour < 20)) %}
           451 W Melrose St, Chicago, IL 60657
         {% else %}
           {{ state_attr("calendar.personal_trigger", "location") }}
@@ -177,6 +194,9 @@
       entity_id:
         - calendar.personal_trigger
         - input_boolean.staying_home
+        - sensor.google_geocode
+        - device_tracker.madisons_iphone_app
+        - sensor.time
         
     google_cal_time:
       value_template: >-
@@ -269,14 +289,14 @@
       entity_id: sensor.time
       
     days_on_estrogen:
-      value_template: '{{ (now().timestamp() - as_timestamp("2019-3-13 00:00:00")) | timestamp_custom("%j") }}'
+      value_template: '{{ ((now().timestamp() - as_timestamp("2019-3-13 00:00:00"))/60/60/24) | int }}'
       unit_of_measurement: 'Days'
       entity_id: sensor.time
       
-    days_until_cruise:
-      value_template: '{{ (now().timestamp() - as_timestamp("2020-4-19 00:00:00")) | timestamp_custom("%j") }}'
-      unit_of_measurement: 'Days'
-      entity_id: sensor.time
+#    days_until_cruise:
+#      value_template: '{{ (now().timestamp() - as_timestamp("2020-4-19 00:00:00")) | timestamp_custom("%j") }}'
+#      unit_of_measurement: 'Days'
+#      entity_id: sensor.time
       
     aurora_brightness_map:
       value_template: >

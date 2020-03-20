@@ -17,7 +17,7 @@ goodnight_tomorrow_summary:
           {% set low = states('sensor.dark_sky_overnight_low_temperature_1d') | int if (day_offset) else states('sensor.dark_sky_overnight_low_temperature_0d') | int %}
           
           {% if is_holiday %}
-          Tomorrow is {{ state_attr('calendar.holidays_in_united_states','message') }}
+          Tomorrow is {{ state_attr('calendar.holidays_in_united_states','message') | replace(" (regional holiday)","") }}
           {% endif %}
           {% if not is_holiday and is_birthday %}
           Tomorrow is
@@ -41,47 +41,5 @@ goodnight_tomorrow_summary:
             "Sleep tight",
             "See you in the morning",
             "Sleep well",
-            "Sweet dreams"] | random }}! And remember, {{ states('sensor.daily_quote') }}
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-#          {% if (states('sensor.auto_alarm_time_ts') | float) | timestamp_custom('%M') == '00' %}
-#          {% set alarm_time = states('sensor.auto_alarm_time_ts') | float | timestamp_custom('%-H') %}
-#          
-#          {% else %}
-#          {% set alarm_time = states('sensor.auto_alarm_time_display') %}
-#          
-#          {% endif %}
-#          
-#          {% if as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%M') == '00' %}
-#          {% set event_time = as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%-H') %}
-#          
-#          {% else %}
-#          {% set event_time = as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%-H %M') %}
-#          
-#          {% endif %}
-#
-#          {% if ((0<=now().hour<=7) and (as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d')) and ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m')))) or ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d') | int + 1) and ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m')))) %}Tomorrow is {{ state_attr('calendar.holidays_in_united_states','message') }} {% endif %}{% if (((0<=now().hour<=7) and (as_timestamp(state_attr('calendar.contacts','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d')) and ((as_timestamp(state_attr('calendar.contacts','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m')))) and ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d') | int + 1) and ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m'))))) and (((0<=now().hour<=7) and (as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d')) and ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m')))) or ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d') | int + 1) and ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m'))))) %}and {% elif (((0<=now().hour<=7) and (as_timestamp(state_attr('calendar.contacts','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d')) and ((as_timestamp(state_attr('calendar.contacts','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m')))) and not ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d') | int + 1) and ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m'))))) and (((0<=now().hour<=7) and (as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d')) and ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m')))) or ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d') | int + 1) and ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m'))))) %}Tomorrow is {% endif %}{% if ((0<=now().hour<=7) and (as_timestamp(state_attr('calendar.contacts','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d')) and ((as_timestamp(state_attr('calendar.contacts','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m')))) or ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%d') == now().timestamp() | timestamp_custom('%d') | int + 1) and ((as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%m') == now().timestamp() | timestamp_custom('%m')))) %}{{ state_attr('calendar.contacts','message') }}. {% endif %}{% if ((as_timestamp(state_attr('calendar.personal_trigger', 'start_time')) | timestamp_custom('%-d') | int ) == (now().day + 1) and (now().hour > 9)) or ((as_timestamp(state_attr('calendar.personal_trigger', 'start_time')) | timestamp_custom('%-d') | int ) == (now().day) and (now().hour < 9)) %}Your first event tomorrow is {{ state_attr('calendar.personal_trigger', 'message') }} at {{ event_time | replace(':', ' ') }} so I'll wake you up around {% else %}You don't have any events tomorrow. So you can sleep in until around {% endif %}{{ alarm_time | replace(':', ' ') }} in about {{ ((states('sensor.auto_alarm_time_ts')|int - now().timestamp())/3600 )|round }} hours. {% if ( 0 >= now().hour | int >= 7) %}Tomorrow's weather will be {{ states('sensor.dark_sky_summary_0d') | replace('.', '') | lower }} with a high of {{ states('sensor.dark_sky_daytime_high_temperature_0d') | int }} and a low of {{ states('sensor.dark_sky_overnight_low_temperature_0d') | int}}. {% else %}Tomorrow's weather will be {{ states('sensor.dark_sky_summary_1d') | replace('.', '') | lower }} with a high of {{ states('sensor.dark_sky_daytime_high_temperature_1d') | int }} and a low of {{ states('sensor.dark_sky_overnight_low_apparent_temperature_1d') | int}}. {% endif %}{{ [
-#          "Goodnight",
-#          "Nighty night",
-#          "Night Night",
-#          "Sleep tight",
-#          "See you in the morning",
-#          "Sleep well",
-#          "Sweet dreams"] | random }}! And remember, {{ states('sensor.daily_quote') }}.
+            "Sweet dreams"] | random }}!
+#            And remember, {{ states('sensor.daily_quote') }}

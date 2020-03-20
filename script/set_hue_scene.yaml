@@ -11,3 +11,8 @@ set_hue_scene:
           - input_select.hue_room
           - input_select.hue_scene
         option: ""
+    - service: input_select.set_options
+      data_template:
+        entity_id: input_select.hue_scene
+        options:
+          - ""

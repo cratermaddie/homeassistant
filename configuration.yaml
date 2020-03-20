@@ -22,7 +22,7 @@ tts:
   - platform: google_translate
     base_url: !secret local_base_url
     
-#group: !include groups.yaml
+group: !include groups.yaml
 automation: !include_dir_merge_list automation
 script: !include_dir_merge_named script
 #scene: !include scenes.yaml
@@ -38,11 +38,21 @@ var: !include integrations/var.yaml
 
 #alarm_control_panel:
 #  - platform: manual
+
+#pi_hole:
+#  host: 'localhost:4865'
+#  verify_ssl: false
+  
+remote:
+  - platform: hueremote
   
 input_datetime:
   manual_alarm:
     has_date: false
     has_time: true
+    
+downloader:
+  download_dir: gtfs
     
 timer:
   laundry:
@@ -80,20 +90,20 @@ twilio:
   account_sid: !secret twilio_sid
   auth_token: !secret twilio_token
 
-microsoft_face:
-  api_key: !secret microsoft_face_api_key
-  azure_region: northcentralus
+#microsoft_face:
+#  api_key: !secret microsoft_face_api_key
+#  azure_region: northcentralus
   
-image_processing:
-  - platform: microsoft_face_detect
-    scan_interval: 9999
-    source:
-      - entity_id: camera.wyze_cam
-  - platform: microsoft_face_identify
-    group: all
-    scan_interval: 9999
-    source:
-      - entity_id: camera.wyze_cam
+#image_processing:
+#  - platform: microsoft_face_detect
+#    scan_interval: 9999
+#    source:
+#      - entity_id: camera.wyze_cam
+#  - platform: microsoft_face_identify
+#    group: all
+#    scan_interval: 9999
+#    source:
+#      - entity_id: camera.wyze_cam
 
 google:
   client_id: !secret google_id

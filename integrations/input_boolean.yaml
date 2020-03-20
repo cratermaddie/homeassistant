@@ -34,6 +34,12 @@ text_mom:
 text_armond:
   name: Text Armond
   icon: mdi:message-text-outline
+text_claire:
+  name: Text Claire
+  icon: mdi:message-text-outline
+text_krista:
+  name: Text Krista
+  icon: mdi:message-text-outline
 estrogen_status:
   name: Estrogen Status
   icon: mdi:needle
@@ -45,3 +51,4 @@ travel_bike:
 travel_walk:
 travel_drive:
 travel_uber:
+sleeping_in:

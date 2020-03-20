@@ -8,3 +8,13 @@
       entity_id: light.nanoleaf
       effect: "{{ states('input_select.aurora_effects') }}"
       brightness: "{{ states('sensor.aurora_brightness_map')|int }}"
+      
+- alias: Update input select based on aurora effect
+  trigger:
+    - platform: state
+      entity_id: light.nanoleaf
+  action:
+    service: input_select.select_option
+    data_template:
+      entity_id: input_select.aurora_effects
+      option: "{{ state_attr('light.nanoleaf','effect') }}"

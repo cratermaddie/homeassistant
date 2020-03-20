@@ -13,7 +13,10 @@
           push:
             thread-id: 'new-ha-version-reminder'
             sound: '3rdParty_Success_Haptic.caf'
+          url: "{{ state_attr('binary_sensor.updater','release_notes') }}"
     - service: persistent_notification.create
       data_template:
-        message: "Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version') }} is available."
         title: "New Home Assistant Version!"
+        message: |
+          Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version') }} is available.
+          [Change Log]({{ state_attr('binary_sensor.updater','release_notes') }})
