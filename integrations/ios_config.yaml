@@ -1,13 +1,13 @@
 push:
   categories:
-    - name: Package
-      identifier: 'package'
-      actions:
-        - identifier: 'DISMISS_PACKAGE'
-          title: 'Dismiss Notification'
-          activationMode: 'background'
-          authenticationRequired: false
-          destructive: true
+#    - name: Package
+#      identifier: 'package'
+#      actions:
+#        - identifier: 'DISMISS_PACKAGE'
+#          title: 'Dismiss Notification'
+#          activationMode: 'background'
+#          authenticationRequired: false
+#          destructive: true
     - name: Meds
       identifier: 'meds'
       actions:

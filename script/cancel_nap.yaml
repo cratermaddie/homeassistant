@@ -16,13 +16,13 @@ cancel_nap:
         value: "home"
     - service: input_boolean.turn_on
       data:
-        entity_id: inpout_boolean.awake
+        entity_id: input_boolean.awake
     - service: input_boolean.turn_off
       data:
-        entity_id: inpout_boolean.sleeping_in
+        entity_id: input_boolean.sleeping_in
     - service: input_select.select_option
       data:
         entity_id: input_select.aurora_brightness
         option: "Bright"
     - service: automation.trigger
-      entity_id: automation.aurora_controller
+      entity_id: automation.aurora_controller_hourly

@@ -39,7 +39,7 @@ wake_up:
     - service: input_boolean.turn_on
       entity_id: input_boolean.awake
     - service: automation.trigger
-      entity_id: automation.aurora_controller
+      entity_id: automation.aurora_controller_hourly
     - service: input_boolean.turn_on
       entity_id: input_boolean.meds_status
     - condition: time

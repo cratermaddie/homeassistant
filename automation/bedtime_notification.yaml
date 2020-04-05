@@ -19,7 +19,7 @@
         state: 'off'
       - condition: numeric_state
         entity_id: sensor.uptime
-        above: 0.2
+        above: 0.1
   action:
     - service: input_boolean.turn_on
       data:

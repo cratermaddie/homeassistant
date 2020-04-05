@@ -13,9 +13,9 @@ staying_home:
 bedtime:
   name: Bedtime notification sent
   icon: mdi:sleep
-alarm_manual_mode:
-  name: Manual Alarm
-  icon: mdi:alarm
+#alarm_manual_mode:
+#  name: Manual Alarm
+#  icon: mdi:alarm
 awake:
   name: Awake
   icon: mdi:eye

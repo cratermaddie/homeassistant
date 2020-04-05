@@ -36,6 +36,9 @@ notify: !include integrations/notify.yaml
 switch: !include integrations/switch.yaml
 var: !include integrations/var.yaml
 
+#speedtestdotnet:
+#  server_id: 10135
+
 #alarm_control_panel:
 #  - platform: manual
 
@@ -46,10 +49,10 @@ var: !include integrations/var.yaml
 remote:
   - platform: hueremote
   
-input_datetime:
-  manual_alarm:
-    has_date: false
-    has_time: true
+#input_datetime:
+#  manual_alarm:
+#    has_date: false
+#    has_time: true
     
 downloader:
   download_dir: gtfs
@@ -140,10 +143,10 @@ counter:
   meds_counter:
     minimum: 0
     
-conversation:
-  intents: !include integrations/intent.yaml
+#conversation:
+#  intents: !include integrations/intent.yaml
   
-intent_script: !include integrations/intent_script.yaml
+#intent_script: !include integrations/intent_script.yaml
 
 rest_command:
   set_aurora_effects:

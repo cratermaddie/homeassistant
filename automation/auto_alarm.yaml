@@ -2,7 +2,7 @@
   trigger:
     - platform: state
       entity_id: sensor.auto_alarm_trigger
-      to: "True"
+      to: 'True'
   condition:
     condition: and
     conditions:
@@ -13,9 +13,9 @@
         entity_id: input_boolean.sleeping_in
         state: 'off'
   action:
-    - delay:
-        minutes: >-
-          {{ ((1 - ((((now().timestamp() - (states('var.time_asleep') | int)) / 3600) | int) / 8)) * 30) | int }}
+#    - delay:
+#        minutes: >-
+#          {{ ((1 - ((((now().timestamp() - (states('var.time_asleep') | int)) / 3600) | int) / 8)) * 30) | int }}
     - condition: state
       entity_id: input_boolean.awake
       state: 'off'
@@ -32,8 +32,8 @@
     - service: automation.trigger
       entity_id: automation.aurora_controller_hourly
     - service: script.wake_up
-    - delay:
-        minutes: 20
-    - condition: template
-      value_template: "{{ as_timestamp(state_attr('script.wake_up','last_triggered')) | float > as_timestamp(state_attr('binary_sensor.shower_motion','timestamp')) | float }}"
-    - service: script.wake_up
+#    - delay:
+#        minutes: 20
+#    - condition: template
+#      value_template: "{{ (as_timestamp(state_attr('script.wake_up','last_triggered')) | float > as_timestamp(state_attr('binary_sensor.shower_motion','timestamp')) | float) and is_state('input_boolean.sleeping_in','off') }}"
+#    - service: script.wake_up

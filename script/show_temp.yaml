@@ -1,4 +1,4 @@
 show_temp:
   sequence:
     - service: automation.trigger
-      entity_id: automation.aurora_controller
+      entity_id: automation.aurora_controller_hourly

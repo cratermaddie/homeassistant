@@ -12,6 +12,7 @@ aurora_brightness:
     - "Dim"
     - "Off"
   icon: mdi:brightness-6
+
 hue_scene:
   name: Scene
   options:

@@ -14,12 +14,12 @@ nap_duration:
 volume_temp:
   friendly_name: 'Volume Value'
   icon: mdi:volume-high
-query_home:
-  friendly_name: 'Query Home'
-  icon: mdi:google-home
-alarm_time:
-  friendly_name: 'Alarm Time'
-  icon: mdi:alarm
+#query_home:
+#  friendly_name: 'Query Home'
+#  icon: mdi:google-home
+#alarm_time:
+#  friendly_name: 'Alarm Time'
+#  icon: mdi:alarm
 time_asleep:
   friendly_name: 'Time Asleep'
   icon: mdi:hotel

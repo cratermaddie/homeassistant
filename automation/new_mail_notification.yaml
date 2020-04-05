@@ -1,7 +1,7 @@
 - alias: Mailbox notification
   trigger:
     - platform: state
-      entity_id: binary_sensor.wyzesense_779ad318
+      entity_id: binary_sensor.mailbox
       to: 'on'
   action:
     - service: notify.mobile_app_madisons_iphone

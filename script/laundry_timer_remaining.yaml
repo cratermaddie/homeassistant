@@ -1,0 +1,39 @@
+laundry_timer_remaining:
+  sequence:
+    - condition: state
+      entity_id: sensor.timer_running
+      state: 'True'
+    - service: media_player.turn_on
+      entity_id: media_player.living_room_display
+    - wait_template: "{{ is_state('media_player.living_room_display', 'idle') }}"
+    - service: var.set
+      data:
+        entity_id: var.volume_temp
+        value_template: "{{ state_attr('media_player.living_room_display', 'volume_level')| float | round(2)}}"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.living_room_display
+        volume_level: 0.8
+    - service: tts.google_translate_say
+      entity_id: media_player.living_room_display
+      data_template:
+        message: >-
+          {% if is_state('timer.laundry','active') %}
+          {% set minutes = 48 - (now().timestamp() - state_attr('automation.start_washing_machine_timer','last_triggered') | as_timestamp | float) | timestamp_custom('%-M') | int %}
+          {% set seconds = 60 - (now().timestamp() - state_attr('automation.start_washing_machine_timer','last_triggered') | as_timestamp | float) | timestamp_custom('%-S') | int %}
+
+          There {% if minutes == 1 or ( minutes == 0 and seconds == 1) %}is{% else %}are{% endif %} {% if not minutes == 0 %}{{ minutes }} {% if minutes == 1 %}minute{% else %}minutes{% endif %}{% if not seconds == 0 %} and {% endif %}{% endif %}{% if not seconds == 0 %}{{ seconds }} {% if seconds == 1 %}second{% else %}seconds{% endif %}{% endif %} remaining.
+
+          {% elif is_state('timer.dryer','active') %}
+          {% set minutes = 44 - (now().timestamp() - state_attr('automation.start_dryer_timer','last_triggered') | as_timestamp | float) | timestamp_custom('%-M') | int %}
+          {% set seconds = 60 - (now().timestamp() - state_attr('automation.start_dryer_timer','last_triggered') | as_timestamp | float) | timestamp_custom('%-S') | int %}
+          There {% if minutes == 1 or ( minutes == 0 and seconds == 1) %}is{% else %}are{% endif %} {% if not minutes == 0 %}{{ minutes }} {% if minutes == 1 %}minute{% else %}minutes{% endif %}{% if not seconds == 0 %} and {% endif %}{% endif %}{% if not seconds == 0 %}{{ seconds }} {% if seconds == 1 %}second{% else %}seconds{% endif %}{% endif %} remaining.
+          {% endif %}
+    - wait_template: "{{ is_state('media_player.living_room_display', 'playing') }}"
+    - wait_template: "{{ is_state('media_player.living_room_display', 'idle') }}"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.living_room_display
+        volume_level: "{{ states('var.volume_temp')| float }}"
+    - service: media_player.turn_off
+      entity_id: media_player.living_room_display
