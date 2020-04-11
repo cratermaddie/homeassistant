@@ -36,6 +36,9 @@ notify: !include integrations/notify.yaml
 switch: !include integrations/switch.yaml
 var: !include integrations/var.yaml
 
+shell_command:
+  delete_gtfs: rm gtfs/google_transit.sqlite
+
 #speedtestdotnet:
 #  server_id: 10135
 
@@ -160,8 +163,8 @@ rest_command:
       {
         "entity_id": "input_select.aurora_effects",
         "options": [
-      {%- for effect in state_attr('light.nanoleaf','effect_list') %}
-        "{{ effect }}"{% if not loop.last %}, {% endif %}
-      {%- endfor %}
+          {%- for effect in state_attr('light.nanoleaf','effect_list') %}
+          {% if loop.first %}"Off", {% endif %}"{{ effect }}"{% if not loop.last %}, {% endif %}
+          {%- endfor %}
         ]
       }

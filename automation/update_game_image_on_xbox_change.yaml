@@ -1,0 +1,8 @@
+- alias: Update game image on xbox change
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: sensor.firebolt227
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.igdb_game_image

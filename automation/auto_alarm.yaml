@@ -12,13 +12,16 @@
       - condition: state
         entity_id: input_boolean.sleeping_in
         state: 'off'
+      - condition: numeric_state
+        entity_id: sensor.uptime
+        above: 0.1
   action:
 #    - delay:
 #        minutes: >-
 #          {{ ((1 - ((((now().timestamp() - (states('var.time_asleep') | int)) / 3600) | int) / 8)) * 30) | int }}
-    - condition: state
-      entity_id: input_boolean.awake
-      state: 'off'
+#    - condition: state
+#      entity_id: input_boolean.awake
+#      state: 'off'
     - service: hue.hue_activate_scene
       data:
         group_name: "Bedroom"
