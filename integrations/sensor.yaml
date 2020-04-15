@@ -18,6 +18,10 @@
   show_topn: 1
   inclusions:
     - title
+
+- platform: moon
+
+- platform: websocket_api
     
 #- platform: lyft
 #  client_id: !secret lyft_client_id
@@ -114,8 +118,8 @@
   resources:
     - type: disk_use_percent
       arg: /home
-    - type: memory_free
     - type: processor_use
+    - typr: memory_use_percent
   scan_interval:
     seconds: 2
     
@@ -141,7 +145,6 @@
 - platform: igdb_game_image
   entity_id: sensor.firebolt227
   api_key: !secret igdb_api_key
-  scan_interval: 9999999999
   
     
 - platform: payment_scrape
@@ -426,9 +429,36 @@
         {{ now().timestamp()|float  >= (states('sensor.google_cal_leave_ts') | int ) }}
       entity_id: sensor.time
       
-    nanoleaf_leave_trigger:
+    first_leave_ts:
       value_template: >-
-        {{ now().timestamp()|float  >= (states('sensor.google_cal_leave_ts') | int ) - 1800 }}
+         {% if is_state_attr("calendar.personal_trigger", "start_time", "unknown") or (state_attr("calendar.personal_trigger", "start_time") == None) %}
+           9999999999999999999999999
+         {% else %}
+           {{ (as_timestamp(state_attr("calendar.personal_trigger", "start_time"))) - ((states('sensor.travel_to_next_event') | int) * 60 + 1200 + 1800) }}
+         {% endif %}
+      entity_id:
+        - sensor.travel_to_next_event
+        - calendar.personal_trigger
+
+    first_leave_trigger:
+      value_template: >-
+        {{ now().timestamp()|float  >= (states('sensor.first_leave_ts') | int ) }}
+      entity_id: sensor.time
+
+    second_leave_ts:
+      value_template: >-
+         {% if is_state_attr("calendar.personal_trigger", "start_time", "unknown") or (state_attr("calendar.personal_trigger", "start_time") == None) %}
+           9999999999999999999999999
+         {% else %}
+           {{ (as_timestamp(state_attr("calendar.personal_trigger", "start_time"))) - ((states('sensor.travel_to_next_event') | int) * 60 + 1200 + 900) }}
+         {% endif %}
+      entity_id:
+        - sensor.travel_to_next_event
+        - calendar.personal_trigger
+
+    second_leave_trigger:
+      value_template: >-
+        {{ now().timestamp()|float  >= (states('sensor.second_leave_ts') | int ) }}
       entity_id: sensor.time
       
     charge_battery_trigger:

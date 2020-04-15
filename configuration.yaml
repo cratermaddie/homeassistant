@@ -36,6 +36,11 @@ notify: !include integrations/notify.yaml
 switch: !include integrations/switch.yaml
 var: !include integrations/var.yaml
 
+#smartthinq:
+#    token: Z3z9250RtfMRTlWzr0Ducc6hFEVZWhtj0S4aqMc4UiU=
+#    region: US
+#    language: en-US
+
 shell_command:
   delete_gtfs: rm gtfs/google_transit.sqlite
 
@@ -91,6 +96,10 @@ camera:
     name: WYZE Cam
     still_image_url: !secret wyze_still_image
     stream_source: !secret wyze_rtsp
+#  - platform: generic
+#    name: Desktop Stream
+#    still_image_url: !secret desktop_still
+#    stream_source: !secret desktop_rtsp
     
 twilio:
   account_sid: !secret twilio_sid

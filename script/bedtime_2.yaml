@@ -3,6 +3,7 @@ bedtime_2:
     - condition: state
       entity_id: var.mode
       state: 'home'
+    - service: script.update_travel_time
     - service: switch.turn_off
       entity_id: switch.air_freshener
     - service: hue.hue_activate_scene
@@ -30,6 +31,15 @@ bedtime_2:
         message: 'Time to go to bed.'
     - wait_template: "{{ is_state('media_player.bedroom_speaker', 'playing') }}"
     - wait_template: "{{ is_state('media_player.bedroom_speaker', 'idle') }}"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.bedroom_speaker
+        volume_level: 0
+    - service: script.goodnight_tomorrow_summary
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'playing') }}"
+      timeout: "00:02:00"
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'idle') }}"
+      timeout: "00:02:00"
     - service: media_player.volume_set
       data_template:
         entity_id: media_player.bedroom_speaker

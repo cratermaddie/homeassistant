@@ -1,0 +1,72 @@
+- alias: Show medium aurora reminder
+  trigger:
+    platform: state
+    entity_id: sensor.second_leave_trigger
+    to: "True"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.staying_home
+        state: 'off'
+      - condition: state
+        entity_id: var.mode
+        state: 'home'
+  action:
+    - service: var.set
+      data:
+        entity_id: var.aurora_temp
+        value_template: "{{ state_attr('light.nanoleaf', 'effect') }}"
+    - service: light.turn_on
+      data:
+        entity_id: light.nanoleaf
+        effect: "Medium alert"
+    - delay:
+        minutes: 1
+    - condition: state
+      entity_id: var.mode
+      state: 'home'
+    - service_template: >
+        {%- if is_state('input_select.aurora_mode', 'Weather') -%}
+        script.aurora_weather
+        {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
+        script.aurora_manual
+        {% endif %}
+        
+        
+        
+        
+- alias: Show low aurora reminder
+  trigger:
+    platform: state
+    entity_id: sensor.first_leave_trigger
+    to: "True"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.staying_home
+        state: 'off'
+      - condition: state
+        entity_id: var.mode
+        state: 'home'
+  action:
+    - service: var.set
+      data:
+        entity_id: var.aurora_temp
+        value_template: "{{ state_attr('light.nanoleaf', 'effect') }}"
+    - service: light.turn_on
+      data:
+        entity_id: light.nanoleaf
+        effect: "Mild alert"
+    - delay:
+        minutes: 1
+    - condition: state
+      entity_id: var.mode
+      state: 'home'
+    - service_template: >
+        {%- if is_state('input_select.aurora_mode', 'Weather') -%}
+        script.aurora_weather
+        {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
+        script.aurora_manual
+        {% endif %}
