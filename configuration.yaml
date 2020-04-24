@@ -5,9 +5,24 @@ homeassistant:
   elevation: 0
   unit_system: metric
   time_zone: America/Chicago
+#  auth_providers:
+#  - type: homeassistant
+#  - type: trusted_networks
+#    trusted_networks:
+#      - !secret 192_168_0_XX
+#      - !secret 172_30_32_XX
 
-default_config:
-
+#default_config:
+config:
+logbook:
+map:
+person:
+mobile_app:
+ssdp:
+zeroconf:
+sun:
+history:
+system_health:
 frontend:
   themes: !include_dir_merge_named themes
 
@@ -35,25 +50,24 @@ input_boolean: !include integrations/input_boolean.yaml
 notify: !include integrations/notify.yaml
 switch: !include integrations/switch.yaml
 var: !include integrations/var.yaml
+rest_command: !include integrations/rest_command.yaml
 
-#smartthinq:
-#    token: Z3z9250RtfMRTlWzr0Ducc6hFEVZWhtj0S4aqMc4UiU=
-#    region: US
-#    language: en-US
+apple_tv:
+  - host: !secret apple_tv_ip
+    login_id: !secret apple_tv_login_id
 
 shell_command:
   delete_gtfs: rm gtfs/google_transit.sqlite
 
-#speedtestdotnet:
-#  server_id: 10135
+airvisual:
+    api_key: !secret airvisual_api_key
+    geographies:
+        latitude: !secret home_lat
+        longitude: !secret home_lon
 
 #alarm_control_panel:
 #  - platform: manual
 
-#pi_hole:
-#  host: 'localhost:4865'
-#  verify_ssl: false
-  
 remote:
   - platform: hueremote
   
@@ -75,7 +89,7 @@ updater:
   include_used_components: true
   
 logger:
-  default: debug
+  default: warning
   
 browser_mod:
   devices:
@@ -108,7 +122,7 @@ twilio:
 #microsoft_face:
 #  api_key: !secret microsoft_face_api_key
 #  azure_region: northcentralus
-  
+#  
 #image_processing:
 #  - platform: microsoft_face_detect
 #    scan_interval: 9999
@@ -119,7 +133,7 @@ twilio:
 #    scan_interval: 9999
 #    source:
 #      - entity_id: camera.wyze_cam
-
+#
 google:
   client_id: !secret google_id
   client_secret: !secret google_secret
@@ -159,21 +173,3 @@ counter:
 #  intents: !include integrations/intent.yaml
   
 #intent_script: !include integrations/intent_script.yaml
-
-rest_command:
-  set_aurora_effects:
-    url: !secret input_select_set_options
-    method: POST
-    headers:
-      content-type: application/json
-      Authorization: !secret bearer_token
-    content_type: application/json
-    payload: >-
-      {
-        "entity_id": "input_select.aurora_effects",
-        "options": [
-          {%- for effect in state_attr('light.nanoleaf','effect_list') %}
-          {% if loop.first %}"Off", {% endif %}"{{ effect }}"{% if not loop.last %}, {% endif %}
-          {%- endfor %}
-        ]
-      }

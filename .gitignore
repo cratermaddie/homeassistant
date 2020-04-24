@@ -6,6 +6,7 @@ deps
 node-red
 tts
 www/community
+www/hacsfiles
 
 # Ignore files
 ip_bans.yaml
@@ -27,3 +28,4 @@ SERVICE_ACCOUNT.json
 .google.token
 gtfs/google_transit.zip
 gtfs/google_transit.sqlite
+html5_push_registrations.conf

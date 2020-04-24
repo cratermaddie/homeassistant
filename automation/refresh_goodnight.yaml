@@ -1,0 +1,31 @@
+- alias: refresh goodnight summary hourly after bedtime
+  trigger:
+    platform: time_pattern
+    hours: '*'
+  condition:
+    condition: state
+    entity_id: sensor.bedtime_trigger
+    state: 'True'
+  action:
+    - service: media_player.turn_on
+      entity_id: media_player.bedroom_speaker
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'idle') }}"
+    - service: var.set
+      data:
+        entity_id: var.volume_temp
+        value_template: "{{ state_attr('media_player.bedroom_speaker', 'volume_level')| float | round(2)}}"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.bedroom_speaker
+        volume_level: 0
+    - service: script.goodnight_tomorrow_summary
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'playing') }}"
+      timeout: "00:02:00"
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'idle') }}"
+      timeout: "00:02:00"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.bedroom_speaker
+        volume_level: "{{ states('var.volume_temp')| float }}"
+    - service: media_player.turn_off
+      entity_id: media_player.bedroom_speaker

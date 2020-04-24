@@ -1,0 +1,39 @@
+set_aurora_effects:
+  url: !secret input_select_set_options
+  method: POST
+  headers:
+    content-type: application/json
+    Authorization: !secret bearer_token
+  content_type: application/json
+  payload: >-
+    {
+      "entity_id": "input_select.aurora_effects",
+      "options": [
+        {%- for effect in state_attr('light.nanoleaf','effect_list') %}
+        {% if loop.first %}"Off", {% endif %}"{{ effect }}"{% if not loop.last %}, {% endif %}
+        {%- endfor %}
+      ]
+    }
+
+turn_on_living_room_ac:
+  url: !secret google_assistant_url
+  method: POST
+  content_type: 'application/json'
+  payload: '{"command":"turn on living room ac", "user":"Madison"}'
+  
+turn_off_living_room_ac:
+  url: !secret google_assistant_url
+  method: POST
+  content_type: 'application/json'
+  payload: '{"command":"turn off living room ac", "user":"Madison"}'
+turn_on_bedroom_ac:
+  url: !secret google_assistant_url
+  method: POST
+  content_type: 'application/json'
+  payload: '{"command":"turn on bedroom ac", "user":"Madison"}'
+  
+turn_off_bedroom_ac:
+  url: !secret google_assistant_url
+  method: POST
+  content_type: 'application/json'
+  payload: '{"command":"turn off bedroom ac", "user":"Madison"}'

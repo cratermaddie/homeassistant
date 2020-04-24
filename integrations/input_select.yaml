@@ -3,7 +3,6 @@ aurora_mode:
   options:
     - "Weather"
     - "Manual"
-  icon: mdi:dip-switch
   
 aurora_brightness:
   name: Aurora Brightness
@@ -11,7 +10,6 @@ aurora_brightness:
     - "Bright"
     - "Dim"
     - "Off"
-  icon: mdi:brightness-6
 
 hue_scene:
   name: Scene
@@ -46,3 +44,4 @@ aurora_effects:
   name: Effect
   options:
     - ""
+  icon: mdi:palette
