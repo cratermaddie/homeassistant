@@ -73,13 +73,6 @@ climate:
     ac_mode: true
     min_cycle_duration:
       minutes: 2
-#  - platform: generic_thermostat
-#    name: Living Room
-#    heater: switch.living_room_ac_fan
-#    target_sensor: sensor.coat_closet_sensor_temperature
-#    ac_mode: true
-#    min_cycle_duration:
-#      minutes: 2
   - platform: generic_thermostat
     name: Bedroom
     heater: switch.bedroom_ac_cool
@@ -87,13 +80,6 @@ climate:
     ac_mode: true
     min_cycle_duration:
       minutes: 2
-#  - platform: generic_thermostat
-#    name: Bedroom
-#    heater: switch.bedroom_ac_fan
-#    target_sensor: sensor.bedroom_closet_sensor_temperature
-#    ac_mode: true
-#    min_cycle_duration:
-#      minutes: 2
 
 shell_command:
   delete_gtfs: rm gtfs/google_transit.sqlite
