@@ -42,6 +42,8 @@ wake_up:
       entity_id: automation.aurora_controller_hourly
     - service: input_boolean.turn_on
       entity_id: input_boolean.meds_status
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.alarm_manual_mode
     - condition: time
       before: "11:00:00"
     - service: tts.google_translate_say

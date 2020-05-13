@@ -74,6 +74,14 @@ goodnight:
       data:
         entity_id: var.time_asleep
         value_template: '{{ now().timestamp() | int }}'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_ac_fan_mode
+        option: Low
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.living_room_ac_mode
+        option: 'Off'
     - service: media_player.play_media
       data:
         entity_id: media_player.bedroom_speaker

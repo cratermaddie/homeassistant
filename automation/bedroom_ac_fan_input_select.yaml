@@ -1,0 +1,6 @@
+- alias: Change bedroom ac fan based on input select
+  trigger:
+    - platform: state
+      entity_id: input_select.bedroom_ac_fan_mode
+  action:
+    - service: rest_command.bedroom_ac_fan_mode

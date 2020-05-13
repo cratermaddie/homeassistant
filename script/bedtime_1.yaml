@@ -15,3 +15,15 @@ bedtime_1:
           - light.dining_area_4
           - light.kitchen_4
         flash: 'short'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_ac_mode
+        option: Cool
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_ac_fan_mode
+        option: Medium
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.bedroom
+        temperature: 18

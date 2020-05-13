@@ -17,7 +17,7 @@ goodnight_tomorrow_summary:
           {% set low = states('sensor.dark_sky_overnight_low_temperature_1d') | int if (day_offset) else states('sensor.dark_sky_overnight_low_temperature_0d') | int %}
           
           {% if is_holiday %}
-          Tomorrow is {{ state_attr('calendar.holidays_in_united_states','message') | replace(" (regional holiday)","") }}
+          Tomorrow is {{ state_attr('calendar.holidays_in_united_states','message') | replace(" (regional holiday)","") }}.
           {% endif %}
           {% if not is_holiday and is_birthday %}
           Tomorrow is
@@ -27,10 +27,14 @@ goodnight_tomorrow_summary:
           {% if is_birthday %}
           {{ state_attr('calendar.contacts','message') }}!
           {% endif %}
-          {% if is_event %}
+          {% if is_event and is_state('input_boolean.alarm_manual_mode','off') %}
           Your first event tomorrow is {{ state_attr('calendar.personal','message') }} at {{ event_time }} so I'll wake you up around 
-          {% else %}
+          {% elif is_state('input_boolean.alarm_manual_mode','off') %}
           You don't have any events tomorrow. So you can sleep in until around 
+          {% elif is_event and is_state('input_boolean.alarm_manual_mode','on') %}
+          Your first event tomorrow is {{ state_attr('calendar.personal','message') }} at {{ event_time }} and your manual alarm is set to
+          {% else %}
+          You don't have any events tomorrow and your manual alarm is set to
           {% endif %}
           {{ alarm_time }} in about {{ ((states('sensor.auto_alarm_time_ts') | int - now().timestamp()) / 3600 ) | round }} hours. 
           Tomorrow's weather will be {{ summary }} with a high of {{ high }} and a low of {{ low }}. 

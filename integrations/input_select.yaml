@@ -45,3 +45,35 @@ aurora_effects:
   options:
     - ""
   icon: mdi:palette
+
+living_room_ac_mode:
+  name: Living Room AC Mode
+  options:
+    - "Off"
+    - "Cool"
+    - "Fan"
+    - "Dry"
+
+bedroom_ac_mode:
+  name: Bedroom AC Mode
+  options:
+    - "Off"
+    - "Cool"
+    - "Fan"
+    - "Dry"
+
+living_room_ac_fan_mode:
+  name: Living Room AC Fan Mode
+  options:
+    - "Off"
+    - "Low"
+    - "Medium"
+    - "High"
+
+bedroom_ac_fan_mode:
+  name: Bedroom AC Fan Mode
+  options:
+    - "Off"
+    - "Low"
+    - "Medium"
+    - "High"

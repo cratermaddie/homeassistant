@@ -5,6 +5,8 @@ homeassistant:
   elevation: 0
   unit_system: metric
   time_zone: America/Chicago
+  whitelist_external_dirs:
+    - /config/images
 #  auth_providers:
 #  - type: homeassistant
 #  - type: trusted_networks
@@ -33,6 +35,13 @@ recorder:
 http:
   base_url: !secret base_url
 
+breaking_changes:
+
+#smartthinq:
+#    token: !secret lg_refresh_token
+#    region: US
+#    language: en-US
+
 tts:
   - platform: google_translate
     base_url: !secret local_base_url
@@ -56,6 +65,36 @@ apple_tv:
   - host: !secret apple_tv_ip
     login_id: !secret apple_tv_login_id
 
+climate:
+  - platform: generic_thermostat
+    name: Living Room
+    heater: switch.living_room_ac_cool
+    target_sensor: sensor.coat_closet_sensor_temperature
+    ac_mode: true
+    min_cycle_duration:
+      minutes: 2
+#  - platform: generic_thermostat
+#    name: Living Room
+#    heater: switch.living_room_ac_fan
+#    target_sensor: sensor.coat_closet_sensor_temperature
+#    ac_mode: true
+#    min_cycle_duration:
+#      minutes: 2
+  - platform: generic_thermostat
+    name: Bedroom
+    heater: switch.bedroom_ac_cool
+    target_sensor: sensor.bedroom_closet_sensor_temperature
+    ac_mode: true
+    min_cycle_duration:
+      minutes: 2
+#  - platform: generic_thermostat
+#    name: Bedroom
+#    heater: switch.bedroom_ac_fan
+#    target_sensor: sensor.bedroom_closet_sensor_temperature
+#    ac_mode: true
+#    min_cycle_duration:
+#      minutes: 2
+
 shell_command:
   delete_gtfs: rm gtfs/google_transit.sqlite
 
@@ -67,14 +106,11 @@ airvisual:
 
 #alarm_control_panel:
 #  - platform: manual
-
-remote:
-  - platform: hueremote
   
-#input_datetime:
-#  manual_alarm:
-#    has_date: false
-#    has_time: true
+input_datetime:
+  manual_alarm:
+    has_date: false
+    has_time: true
     
 downloader:
   download_dir: gtfs
@@ -110,6 +146,12 @@ camera:
     name: WYZE Cam
     still_image_url: !secret wyze_still_image
     stream_source: !secret wyze_rtsp
+  - platform: local_file
+    file_path: /config/images/mail_and_packages/mail_today.gif
+    name: mail_usps
+  - platform: unsplash
+    api_key: !secret unsplash_access_key
+    orientation: landscape
 #  - platform: generic
 #    name: Desktop Stream
 #    still_image_url: !secret desktop_still
@@ -150,13 +192,6 @@ light:
 icloud:
   - username: !secret email
     password: !secret apple_password
-    
-vacuum:
-  - platform: roomba
-    name: 'Dustin'
-    host: !secret roomba_ip
-    username: !secret roomba_username
-    password: !secret roomba_password
     
 google_assistant:
   service_account: !include SERVICE_ACCOUNT.json

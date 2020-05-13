@@ -1,0 +1,5 @@
+turn_on_living_room_ac_fan:
+     sequence:
+       - service: rest_command.turn_on_living_room_ac
+       - service: input_boolean.turn_on
+         entity_id: input_boolean.living_room_ac_fan

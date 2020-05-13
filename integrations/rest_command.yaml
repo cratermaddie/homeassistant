@@ -26,6 +26,25 @@ turn_off_living_room_ac:
   method: POST
   content_type: 'application/json'
   payload: '{"command":"turn off living room ac", "user":"Madison"}'
+
+living_room_ac_mode:
+  url: !secret google_assistant_url
+  method: POST
+  content_type: 'application/json'
+  payload: '{"command":"set living room ac to {{ states("input_select.living_room_ac_mode") }}", "user":"Madison"}'
+
+living_room_ac_fan_mode:
+  url: !secret google_assistant_url
+  method: POST
+  content_type: 'application/json'
+  payload: '{"command":"set living room ac fan to {{ states("input_select.living_room_ac_fan_mode") }}", "user":"Madison"}'
+
+living_room_ac_temperature_set:
+  url: !secret google_assistant_url
+  method: POST
+  content_type: 'application/json'
+  payload: '{"command":"set living room ac to {{ (state_attr("climate.living_room","temperature") * 9/5 + 32) | int }} degrees", "user":"Madison"}'
+
 turn_on_bedroom_ac:
   url: !secret google_assistant_url
   method: POST
@@ -37,3 +56,21 @@ turn_off_bedroom_ac:
   method: POST
   content_type: 'application/json'
   payload: '{"command":"turn off bedroom ac", "user":"Madison"}'
+
+bedroom_ac_mode:
+  url: !secret google_assistant_url
+  method: POST
+  content_type: 'application/json'
+  payload: '{"command":"set bedroom ac to {{ states("input_select.bedroom_ac_mode") }}", "user":"Madison"}'
+
+bedroom_ac_fan_mode:
+  url: !secret google_assistant_url
+  method: POST
+  content_type: 'application/json'
+  payload: '{"command":"set bedroom ac fan to {{ states("input_select.bedroom_ac_fan_mode") }}", "user":"Madison"}'
+
+bedroom_ac_temperature_set:
+  url: !secret google_assistant_url
+  method: POST
+  content_type: 'application/json'
+  payload: '{"command":"set bedroom ac to {{ (state_attr("climate.bedroom","temperature") * 9/5 + 32) | int }} degrees", "user":"Madison"}'

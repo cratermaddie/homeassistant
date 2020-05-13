@@ -1,0 +1,9 @@
+- alias: Turn on climate when home
+  trigger:
+    - platform: zone
+      entity_id: device_tracker.madisons_iphone_app
+      zone: zone.home
+      event: enter
+  action:
+    - service: rest_command.living_room_ac_mode
+    - service: rest_command.bedroom_ac_mode

@@ -1,0 +1,23 @@
+- alias: Aurora Controller Hourly
+  trigger:
+    - platform: zone
+      entity_id: device_tracker.madisons_iphone_app
+      zone: zone.home
+      event: enter
+  action:
+    - service: var.set
+      data:
+        entity_id: var.aurora_temp
+        value_template: "{{ state_attr('light.nanoleaf', 'effect') }}"
+    - service: script.aurora_thermometer
+    - delay:
+        minutes: 1
+    - condition: state
+      entity_id: var.mode
+      state: 'home'
+    - service_template: >
+        {%- if is_state('input_select.aurora_mode', 'Weather') -%}
+        script.aurora_weather
+        {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
+        script.aurora_manual
+        {% endif %}

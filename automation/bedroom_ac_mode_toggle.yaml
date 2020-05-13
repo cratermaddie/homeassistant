@@ -1,0 +1,98 @@
+- alias: Bedroom AC Off mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_off
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_mode_cool
+          - input_boolean.bedroom_ac_mode_fan
+          - input_boolean.bedroom_ac_mode_dry
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.bedroom_ac_mode
+        option: "Off"
+        
+- alias: Bedroom AC Cool mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_cool
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_mode_off
+          - input_boolean.bedroom_ac_mode_fan
+          - input_boolean.bedroom_ac_mode_dry
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.bedroom_ac_mode
+        option: "Cool"
+
+- alias: Bedroom AC Fan mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_fan
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_mode_cool
+          - input_boolean.bedroom_ac_mode_off
+          - input_boolean.bedroom_ac_mode_dry
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.bedroom_ac_mode
+        option: "Fan"
+
+- alias: Bedroom AC Dry mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_dry
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_mode_cool
+          - input_boolean.bedroom_ac_mode_fan
+          - input_boolean.bedroom_ac_mode_off
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.bedroom_ac_mode
+        option: "Dry"
+    
+- alias: Bedroom AC none mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_dry
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_cool
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_fan
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_off
+        to: "off"
+  condition:
+    condition: template
+    value_template: "{{ is_state('input_boolean.bedroom_ac_mode_dry','off') and is_state('input_boolean.bedroom_ac_mode_cool','off') and is_state('input_boolean.bedroom_ac_mode_fan','off') and is_state('input_boolean.bedroom_ac_mode_off','off') }}"
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "{{trigger.entity_id}}"
+        
+- alias: input select bedroom ac mode switches
+  trigger:
+      - platform: state
+        entity_id: input_select.bedroom_ac_mode
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "input_boolean.bedroom_ac_mode_{{ states('input_select.bedroom_ac_mode') | lower }}"

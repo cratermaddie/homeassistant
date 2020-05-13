@@ -35,6 +35,14 @@
     - service: automation.trigger
       entity_id: automation.aurora_controller_hourly
     - service: script.wake_up
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_ac_mode
+        option: Fan
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_ac_fan_mode
+        option: Low
 #    - delay:
 #        minutes: 20
 #    - condition: template

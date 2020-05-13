@@ -1,7 +1,15 @@
 - alias: Restart home assistant when connected clients overloads
   trigger:
     - platform: numeric_state
-      entity_id: sensor.connected_cliends
+      entity_id: sensor.connected_clients
       above: 12
   action:
+    - service: persistent_notification.create
+      data_template:
+        title: "Connected Clients Overload"
+        message: |
+          There are currently {{ states('sensor.connected_clients') }} connected clients.
+          Restarting in 30 seconds.
+    - delay:
+        seconds: 30
     - service: hassio.host_reboot

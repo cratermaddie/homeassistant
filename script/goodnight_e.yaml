@@ -7,3 +7,5 @@ goodnight_e:
       entity_id: media_player.bedroom_speaker
       data_template:
         message: "You still need to take your estrogen."
+    - service: light.turn_on
+      entity_id: light.bathroom_6

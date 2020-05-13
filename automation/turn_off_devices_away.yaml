@@ -28,3 +28,11 @@
     - service: script.turn_off_tv
     - service: script.turn_off_vanity
     - service: script.turn_off_diffuser
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.living_room_ac_mode
+        option: "Off"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.bedroom_ac_mode
+        option: "Off"

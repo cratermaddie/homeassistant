@@ -1,0 +1,7 @@
+- alias: Turn off living room ac based on input select
+  trigger:
+    - platform: state
+      entity_id: input_select.living_room_ac_mode
+      to: "Off"
+  action:
+    - service: rest_command.turn_off_living_room_ac

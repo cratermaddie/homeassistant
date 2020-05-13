@@ -1,19 +1,28 @@
 - platform: yr
 
+#Hat Films
 - platform: youtube
   channel_id: UC7A_dLnSAjl7uROCdoNyjzg
   
+#Yogscast
 - platform: youtube
   channel_id: UCH-_hzb2ILSCo9ftVSnrCIQ
   
+#UpIsNotJump
 - platform: youtube
   channel_id: UCFLwN7vRu8M057qJF8TsBaA
   
+#Lydia
 - platform: youtube
   channel_id: UCzwUf6paImIBVK6fEVeHNRQ
   
+#Vivziepop
 - platform: youtube
   channel_id: UCzfyYtgvkx5mLy8nlLlayYg
+
+#JonTronShow
+- platform: youtube
+  channel_id: UCdJdEguB1F1CiYe7OEi3SBg
 
 - platform: feedparser
   name: Cubs Game
@@ -28,14 +37,19 @@
 
 - platform: websocket_api
 
-- platform: github
-  access_token: !secret github_access_token
-  repositories:
-    - path: 'cratermaddie/homeassistant'
+#- platform: github
+#  access_token: !secret github_access_token
+#  repositories:
+#    - path: 'cratermaddie/homeassistant'
     
 #- platform: lyft
 #  client_id: !secret lyft_client_id
 #  client_secret: !secret lyft_client_secret
+
+- platform: weatheralerts
+  state: IL
+  zone: 104
+  county: 31
 
 - platform: history_stats
   name: Quarantine meter Madison
@@ -79,6 +93,7 @@
     - HatFilms
     - vidiotsOffical
     - vivzie
+    - jontronshow
   
 - platform: steam_online
   api_key: !secret steam_key
@@ -365,12 +380,45 @@
       unit_of_measurement: '$'
       entity_id:
         - sensor.payment_scrape
-      
+
+    weather_alerts_count:
+      value_template: >
+        {% set alerts = namespace(value='') %}
+        {% for alert in state_attr('sensor.central_cook','alerts') if (alert.NWSheadline != "null" and as_timestamp(alert.expires) > now().timestamp() and not alert.NWSheadline[0].replace(' CDT','') in alerts.value) %}
+        {% set alerts.value = alerts.value + alert.NWSheadline[0].replace(' CDT','') | title | replace(' Pm','pm') | replace(' Am','am') %}
+        {% if not loop.last %}
+        {% set alerts.value = alerts.value + '\n' %}
+        {% endif %}
+        {% endfor %}
+        {{ alerts.value.split('\n') | count if (alerts.value.split('\n')[0] != '') else 0 }}
+      entity_id:
+        - sensor.central_cook
+
     timer_running:
       value_template: "{{ is_state('timer.laundry','active') or is_state('timer.dryer','active') }}"
       entity_id:
         - timer.laundry
         - timer.dryer
+
+    show_climate_living_room:
+      value_template: "{{ is_state('input_select.living_room_ac_mode','Cool') or is_state('input_select.living_room_ac_mode','Dry') }}"
+      entity_id:
+        - input_select.living_room_ac_mode
+
+    show_climate_bedroom:
+      value_template: "{{ is_state('input_select.bedroom_ac_mode','Cool') or is_state('input_select.bedroom_ac_mode','Dry') }}"
+      entity_id:
+        - input_select.bedroom_ac_mode
+
+    climate_bedroom_set_temperature:
+      value_template: "{{ state_attr('climate.bedroom','temperature') }}"
+      entity_id:
+        - climate.bedroom
+
+    climate_living_room_set_temperature:
+      value_template: "{{ state_attr('climate.living_room','temperature') }}"
+      entity_id:
+        - climate.living_room
       
     cubs_result:
       value_template: "{{ state_attr('sensor.cubs_game','entries') }}"
@@ -380,6 +428,79 @@
       value_template: >
         {{ as_timestamp(strptime((states('sensor.cubs_result') | replace('nd.','') | replace('rd.','') | replace('th.','') | replace('st.','')+"2020"),"[{'title': 'Is There a Cubs Game Today? Today is %A, %B %d YES AT %I:%M %p'}]%Y")) }}
       entity_id: sensor.cubs_result
+
+    mail_deliveries_message:
+      friendly_name: "Deliveries Summary"
+      entity_id: 
+        - sensor.mail_usps_mail
+        - sensor.mail_usps_delivering
+        - sensor.mail_fedex_delivering
+        - sensor.mail_ups_delivering
+      value_template: > 
+        {# Deliveries Sentence #}
+          {% macro deliveries_sentence() -%}
+                {%- if states("sensor.mail_usps_mail")|int == 0 -%}
+                  No
+                {%- else -%}
+                  {{states("sensor.mail_usps_mail")|int}}
+                {%- endif -%}
+              {{' '}} 
+                {%- if states("sensor.mail_usps_mail")|int <= 1 -%}
+                  pieces of mail
+                {%- else -%}
+                  pieces of mail
+                {%- endif -%}
+              {{' '}}will be delivered.{{' '}} 
+                {%- if states("sensor.mail_usps_delivering")|int == 0 -%}
+                  No
+                {%- else -%}
+                  {{states("sensor.mail_usps_delivering")|int}}
+                {%- endif -%}
+              {{' '}} 
+                {%- if states("sensor.mail_usps_delivering")|int == 1 -%}
+                  USPS package is
+                {%- else -%}
+                  USPS packages are
+                {%- endif -%}
+              {{' '}}in transit.{{' '}}
+                {%- if states("sensor.mail_fedex_delivering")|int == 0 -%}
+                  No
+                {%- else -%}
+                  {{states("sensor.mail_fedex_delivering")|int}}
+                {%- endif -%}
+              {{' '}} 
+                {%- if states("sensor.mail_fedex_delivering")|int == 1 -%}
+                  FedEx package is
+                {%- else -%}
+                  Fedex packages are
+                {%- endif -%}
+              {{' '}}in transit.{{' '}}
+              {%- if states("sensor.mail_ups_delivering")|int == 0 -%}
+                  No
+                {%- else -%}
+                  {{states("sensor.mail_ups_delivering")|int}}
+                {%- endif -%}
+              {{' '}} 
+                {%- if states("sensor.mail_ups_delivering")|int == 1 -%}
+                  UPS package is
+                {%- else -%}
+                  UPS packages are
+                {%- endif -%}
+              {{' '}}in transit.{{' '}}
+              {%- if states("sensor.mail_amazon_packages")|int == 0 -%}
+                  No
+                {%- else -%}
+                  {{states("sensor.mail_amazon_packages")|int}}
+                {%- endif -%}
+              {{' '}} 
+                {%- if states("sensor.mail_amazon_packages")|int == 1 -%}
+                  Amazon package is
+                {%- else -%}
+                  Amazon packages are
+                {%- endif -%}
+              {{' '}}in transit.{{' '}}
+          {%- endmacro %}
+        {{deliveries_sentence()}}
 
     travel_to_next_event:
       value_template: >
@@ -419,7 +540,9 @@
         {% else %}
           {{ as_timestamp(state_attr("calendar.personal_trigger", "start_time")) }}
         {% endif %}
-      entity_id: calendar.personal_trigger
+      entity_id: 
+        - calendar.personal_trigger
+        - sensor.time
 
     google_cal_leave_ts:
       value_template: >-
@@ -479,13 +602,17 @@
         {% else %}
         {% set auto_time = (as_timestamp(strptime(((now().timestamp()|float +86400)|timestamp_custom('%b %d %Y 09:00')),'%b %d %Y %H:%M'))|int) %}        
         {% endif %}
-        {% if now().hour > 7 %}
+        {% if now().hour > 7 and is_state('input_boolean.awake','on') %}
         {% set default_time = (as_timestamp(strptime(((now().timestamp()|float +86400)|timestamp_custom('%b %d %Y 09:00')),'%b %d %Y %H:%M'))|int) %}        
+        {% set manual_time = (as_timestamp(strptime(((now().timestamp()|float + 86400)|timestamp_custom('%b %d %Y 00:00')),'%b %d %Y %H:%M'))|int) + state_attr('input_datetime.manual_alarm','timestamp') %}        
         {% else %}
         {% set default_time = (as_timestamp(strptime(((now().timestamp()|float )|timestamp_custom('%b %d %Y 09:00')),'%b %d %Y %H:%M'))|int) %}
+        {% set manual_time = (as_timestamp(strptime(((now().timestamp()|float)|timestamp_custom('%b %d %Y 00:00')),'%b %d %Y %H:%M'))|int) + state_attr('input_datetime.manual_alarm','timestamp') %}
         {% endif %}
-
-        {% if (auto_time > default_time) %}
+        
+        {% if is_state('input_boolean.alarm_manual_mode','on') %}
+        {{ manual_time }}
+        {% elif (auto_time > default_time) %}
         {{ default_time }}
         {% else %}
         {{ auto_time }}
@@ -494,6 +621,8 @@
         - sensor.travel_to_next_event
         - input_boolean.staying_home
         - calendar.personal_trigger
+        - input_datetime.manual_alarm
+        - input_boolean.alarm_manual_mode
         - sensor.time
       
     auto_alarm_time_display:
@@ -509,7 +638,13 @@
         - input_boolean.bedtime
         - input_boolean.staying_up
         - input_boolean.awake
-    
+
+    manual_alarm_time_display:
+      value_template: >-
+        {{ '{:02}:{:02}'.format(state_attr('input_datetime.manual_alarm','hour'), state_attr('input_datetime.manual_alarm','minute')) }}
+      entity_id:
+        - input_datetime.manual_alarm
+
     bedtime_ts:
       value_template: '{{ (states("sensor.auto_alarm_time_ts") | int) - (18*1800) }}'
       entity_id: calendar.auto_alarm_time_ts
@@ -532,6 +667,11 @@
       
     days_on_estrogen:
       value_template: '{{ ((now().timestamp()|float  - as_timestamp("2019-3-13 00:00:00"))/60/60/24) | int }}'
+      unit_of_measurement: 'Days'
+      entity_id: sensor.date
+
+    days_until_surgery:
+      value_template: '{{ ((as_timestamp("2020-9-23 00:00:00") - now().timestamp()|float)/60/60/24) | int }}'
       unit_of_measurement: 'Days'
       entity_id: sensor.date
       

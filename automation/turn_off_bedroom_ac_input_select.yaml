@@ -1,0 +1,7 @@
+- alias: Turn off bedroom ac based on input select
+  trigger:
+    - platform: state
+      entity_id: input_select.bedroom_ac_mode
+      to: "Off"
+  action:
+    - service: rest_command.turn_off_bedroom_ac

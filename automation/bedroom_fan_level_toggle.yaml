@@ -1,0 +1,98 @@
+- alias: Bedroom Fan med mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_medium
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_fan_low
+          - input_boolean.bedroom_ac_fan_off
+          - input_boolean.bedroom_ac_fan_high
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.bedroom_ac_fan_mode
+        option: "Medium"
+        
+- alias: Bedroom Fan low mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_low
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_fan_medium
+          - input_boolean.bedroom_ac_fan_off
+          - input_boolean.bedroom_ac_fan_high
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.bedroom_ac_fan_mode
+        option: "Low"
+
+- alias: Bedroom Fan off mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_off
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_fan_low
+          - input_boolean.bedroom_ac_fan_medium
+          - input_boolean.bedroom_ac_fan_high
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.bedroom_ac_fan_mode
+        option: "Off"
+
+- alias: Bedroom Fan High mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_high
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_fan_low
+          - input_boolean.bedroom_ac_fan_off
+          - input_boolean.bedroom_ac_fan_medium
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.bedroom_ac_fan_mode
+        option: "High"
+    
+- alias: Bedroom Fan none mode switches controller
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_high
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_low
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_off
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_medium
+        to: "off"
+  condition:
+    condition: template
+    value_template: "{{ is_state('input_boolean.bedroom_ac_fan_high','off') and is_state('input_boolean.bedroom_ac_fan_low','off') and is_state('input_boolean.bedroom_ac_fan_off','off') and is_state('input_boolean.bedroom_ac_fan_medium','off') }}"
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "{{trigger.entity_id}}"
+        
+- alias: input select Bedroom Fan mode switches
+  trigger:
+      - platform: state
+        entity_id: input_select.bedroom_ac_fan_mode
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "input_boolean.bedroom_ac_fan_{{ states('input_select.bedroom_ac_fan_mode') | lower }}"
