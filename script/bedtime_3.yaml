@@ -5,11 +5,11 @@ bedtime_3:
       state: 'home'
     - service: light.turn_off
       entity_id:
-        - light.dining_area_4
-        - light.entry_way_2
+        - light.dining_area_lights
+        - light.entryway_lights
     - service: script.turn_off_pc
     - condition: template
       value_template: "{{ not is_state('media_player.apple_tv','playing') and not is_state('media_player.living_room_tv','playing') }}"
     - service: light.turn_off
       entity_id:
-        - light.living_room_4
+        - light.living_room_lights

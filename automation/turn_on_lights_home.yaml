@@ -20,5 +20,5 @@
         scene_name: "Relax"
     - service: hue.hue_activate_scene
       data:
-        group_name: "Entry way"
+        group_name: "Entryway"
         scene_name: "Bright"

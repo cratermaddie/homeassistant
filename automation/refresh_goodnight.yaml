@@ -4,7 +4,7 @@
     hours: '*'
   condition:
     condition: template
-    value_template: "{{ (as_timestamp(states.sensor.bedtime_trigger.last_changed) < now().timestamp() < as_timestamp(state_attr('script.goodnight','last_triggered'))) and is_state('sensor.bedtime_trigger','True') }}"
+    value_template: "{{ (as_timestamp(states.sensor.bedtime_trigger.last_changed) < now().timestamp() < as_timestamp(state_attr('script.goodnight','last_triggered'))) and is_state('input_boolean.bedtime','on') }}"
   action:
     - service: media_player.turn_on
       entity_id: media_player.bedroom_speaker

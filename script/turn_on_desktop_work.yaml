@@ -1,0 +1,7 @@
+turn_on_desktop_work:
+  sequence:
+    - condition: template
+      value_template: "{{ is_state('input_boolean.staying_home','on') and is_state('switch.desktop','off') and is_state_attr('calendar.personal_trigger','message','Work') }}"
+    - service: wake_on_lan.send_magic_packet
+      data:
+        mac: !secret desktop_mac

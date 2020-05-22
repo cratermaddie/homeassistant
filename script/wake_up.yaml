@@ -7,10 +7,10 @@ wake_up:
     - service: media_player.turn_on
       entity_id: media_player.bedroom_speaker
     - wait_template: "{{ not is_state('media_player.bedroom_speaker', 'off') }}"
-    - service: var.set
-      data:
-        entity_id: var.volume_temp
-        value_template: "{{ state_attr('media_player.bedroom_speaker', 'volume_level') | float | round(2) }}"
+#    - service: var.set
+#      data:
+#        entity_id: var.volume_temp
+#        value_template: "{{ state_attr('media_player.bedroom_speaker', 'volume_level') | float | round(2) }}"
     - service: media_player.volume_set
       data_template:
         entity_id: media_player.bedroom_speaker
@@ -24,6 +24,10 @@ wake_up:
     - wait_template: "{{ is_state('media_player.bedroom_speaker', 'paused') }}"
     - service: media_player.turn_off
       entity_id: media_player.bedroom_speaker
+#    - service: media_player.volume_set
+#      data_template:
+#        entity_id: media_player.bedroom_speaker
+#        volume_level: "{{ states('var.volume_temp')|float }}"
     - service: media_player.volume_set
       data_template:
         entity_id: media_player.bedroom_speaker
@@ -44,6 +48,7 @@ wake_up:
       entity_id: input_boolean.meds_status
     - service: input_boolean.turn_off
       entity_id: input_boolean.alarm_manual_mode
+    - service: script.turn_on_desktop_work
     - condition: time
       before: "11:00:00"
     - service: tts.google_translate_say

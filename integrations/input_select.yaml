@@ -26,7 +26,7 @@ hue_room:
     - "Bedroom"
     - "Dining area"
     - "Kitchen"
-    - "Entry way"
+    - "Entryway"
     - "Bathroom"
   initial: ""
   icon: mdi:floor-plan

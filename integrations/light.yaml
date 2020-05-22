@@ -1,0 +1,47 @@
+- platform: nanoleaf
+  host: !secret nanoleaf_ip
+  token: !secret nanoleaf_token
+
+- platform: group
+  name: Kitchen Lights
+  entities:
+    - light.kitchen
+    - light.kitchen_2
+    - light.kitchen_3
+
+- platform: group
+  name: Living Room Lights
+  entities:
+    - light.living_room
+    - light.living_room_2
+    - light.living_room_3
+    - light.desk_lamp
+
+- platform: group
+  name: Dining Area Lights
+  entities:
+    - light.dining_area
+    - light.dining_area_2
+    - light.dining_area_3
+
+- platform: group
+  name: Bedroom Lights
+  entities:
+    - light.bedroom
+    - light.bedroom_2
+    - light.bedroom_3
+    - light.bedside_lamp
+
+- platform: group
+  name: Bathroom Lights
+  entities:
+    - light.bathroom
+    - light.bathroom_2
+    - light.bathroom_3
+    - light.bathroom_4
+    - light.bathroom_5
+
+- platform: group
+  name: Entryway Lights
+  entities:
+    - light.entry_way

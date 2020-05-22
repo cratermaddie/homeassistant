@@ -15,3 +15,7 @@ volume_temp:
 #  friendly_name: 'Alarm Time'
 time_asleep:
   friendly_name: 'Time Asleep'
+living_room_ac_mode:
+living_room_fan_mode:
+bedroom_ac_mode:
+bedroom_fan_mode:

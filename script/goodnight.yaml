@@ -22,9 +22,9 @@ goodnight:
     - wait_template: "{{ is_state('input_boolean.estrogen_status', 'on') }}"
     - service: light.turn_on
       data_template:
-        entity_id: light.bedroom_4
+        entity_id: light.bedroom_lights
         brightness: >-
-          {% if is_state('light.bedroom_4','on') %}
+          {% if is_state('light.bedroom_lights','on') %}
             26
           {% else %}
             0
@@ -60,15 +60,15 @@ goodnight:
       entity_id: switch.air_freshener
     - service: light.turn_off
       entity_id:
-        - light.living_room_4
-        - light.bedroom_4
+        - light.living_room_lights
+        - light.bedroom_lights
         - light.nanoleaf
-        - light.entry_way_2
-        - light.bathroom_6
-        - light.bedroom_closet_2
-        - light.kitchen_4
-        - light.dining_area_4
-        - light.coat_closet_2
+        - light.entryway_lights
+        - light.bathroom_lights
+        - light.bedroom_closet
+        - light.kitchen_lights
+        - light.dining_area_lights
+        - light.coat_closet
     - service: script.turn_off_vanity
     - service: var.set
       data:

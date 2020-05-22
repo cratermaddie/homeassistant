@@ -71,14 +71,14 @@
         - Dimmed
         - Nightlight
         
-- alias: Set hue scenes input select when room changes to entry way
+- alias: Set hue scenes input select when room changes to entryway
   trigger:
     platform: state
     entity_id: input_select.hue_room
   condition:
     condition: state
     entity_id: input_select.hue_room
-    state: Entry way
+    state: Entryway
   action:
     service: input_select.set_options
     data_template:
