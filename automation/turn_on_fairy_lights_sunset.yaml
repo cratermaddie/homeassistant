@@ -1,0 +1,11 @@
+- alias: Turn on fairy lights sunset
+  trigger:
+    platform: sun
+    event: sunset
+  condition:
+    condition: state
+    entity_id: var.mode
+    state: 'home'
+  action:
+    - service: switch.turn_off
+      entity_id: group.fairy_lights

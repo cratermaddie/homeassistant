@@ -1,16 +1,16 @@
-- alias: Send iOS notification when to refill pills
-  trigger:
-    platform: numeric_state
-    entity_id: counter.meds_counter
-    above: 13
-  action:
-    - service: notify.mobile_app_madisons_iphone
-      data_template:
-        message: "You need to refill your pills."
-        data:
-          apns_headers:
-            'apns-collapse-id': 'refill-pills'
-          push:
-            category: "refill-pills"
-            thread-id: "refill-pills"
-            sound: 'pills.wav'
+#- alias: Send iOS notification when to refill pills
+#  trigger:
+#    platform: numeric_state
+#    entity_id: counter.meds_counter
+#    above: 13
+#  action:
+#    - service: notify.mobile_app_madisons_iphone
+#      data_template:
+#        message: "You need to refill your pills."
+#        data:
+#          apns_headers:
+#            'apns-collapse-id': 'refill-pills'
+#          push:
+#            category: "refill-pills"
+#            thread-id: "refill-pills"
+#            sound: 'pills.wav'

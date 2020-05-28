@@ -9,4 +9,11 @@ set_nap:
     - service: input_boolean.turn_off
       entity_id: input_boolean.awake
     - delay: "00:{{ duration | int }}:00"
+    - service: switch.turn_off
+      entity_id: group.fairy_lights
     - service: script.wake_up
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - service: switch.turn_on
+      entity_id: group.fairy_lights

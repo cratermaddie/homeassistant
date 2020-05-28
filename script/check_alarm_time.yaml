@@ -18,15 +18,15 @@ check_alarm_time:
       data_template:
         message: >-
           {% set day_offset = 0 if (0<=now().hour<=7) else 1 %}
-          {% set is_event = now().timestamp() | timestamp_custom('%d') | int + day_offset == as_timestamp(state_attr('calendar.personal','start_time')) | timestamp_custom('%d') | int %}
+          {% set is_event = now().timestamp() | timestamp_custom('%d') | int + day_offset == as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%d') | int %}
           {% set alarm_time = (states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-H')) if (0 <= states('sensor.auto_alarm_time_ts') | int % 3600 <= 59) else (states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-H %M')) %}
 
           {% if is_event and is_state('input_boolean.alarm_manual_mode','off') %}
-          I'll be waking you up for {{ state_attr('calendar.personal','message') }} around 
+          I'll be waking you up for {{ state_attr('calendar.personal_trigger','message') }} around 
           {% elif is_state('input_boolean.alarm_manual_mode','off') %}
           You don't have any events tomorrow. So you can sleep in until around 
           {% elif is_event and is_state('input_boolean.alarm_manual_mode','on') %}
-          You have {{ state_attr('calendar.personal','message') }} at {{ event_time }} and your manual alarm is set to
+          You have {{ state_attr('calendar.personal_trigger','message') }} at {{ event_time }} and your manual alarm is set to
           {% else %}
           You don't have any events tomorrow and your manual alarm is set to
           {% endif %}

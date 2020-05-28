@@ -10,11 +10,11 @@ goodnight_tomorrow_summary:
           {% set month = (now().timestamp()|float +86400 )|timestamp_custom('%B') if day_offset else (now().timestamp()|float )|timestamp_custom('%B') %}
           {% set day = (now().timestamp()|float +86400 )|timestamp_custom('%-d') if day_offset else (now().timestamp()|float )|timestamp_custom('%-d') %}
           {% set is_birthday = (now().timestamp() | timestamp_custom('%d') | int + day_offset == as_timestamp(state_attr('calendar.contacts','start_time')) | timestamp_custom('%d') | int) and (now().timestamp() | timestamp_custom('%m') | int == as_timestamp(state_attr('calendar.contacts','start_time')) | timestamp_custom('%m') | int) %}
-          {% set is_event = now().timestamp() | timestamp_custom('%d') | int + day_offset == as_timestamp(state_attr('calendar.personal','start_time')) | timestamp_custom('%d') | int %}
+          {% set is_event = now().timestamp() | timestamp_custom('%d') | int + day_offset == as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%d') | int %}
           {% set is_holiday = now().timestamp() | timestamp_custom('%d') | int + day_offset == as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%d') | int and (now().timestamp() | timestamp_custom('%m') | int == as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%m') | int) %}
           
           {% set alarm_time = (states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-H')) if (0 <= states('sensor.auto_alarm_time_ts') | int % 3600 <= 59) else (states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-H %M')) %}
-          {% set event_time = (as_timestamp(state_attr('calendar.personal','start_time')) | int | timestamp_custom('%-H')) if (0 <= as_timestamp(state_attr('calendar.personal','start_time')) % 3600 <= 59) else (as_timestamp(state_attr('calendar.personal','start_time')) | timestamp_custom('%-H %M')) %}
+          {% set event_time = (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | int | timestamp_custom('%-H')) if (0 <= as_timestamp(state_attr('calendar.personal_trigger','start_time')) % 3600 <= 59) else (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%-H %M')) %}
           {% set summary = states('sensor.dark_sky_summary_1d') | replace('.', '') | lower if (day_offset) else states('sensor.dark_sky_summary_0d') | replace('.', '') | lower %}
           {% set high = states('sensor.dark_sky_daytime_high_temperature_1d') | int if (day_offset) else states('sensor.dark_sky_daytime_high_temperature_0d') |int %}
           {% set low = states('sensor.dark_sky_overnight_low_temperature_1d') | int if (day_offset) else states('sensor.dark_sky_overnight_low_temperature_0d') | int %}
@@ -31,11 +31,11 @@ goodnight_tomorrow_summary:
           {{ state_attr('calendar.contacts','message') }}!
           {% endif %}
           {% if is_event and is_state('input_boolean.alarm_manual_mode','off') %}
-          Your first event tomorrow is {{ state_attr('calendar.personal','message') }} at {{ event_time }} so I'll wake you up around 
+          Your first event tomorrow is {{ state_attr('calendar.personal_trigger','message') }} at {{ event_time }} so I'll wake you up around 
           {% elif is_state('input_boolean.alarm_manual_mode','off') %}
           You don't have any events tomorrow. So you can sleep in until around 
           {% elif is_event and is_state('input_boolean.alarm_manual_mode','on') %}
-          Your first event tomorrow is {{ state_attr('calendar.personal','message') }} at {{ event_time }} and your manual alarm is set to
+          Your first event tomorrow is {{ state_attr('calendar.personal_trigger','message') }} at {{ event_time }} and your manual alarm is set to
           {% else %}
           You don't have any events tomorrow and your manual alarm is set to
           {% endif %}

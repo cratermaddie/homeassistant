@@ -47,7 +47,7 @@ bedtime_2:
     - service: media_player.turn_off
       entity_id: media_player.bedroom_speaker
     - condition: template
-      value_template: "{{ now().weekday() <= 4 and (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%H')) | int < 9 }}"
+      value_template: "{{ (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%H') | int < 9) and (((now().hour > 7) and ((now().timestamp() + 86400) | timestamp_custom('%d') == as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%d'))) or ((0 <= now().hour <= 7) and (now().day == as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%d')))) }}"
     - delay:
         minutes: 1
     - service: media_player.turn_on
@@ -64,7 +64,7 @@ bedtime_2:
     - service: tts.google_translate_say
       entity_id: media_player.living_room_display
       data_template:
-        message: "Remember, you have {{ state_attr('calendar.personal','message') }} at {{ (as_timestamp(state_attr('calendar.personal','start_time')) | int | timestamp_custom('%-H')) if (0 <= as_timestamp(state_attr('calendar.personal','start_time')) % 3600 <= 59) else (as_timestamp(state_attr('calendar.personal','start_time')) | timestamp_custom('%-H %M')) }} tomorrow."
+        message: "Remember, you have {{ state_attr('calendar.personal_trigger','message') }} at {{ (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | int | timestamp_custom('%-H')) if (0 <= as_timestamp(state_attr('calendar.personal_trigger','start_time')) % 3600 <= 59) else (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%-H %M')) }} tomorrow."
     - wait_template: "{{ is_state('media_player.living_room_display', 'playing') }}"
     - wait_template: "{{ is_state('media_player.living_room_display', 'idle') }}"
     - service: media_player.volume_set

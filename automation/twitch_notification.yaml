@@ -13,10 +13,11 @@
       - condition: template
         value_template: "{{ ((as_timestamp(state_attr('calendar.personal_trigger','start_time'))) - (states('sensor.travel_to_next_event') | int * 60)) - (now().timestamp()) >= 3600 }}"
   action:
+    - wait_template: "{{ state_attr(trigger.entity_id, 'title') }}"
     - service: notify.mobile_app_madisons_iphone
       data_template:
         message: >
-          {{ trigger.from_state.attributes.friendly_name }} is live!
+          {{ state_attr(trigger.entity_id, 'friendly_name') }} is live with {{ state_attr(trigger.entity_id, 'title') }}{{ '!' if state_attr(trigger.entity_id, 'title')[-1] != '!' else '' }}
         data:
           apns_headers:
             'apns-collapse-id': '{{ trigger.from_state.attributes.friendly_name }}-reminder'

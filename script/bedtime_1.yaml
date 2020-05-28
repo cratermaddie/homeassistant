@@ -27,3 +27,5 @@ bedtime_1:
       data:
         entity_id: climate.bedroom
         temperature: 20
+    - service: switch.turn_off
+      entity_id: group.fairy_lights

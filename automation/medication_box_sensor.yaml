@@ -3,6 +3,9 @@
     platform: state
     entity_id: binary_sensor.pills
     to: 'on'
+  condition:
+    condition: template
+    value_template: "{{ (now().timestamp() - as_timestamp(state_attr('script.goodnight','last_triggered'))) > 300 }}"
   action:
     service: counter.increment
     entity_id: counter.meds_counter

@@ -97,9 +97,9 @@ climate:
     min_cycle_duration:
       minutes: 2
 
-#sonoff:
-#  username: !secret email
-#  password: !secret sonoff_password
+sonoff:
+  username: !secret sonoff_email
+  password: !secret sonoff_password
 #  grace_period: 600
 #  api_region: 'us'
 #  entity_prefix: True

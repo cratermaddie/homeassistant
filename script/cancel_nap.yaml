@@ -26,3 +26,8 @@ cancel_nap:
         option: "Bright"
     - service: automation.trigger
       entity_id: automation.aurora_controller_hourly
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - service: switch.turn_on
+      entity_id: group.fairy_lights

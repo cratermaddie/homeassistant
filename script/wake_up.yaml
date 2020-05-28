@@ -31,7 +31,7 @@ wake_up:
     - service: media_player.volume_set
       data_template:
         entity_id: media_player.bedroom_speaker
-        volume_level: "{{ states('var.volume_temp')|float }}"
+        volume_level: 0.5
     - service: input_select.select_option
       data:
         entity_id: input_select.aurora_brightness
