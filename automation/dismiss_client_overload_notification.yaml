@@ -1,0 +1,8 @@
+- alias: Dismiss connected client restart notification on restart
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: client_overload

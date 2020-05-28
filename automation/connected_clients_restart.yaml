@@ -7,9 +7,10 @@
     - service: persistent_notification.create
       data_template:
         title: "Connected Clients Overload"
+        notification_id: client_overload
         message: |
           There are currently {{ states('sensor.connected_clients') }} connected clients.
           Restarting in 30 seconds.
     - delay:
         seconds: 30
-    - service: hassio.host_reboot
+    - service: homeassistant.restart
