@@ -3,6 +3,6 @@
     - platform: homeassistant
       event: start
   action:
-    - wait_template: "{{ not is_state('light.nanoleaf', 'unknown') }}"
-      timeout: '00:10:00'
+    - delay:
+        minutes: 1
     - service: rest_command.set_aurora_effects

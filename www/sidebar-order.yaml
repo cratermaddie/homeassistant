@@ -1,0 +1,22 @@
+order:
+#Hide
+  - item: map
+    hide: true
+  - item: calendar
+    hide: true
+
+#Top 
+  - item: overview
+  - item: logbook
+  - item: history
+
+#Bottom
+  - item: visual studio
+    bottom: true
+  - item: hacs
+    bottom: true
+  - item: developer tools
+    href: /developer-tools/state
+    bottom: true
+  - item: terminal
+    bottom: true
