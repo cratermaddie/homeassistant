@@ -13,10 +13,10 @@ order:
 #Bottom
   - item: visual studio
     bottom: true
-  - item: hacs
-    bottom: true
   - item: developer tools
     href: /developer-tools/state
     bottom: true
   - item: terminal
+    bottom: true
+  - item: hacs
     bottom: true

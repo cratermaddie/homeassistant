@@ -623,7 +623,7 @@
         {% else %}
         {% set auto_time = (as_timestamp(strptime(((now().timestamp()|float +86400)|timestamp_custom('%b %d %Y 09:00')),'%b %d %Y %H:%M'))|int) %}        
         {% endif %}
-        {% if now().hour > 7 and is_state('input_boolean.awake','on') %}
+        {% if now().hour > 7 and is_state('input_boolean.awake','on') and ((now().timestamp() - as_timestamp(states.input_boolean.awake.last_changed)) <=  120) %}
         {% set default_time = (as_timestamp(strptime(((now().timestamp()|float +86400)|timestamp_custom('%b %d %Y 09:00')),'%b %d %Y %H:%M'))|int) %}        
         {% set manual_time = (as_timestamp(strptime(((now().timestamp()|float + 86400)|timestamp_custom('%b %d %Y 00:00')),'%b %d %Y %H:%M'))|int) + state_attr('input_datetime.manual_alarm','timestamp') %}        
         {% else %}
@@ -668,7 +668,7 @@
 
     late_alarm_flag:
       value_template: >-
-        {{ as_timestamp(state_attr("calendar.personal_trigger", "start_time")) != None and is_state('input_boolean.alarm_manual_mode','on') and (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | int < states('sensor.auto_alarm_time_ts') | int) }}
+        {{ as_timestamp(state_attr("calendar.personal_trigger", "start_time")) != None and is_state('input_boolean.alarm_manual_mode','on') and (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | int < states('sensor.auto_alarm_time_ts') | int) and (now().day != states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-d') | int) }}
       entity_id:
         - sensor.auto_alarm_time_ts
 

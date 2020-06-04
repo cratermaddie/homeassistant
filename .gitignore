@@ -3,10 +3,10 @@
 .cloud
 custom_components
 deps
-node-red
 tts
 www/community
 www/hacsfiles
+gtfs
 
 # Ignore files
 ip_bans.yaml
@@ -26,7 +26,5 @@ home-assistant_v2.db
 ideas.txt
 SERVICE_ACCOUNT.json
 .google.token
-gtfs/google_transit.zip
-gtfs/google_transit.sqlite
 html5_push_registrations.conf
 images/mail_and_packages/mail_today.gif
