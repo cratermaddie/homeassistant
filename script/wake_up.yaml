@@ -4,34 +4,12 @@ wake_up:
       data:
         group_name: "Bedroom"
         scene_name: "Energize"
-    - service: media_player.turn_on
-      entity_id: media_player.bedroom_speaker
-    - wait_template: "{{ not is_state('media_player.bedroom_speaker', 'off') }}"
-#    - service: var.set
-#      data:
-#        entity_id: var.volume_temp
-#        value_template: "{{ state_attr('media_player.bedroom_speaker', 'volume_level') | float | round(2) }}"
-    - service: media_player.volume_set
-      data_template:
-        entity_id: media_player.bedroom_speaker
-        volume_level: 0.8
-    - service: media_player.play_media
-      data:
-        entity_id: media_player.bedroom_speaker
-        media_content_id: !secret alarm_url
-        media_content_type: 'music'
-    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'playing') }}"
-    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'paused') }}"
-    - service: media_player.turn_off
-      entity_id: media_player.bedroom_speaker
-#    - service: media_player.volume_set
-#      data_template:
-#        entity_id: media_player.bedroom_speaker
-#        volume_level: "{{ states('var.volume_temp')|float }}"
-    - service: media_player.volume_set
-      data_template:
-        entity_id: media_player.bedroom_speaker
-        volume_level: 0.5
+    - service_template: >
+        {% if is_state('media_player.bedroom_speaker','unavailable') %}
+          script.wake_up_iphone
+        {% else %}
+          script.wake_up_google_home
+        {% endif %}
     - service: input_select.select_option
       data:
         entity_id: input_select.aurora_brightness
@@ -49,9 +27,3 @@ wake_up:
     - service: input_boolean.turn_off
       entity_id: input_boolean.alarm_manual_mode
     - service: script.turn_on_desktop_work
-    - condition: time
-      before: "11:00:00"
-    - service: tts.google_translate_say
-      entity_id: media_player.bedroom_speaker
-      data:
-        message: 'Good morning Madison!'

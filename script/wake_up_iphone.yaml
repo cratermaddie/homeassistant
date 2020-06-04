@@ -1,0 +1,14 @@
+wake_up_iphone:
+  sequence:
+    - service: notify.mobile_app_madisons_iphone
+      data:
+        title: "Wake up!"
+        message: "Bedroom speaker was unavailable"
+        data:
+          apns_headers:
+            'apns-collapse-id': 'wake-up'
+          push:
+            thread-id: "wake-up"
+            sound: 'googlealarmnotif.wav'
+            critical: 1
+            volume: 1.0

@@ -1,0 +1,28 @@
+wake_up_google_home:
+  sequence:
+    - service: media_player.turn_on
+      entity_id: media_player.bedroom_speaker
+    - wait_template: "{{ not is_state('media_player.bedroom_speaker', 'off') }}"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.bedroom_speaker
+        volume_level: 0.8
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.bedroom_speaker
+        media_content_id: !secret alarm_url
+        media_content_type: 'music'
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'playing') }}"
+    - wait_template: "{{ is_state('media_player.bedroom_speaker', 'paused') }}"
+    - service: media_player.turn_off
+      entity_id: media_player.bedroom_speaker
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.bedroom_speaker
+        volume_level: 0.5
+    - condition: time
+      before: "11:00:00"
+    - service: tts.google_translate_say
+      entity_id: media_player.bedroom_speaker
+      data:
+        message: 'Good morning Madison!'
