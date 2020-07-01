@@ -7,6 +7,8 @@ order:
 
 #Top 
   - item: overview
+  - item: bitwarden
+  - item: octoprint
   - item: logbook
   - item: history
 
