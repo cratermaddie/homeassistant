@@ -1,3 +1,13 @@
-binary_sensor:
-  - platform: template
-    sensors:
+- platform: trend
+  sensors:
+    ph_rank_trend:
+      entity_id: sensor.ph_ranking_scrape
+      invert : true
+
+- platform: wyzesense
+  device: auto
+
+- platform: octoprint
+  monitored_conditions:
+    - Printing
+    - Printing Error

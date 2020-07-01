@@ -77,3 +77,13 @@ bedroom_ac_fan_mode:
     - "Low"
     - "Medium"
     - "High"
+
+previous_turnip_pattern:
+  name: Previous Pattern
+  icon: mdi:leaf
+  options:
+    - "I don't know"
+    - "Fluctuating"
+    - "Small Spike"
+    - "Large Spike"
+    - "Decreasing"

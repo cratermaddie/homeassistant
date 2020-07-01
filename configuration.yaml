@@ -5,9 +5,6 @@ homeassistant:
   whitelist_external_dirs:
     - /config/images
 
-http:
-  base_url: !secret base_url
-
 config:
 
 logbook:
@@ -52,6 +49,9 @@ ios: !include integrations/ios_config.yaml
 input_select: !include integrations/input_select.yaml
 device_tracker: !include integrations/device_tracker.yaml
 input_boolean: !include integrations/input_boolean.yaml
+input_datetime: !include integrations/input_datetime.yaml
+input_number: !include integrations/input_number.yaml
+binary_sensor: !include integrations/binary_sensor.yaml
 notify: !include integrations/notify.yaml
 switch: !include integrations/switch.yaml
 var: !include integrations/var.yaml
@@ -67,10 +67,10 @@ spotify:
 
 breaking_changes:
 
-#smartthinq:
-#    token: !secret lg_refresh_token
-#    region: US
-#    language: en-US
+smartthinq:
+    token: !secret lg_refresh_token
+    region: US
+    language: en-US
 
 tts:
   - platform: google_translate
@@ -103,10 +103,8 @@ climate:
 sonoff:
   username: !secret sonoff_email
   password: !secret sonoff_password
-#  grace_period: 600
-#  api_region: 'us'
-#  entity_prefix: True
-
+  reload: always
+  default_class: light
 
 shell_command:
   delete_gtfs: rm gtfs/google_transit.sqlite
@@ -116,17 +114,6 @@ airvisual:
     geographies:
         latitude: !secret home_lat
         longitude: !secret home_lon
-
-input_datetime:
-  manual_alarm:
-    has_date: false
-    has_time: true
-    
-#roomba:
-#    host: !secret roomba_ip
-#    blid: !secret roomba_username
-#    password: !secret roomba_password
-#    continuous: false
 
 downloader:
   download_dir: gtfs
@@ -150,10 +137,6 @@ browser_mod:
       camera: true
     c2208e85-9429800f:
       name: Madison's iPhone
-  
-binary_sensor:
-  - platform: wyzesense
-    device: auto
 
 camera:
   - platform: generic
@@ -219,7 +202,6 @@ counter:
 #    title: Bitwarden
 #    icon: mdi:shield-half-full
 #    url: !secret bitwarden_url
-
 #  octoprint:
 #    title: OctoPrint
 #    icon: mdi:printer-3d
@@ -227,6 +209,8 @@ counter:
 
 #octoprint:
 #  host: !secret octoprint_host
+#  port:
+#  ssl: true
 #  api_key: !secret octoprint_api_key
 #  name: da Vinci nano
 #  number_of_tools: 1

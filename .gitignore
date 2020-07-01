@@ -7,6 +7,7 @@ tts
 www/community
 www/hacsfiles
 gtfs
+images
 
 # Ignore files
 ip_bans.yaml
@@ -28,3 +29,4 @@ SERVICE_ACCOUNT.json
 .google.token
 html5_push_registrations.conf
 images/mail_and_packages/mail_today.gif
+.sonoff.json

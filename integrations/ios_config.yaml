@@ -48,3 +48,15 @@ push:
           activationMode: 'background'
           authenticationRequired: false
           destructive: false
+
+
+    - name: Update Turnips
+      identifier: 'turnip'
+      actions:
+        - identifier: 'UPDATE_TURNIP'
+          title: 'Update Turnip Prices'
+          activationMode: 'background'
+          authenticationRequired: false
+          destructive: false
+          behavior: 'textInput'
+          textInputButtonTitle: 'Update'

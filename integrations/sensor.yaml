@@ -83,6 +83,8 @@
 - platform: google_geocode_custom
   calendar: calendar.personal_trigger
   api_key: !secret google_geocode_key
+  scan_interval:
+    days: 9999
 
 - platform: twitch
   client_id: !secret twitch_id
@@ -100,7 +102,7 @@
   accounts:
     - '76561197991761979'
     
-- platform: google_travel_time
+- platform: custom_google_travel_time
   name: Transit To Next Cal Event
   scan_interval:
     days: 9999
@@ -109,8 +111,9 @@
   destination: sensor.google_cal_location
   options:
     mode: transit
-    
-- platform: google_travel_time
+    arrival_time: sensor.google_cal_time
+
+- platform: custom_google_travel_time
   name: Bike To Next Cal Event
   scan_interval:
     days: 9999
@@ -119,8 +122,9 @@
   destination: sensor.google_cal_location
   options:
     mode: bicycling
+    arrival_time: sensor.google_cal_time
     
-- platform: google_travel_time
+- platform: custom_google_travel_time
   name: Drive To Next Cal Event
   scan_interval:
     days: 9999
@@ -129,8 +133,9 @@
   destination: sensor.google_cal_location
   options:
     mode: driving
+    arrival_time: sensor.google_cal_time
     
-- platform: google_travel_time
+- platform: custom_google_travel_time
   name: Walk To Next Cal Event
   scan_interval:
     days: 9999
@@ -139,6 +144,47 @@
   destination: sensor.google_cal_location
   options:
     mode: walking
+    arrival_time: sensor.google_cal_time
+
+#- platform: google_travel_time
+#  name: Transit To Next Cal Event
+#  scan_interval:
+#    days: 9999
+#  api_key: !secret google_maps_api_key
+#  origin: device_tracker.madisons_iphone_app
+#  destination: sensor.google_cal_location
+#  options:
+#    mode: transit
+#    
+#- platform: google_travel_time
+#  name: Bike To Next Cal Event
+#  scan_interval:
+#    days: 9999
+#  api_key: !secret google_maps_api_key
+#  origin: device_tracker.madisons_iphone_app
+#  destination: sensor.google_cal_location
+#  options:
+#    mode: bicycling
+#    
+#- platform: google_travel_time
+#  name: Drive To Next Cal Event
+#  scan_interval:
+#    days: 9999
+#  api_key: !secret google_maps_api_key
+#  origin: device_tracker.madisons_iphone_app
+#  destination: sensor.google_cal_location
+#  options:
+#    mode: driving
+#    
+#- platform: google_travel_time
+#  name: Walk To Next Cal Event
+#  scan_interval:
+#    days: 9999
+#  api_key: !secret google_maps_api_key
+#  origin: device_tracker.madisons_iphone_app
+#  destination: sensor.google_cal_location
+#  options:
+#    mode: walking
     
 - platform: systemmonitor
   resources:
@@ -193,7 +239,10 @@
   entity_id: sensor.firebolt227
   api_key: !secret igdb_api_key
   
-    
+#- platform: turnip_prophet
+#  scan_interval:
+#    days: 1
+
 - platform: payment_scrape
   scan_interval: 60
   headers:
@@ -201,6 +250,20 @@
     Host: !secret balance_host
     User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36 Edg/80.0.361.69
     
+- platform: ph_ranking_scrape
+  scan_interval: 60
+  headers:
+    Cookie: !secret balance_cookie
+    Host: !secret balance_host
+    User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36 Edg/80.0.361.69
+
+- platform: average
+  name: 'Average Rank'
+  duration:
+    hours: 1460
+  entities:
+    - sensor.ph_ranking_scrape
+
 - platform: template
   sensors:
   
@@ -414,6 +477,34 @@
         {{ alerts.value.split('\n') | count if (alerts.value.split('\n')[0] != '') else 0 }}
       entity_id:
         - sensor.central_cook
+
+    turnip_prophet_url:
+      value_template: >
+        {% set mapper =
+          { "I don't know":'',
+            'Fluctuating':'1',
+            'Small Spike':'2',
+            'Large Spike':'3',
+            'Decreasing':'4'} %}
+        {% set state = states('input_select.previous_turnip_pattern') %}
+        {% set pattern = mapper[state] if state in mapper %}
+
+        https://turnipprophet.io/?prices={{states('input_number.sunday_price')|int}}.{{states('input_number.monday_am')|int}}.{{states('input_number.monday_pm')|int}}.{{states('input_number.tuesday_am')|int}}.{{states('input_number.tuesday_pm')|int}}.{{states('input_number.wednesday_am')|int}}.{{states('input_number.wednesday_pm')|int}}.{{states('input_number.thursday_am')|int}}.{{states('input_number.thursday_pm')|int}}.{{states('input_number.friday_am')|int}}.{{states('input_number.friday_pm')|int}}.{{states('input_number.saturday_am')|int}}.{{states('input_number.saturday_pm')|int}}&first=false&pattern={{pattern}}
+      entity_id:
+        - input_number.sunday_price
+        - input_number.monday_am
+        - input_number.monday_pm
+        - input_number.tuesday_am
+        - input_number.tuesday_pm
+        - input_number.wednesday_am
+        - input_number.wednesday_pm
+        - input_number.thursday_am
+        - input_number.thursday_pm
+        - input_number.friday_am
+        - input_number.friday_pm
+        - input_number.saturday_am
+        - input_number.saturday_pm
+        - input_select.previous_turnip_pattern
 
     timer_running:
       value_template: "{{ is_state('timer.laundry','active') or is_state('timer.dryer','active') }}"
@@ -668,7 +759,7 @@
 
     late_alarm_flag:
       value_template: >-
-        {{ as_timestamp(state_attr("calendar.personal_trigger", "start_time")) != None and is_state('input_boolean.alarm_manual_mode','on') and (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | int < states('sensor.auto_alarm_time_ts') | int) and (now().day != states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-d') | int) }}
+        {{ as_timestamp(state_attr("calendar.personal_trigger", "start_time")) != None and is_state('input_boolean.alarm_manual_mode','on') and (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | int < states('sensor.auto_alarm_time_ts') | int) and (now().day != states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-d') | int) and (((now().hour > 7) and (now().day != states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-d') | int)) or ((now().hour < 7) and (now().day == states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-d') | int))) }}
       entity_id:
         - sensor.auto_alarm_time_ts
 

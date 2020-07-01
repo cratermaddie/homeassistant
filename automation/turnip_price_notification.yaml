@@ -1,0 +1,35 @@
+- alias: Remind to set turnip price
+  trigger:
+    - platform: time
+      at: '11:30:00'
+    - platform: time
+      at: '21:30:00'
+  condition:
+    condition: template
+    value_template: >-
+      {{
+      ((now().timestamp()|timestamp_custom('%a')|lower == 'sun') and ((as_timestamp(states.input_number.sunday_price.last_changed)|timestamp_custom('%-d')|int) != (now().day)))
+      or
+      ((now().timestamp()|timestamp_custom('%a')|lower == 'mon') and (((now().hour|int <12) and ((as_timestamp(states.input_number.monday_am.last_changed)|timestamp_custom('%-d')|int) != (now().day))) or ((now().hour|int >=12) and ((as_timestamp(states.input_number.monday_pm.last_changed)|timestamp_custom('%-d')|int) != (now().day)))))
+      or
+      ((now().timestamp()|timestamp_custom('%a')|lower == 'tue') and (((now().hour|int <12) and ((as_timestamp(states.input_number.tuesday_am.last_changed)|timestamp_custom('%-d')|int) != (now().day))) or ((now().hour|int >=12) and ((as_timestamp(states.input_number.tuesday_pm.last_changed)|timestamp_custom('%-d')|int) != (now().day)))))
+      or
+      ((now().timestamp()|timestamp_custom('%a')|lower == 'wed') and (((now().hour|int <12) and ((as_timestamp(states.input_number.wednesday_am.last_changed)|timestamp_custom('%-d')|int) != (now().day))) or ((now().hour|int >=12) and ((as_timestamp(states.input_number.wednesday_pm.last_changed)|timestamp_custom('%-d')|int) != (now().day)))))
+      or
+      ((now().timestamp()|timestamp_custom('%a')|lower == 'thu') and (((now().hour|int <12) and ((as_timestamp(states.input_number.thursday_am.last_changed)|timestamp_custom('%-d')|int) != (now().day))) or ((now().hour|int >=12) and ((as_timestamp(states.input_number.thursday_pm.last_changed)|timestamp_custom('%-d')|int) != (now().day)))))
+      or
+      ((now().timestamp()|timestamp_custom('%a')|lower == 'fri') and (((now().hour|int <12) and ((as_timestamp(states.input_number.friday_am.last_changed)|timestamp_custom('%-d')|int) != (now().day))) or ((now().hour|int >=12) and ((as_timestamp(states.input_number.friday_pm.last_changed)|timestamp_custom('%-d')|int) != (now().day)))))
+      or
+      ((now().timestamp()|timestamp_custom('%a')|lower == 'sat') and (((now().hour|int <12) and ((as_timestamp(states.input_number.saturday_am.last_changed)|timestamp_custom('%-d')|int) != (now().day))) or ((now().hour|int >=12) and ((as_timestamp(states.input_number.saturday_pm.last_changed)|timestamp_custom('%-d')|int) != (now().day)))))
+      }}
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data_template:
+        message: "{{ 'Remember to enter turnip prices for this ' + ('morning!' if now().hour|int <12 else 'afternoon!') }}"
+        data:
+          apns_headers:
+            'apns-collapse-id': 'turnip-reminder'
+          push:
+            category: "turnip"
+            thread-id: "turnip-reminder"
+            sound: 'buzzer.wav'

@@ -8,10 +8,30 @@ set_nap:
       entity_id: light.bedroom_lights
     - service: input_boolean.turn_off
       entity_id: input_boolean.awake
-    - delay: "00:{{ duration | int }}:00"
     - service: switch.turn_off
       entity_id: group.fairy_lights
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_ac_mode
+        option: Cool
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_ac_fan_mode
+        option: Low
+    - service: climate.set_temperature
+      data:
+        entity_id: climate.bedroom
+        temperature: 20
+    - delay: "00:{{ duration | int }}:00"
     - service: script.wake_up
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_ac_mode
+        option: Fan
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_ac_fan_mode
+        option: Low
     - condition: state
       entity_id: sun.sun
       state: below_horizon

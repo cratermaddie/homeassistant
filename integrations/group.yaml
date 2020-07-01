@@ -7,7 +7,7 @@ home:
 fairy_lights:
   name: Fairy Lights
   entities:
-    - switch.sonoff_1000d48712
-    - switch.sonoff_1000d48923
-    - switch.sonoff_1000d48fdc
-    - switch.sonoff_1000d49402
+    - light.fairy_lights_bedroom
+    - light.fairy_lights_living_room
+    - light.fairy_lights_art
+    - light.fairy_lights_photo

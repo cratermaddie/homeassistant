@@ -14,3 +14,5 @@
     - service: script.update_travel_time
     - service: homeassistant.update_entity
       entity_id: sensor.travel_update_trigger
+    - service: homeassistant.update_entity
+      entity_id: sensor.google_geocode

@@ -2,7 +2,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.connected_clients
-      above: 12
+      above: 25
   action:
     - service: persistent_notification.create
       data_template:
