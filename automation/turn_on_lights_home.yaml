@@ -5,11 +5,12 @@
     entity_id: device_tracker.madisons_iphone_app
     zone: zone.home
     event: enter
-  condition:
-    condition: state
-    entity_id: sun.sun
-    state: 'below_horizon'
   action:
+    - service: light.turn_on
+      entity_id: light.desktop
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
     - service: hue.hue_activate_scene
       data:
         group_name: "Bedroom"

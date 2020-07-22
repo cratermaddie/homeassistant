@@ -10,6 +10,6 @@
     - service: switch.turn_on
       entity_id: switch.diffuser
     - service: climate.set_temperature
-      data:
+      data_template:
         entity_id: climate.bedroom
-        temperature: 20
+        temperature: "{{ states('input_number.sleep_temperature')|int }}"

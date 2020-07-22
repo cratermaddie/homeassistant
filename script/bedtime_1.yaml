@@ -24,8 +24,8 @@ bedtime_1:
         entity_id: input_select.bedroom_ac_fan_mode
         option: Medium
     - service: climate.set_temperature
-      data:
+      data_template:
         entity_id: climate.bedroom
-        temperature: 19
-    - service: switch.turn_off
-      entity_id: group.fairy_lights
+        temperature: "{{ states('input_number.sleep_temperature')|int }}"
+    - service: light.turn_off
+      entity_id: light.fairy_lights

@@ -32,4 +32,4 @@
           push:
             category: "turnip"
             thread-id: "turnip-reminder"
-            sound: 'buzzer.wav'
+            sound: 'nook_phone.wav'

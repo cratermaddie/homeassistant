@@ -26,6 +26,8 @@
       entity_id: light.coat_closet
     - service: light.turn_off
       entity_id: light.desktop
+    - service: light.turn_off
+      entity_id: light.fairy_lights
     - service: switch.turn_off
       entity_id: switch.air_freshener
     - service: script.turn_off_tv

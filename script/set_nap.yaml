@@ -19,9 +19,9 @@ set_nap:
         entity_id: input_select.bedroom_ac_fan_mode
         option: Low
     - service: climate.set_temperature
-      data:
+      data_template:
         entity_id: climate.bedroom
-        temperature: 20
+        temperature: "{{ states('input_number.sleep_temperature')|int }}"
     - delay: "00:{{ duration | int }}:00"
     - service: script.wake_up
     - service: input_select.select_option
@@ -32,8 +32,3 @@ set_nap:
       data:
         entity_id: input_select.bedroom_ac_fan_mode
         option: Low
-    - condition: state
-      entity_id: sun.sun
-      state: below_horizon
-    - service: switch.turn_on
-      entity_id: group.fairy_lights

@@ -1,0 +1,14 @@
+- alias: Turn on fairy lights when I get home at night
+  initial_state: true
+  trigger:
+    platform: zone
+    entity_id: device_tracker.madisons_iphone_app
+    zone: zone.home
+    event: enter
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  action:
+    - service: light.turn_on
+      entity_id: light.fairy_lights

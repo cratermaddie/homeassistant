@@ -48,8 +48,6 @@ push:
           activationMode: 'background'
           authenticationRequired: false
           destructive: false
-
-
     - name: Update Turnips
       identifier: 'turnip'
       actions:
@@ -60,3 +58,4 @@ push:
           destructive: false
           behavior: 'textInput'
           textInputButtonTitle: 'Update'
+          textInputPlaceholder: ' '

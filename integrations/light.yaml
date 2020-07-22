@@ -44,4 +44,12 @@
 - platform: group
   name: Entryway Lights
   entities:
-    - light.entry_way
+    - light.entryway
+
+- platform: group
+  name: Fairy Lights
+  entities:
+    - light.fairy_lights_bedroom
+    - light.fairy_lights_living_room
+    - light.fairy_lights_art
+    - light.fairy_lights_photo

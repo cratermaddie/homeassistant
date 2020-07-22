@@ -1,7 +1,9 @@
 - alias: Set aurora brightness on sun position
   trigger:
-    - platform: state
-      entity_id: sun.sun
+    - platform: sun
+      event: sunset
+    - platform: sun
+      event: sunrise
     - platform: state
       entity_id: light.nanoleaf
       to: 'on'

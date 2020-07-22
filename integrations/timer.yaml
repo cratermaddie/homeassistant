@@ -1,0 +1,28 @@
+laundry:
+  duration: '00:49:00'
+dryer:
+  duration: '00:45:00'
+kitchen_slider:
+  duration: '00:00:01'
+kitchen_light:
+  duration: '00:00:01'
+dining_area_slider:
+  duration: '00:00:01'
+dining_area_light:
+  duration: '00:00:01'
+living_room_slider:
+  duration: '00:00:01'
+living_room_light:
+  duration: '00:00:01'
+entryway_slider:
+  duration: '00:00:01'
+entryway_light:
+  duration: '00:00:01'
+bathroom_slider:
+  duration: '00:00:01'
+bathroom_light:
+  duration: '00:00:01'
+bedroom_slider:
+  duration: '00:00:01'
+bedroom_light:
+  duration: '00:00:01'

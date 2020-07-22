@@ -3,11 +3,3 @@ home:
   entities:
     - person.armond
     - person.madison
-
-fairy_lights:
-  name: Fairy Lights
-  entities:
-    - light.fairy_lights_bedroom
-    - light.fairy_lights_living_room
-    - light.fairy_lights_art
-    - light.fairy_lights_photo

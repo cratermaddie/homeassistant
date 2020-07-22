@@ -57,6 +57,7 @@ switch: !include integrations/switch.yaml
 var: !include integrations/var.yaml
 light: !include integrations/light.yaml
 rest_command: !include integrations/rest_command.yaml
+timer: !include integrations/timer.yaml
 
 ####################################
 #        Manual Integrations       #
@@ -67,10 +68,10 @@ spotify:
 
 breaking_changes:
 
-smartthinq:
-    token: !secret lg_refresh_token
-    region: US
-    language: en-US
+#smartthinq:
+#    token: !secret lg_refresh_token
+#    region: US
+#    language: en-US
 
 tts:
   - platform: google_translate
@@ -106,6 +107,31 @@ sonoff:
   reload: always
   default_class: light
 
+nintendo_wishlist:
+  country: US
+  wishlist:
+    - FAST RMX
+    - Return of the Obra Dinn
+    - "The Experiment: Escape Room"
+    - Superliminal
+    - STAR WARS Episode I Racer
+    - Undertale
+    - Untitled Goose Game
+    - Overcooked Special Edition
+    - Katamari Damacy REROLL
+    - "The Legend of Zelda: Link’s Awakening"
+    - "Phoenix Wright: Ace Attorney Trilogy"
+    - Spyro Reignited Trilogy
+    - Superliminal
+    - Kirby Star Allies
+    - Super Mario Odyssey
+    - New Super Mario Bros. U Deluxe
+    - The Jackbox Party Pack
+    - Luigi’s Mansion 3
+    - Overcooked! 2
+    - Cuphead
+    - Super Mario Party
+
 shell_command:
   delete_gtfs: rm gtfs/google_transit.sqlite
 
@@ -118,15 +144,11 @@ airvisual:
 downloader:
   download_dir: gtfs
     
-timer:
-  laundry:
-    duration: '00:49:00'
-  dryer:
-    duration: '00:45:00'
-    
 updater:
   include_used_components: true
-  
+
+uilogs:
+
 logger:
   default: warning
 

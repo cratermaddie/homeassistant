@@ -3,9 +3,20 @@
     platform: sun
     event: sunset
   condition:
-    condition: state
-    entity_id: var.mode
-    state: 'home'
+    condition: not
+    conditions:
+      - condition: state
+        entity_id: var.mode
+        state: 'away'
   action:
-    - service: switch.turn_off
-      entity_id: group.fairy_lights
+    - service: light.turn_on
+      entity_id: light.fairy_lights_living_room
+    - service: light.turn_on
+      entity_id: light.fairy_lights_art
+    - condition: state
+      entity_id: var.mode
+      state: 'home'
+    - service: light.turn_on
+      entity_id: light.fairy_lights_bedroom
+    - service: light.turn_on
+      entity_id: light.fairy_lights_photo

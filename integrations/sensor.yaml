@@ -33,6 +33,9 @@
 
 - platform: version
 
+- platform: faastatus
+  id: ORD
+
 - platform: moon
 
 - platform: websocket_api
@@ -259,6 +262,7 @@
 
 - platform: average
   name: 'Average Rank'
+  precision: 0
   duration:
     hours: 1460
   entities:
@@ -289,7 +293,7 @@
         'Total Month Earnings':'7',
         'Total All-Time Earnings':'8'} %}
         {% set offset = namespace(value=column['Free Videos']) %}
-        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace('$','').split() -%}
+        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace(',','').replace('$','').split() -%}
         {% if (loop.index0 | int - offset.value | int) == 0 %}
         {{ cell }}{% endif %}
         {%- endfor %}
@@ -310,7 +314,7 @@
         'Total Month Earnings':'7',
         'Total All-Time Earnings':'8'} %}
         {% set offset = namespace(value=column['Free Video Earnings']) %}
-        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace('$','').split() -%}
+        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace(',','').replace('$','').split() -%}
         {% if (loop.index0 | int - offset.value | int) == 0 %}
         {{ cell }}{% endif %}
         {%- endfor %}
@@ -331,7 +335,7 @@
         'Total Month Earnings':'7',
         'Total All-Time Earnings':'8'} %}
         {% set offset = namespace(value=column['Viewshare Videos']) %}
-        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace('$','').split() -%}
+        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace(',','').replace('$','').split() -%}
         {% if (loop.index0 | int - offset.value | int) == 0 %}
         {{ cell }}{% endif %}
         {%- endfor %}
@@ -352,7 +356,7 @@
         'Total Month Earnings':'7',
         'Total All-Time Earnings':'8'} %}
         {% set offset = namespace(value=column['Viewshare Video Earnings']) %}
-        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace('$','').split() -%}
+        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace(',','').replace('$','').split() -%}
         {% if (loop.index0 | int - offset.value | int) == 0 %}
         {{ cell }}{% endif %}
         {%- endfor %}
@@ -373,7 +377,7 @@
         'Total Month Earnings':'7',
         'Total All-Time Earnings':'8'} %}
         {% set offset = namespace(value=column['For Sale Videos']) %}
-        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace('$','').split() -%}
+        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace(',','').replace('$','').split() -%}
         {% if (loop.index0 | int - offset.value | int) == 0 %}
         {{ cell }}{% endif %}
         {%- endfor %}
@@ -394,7 +398,7 @@
         'Total Month Earnings':'7',
         'Total All-Time Earnings':'8'} %}
         {% set offset = namespace(value=column['For Sale Earnings']) %}
-        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace('$','').split() -%}
+        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace(',','').replace('$','').split() -%}
         {% if (loop.index0 | int - offset.value | int) == 0 %}
         {{ cell }}{% endif %}
         {%- endfor %}
@@ -415,7 +419,7 @@
         'Total Month Earnings':'7',
         'Total All-Time Earnings':'8'} %}
         {% set offset = namespace(value=column['Other Earnings']) %}
-        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace('$','').split() -%}
+        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace(',','').replace('$','').split() -%}
         {% if (loop.index0 | int - offset.value | int) == 0 %}
         {{ cell }}{% endif %}
         {%- endfor %}
@@ -436,7 +440,7 @@
         'Total Month Earnings':'7',
         'Total All-Time Earnings':'8'} %}
         {% set offset = namespace(value=column['Total Month Earnings']) %}
-        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace('$','').split() -%}
+        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace(',','').replace('$','').split() -%}
         {% if (loop.index0 | int - offset.value | int) == 0 %}
         {{ cell }}{% endif %}
         {%- endfor %}
@@ -457,7 +461,7 @@
         'Total Month Earnings':'7',
         'Total All-Time Earnings':'8'} %}
         {% set offset = namespace(value=column['Total All-Time Earnings']) %}
-        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace('$','').split() -%}
+        {% for cell in (state_attr('sensor.payment_scrape','table') | regex_replace(find='[0-9]{4}-[0-9]{2}', replace='', ignorecase=False) | regex_replace(find='[A-Za-z]+(-[A-Za-z]+)*', replace='', ignorecase=False) | regex_replace(find='(-)+', replace='0', ignorecase=False)).replace(' ','').replace(',','').replace('$','').split() -%}
         {% if (loop.index0 | int - offset.value | int) == 0 %}
         {{ cell }}{% endif %}
         {%- endfor %}
@@ -481,11 +485,11 @@
     turnip_prophet_url:
       value_template: >
         {% set mapper =
-          { "I don't know":'',
-            'Fluctuating':'1',
-            'Small Spike':'2',
-            'Large Spike':'3',
-            'Decreasing':'4'} %}
+          { "I don't know":'-1',
+            'Fluctuating':'0',
+            'Small Spike':'3',
+            'Large Spike':'1',
+            'Decreasing':'2'} %}
         {% set state = states('input_select.previous_turnip_pattern') %}
         {% set pattern = mapper[state] if state in mapper %}
 
@@ -714,7 +718,7 @@
         {% else %}
         {% set auto_time = (as_timestamp(strptime(((now().timestamp()|float +86400)|timestamp_custom('%b %d %Y 09:00')),'%b %d %Y %H:%M'))|int) %}        
         {% endif %}
-        {% if now().hour > 7 and is_state('input_boolean.awake','on') and ((now().timestamp() - as_timestamp(states.input_boolean.awake.last_changed)) <=  120) %}
+        {% if now().hour > 7 and is_state('input_boolean.awake','on') and ((now().timestamp() - as_timestamp(states.input_boolean.awake.last_changed)) >=  120) %}
         {% set default_time = (as_timestamp(strptime(((now().timestamp()|float +86400)|timestamp_custom('%b %d %Y 09:00')),'%b %d %Y %H:%M'))|int) %}        
         {% set manual_time = (as_timestamp(strptime(((now().timestamp()|float + 86400)|timestamp_custom('%b %d %Y 00:00')),'%b %d %Y %H:%M'))|int) + state_attr('input_datetime.manual_alarm','timestamp') %}        
         {% else %}
@@ -739,17 +743,9 @@
       
     auto_alarm_time_display:
       value_template: >-
-        {% if is_state('input_boolean.bedtime','on') or is_state('input_boolean.awake','off') or is_state('input_boolean.staying_up','on') %}
         {{ states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-H:%M')}}
-        {% else %}
-        {{ states('sensor.bedtime_ts') | int | timestamp_custom('%-H:%M')}}
-        {% endif %}
       entity_id:
         - sensor.auto_alarm_time_ts
-        - sensor.bedtime_ts
-        - input_boolean.bedtime
-        - input_boolean.staying_up
-        - input_boolean.awake
 
     manual_alarm_time_display:
       value_template: >-

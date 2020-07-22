@@ -58,8 +58,6 @@ goodnight:
         entity_id: input_boolean.staying_up
     - service: switch.turn_off
       entity_id: switch.air_freshener
-    - service: switch.turn_off
-      entity_id: group.fairy_lights
     - service: light.turn_off
       entity_id:
         - light.living_room_lights
@@ -71,6 +69,7 @@ goodnight:
         - light.kitchen_lights
         - light.dining_area_lights
         - light.coat_closet
+        - light.fairy_lights
     - service: script.turn_off_vanity
     - service: var.set
       data:

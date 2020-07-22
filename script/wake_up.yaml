@@ -27,3 +27,10 @@ wake_up:
     - service: input_boolean.turn_off
       entity_id: input_boolean.alarm_manual_mode
     - service: script.turn_on_desktop_work
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - service: light.turn_on
+      entity_id: light.fairy_lights_bedroom
+    - service: light.turn_on
+      entity_id: light.fairy_lights_photo

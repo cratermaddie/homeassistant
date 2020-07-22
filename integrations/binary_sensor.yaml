@@ -3,6 +3,7 @@
     ph_rank_trend:
       entity_id: sensor.ph_ranking_scrape
       invert : true
+      max_samples: 6
 
 - platform: wyzesense
   device: auto
