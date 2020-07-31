@@ -1,4 +1,5 @@
 - alias: Turn off tank lights in the evening
+  mode: restart
   trigger:
     platform: sun
     event: sunset

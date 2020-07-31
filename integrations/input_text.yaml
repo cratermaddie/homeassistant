@@ -1,0 +1,4 @@
+clipboard:
+  name: Clipboard
+  icon: mdi:clipboard-outline
+  max: 255

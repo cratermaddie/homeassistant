@@ -1,4 +1,5 @@
 - alias: Living Room AC Off mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.living_room_ac_mode_off
@@ -16,6 +17,7 @@
         option: "Off"
         
 - alias: Living Room AC Cool mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.living_room_ac_mode_cool
@@ -33,6 +35,7 @@
         option: "Cool"
 
 - alias: Living Room AC Fan mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.living_room_ac_mode_fan
@@ -50,6 +53,7 @@
         option: "Fan"
 
 - alias: Living Room AC Dry mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.living_room_ac_mode_dry
@@ -67,6 +71,7 @@
         option: "Dry"
     
 - alias: Living Room AC none mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.living_room_ac_mode_dry
@@ -89,6 +94,7 @@
         entity_id: "{{trigger.entity_id}}"
         
 - alias: input select living room ac mode switches
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_select.living_room_ac_mode

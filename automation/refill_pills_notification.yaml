@@ -1,4 +1,5 @@
 #- alias: Send iOS notification when to refill pills
+#  mode: restart
 #  trigger:
 #    platform: numeric_state
 #    entity_id: counter.meds_counter

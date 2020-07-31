@@ -1,4 +1,5 @@
 - alias: download new gtfs
+  mode: restart
   trigger:
     platform: time_pattern
     hours: '0'

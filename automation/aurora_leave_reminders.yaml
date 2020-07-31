@@ -1,4 +1,5 @@
 - alias: Show medium aurora reminder
+  mode: restart
   trigger:
     platform: state
     entity_id: sensor.second_leave_trigger
@@ -34,6 +35,7 @@
         {% endif %}
                
 - alias: Show low aurora reminder
+  mode: restart
   trigger:
     platform: state
     entity_id: sensor.first_leave_trigger

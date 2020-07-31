@@ -1,4 +1,5 @@
 - alias: Update aurora effect based on input select
+  mode: restart
   trigger:
     - platform: state
       entity_id: input_select.aurora_effects
@@ -12,6 +13,7 @@
         brightness: "{{ states('sensor.aurora_brightness_map')|int }}"
       
 - alias: Update input select based on aurora effect
+  mode: restart
   trigger:
     - platform: state
       entity_id: light.nanoleaf

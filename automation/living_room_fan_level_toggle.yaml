@@ -1,4 +1,5 @@
 - alias: Living Room Fan med mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.living_room_ac_fan_medium
@@ -16,6 +17,7 @@
         option: "Medium"
         
 - alias: Living Room Fan low mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.living_room_ac_fan_low
@@ -33,6 +35,7 @@
         option: "Low"
 
 - alias: Living Room Fan off mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.living_room_ac_fan_off
@@ -50,6 +53,7 @@
         option: "Off"
 
 - alias: Living Room Fan high mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.living_room_ac_fan_high
@@ -67,6 +71,7 @@
         option: "High"
     
 - alias: Living Room Fan none mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.living_room_ac_fan_high
@@ -89,6 +94,7 @@
         entity_id: "{{trigger.entity_id}}"
         
 - alias: input select living room Fan mode switches
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_select.living_room_ac_fan_mode

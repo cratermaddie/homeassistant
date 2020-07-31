@@ -1,4 +1,5 @@
 - alias: Restart home assistant when connected clients overloads
+  mode: restart
   trigger:
     - platform: numeric_state
       entity_id: sensor.connected_clients

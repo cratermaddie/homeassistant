@@ -1,4 +1,5 @@
 - alias: Turn off living room ac based on input select
+  mode: restart
   trigger:
     - platform: state
       entity_id: input_select.living_room_ac_mode

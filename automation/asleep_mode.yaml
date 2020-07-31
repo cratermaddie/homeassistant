@@ -1,4 +1,5 @@
 - alias: Assume asleep 2 hours after going to bed
+  mode: restart
   trigger:
     platform: state
     entity_id: var.mode

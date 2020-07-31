@@ -1,4 +1,5 @@
 - alias: Send notification if I need to do laundry
+  mode: restart
   trigger:
     - platform: state
       entity_id: sensor.laundry_reminder_trigger

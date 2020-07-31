@@ -10,10 +10,8 @@ wake_up:
         {% else %}
           script.wake_up_google_home
         {% endif %}
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.aurora_brightness
-        option: 'Bright'
+    - service: automation.trigger
+      entity_id: automation.set_aurora_brightness_on_sun_position
     - service: var.set
       data:
         entity_id: var.mode

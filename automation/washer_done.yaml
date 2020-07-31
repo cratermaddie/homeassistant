@@ -1,4 +1,5 @@
 - alias: Send notification when washing machine is done
+  mode: restart
   trigger:
     platform: event
     event_type: timer.finished

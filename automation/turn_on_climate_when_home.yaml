@@ -1,4 +1,5 @@
 - alias: Turn on climate when home
+  mode: restart
   trigger:
     - platform: zone
       entity_id: device_tracker.madisons_iphone_app

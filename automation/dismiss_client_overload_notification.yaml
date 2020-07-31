@@ -1,4 +1,5 @@
 - alias: Dismiss connected client restart notification on restart
+  mode: restart
   trigger:
     platform: homeassistant
     event: start

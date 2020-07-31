@@ -1,7 +1,13 @@
 goodnight:
   sequence:
-    - service: script.turn_off_pc
     - service: script.update_travel_time
+    - service: homeassistant.update_entity
+      entity_id: sensor.auto_alarm_time_ts
+    - service: script.turn_off_pc
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.bedroom_ac_fan_mode
+        option: Low
     - service: media_player.turn_on
       entity_id: media_player.bedroom_speaker
     - wait_template: "{{ is_state('media_player.bedroom_speaker', 'idle') }}"
@@ -39,6 +45,8 @@ goodnight:
       data_template:
         entity_id: media_player.bedroom_speaker
         volume_level: 0.25
+    - wait_template: "{{ states.sensor.auto_alarm_time_ts.last_updated.timestamp() > states.script.goodnight.attributes.last_triggered.timestamp() }}"
+      timeout: "00:00:02"
     - service: var.set
       data:
         entity_id: var.mode
@@ -75,16 +83,16 @@ goodnight:
       data:
         entity_id: var.time_asleep
         value_template: '{{ now().timestamp() | int }}'
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.bedroom_ac_fan_mode
-        option: Low
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.living_room_ac_mode
-        option: 'Off'
     - service: media_player.play_media
       data:
         entity_id: media_player.bedroom_speaker
         media_content_id: 'https://storage.googleapis.com/relaxation-sounds/babbling_brook_3600.mp3'
         media_content_type: 'music'
+    - condition: state
+      entity_id: person.armond
+      state: 'not_home'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.living_room_ac_mode
+        option: 'Off'
+    - service: script.turn_off_tv

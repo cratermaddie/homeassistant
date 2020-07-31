@@ -1,5 +1,6 @@
 - alias: Update game image on xbox change
   initial_state: true
+  mode: restart
   trigger:
     - platform: state
       entity_id: sensor.firebolt227

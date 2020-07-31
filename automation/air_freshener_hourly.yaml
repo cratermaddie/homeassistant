@@ -1,4 +1,5 @@
 - alias: Toggle air freshener hourly when home
+  mode: restart
   trigger:
     platform: time_pattern
     hours: '*'

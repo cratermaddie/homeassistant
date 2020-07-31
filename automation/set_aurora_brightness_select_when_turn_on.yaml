@@ -1,4 +1,5 @@
 #- alias: Set aurora brightness select when turn on
+#  mode: restart
 #  trigger:
 #    platform: state
 #    entity_id: light.nanoleaf

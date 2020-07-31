@@ -1,4 +1,5 @@
 - alias: Change bedroom ac to off based on input select
+  mode: restart
   trigger:
     - platform: state
       entity_id: input_select.bedroom_ac_mode
@@ -7,6 +8,7 @@
     - service: rest_command.turn_off_bedroom_ac
 
 - alias: Change bedroom ac to cool based on input select
+  mode: restart
   trigger:
     - platform: state
       entity_id: input_select.bedroom_ac_mode
@@ -18,6 +20,7 @@
     - service: rest_command.bedroom_ac_temperature_set
 
 - alias: Change bedroom ac to fan based on input select
+  mode: restart
   trigger:
     - platform: state
       entity_id: input_select.bedroom_ac_mode
@@ -28,6 +31,7 @@
     - service: rest_command.bedroom_ac_fan_mode
 
 - alias: Change bedroom ac to dry based on input select
+  mode: restart
   trigger:
     - platform: state
       entity_id: input_select.bedroom_ac_mode

@@ -1,4 +1,5 @@
 - alias: Turn on fairy lights sunset
+  mode: restart
   trigger:
     platform: sun
     event: sunset

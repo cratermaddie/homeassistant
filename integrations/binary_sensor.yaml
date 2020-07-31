@@ -12,3 +12,16 @@
   monitored_conditions:
     - Printing
     - Printing Error
+
+- platform: ffmpeg_motion
+  input: !secret wyze_address
+  name: wyze_motion
+  changes: 2
+
+- platform: template
+  sensors:
+      apple_tv_paused:
+        value_template: >-
+          {{ is_state('media_player.apple_tv', 'paused') }}
+        delay_on:
+          minutes: 30

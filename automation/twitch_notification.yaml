@@ -1,5 +1,6 @@
 - alias: Send notification when twitch streamer goes live
   initial_state: true
+  mode: restart
   trigger:
     platform: state
     entity_id: sensor.hatfilms,sensor.upisnotjump,sensor.squidgame,sensor.yogscast

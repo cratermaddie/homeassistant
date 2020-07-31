@@ -1,4 +1,5 @@
 - alias: refresh goodnight summary hourly after bedtime
+  mode: restart
   trigger:
     platform: time_pattern
     hours: '*'

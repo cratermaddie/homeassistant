@@ -1,4 +1,5 @@
 - alias: Set turnip price
+  mode: restart
   trigger:
     platform: event
     event_type: ios.notification_action_fired

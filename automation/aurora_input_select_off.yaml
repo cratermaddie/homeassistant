@@ -1,4 +1,5 @@
 - alias: Update aurora select to off
+  mode: restart
   trigger:
     - platform: state
       entity_id: light.nanoleaf

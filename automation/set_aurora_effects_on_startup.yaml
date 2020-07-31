@@ -1,4 +1,5 @@
 - alias: Set aurora effects list on startup
+  mode: restart
   trigger:
     - platform: homeassistant
       event: start

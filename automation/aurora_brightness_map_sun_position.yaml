@@ -1,4 +1,5 @@
 - alias: Set aurora brightness on sun position
+  mode: restart
   trigger:
     - platform: sun
       event: sunset

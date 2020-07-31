@@ -1,4 +1,5 @@
 - alias: Travel bike mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.travel_bike
@@ -17,6 +18,7 @@
         option: "Bike"
         
 - alias: Travel transit mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.travel_transit
@@ -35,6 +37,7 @@
         option: "Transit"
         
 - alias: Travel uber mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.travel_uber
@@ -53,6 +56,7 @@
         option: "Uber"
         
 - alias: Travel walk mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.travel_walk
@@ -71,6 +75,7 @@
         option: "Walk"
         
 - alias: Travel drive mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.travel_drive
@@ -89,6 +94,7 @@
         option: "Drive"
         
 - alias: Travel none mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.travel_drive
@@ -114,6 +120,7 @@
         entity_id: "{{trigger.entity_id}}"
         
 - alias: input select travel switches
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_select.travel_mode

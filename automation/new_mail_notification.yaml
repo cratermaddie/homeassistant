@@ -1,4 +1,5 @@
 - alias: Mailbox notification
+  mode: restart
   trigger:
     - platform: state
       entity_id: binary_sensor.mailbox

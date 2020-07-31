@@ -1,4 +1,5 @@
 - alias: Send notification if I have not taken my e
+  mode: restart
   trigger:
     - platform: time
       at: '19:00:00'

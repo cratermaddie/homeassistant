@@ -1,5 +1,6 @@
 - alias: Turn on lights when I get home at night
   initial_state: true
+  mode: restart
   trigger:
     platform: zone
     entity_id: device_tracker.madisons_iphone_app

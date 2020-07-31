@@ -1,4 +1,5 @@
 - alias: Turn on tank lights in the morning
+  mode: restart
   trigger:
     platform: sun
     event: sunrise

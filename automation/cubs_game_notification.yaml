@@ -1,4 +1,5 @@
 - alias: Send notification if I there is a cubs cage
+  mode: restart
   trigger:
     - platform: state
       entity_id: sensor.google_cal_leave_trigger

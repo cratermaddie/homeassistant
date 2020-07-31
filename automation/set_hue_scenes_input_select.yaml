@@ -1,4 +1,5 @@
 - alias: Set hue scenes input select when room changes to bedroom
+  mode: restart
   trigger:
     platform: state
     entity_id: input_select.hue_room
@@ -27,6 +28,7 @@
         - Filming
         
 - alias: Set hue scenes input select when room changes to living room
+  mode: restart
   trigger:
     platform: state
     entity_id: input_select.hue_room
@@ -54,6 +56,7 @@
         - Filming
         
 - alias: Set hue scenes input select when room changes to bathroom
+  mode: restart
   trigger:
     platform: state
     entity_id: input_select.hue_room
@@ -72,6 +75,7 @@
         - Nightlight
         
 - alias: Set hue scenes input select when room changes to entryway
+  mode: restart
   trigger:
     platform: state
     entity_id: input_select.hue_room
@@ -90,6 +94,7 @@
         - Nightlight
         
 - alias: Set hue scenes input select when room changes to dining area
+  mode: restart
   trigger:
     platform: state
     entity_id: input_select.hue_room
@@ -108,6 +113,7 @@
         - Nightlight
         
 - alias: Set hue scenes input select when room changes to kitchen
+  mode: restart
   trigger:
     platform: state
     entity_id: input_select.hue_room
@@ -126,6 +132,7 @@
         - Nightlight
         
 - alias: Set hue scenes input select when room changes to empty
+  mode: restart
   trigger:
     platform: state
     entity_id: input_select.hue_room

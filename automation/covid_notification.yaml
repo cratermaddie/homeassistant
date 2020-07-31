@@ -1,4 +1,5 @@
 #- alias: send notification when new case of covid-19
+#  mode: restart
 #  trigger:
 #    - platform: state
 #      entity_id: sensor.worldwide_confirmed

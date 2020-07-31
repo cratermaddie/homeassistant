@@ -1,4 +1,5 @@
 - alias: Bedroom AC Off mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.bedroom_ac_mode_off
@@ -16,6 +17,7 @@
         option: "Off"
         
 - alias: Bedroom AC Cool mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.bedroom_ac_mode_cool
@@ -33,6 +35,7 @@
         option: "Cool"
 
 - alias: Bedroom AC Fan mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.bedroom_ac_mode_fan
@@ -50,6 +53,7 @@
         option: "Fan"
 
 - alias: Bedroom AC Dry mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.bedroom_ac_mode_dry
@@ -67,6 +71,7 @@
         option: "Dry"
     
 - alias: Bedroom AC none mode switches controller
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_boolean.bedroom_ac_mode_dry
@@ -89,6 +94,7 @@
         entity_id: "{{trigger.entity_id}}"
         
 - alias: input select bedroom ac mode switches
+  mode: restart
   trigger:
       - platform: state
         entity_id: input_select.bedroom_ac_mode

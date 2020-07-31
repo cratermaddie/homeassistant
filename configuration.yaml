@@ -49,6 +49,7 @@ ios: !include integrations/ios_config.yaml
 input_select: !include integrations/input_select.yaml
 device_tracker: !include integrations/device_tracker.yaml
 input_boolean: !include integrations/input_boolean.yaml
+input_text: !include integrations/input_text.yaml
 input_datetime: !include integrations/input_datetime.yaml
 input_number: !include integrations/input_number.yaml
 binary_sensor: !include integrations/binary_sensor.yaml
@@ -147,8 +148,6 @@ downloader:
 updater:
   include_used_components: true
 
-uilogs:
-
 logger:
   default: warning
 
@@ -157,14 +156,13 @@ browser_mod:
     ebd9cb56-e768f3d4:
       name: Desktop
       camera: true
-    c2208e85-9429800f:
+    0cedc2eb-d5dca07b:
       name: Madison's iPhone
 
 camera:
-  - platform: generic
+  - platform: ffmpeg
     name: WYZE Cam
-    still_image_url: !secret wyze_still_image
-    stream_source: !secret wyze_rtsp
+    input: !secret wyze_address
   - platform: local_file
     file_path: /config/images/mail_and_packages/mail_today.gif
     name: mail_usps
@@ -196,7 +194,7 @@ google:
   client_secret: !secret google_secret
     
 icloud:
-  - username: !secret email
+  - username: !secret old_apple_email
     password: !secret apple_password
     
 google_assistant:

@@ -53,3 +53,19 @@
     - light.fairy_lights_living_room
     - light.fairy_lights_art
     - light.fairy_lights_photo
+
+- platform: group
+  name: Main Lights
+  entities:
+    - light.living_room_lights
+    - light.bedroom_lights
+    - light.bathroom_lights
+    - light.entryway_lights
+    - light.kitchen_lights
+    - light.dining_area_lights
+
+- platform: group
+  name: Accessory Lights
+  entities:
+    - light.fairy_lights
+    - light.nanoleaf

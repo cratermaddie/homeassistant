@@ -1,4 +1,5 @@
 - alias: Auto alarm
+  mode: restart
   trigger:
     - platform: state
       entity_id: sensor.auto_alarm_trigger
@@ -15,6 +16,9 @@
       - condition: numeric_state
         entity_id: sensor.uptime
         above: 0.1
+      - condition: state
+        entity_id: script.set_nap
+        state: 'off'
   action:
 #    - delay:
 #        minutes: >-
@@ -32,9 +36,18 @@
       entity_id: light.bedroom_lights
     - delay:
         minutes: 2
+    - condition: state
+      entity_id: input_boolean.awake
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.sleeping_in
+      state: 'off'
     - service: automation.trigger
       entity_id: automation.aurora_controller_hourly
     - service: script.wake_up
+    - condition: state
+      entity_id: person.armond
+      state: 'not_home'
     - service: input_select.select_option
       data:
         entity_id: input_select.bedroom_ac_mode

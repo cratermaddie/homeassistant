@@ -1,5 +1,6 @@
 - alias: Turn off devices when away
   initial_state: true
+  mode: restart
   trigger:
     platform: state
     entity_id: var.mode

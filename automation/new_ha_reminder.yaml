@@ -1,4 +1,5 @@
 - alias: Update Available Notification
+  mode: restart
   trigger:
     - platform: state
       entity_id: binary_sensor.updater

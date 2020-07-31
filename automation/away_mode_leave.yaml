@@ -1,4 +1,5 @@
 - alias: Set mode to away when I leave
+  mode: restart
   trigger:
     platform: zone
     entity_id: device_tracker.madisons_iphone_app

@@ -8,8 +8,6 @@ bedtime_1:
         entity_id:
           - light.bedroom_lights
           - light.bathroom_lights
-          - light.bedroom_closet
-          - light.coat_closet
           - light.entryway_lights
           - light.living_room_lights
           - light.dining_area_lights
@@ -22,10 +20,15 @@ bedtime_1:
     - service: input_select.select_option
       data:
         entity_id: input_select.bedroom_ac_fan_mode
-        option: Medium
+        option: High
     - service: climate.set_temperature
       data_template:
         entity_id: climate.bedroom
         temperature: "{{ states('input_number.sleep_temperature')|int }}"
     - service: light.turn_off
       entity_id: light.fairy_lights
+    - delay:
+        minutes: 1
+    - service: rest_command.bedroom_ac_mode
+    - service: rest_command.bedroom_ac_fan_mode
+    - service: rest_command.bedroom_ac_temperature_set

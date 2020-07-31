@@ -1,5 +1,6 @@
 - alias: Update travel time
   initial_state: true
+  mode: restart
   trigger:
     - platform: state
       entity_id: sensor.travel_update_trigger

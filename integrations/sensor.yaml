@@ -195,6 +195,7 @@
       arg: /home
     - type: processor_use
     - type: memory_use_percent
+    - type: process
   scan_interval:
     seconds: 2
 
@@ -618,6 +619,18 @@
           {%- endmacro %}
         {{deliveries_sentence()}}
 
+    hacs_string:
+      value_template: >-
+        {% if is_state('sensor.hacs','0') %}
+        0 pending updates
+        {% elif is_state('sensor.hacs','1') %}
+        {{ states('sensor.hacs') }} pending update
+        {% else %}
+        {{ states('sensor.hacs') }} pending updates
+        {% endif %}
+      icon_template: 'mdi:alpha-c-box'
+      entity_id: sensor.hacs
+
     travel_to_next_event:
       value_template: >
         {% if is_state('input_select.travel_mode', 'Drive') %}
@@ -637,7 +650,7 @@
       
     google_cal_location:
       value_template: >-
-        {% if (is_state_attr("calendar.personal_trigger", "location", "unknown") or (is_state_attr("calendar.personal_trigger", "start_time", None)) or is_state("input_boolean.staying_home","on") or (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%d') | int != now().day and distance('sensor.google_geocode', 'device_tracker.madisons_iphone_app') < 1) or (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%d') | int != now().day and now().hour < 20)) %}
+        {% if (is_state_attr("calendar.personal_trigger", "location", "unknown") or (is_state_attr("calendar.personal_trigger", "start_time", None)) or is_state("input_boolean.staying_home","on") or (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%d') | int != now().day and distance('sensor.google_geocode', 'device_tracker.madisons_iphone_app') < 1) or (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%d') | int == (now().day + 1) and now().hour < 14) or (as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | timestamp_custom('%d') | int > (now().day + 1))) %}
           451 W Melrose St, Chicago, IL 60657
         {% else %}
           {{ state_attr("calendar.personal_trigger", "location") }}
