@@ -1,7 +1,7 @@
-- alias: Set bedroom ac temperature based on climate
-  mode: restart
-  trigger:
-    - platform: state
-      entity_id: sensor.climate_bedroom_set_temperature
-  action:
-    - service: rest_command.bedroom_ac_temperature_set
+#- alias: Set bedroom ac temperature based on climate
+#  mode: restart
+#  trigger:
+#    - platform: state
+#      entity_id: sensor.climate_bedroom_set_temperature
+#  action:
+#    - service: rest_command.bedroom_ac_temperature_set

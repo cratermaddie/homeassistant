@@ -1,0 +1,20 @@
+- alias: Disarm security alarm
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      from: 'armed_away'
+      to: 'disarmed'
+  action:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.all_devices
+        volume_level: 0.5
+    - service: tts.google_translate_say
+      data:
+        entity_id: media_player.office_speaker
+        message: Alarm disarmed. Welcome home.
+    - service: media_player.turn_off
+      entity_id: media_player.all_devices
+    - service: switch.turn_off
+      entity_id: switch.noonlight_switch

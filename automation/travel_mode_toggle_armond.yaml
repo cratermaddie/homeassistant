@@ -1,0 +1,130 @@
+- alias: Travel bike mode switches controller armond
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_bike_armond
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.travel_transit_armond
+          - input_boolean.travel_drive_armond
+          - input_boolean.travel_walk_armond
+          - input_boolean.travel_uber_armond
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode_armond
+        option: "Bike"
+        
+- alias: Travel transit mode switches controller armond
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_transit_armond
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.travel_bike_armond
+          - input_boolean.travel_drive_armond
+          - input_boolean.travel_walk_armond
+          - input_boolean.travel_uber_armond
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode_armond
+        option: "Transit"
+        
+- alias: Travel uber mode switches controller armond
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_uber_armond
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.travel_bike_armond
+          - input_boolean.travel_drive_armond
+          - input_boolean.travel_walk_armond
+          - input_boolean.travel_transit_armond
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode_armond
+        option: "Uber"
+        
+- alias: Travel walk mode switches controller armond
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_walk_armond
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.travel_transit_armond
+          - input_boolean.travel_drive_armond
+          - input_boolean.travel_bike_armond
+          - input_boolean.travel_uber_armond
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode_armond
+        option: "Walk"
+        
+- alias: Travel drive mode switches controller armond
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_drive_armond
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.travel_transit_armond
+          - input_boolean.travel_bike_armond
+          - input_boolean.travel_walk_armond
+          - input_boolean.travel_uber_armond
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode_armond
+        option: "Drive"
+        
+- alias: Travel none mode switches controller armond
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.travel_drive_armond
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.travel_transit_armond
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.travel_walk_armond
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.travel_bike_armond
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.travel_uber_armond
+        to: "off"
+  condition:
+    condition: template
+    value_template: "{{ is_state('input_boolean.travel_walk_armond','off') and is_state('input_boolean.travel_drive_armond','off') and is_state('input_boolean.travel_transit_armond','off') and is_state('input_boolean.travel_bike_armond','off') and is_state('input_boolean.travel_uber_armond','off') }}"
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "{{trigger.entity_id}}"
+        
+- alias: input select travel switches armond
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_select.travel_mode_armond
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "input_boolean.travel_{{ states('input_select.travel_mode') | lower }}_armond"

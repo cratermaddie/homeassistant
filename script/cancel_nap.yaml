@@ -8,29 +8,29 @@ cancel_nap:
         entity_id: script.snooze
     - service: hue.hue_activate_scene
       data:
-        group_name: "Bedroom"
+        group_name: "Master Bedroom"
         scene_name: "Relax"
     - service: var.set
       data:
         entity_id: var.mode
         value: "home"
-    - service: input_boolean.turn_on
-      data:
-        entity_id: input_boolean.awake
-    - service: automation.trigger
-      entity_id: automation.set_aurora_brightness_on_sun_position
-    - service: automation.trigger
-      entity_id: automation.aurora_controller_hourly
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.bedroom_ac_mode
-        option: Fan
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.bedroom_ac_fan_mode
-        option: Low
-    - condition: state
-      entity_id: sun.sun
-      state: below_horizon
-    - service: switch.turn_on
-      entity_id: group.fairy_lights
+#    - service: input_boolean.turn_on
+#      data:
+#        entity_id: input_boolean.awake
+#    - service: automation.trigger
+#      entity_id: automation.set_aurora_brightness_on_sun_position
+#    - service: automation.trigger
+#      entity_id: automation.aurora_controller_hourly
+#    - service: input_select.select_option
+#      data:
+#        entity_id: input_select.bedroom_ac_mode
+#        option: Fan
+#    - service: input_select.select_option
+#      data:
+#        entity_id: input_select.bedroom_ac_fan_mode
+#        option: Low
+#    - condition: state
+#      entity_id: sun.sun
+#      state: below_horizon
+#    - service: switch.turn_on
+#      entity_id: group.fairy_lights

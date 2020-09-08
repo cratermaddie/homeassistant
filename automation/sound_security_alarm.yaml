@@ -1,0 +1,43 @@
+- alias: Sound security alarm
+  mode: restart
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.home_alarm
+    to: 'triggered'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.main_lights
+        rgb_color: [255,255,255]
+        brightness: 255
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.all_devices
+        volume_level: 1.0
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.all_devices
+        media_content_id: 'http://192.168.0.2:8123/local/audio/security_alarm.mp3'
+        media_content_type: music
+    - service: notify.mobile_app_madisons_iphone
+      data:
+        message: "The alarm has been triggered!"
+        data:
+          push:
+            category: "dryer"
+            thread-id: "laundry-reminder"
+            sound: 'buzzer.wav'
+    - service: notify.mobile_app_madisons_iphone
+      data:
+        title: "ALARM"
+        message: "The alarm has been triggered!"
+        data:
+          apns_headers:
+            'apns-collapse-id': 'alarm'
+          push:
+            thread-id: "alarm"
+#            sound: 'googlealarmnotif.wav'
+            critical: 1
+            volume: 1.0
+    - service: switch.turn_on
+      entity_id: switch.noonlight_switch

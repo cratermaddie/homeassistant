@@ -1,3 +1,4 @@
+###TODO###
 - alias: Send notification when washing machine is done
   mode: restart
   trigger:

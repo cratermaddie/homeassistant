@@ -1,10 +1,19 @@
+###TODO###
 - alias: Set mode to away when I leave
   mode: restart
   trigger:
-    platform: zone
-    entity_id: device_tracker.madisons_iphone_app
-    zone: zone.home
-    event: leave
+    - platform: zone
+      entity_id: device_tracker.madisons_iphone_app
+      zone: zone.home
+      event: leave
+    - platform: zone
+      entity_id: device_tracker.armonds_iphone_app
+      zone: zone.home
+      event: leave
+  condition:
+    condition: state
+    entity_id: group.home
+    state: 'not_home'
   action:
     service: var.set
     data:

@@ -1,53 +1,7 @@
-
-- platform: netgear
-  ssl: False
-  host: !secret router_ip
-  password: !secret netgear_password
-  interval_seconds: 30
-  consider_home: 300
-  new_device_defaults:
-    track_new_devices: true
-#  exclude:
-#    - !secret desktop_mac
-#    - !secret home_assistant_mac
-#    - !secret hue_mac
-#    - !secret dustin_mac
-#    - !secret wyze_cam_mac
-#    - !secret nanoleaf_mac
-#    - !secret wemo_tv_mac
-#    - !secret wemo_air_freshener_mac
-#    - !secret wemo_aquarium_day_mac
-#    - !secret wemo_aquarium_night_mac
-#    - !secret wemo_diffuser_mac
-#    - !secret wemo_vanity_mac
-#    - !secret chromecast_mac
-#    - !secret google_hub_mac
-#    - !secret bedroom_mini_mac
-#    - !secret bathroom_mini_mac
-#    - !secret kitchen_mini_mac
-#    - !secret printer_mac
-#    - !secret apple_tv_mac
-#    - !secret air_conditioner_1_mac
-#    - !secret air_conditioner_2_mac
-#    - !secret fairy_light_art_mac
-#    - !secret fairy_light_photo_mac
-#    - !secret fairy_light_LR_mac
-#    - !secret fairy_light_BR_mac
-#    - !secret octoprint_mac
-
-#- platform: netgear
-#  ssl: False
-#  host: !secret router_ip
-#  password: !secret netgear_password
-#  interval_seconds: 30
-#  consider_home: 300
-#  new_device_defaults:
-#    track_new_devices: False
-
 - platform: iphonedetect
   consider_home: 60
   new_device_defaults:
     track_new_devices: true
   hosts:
-    armond_iphone: 192.168.0.27
-    madison_iphone: 192.168.0.5
+    armond_iphone: 192.168.0.8
+    madison_iphone: 192.168.0.7

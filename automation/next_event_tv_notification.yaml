@@ -1,0 +1,15 @@
+- alias: Send notification of next cal event when tv turns on
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: media_player.living_room_tv_lgos
+      from: 'off'
+      to: 'on'
+  condition:
+    condition: template
+    value_template: "{{ ((as_timestamp(state_attr('calendar.personal_trigger','start_time')) - now().timestamp()) / 60 / 60) | int < 12 }}"
+  action:
+    - service: notify.living_room_tv
+      data_template:
+        message: >
+          Next event: {{ state_attr('calendar.personal_trigger','message') }} - In {% set value = state_attr('calendar.personal_trigger','start_time') -%}{%- set start_time = as_timestamp(strptime(value, "%Y-%m-%d  %H:%M:%S")) -%}{%- set seconds = start_time-now().timestamp() -%}{%- set hours = seconds / 3600 -%}{%- if seconds / ( 60 * 60 * 24 ) > 1 -%}{{ (seconds //  ( 60 * 60 * 24 )) | int }} {% if (seconds //  ( 60 * 60 * 24 )) | int == 1 %}day{% else %}days{% endif %}{%- elif seconds / ( 60 * 60 ) > 1 -%}{{ (seconds //  ( 60 * 60 )) | int }} {% if (seconds //  ( 60 * 60 )) | int == 1 %}hour{% else %}hours{% endif %}{%- else -%} {{ (seconds // 60) | int }} {% if (seconds //  60) | int == 1 %}minute{% else %}minutes{% endif %}{%- endif %} - {{ as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%-d %B at %-H:%M') }}

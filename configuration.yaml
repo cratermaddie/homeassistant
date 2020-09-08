@@ -2,8 +2,13 @@
 #       System Configuration       #
 ####################################
 homeassistant:
+  customize: !include customize.yaml
   whitelist_external_dirs:
     - /config/images
+
+#http:
+#  ssl_certificate: /ssl/fullchain.pem
+#  ssl_key: /ssl/privkey.pem
 
 config:
 
@@ -27,11 +32,14 @@ system_health:
 
 discovery:
 
+cloud:
+
 frontend:
   themes: !include_dir_merge_named themes
   javascript_version: latest
   extra_module_url:
     - /hacsfiles/custom-sidebar/custom-sidebar.js
+    - /local/custom_icons.js
 
 recorder:
   db_url: !secret db_url
@@ -69,38 +77,61 @@ spotify:
 
 breaking_changes:
 
-#smartthinq:
-#    token: !secret lg_refresh_token
-#    region: US
-#    language: en-US
+stream:
+
+wemo:
+#  discovery: false
+#  static:
+#    - 192.168.0.13
+#    - 192.168.0.14
+#    - 192.168.0.15
+#    - 192.168.0.16
+
+smartthinq:
+  token: !secret lg_refresh_token
+  region: US
+  language: en-US
 
 tts:
   - platform: google_translate
-    base_url: !secret local_base_url
+#    base_url: !secret local_base_url
 
 apple_tv:
   - host: !secret apple_tv_ip
     login_id: !secret apple_tv_login_id
 
-climate:
-  - platform: generic_thermostat
-    name: Living Room
-    heater: switch.living_room_ac_cool
-    target_sensor: sensor.coat_closet_sensor_temperature
-    ac_mode: true
-    keep_alive:
-      minutes: 10
-    min_cycle_duration:
-      minutes: 2
-  - platform: generic_thermostat
-    name: Bedroom
-    heater: switch.bedroom_ac_cool
-    target_sensor: sensor.bedroom_closet_sensor_temperature
-    ac_mode: true
-    keep_alive:
-      minutes: 10
-    min_cycle_duration:
-      minutes: 2
+alarm_control_panel:
+  - platform: manual
+    name: Home Alarm
+    code: !secret alarm_code
+    arming_time: 60
+    delay_time: 20
+    trigger_time: 4
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      arming_time: 0
+      delay_time: 0
+
+#climate:
+#  - platform: generic_thermostat
+#    name: Living Room
+#    heater: switch.living_room_ac_cool
+#    target_sensor: sensor.coat_closet_sensor_temperature
+#    ac_mode: true
+#    keep_alive:
+#      minutes: 10
+#    min_cycle_duration:
+#      minutes: 2
+#  - platform: generic_thermostat
+#    name: Bedroom
+#    heater: switch.bedroom_ac_cool
+#    target_sensor: sensor.bedroom_closet_sensor_temperature
+#    ac_mode: true
+#    keep_alive:
+#      minutes: 10
+#    min_cycle_duration:
+#      minutes: 2
 
 sonoff:
   username: !secret sonoff_email
@@ -108,6 +139,7 @@ sonoff:
   reload: always
   default_class: light
 
+#cSpell:disable
 nintendo_wishlist:
   country: US
   wishlist:
@@ -131,7 +163,8 @@ nintendo_wishlist:
     - Luigi’s Mansion 3
     - Overcooked! 2
     - Cuphead
-    - Super Mario Party
+
+#cSpell:enable
 
 shell_command:
   delete_gtfs: rm gtfs/google_transit.sqlite
@@ -150,22 +183,48 @@ updater:
 
 logger:
   default: warning
+#  logs:
+#    custom_components.ph_notification_scrape: debug
 
 browser_mod:
   devices:
-    ebd9cb56-e768f3d4:
+    90dd968f_a0d40597:
       name: Desktop
       camera: true
     0cedc2eb-d5dca07b:
       name: Madison's iPhone
 
+wake_on_lan:
+
+webostv:
+  host: !secret lg_tv_ip
+  name: Living Room TV
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret lg_tv_mac
+      broadcast_address: !secret lg_tv_ip
+  customize:
+    sources:
+      - livetv
+      - youtube
+      - amazon
+      - netflix
+
 camera:
   - platform: ffmpeg
-    name: WYZE Cam
-    input: !secret wyze_address
-  - platform: local_file
-    file_path: /config/images/mail_and_packages/mail_today.gif
-    name: mail_usps
+    name: Printer Camera
+    input: !secret print_camera_rtsp
+    extra_arguments: "-vf 'rotate=0.5'"
+  - platform: ffmpeg
+    name: West Camera
+    input: !secret west_camera_rtsp
+  - platform: ffmpeg
+    name: East Camera
+    input: !secret east_camera_rtsp
+#  - platform: local_file
+#    file_path: /config/images/mail_and_packages/mail_today.gif
+#    name: mail_usps
   - platform: unsplash
     api_key: !secret unsplash_access_key
     orientation: landscape
@@ -196,13 +255,19 @@ google:
 icloud:
   - username: !secret old_apple_email
     password: !secret apple_password
+
+noonlight:
+  id: !secret noonlight_id
+  secret: !secret noonlight_secret
+  api_endpoint: https://api.noonlight.com/platform/v1
+  token_endpoint: https://noonlight.konnected.io/ha/token
     
-google_assistant:
-  service_account: !include SERVICE_ACCOUNT.json
-  project_id: !secret google_assistant_project_id
-  report_state: true
-  exposed_domains:
-    - script
+#google_assistant:
+#  service_account: !include SERVICE_ACCOUNT.json
+#  project_id: !secret google_assistant_project_id
+#  report_state: true
+#  exposed_domains:
+#    - script
     
 counter:
   meds_counter:

@@ -2,7 +2,7 @@ wake_up:
   sequence:
     - service: hue.hue_activate_scene
       data:
-        group_name: "Bedroom"
+        group_name: "Master Bedroom"
         scene_name: "Energize"
     - service_template: >
         {% if is_state('media_player.bedroom_speaker','unavailable') %}

@@ -1,7 +1,0 @@
-- alias: Change living room ac fan based on input select
-  mode: restart
-  trigger:
-    - platform: state
-      entity_id: input_select.living_room_ac_fan_mode
-  action:
-    - service: rest_command.living_room_ac_fan_mode

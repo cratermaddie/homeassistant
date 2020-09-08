@@ -1,0 +1,16 @@
+#- alias: Update master bedroom ac input number
+#  mode: restart
+#  trigger:
+#    platform: state
+#    entity_id: sensor.ecobee_set_temp
+#  condition:
+#    condition: not
+#    conditions:
+#      condition: state
+#      entity_id: var.mode
+#      state: 'sleep'
+#  action:
+#    service: input_number.set_value
+#    data_template:
+#      entity_id: input_number.master_bedroom_ac_temperature
+#      value: "{{ states('sensor.ecobee_set_temp') }}"

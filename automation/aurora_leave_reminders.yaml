@@ -33,7 +33,7 @@
         {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
         script.aurora_manual
         {% endif %}
-               
+
 - alias: Show low aurora reminder
   mode: restart
   trigger:

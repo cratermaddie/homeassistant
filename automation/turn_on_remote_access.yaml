@@ -1,0 +1,13 @@
+- alias: Turn on remote access
+  mode: restart
+  trigger:
+    - platform: zone
+      entity_id: device_tracker.madisons_iphone_app
+      zone: zone.home
+      event: leave
+    - platform: zone
+      entity_id: device_tracker.armonds_iphone_app
+      zone: zone.home
+      event: leave
+  action:
+    - service: cloud.remote_connect

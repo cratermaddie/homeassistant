@@ -1,3 +1,4 @@
+###TODO###
 - alias: Send notification if I need to do laundry
   mode: restart
   trigger:

@@ -1,4 +1,4 @@
-sleep_temperature:
+master_bedroom_ac_temperature:
   name: Sleep Temperature
   min: 10
   max: 25

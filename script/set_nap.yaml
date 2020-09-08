@@ -5,30 +5,30 @@ set_nap:
         entity_id: var.mode
         value: "sleep"
     - service: light.turn_off
-      entity_id: light.bedroom_lights
+      entity_id: light.master_bedroom_lights
     - service: input_boolean.turn_off
       entity_id: input_boolean.awake
-    - service: switch.turn_off
-      entity_id: group.fairy_lights
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.bedroom_ac_mode
-        option: Cool
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.bedroom_ac_fan_mode
-        option: Low
-    - service: climate.set_temperature
-      data_template:
-        entity_id: climate.bedroom
-        temperature: "{{ states('input_number.sleep_temperature')|int }}"
+#    - service: switch.turn_off
+#      entity_id: group.fairy_lights
+#    - service: input_select.select_option
+#      data:
+#        entity_id: input_select.bedroom_ac_mode
+#        option: Cool
+#    - service: input_select.select_option
+#      data:
+#        entity_id: input_select.bedroom_ac_fan_mode
+#        option: Low
+#    - service: climate.set_temperature
+#      data_template:
+#        entity_id: climate.bedroom
+#        temperature: "{{ states('input_number.sleep_temperature')|int }}"
     - delay: "00:{{ duration | int }}:00"
     - service: script.wake_up
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.bedroom_ac_mode
-        option: Fan
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.bedroom_ac_fan_mode
-        option: Low
+#    - service: input_select.select_option
+#      data:
+#        entity_id: input_select.bedroom_ac_mode
+#        option: Fan
+#    - service: input_select.select_option
+#      data:
+#        entity_id: input_select.bedroom_ac_fan_mode
+#        option: Low

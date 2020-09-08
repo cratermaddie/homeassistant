@@ -5,6 +5,11 @@
       invert : true
       max_samples: 6
 
+    mv_rank_trend:
+      entity_id: sensor.mv_rank_scrape
+      invert : true
+      max_samples: 6
+
 - platform: wyzesense
   device: auto
 
@@ -14,8 +19,18 @@
     - Printing Error
 
 - platform: ffmpeg_motion
-  input: !secret wyze_address
-  name: wyze_motion
+  input: !secret west_camera_rtsp
+  name: west_camera_motion
+  changes: 2
+
+- platform: ffmpeg_motion
+  input: !secret east_camera_rtsp
+  name: east_camera_motion
+  changes: 2
+
+- platform: ffmpeg_motion
+  input: !secret print_camera_rtsp
+  name: print_camera_motion
   changes: 2
 
 - platform: template
@@ -25,3 +40,6 @@
           {{ is_state('media_player.apple_tv', 'paused') }}
         delay_on:
           minutes: 30
+      new_release:
+        value_template: "{{ states('sensor.current_version') != states('sensor.release') }}"
+        icon_template: mdi:arrow-up-bold-circle-outline

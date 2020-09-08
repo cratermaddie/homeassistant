@@ -23,15 +23,26 @@ hue_room:
   options:
     - ""
     - "Living room"
-    - "Bedroom"
-    - "Dining area"
+    - "Master Bedroom"
+    - "Dining Room"
     - "Kitchen"
-    - "Entryway"
+    - "Guest Bedroom"
     - "Bathroom"
+    - "Hallway"
+    - "Office"
   initial: ""
   icon: mdi:floor-plan
   
-travel_mode:
+travel_mode_madison:
+  name: Travel Mode
+  options:
+    - "Drive"
+    - "Uber"
+    - "Bike"
+    - "Transit"
+    - "Walk"
+
+travel_mode_armond:
   name: Travel Mode
   options:
     - "Drive"
@@ -45,39 +56,7 @@ aurora_effects:
   options:
     - ""
   icon: mdi:palette
-
-living_room_ac_mode:
-  name: Living Room AC Mode
-  options:
-    - "Off"
-    - "Cool"
-    - "Fan"
-    - "Dry"
-
-bedroom_ac_mode:
-  name: Bedroom AC Mode
-  options:
-    - "Off"
-    - "Cool"
-    - "Fan"
-    - "Dry"
-
-living_room_ac_fan_mode:
-  name: Living Room AC Fan Mode
-  options:
-    - "Off"
-    - "Low"
-    - "Medium"
-    - "High"
-
-bedroom_ac_fan_mode:
-  name: Bedroom AC Fan Mode
-  options:
-    - "Off"
-    - "Low"
-    - "Medium"
-    - "High"
-
+  
 previous_turnip_pattern:
   name: Previous Pattern
   icon: mdi:leaf
@@ -87,3 +66,15 @@ previous_turnip_pattern:
     - "Small Spike"
     - "Large Spike"
     - "Decreasing"
+
+system_info_tab:
+  name: System Info Tab
+  icon: mdi:wrench
+  options:
+    - "system_variables"
+    - "system_disabled_automations"
+    - "system_running_automations"
+    - "system_running_scripts"
+    - "system_running_timers"
+    - "system_alerts"
+    - "system_groups"

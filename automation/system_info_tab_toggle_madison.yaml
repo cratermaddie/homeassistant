@@ -1,0 +1,191 @@
+- alias: System variables info tab controller madison
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_variables_madison
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_disabled_automations_madison
+          - input_boolean.system_running_automations_madison
+          - input_boolean.system_running_scripts_madison
+          - input_boolean.system_running_timers_madison
+          - input_boolean.system_alerts_madison
+          - input_boolean.system_groups_madison
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab_madison
+        option: "system_variables"
+        
+- alias: System disabled automations info tab controller madison
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_disabled_automations_madison
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_variables_madison
+          - input_boolean.system_running_automations_madison
+          - input_boolean.system_running_scripts_madison
+          - input_boolean.system_running_timers_madison
+          - input_boolean.system_alerts_madison
+          - input_boolean.system_groups_madison
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab_madison
+        option: "system_disabled_automations"
+        
+- alias: System running timers info tab controller madison
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_running_timers_madison
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_variables_madison
+          - input_boolean.system_running_automations_madison
+          - input_boolean.system_running_scripts_madison
+          - input_boolean.system_disabled_automations_madison
+          - input_boolean.system_alerts_madison
+          - input_boolean.system_groups_madison
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab_madison
+        option: "system_running_timers"
+        
+- alias: System running scripts info tab controller madison
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_running_scripts_madison
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_disabled_automations_madison
+          - input_boolean.system_running_automations_madison
+          - input_boolean.system_variables_madison
+          - input_boolean.system_running_timers_madison
+          - input_boolean.system_alerts_madison
+          - input_boolean.system_groups_madison
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab_madison
+        option: "system_running_scripts"
+        
+- alias: System running automations info tab controller madison
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_running_automations_madison
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_disabled_automations_madison
+          - input_boolean.system_variables_madison
+          - input_boolean.system_running_scripts_madison
+          - input_boolean.system_running_timers_madison
+          - input_boolean.system_alerts_madison
+          - input_boolean.system_groups_madison
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab_madison
+        option: "system_running_automations"
+
+- alias: System alerts info tab controller madison
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_alerts_madison
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_disabled_automations_madison
+          - input_boolean.system_variables_madison
+          - input_boolean.system_running_scripts_madison
+          - input_boolean.system_running_timers_madison
+          - input_boolean.system_running_automations_madison
+          - input_boolean.system_groups_madison
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab_madison
+        option: "system_alerts"
+
+- alias: System groups info tab controller madison
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_groups_madison
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_disabled_automations_madison
+          - input_boolean.system_variables_madison
+          - input_boolean.system_running_scripts_madison
+          - input_boolean.system_running_timers_madison
+          - input_boolean.system_running_automations_madison
+          - input_boolean.system_alerts_madison
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab_madison
+        option: "system_groups"
+
+
+
+
+- alias: system none mode switches controller madison
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_running_automations_madison
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_disabled_automations_madison
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_running_scripts_madison
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_variables_madison
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_running_timers_madison
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_alerts_madison
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_groups_madison
+        to: "off"
+  condition:
+    condition: template
+    value_template: "{{ is_state('input_boolean.system_running_scripts_madison','off') and is_state('input_boolean.system_running_automations_madison','off') and is_state('input_boolean.system_disabled_automations_madison','off') and is_state('input_boolean.system_variables_madison','off') and is_state('input_boolean.system_running_timers_madison','off') and is_state('input_boolean.system_alerts_madison','off') and is_state('input_boolean.system_groups_madison','off') }}"
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "{{trigger.entity_id}}"
+        
+- alias: input select system info switches
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_select.system_info_tab_madison
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "input_boolean.{{ states('input_select.system_info_tab') }}_madison"

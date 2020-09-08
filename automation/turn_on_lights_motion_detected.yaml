@@ -1,0 +1,26 @@
+- alias: Turn on devices when activity detected
+  mode: parallel
+  trigger:
+    platform: state
+    entity_id: binary_sensor.office_occupancy, binary_sensor.living_room_occupancy, binary_sensor.master_bedroom_occupancy, binary_sensor.guest_bedroom_occupancy, binary_sensor.west_camera_motion
+    to: "on"
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: "below_horizon"
+      - condition: state
+        entity_id: var.mode
+        state: 'home'
+      - condition: template
+        value_template: "{{ states(trigger.entity_id | replace('binary_sensor.','light.') | replace('_occupancy','_lights')) == 'off' }}"
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: >-
+          {% if trigger.entity_id == "binary_sensor.west_camera_motion" %}
+          [light.hallway_lights, light.kitchen_lights]
+          {% else %}
+          {{ trigger.entity_id | replace('binary_sensor.','light.') | replace('_occupancy','_lights') }}
+          {% endif %}

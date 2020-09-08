@@ -2,25 +2,23 @@
   initial_state: true
   mode: restart
   trigger:
-    platform: zone
-    entity_id: device_tracker.madisons_iphone_app
-    zone: zone.home
-    event: enter
+    - platform: zone
+      entity_id: device_tracker.madisons_iphone_app
+      zone: zone.home
+      event: enter
+    - platform: zone
+      entity_id: device_tracker.armonds_iphone_app
+      zone: zone.home
+      event: enter
   action:
-    - service: light.turn_on
-      entity_id: light.desktop
     - condition: state
       entity_id: sun.sun
       state: 'below_horizon'
     - service: hue.hue_activate_scene
       data:
-        group_name: "Bedroom"
-        scene_name: "Relax"
+        group_name: "Dining Room"
+        scene_name: "Bright"
     - service: hue.hue_activate_scene
       data:
-        group_name: "Living room"
-        scene_name: "Relax"
-    - service: hue.hue_activate_scene
-      data:
-        group_name: "Entryway"
+        group_name: "Kitchen"
         scene_name: "Bright"

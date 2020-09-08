@@ -45,6 +45,7 @@
 					word-wrap: break-word;
 					width: 100%;
 					word-spacing: inherit;
+					resize: none;
 				}
 				.text-bold {
 					font-weight: bold;
@@ -56,7 +57,9 @@
 					float: left;
 				}
 				.text-red {
-					color: red;
+					box-shadow: 0 0 3px 6px rgba(255, 0, 0, 0.3);
+					border-color: #dc3545;
+					transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 				}
 				.text-right {
 					float: right;
@@ -90,9 +93,7 @@
 				<ha-card .hass="${this._hass}" .config="${this._config}" class="background">
 					${this.state.title ? html`<div class="card-header">${this.state.title}</div>` : null}
 					<div class="card-content">
-						<textarea maxlength="${this.state.max_length !== -1 ? this.state.max_length : ""}" @keyup="${() => this.onKeyupTextarea()}" class="textarea" placeholder="${this.state.placeholder_text}">${this.getState()}</textarea>
-						<span class="text-red text-small text-italic text-left" id="spanMinCharactersInfoText"></span>
-						<span class="text-small text-italic text-right" id="spanMaxCharactersInfoText"></span>
+						<textarea maxlength="${this.state.max_length !== -1 ? this.state.max_length : ""}" @keyup="${() => this.onKeyupTextarea()}" class="textarea text-red" id="mainBox" placeholder="${this.state.placeholder_text}">${this.getState()}</textarea>
 					</div>
 					${this.state.showButtons ? html`
 						<div class="flex">
@@ -125,7 +126,6 @@
 				this.state.last_updated_text = val;
 			}
 			this.shadowRoot.querySelector(".textarea").value = val;
-			this.resizeTextarea();
 			this.updateCharactersInfoText();
 		}
 
@@ -136,34 +136,88 @@
 
 		pasteText() {
 			clearTimeout(this.state.autosave_timeout);
-			let elem = this.shadowRoot.querySelector(".textarea");
-			if(elem) {
-				elem.focus();
-				let val = elem.value;
-				if(typeof navigator.clipboard.readText === "function") {
-					navigator.clipboard.readText().then((text) => { this.setText(val + text); }, (err) => { console.error("Error on paste: ", err); });
-				}
-				else {
-					console.warn("Sorry, your browser does not support the clipboard paste function.");
+			let elem = _this.shadowRoot.querySelector(".textarea")
+			if ("iPhone" in navigator.platform) {
+				this.pasteTextIphone(elem);
+			}
+			else {
+				let _this = this;
+				if(elem) {
+					elem.focus();
+					let val = elem.value;
+					if(typeof navigator.clipboard.readText === "function") {
+						navigator.clipboard.readText().then((text) => {
+							_this.setText(val + text);
+							_this.onKeyupTextarea();
+						}, (err) => { console.error("Error on paste: ", err); });
+					}
+					else {
+						console.warn("Sorry, your browser does not support the clipboard paste function.");
+					}
 				}
 			}
+		}
+
+		pasteTextIphone(el){
+			var oldContentEditable = el.contentEditable,
+			oldReadOnly = el.readOnly,
+			range = document.createRange();
+	
+			el.contentEditable = true;
+			el.readOnly = false;
+			range.selectNodeContents(el);
+			
+			var s = window.getSelection();
+			s.removeAllRanges();
+			s.addRange(range);
+			
+			el.contentEditable = oldContentEditable;
+			el.readOnly = oldReadOnly;
+			
+			document.execCommand('paste');
 		}
 
 		copyText() {
 			clearTimeout(this.state.autosave_timeout);
 			let elem = this.shadowRoot.querySelector(".textarea");
-			if(elem) {
-				elem.focus();
-				let val = elem.value;
-				if(typeof navigator.clipboard.writeText === "function") {
-					if(val !== null && val !== ''){
-						navigator.clipboard.writeText(val);
+			if ("iPhone" in navigator.platform) {
+				this.copyTextIphone(elem);
+			}
+			else {
+				if(elem) {
+					elem.focus();
+					let val = elem.value;
+					if(typeof navigator.clipboard.writeText === "function") {
+						if(val !== null && val !== ''){
+							navigator.clipboard.writeText(val);
+						}
+					}
+					else {
+						console.warn("Sorry, your browser does not support the clipboard copy function.");
 					}
 				}
-				else {
-					console.warn("Sorry, your browser does not support the clipboard copy function.");
-				}
 			}
+		}
+
+		copyTextIphone(el){
+			var oldContentEditable = el.contentEditable,
+			oldReadOnly = el.readOnly,
+			range = document.createRange();
+	
+			el.contentEditable = true;
+			el.readOnly = false;
+			range.selectNodeContents(el);
+			
+			var s = window.getSelection();
+			s.removeAllRanges();
+			s.addRange(range);
+			
+			el.setSelectionRange(0, 999999); // A big number, to cover anything that could be inside the element.
+			
+			el.contentEditable = oldContentEditable;
+			el.readOnly = oldReadOnly;
+			
+			document.execCommand('copy');
 		}
 
 		onKeyupTextarea() {
@@ -177,7 +231,6 @@
 				}, 1000);
 			}
 			this.updateCharactersInfoText();
-			this.resizeTextarea();
 		}
 
 		updateCharactersInfoText() {
@@ -186,33 +239,17 @@
 			let disable_button = false;
 
 			if(this.state.max_length !== false) {
-				let maxCharactersInfoText = `${textLength}/${this.state.max_length} max.`;
-				let maxCharactersElem = this.shadowRoot.querySelector("#spanMaxCharactersInfoText")
-				maxCharactersElem.innerHTML = maxCharactersInfoText;
+				let mainBoxAreaElem = this.shadowRoot.querySelector("#mainBox")
 
 				if(textLength >= this.state.max_length) {
-					maxCharactersElem.classList.add("text-red");
+					mainBoxAreaElem.classList.add("text-red");
 					disable_button = true;
 				}
 				else {
-					maxCharactersElem.classList.remove("text-red");
+					mainBoxAreaElem.classList.remove("text-red");
 				}
 				if(textLength <= this.state.max_length) {
 					disable_button = false;
-				}
-			}
-
-			if(this.state.min_length > 0) {
-				let minCharactersInfoText = `${textLength}/${this.state.min_length} min.`;
-				let minCharactersElem = this.shadowRoot.querySelector("#spanMinCharactersInfoText")
-				minCharactersElem.innerHTML = minCharactersInfoText;
-
-				if(textLength < this.state.min_length) {
-					minCharactersElem.classList.remove("hidden");
-					disable_button = true;
-				}
-				else {
-					minCharactersElem.classList.add("hidden");
 				}
 			}
 
@@ -226,15 +263,6 @@
 					button_save.classList.remove("text-red");
 				}
 			}
-		}
-
-		resizeTextarea() {
-			let textArea = this.shadowRoot.querySelector('.textarea');
-			let textAreaComputedStyle = getComputedStyle(textArea);
-			textArea.style.height = "auto";
-			textArea.style.overflowY = "auto";
-			textArea.style.height = (parseFloat(textArea.scrollHeight) + parseFloat(textAreaComputedStyle.paddingBottom) + parseFloat(textAreaComputedStyle.borderBottomWidth)) + "px";
-			textArea.style.overflowY = "hidden";
 		}
 
 		callAction(action) {

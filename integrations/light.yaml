@@ -12,39 +12,67 @@
 - platform: group
   name: Living Room Lights
   entities:
-    - light.living_room
+    - light.living_room_1
     - light.living_room_2
     - light.living_room_3
-    - light.desk_lamp
 
 - platform: group
-  name: Dining Area Lights
+  name: Dining Room Lights
   entities:
-    - light.dining_area
-    - light.dining_area_2
-    - light.dining_area_3
+    - light.dining_room_1
+    - light.dining_room_2
+    - light.dining_room_3
+    - light.dining_room_4
+    - light.dining_room_5
 
 - platform: group
-  name: Bedroom Lights
+  name: Master Bedroom Lights
   entities:
-    - light.bedroom
-    - light.bedroom_2
-    - light.bedroom_3
+    - light.master_bedroom_1
+    - light.master_bedroom_2
+    - light.master_bedroom_3
     - light.bedside_lamp
+
+- platform: group
+  name: Master Bedroom Closet Lights
+  entities:
+    - light.master_closet
+
+- platform: group
+  name: Guest Bedroom Lights
+  entities:
+    - light.guest_bedroom_1
+    - light.guest_bedroom_2
+    - light.guest_bedroom_3
+
+- platform: group
+  name: Guest Bedroom Closet Lights
+  entities:
+    - light.guest_closet
 
 - platform: group
   name: Bathroom Lights
   entities:
-    - light.bathroom
+    - light.bathroom_1
     - light.bathroom_2
     - light.bathroom_3
-    - light.bathroom_4
-    - light.bathroom_5
 
 - platform: group
-  name: Entryway Lights
+  name: Hallway Lights
   entities:
-    - light.entryway
+    - light.hallway
+
+- platform: group
+  name: Office Lights
+  entities:
+    - light.office_1
+    - light.office_2
+    - light.office_3
+
+- platform: group
+  name: Office Closet Lights
+  entities:
+    - light.office_closet
 
 - platform: group
   name: Fairy Lights
@@ -58,14 +86,32 @@
   name: Main Lights
   entities:
     - light.living_room_lights
-    - light.bedroom_lights
+    - light.master_bedroom_lights
+    - light.guest_bedroom_lights
     - light.bathroom_lights
-    - light.entryway_lights
+    - light.hallway_lights
     - light.kitchen_lights
-    - light.dining_area_lights
+    - light.dining_room_lights
+    - light.office_lights
 
 - platform: group
   name: Accessory Lights
   entities:
     - light.fairy_lights
     - light.nanoleaf
+
+- platform: switch
+  name: Fairy Lights Art
+  entity_id: switch.fairy_lights_art
+
+- platform: switch
+  name: Fairy Lights Bedroom
+  entity_id: switch.fairy_lights_bedroom
+
+- platform: switch
+  name: Fairy Lights Living Room
+  entity_id: switch.fairy_lights_living_room
+
+- platform: switch
+  name: Fairy Lights Photo
+  entity_id: switch.fairy_lights_photo

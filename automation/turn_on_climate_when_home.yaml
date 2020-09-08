@@ -1,24 +1,24 @@
-- alias: Turn on climate when home
-  mode: restart
-  trigger:
-    - platform: zone
-      entity_id: device_tracker.madisons_iphone_app
-      zone: zone.home
-      event: enter
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.living_room_ac_mode
-        option: "{{ states('var.living_room_ac_mode') }}"
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.bedroom_ac_mode
-        option: "{{ states('var.bedroom_ac_mode') }}"
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.living_room_ac_fan_mode
-        option: "{{ states('var.living_room_fan_mode') }}"
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.bedroom_ac_fan_mode
-        option: "{{ states('var.bedroom_fan_mode') }}"
+#- alias: Turn on climate when home
+#  mode: restart
+#  trigger:
+#    - platform: zone
+#      entity_id: device_tracker.madisons_iphone_app
+#      zone: zone.home
+#      event: enter
+#  action:
+#    - service: input_select.select_option
+#      data_template:
+#        entity_id: input_select.living_room_ac_mode
+#        option: "{{ states('var.living_room_ac_mode') }}"
+#    - service: input_select.select_option
+#      data_template:
+#        entity_id: input_select.bedroom_ac_mode
+#        option: "{{ states('var.bedroom_ac_mode') }}"
+#    - service: input_select.select_option
+#      data_template:
+#        entity_id: input_select.living_room_ac_fan_mode
+#        option: "{{ states('var.living_room_fan_mode') }}"
+#    - service: input_select.select_option
+#      data_template:
+#        entity_id: input_select.bedroom_ac_fan_mode
+#        option: "{{ states('var.bedroom_fan_mode') }}"

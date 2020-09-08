@@ -25,3 +25,13 @@
           push:
             sound: 'SwTest1_Haptic.caf'
             thread-id: 'ph-removal-reminder'
+    - service: notify.mobile_app_armonds_iphone
+      data_template:
+        message: >-
+          PH Video Removed!
+        data:
+          apns_headers:
+            'apns-collapse-id': 'ph-removal-reminder'
+          push:
+            sound: 'SwTest1_Haptic.caf'
+            thread-id: 'ph-removal-reminder'

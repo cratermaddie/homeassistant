@@ -1,0 +1,19 @@
+- alias: Update travel time madison
+  initial_state: true
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: sensor.travel_update_trigger_madison
+      to: "True"
+    - platform: state
+      entity_id: calendar.personal_trigger
+    - platform: state
+      entity_id: input_select.travel_mode_madison
+    - platform: state
+      entity_id: input_boolean.staying_home_madison
+  action:
+    - service: script.update_travel_time_madison
+    - service: homeassistant.update_entity
+      entity_id: sensor.travel_update_trigger_madison
+    - service: homeassistant.update_entity
+      entity_id: sensor.madison_geocode

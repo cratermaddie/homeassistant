@@ -1,0 +1,12 @@
+- alias: Turn off devices when no activity
+  mode: parallel
+  trigger:
+    platform: state
+    entity_id: binary_sensor.office_occupancy, binary_sensor.living_room_occupancy, binary_sensor.master_bedroom_occupancy, binary_sensor.guest_bedroom_occupancy
+    to: "off"
+    for:
+      minutes: 30
+  action:
+    - service: light.turn_off
+      data_template:
+        entity_id: "{{ trigger.entity_id | replace('binary_sensor.','light.') | replace('_occupancy','_lights') }}"

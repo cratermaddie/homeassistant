@@ -1,0 +1,28 @@
+#- alias: Update master bedroom ac fan speed
+#  mode: restart
+#  trigger:
+#    - platform: state
+#      entity_id:
+#        - sensor.bedroom_ac_current_temperature
+#        - sensor.ecobee_set_temperature
+#  condition:
+#    condition: or
+#    conditions:
+#      - condition: state
+#        entity_id: var.mode
+#        state: 'sleep'
+#      - condition: state
+#        entity_id: binary_sensor.master_bedroom_occupancy
+#        state: "on"
+#  action:
+#    - service: climate.set_fan_mode
+#      data_template:
+#        entity_id: climate.bedroom_ac
+#        fan_mode: >-
+#          {% if state_attr('climate.bedroom_ac','current_temperature') - state_attr('climate.bedroom_ac','temperature') < 7 %}
+#          high
+#          {% elif state_attr('climate.bedroom_ac','current_temperature') - state_attr('climate.bedroom_ac','temperature') < 4 %}
+#          medium
+#          {% else %}
+#          low
+#          {% endif %}

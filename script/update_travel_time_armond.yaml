@@ -1,0 +1,14 @@
+update_travel_time_armond:
+  sequence:
+    - service: homeassistant.update_entity
+      data_template:
+        entity_id: >-
+          {% if is_state('input_select.travel_mode', 'Drive') %}
+            sensor.drive_to_next_cal_event_armond
+          {% elif is_state('input_select.travel_mode', 'Walk') %}
+            sensor.walk_to_next_cal_event_armond
+          {% elif is_state('input_select.travel_mode', 'Transit') %}
+            sensor.transit_to_next_cal_event_armond
+          {% else %}
+            sensor.bike_to_next_cal_event_armond
+          {% endif %}

@@ -1,93 +1,146 @@
 # Thanks @JuanMTech, @thomasloven, and @N-l1.
 Light Soft UI:
-  # Header Colors
-  app-header-background-color: "#f3f5f7"
-  app-header-text-color: "#000"
-  # Interface Colors
+  # Color
   primary-color: "#5F9BEA"
-  light-primary-color: var(--primary-color)
-  primary-background-color: "#f3f5f7"
+  light-primary-color: "#80B7FF"
+  mdc-theme-secondary: var(--primary-color)
+  accent-color: var(--primary-color)
+  # Background
+  primary-background-color: "#F3F5F7"
   secondary-background-color: var(--primary-background-color)
-  divider-color: var(--primary-background-color)
-  card-background-color: var(--primary-background-color)
-  # Text Colors
+  # Text
   primary-text-color: "#4A4A4A"
-  secondary-text-color: "#5F6267"
+  secondary-text-color: var(--primary-text-color)
+  material-secondary-text-color: var(--secondary-text-color)
   text-primary-color: "#FFFFFF"
   disabled-text-color: "#717171"
-  # Sidebar Menu Colors
-  sidebar-icon-color: "#555"
-  sidebar-text-color: "#555"
-  sidebar-background-color: "#f3f5f7"
+  # Sidebar
+  sidebar-icon-color: var(--primary-text-color)
+  sidebar-text-color: var(--primary-text-color)
+  sidebar-selected-icon-color: var(--light-primary-color)
+  sidebar-selected-text-color: var(--light-primary-color)
+  sidebar-background-color: var(--primary-background-color)
   sidebar-selected-background-color: var(--primary-background-color)
-  sidebar-selected-icon-color: "#5F9BEA"
-  sidebar-selected-text-color: var(--sidebar-selected-icon-color))
-  # State and Badge Colors
-  state-icon-color: "#5F6267"
-  state-icon-active-color: "#5F9BEA"
+  divider-color: var(--primary-background-color)
+  # Header
+  app-header-background-color: var(--primary-background-color)
+  app-header-text-color: var(--primary-text-color)
+  # Icons
+  state-icon-color: var(--primary-text-color)
+  state-icon-active-color: var(--primary-color)
   state-icon-unavailable-color: var(--disabled-text-color)
-  # Slider Colors
-  paper-slider-knob-color: "#5F9BD3"
-  paper-slider-knob-start-color: var(--paper-slider-knob-color)
-  paper-slider-pin-color: var(--paper-slider-knob-color)
-  paper-slider-active-color: var(--paper-slider-knob-color)
+  # Sliders
+  paper-slider-knob-color: var(--primary-color)
+  paper-slider-knob-start-color: var(--primary-color)
+  paper-slider-pin-color: var(--primary-color)
+  paper-slider-active-color: var(--primary-color)
   paper-slider-secondary-color: var(--light-primary-color)
-  # Label Colors
-  label-badge-background-color: "#F8FAF9"
-  label-badge-text-color: "#4D5575"
+  # Labels
+  label-badge-background-color: var(--primary-background-color)
+  label-badge-text-color: var(--primary-text-color)
   label-badge-red: "#C7484C"
   label-badge-green: "#6DC071"
   label-badge-blue: "#51AAD1"
   label-badge-yellow: "#D9B757"
   label-badge-gray: "#5F6267"
-  # Card Stuff + Colors
-  ha-card-border-radius: '15px'
-  ha-card-box-shadow: '-5.5px -5.5px 5.5px 0 rgba(255,255,255,.5), 5.5px 5.5px 5.5px 0 rgba(0,0,0,.03)'
-  paper-card-background-color: "rgba(255, 255, 255, 0.9)"
-  paper-listbox-background-color: "rgba(255, 255, 255, 0.9)"
-  # Switch Colors
-  switch-checked-button-color: "#5F9Bd3"
-  switch-checked-track-color: "#75a2d3"
-  switch-unchecked-button-color: "#5F6267"
-  switch-unchecked-track-color: "#888b91"
-  # Toggle Colors
-  paper-toggle-button-checked-button-color: var(--switch-checked-button-color)
-  paper-toggle-button-checked-bar-color: var(--switch-checked-track-color)
-  paper-toggle-button-unchecked-button-color: var(--switch-unchecked-button-color)
-  paper-toggle-button-unchecked-bar-color: var(--switch-unchecked-track-color)
-  # Table Colors
+  # Cards
+  ha-card-border-radius: "15px"
+  ha-card-box-shadow: -5.5px -5.5px 5.5px 0 rgba(255, 255, 255, .5), 5.5px 5.5px 5.5px 0 rgba(0, 0, 0, .03)
+  card-background-color: var(--primary-background-color)
+  paper-card-background-color: var(--primary-background-color)
+  paper-listbox-background-color: var(--primary-background-color)
+  # Switches
+  switch-checked-button-color: var(--primary-color)
+  switch-checked-track-color: var(--primary-color)
+  switch-unchecked-button-color: var(--disabled-text-color)
+  switch-unchecked-track-color: var(--disabled-text-color)
+  paper-toggle-button-checked-button-color: var(--primary-color)
+  paper-toggle-button-checked-bar-color: var(--primary-color)
+  paper-toggle-button-unchecked-button-color: var(--disabled-text-color)
+  paper-toggle-button-unchecked-bar-color: var(--disabled-text-color)
+  # Tables
   table-row-background-color: var(--primary-background-color)
-  table-row-alternative-background-color: var(--secondary-background-color)
+  table-row-alternative-background-color: var(--primary-background-color)
   data-table-background-color: var(--primary-background-color)
-  # Dropdown Colors
-  material-background-color: var(--paper-card-background-color)
-  material-secondary-background-color: var(--primary-background-color)
-  mdc-theme-surface: var(--paper-card-background-color)
+  # Dropdowns
+  material-background-color: var(--primary-background-color)
+  material-secondary-background-color: rgba(0, 0, 0, 0.1)
+  mdc-theme-surface: var(--primary-background-color)
+  # Convenience
+  primary-name-text-color: grey
+  primary-state-text-color: grey
+  primary-icon-color: grey
+  primary-yellow: "#FAD46B"
+  dark-primary-yellow: "#DAB44B"
+  tertiary-background-color: "#DAE2EB"
+  ha-card-box-shadow-inset: inset -5.5px -5.5px 5.5px 0 rgba(255, 255, 255, .5), inset 5.5px 5.5px 5.5px 0 rgba(0, 0, 0, .03)
+  soft-ui-pressed: var(--ha-card-box-shadow-inset)
+  soft-ui-shadow: var(--ha-card-box-shadow)
+  red: "#eb6060"
+  red-orange: "#eb8e60"
+  orange-red: "#eb9a60"
+  orange: "#eba560"
+  orange-yellow: "#ebc860"
+  yellow-orange: "#ebd460"
+  yellow: "#ebdf60"
+  yellow-green: "#c8eb60"
+  green-yellow: "#b1eb60"
+  green: "#60eb60"
+  green-cyan: "#60eba5"
+  cyan-green: "#60ebc8"
+  cyan: "#60ebeb"
+  cyan-blue: "#60bceb"
+  blue-cyan: "#608eeb"
+  blue: "#6060eb"
+  blue-purple: "#7760eb"
+  purple-blue: "#8e60eb"
+  purple: "#a560eb"
+  purple-pink: "#bc60eb"
+  pink-purple: "#d460eb"
+  pink: "#eb60eb"
+  pink-red: "#eb60bc"
+  red-pink: "#eb608e"
   # Card-mod
   card-mod-theme: "Light Soft UI"
   theme-red: firebrick
   theme-green: forestgreen
   theme-blue: deepskyblue
   ha-label-badge-title-font-size: 1em
+  # Cards
   card-mod-card-yaml: |
     hui-image:
       $: |
         img {
-          border-radius: 18px;
+          border-radius: 15px;
         }
     ha-gauge:
       $: |
         .dial {
           stroke: white !important;
         }
+    ha-markdown:
+      $: |
+        h1 {
+          text-align: center;
+        }
     .: |
+      * {
+        --soft-ui-shadow: var(--ha-card-box-shadow) !important;
+        --soft-ui-pressed: var(--ha-card-box-shadow-inset) !important;
+      }
+      ha-card.type-markdown {
+        box-shadow: none;
+      }
+      ha-card.type-markdown > ha-markdown {
+        padding: 8px;
+      }
       ha-card:not(.type-markdown) {
         background-color: var(--primary-background-color);
         border-radius: var(--ha-card-border-radius);
       }
-      ha-card:not(.type-markdown):not(.type-custom-button-card):not(.type-entities):not(.type-custom-mod-card):not(.type-custom-bar-card):not(.type-history-graph) {
-        margin: 20px 0;
-        box-shadow: -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+      ha-card:not(.type-markdown):not(.type-custom-button-card):not(.type-entities):not(.type-custom-mod-card):not(.type-custom-bar-card):not(.type-history-graph):not(.type-iframe):not(.type-glance) {
+        margin: 20px 6px;
+        box-shadow: var(--ha-card-box-shadow);
       }
       ha-card.type-custom-vacuum-card > .preview {
         --primary-color: var(--primary-background-color);
@@ -101,16 +154,21 @@ Light Soft UI:
       ha-card.type-custom-vacuum-card > .preview > .metadata > .vacuum-name {
         color: var(--primary-text-color);
       }
-      ha-card.type-picture-entity {
+      ha-card.type-picture-entity,
+      ha-card.type-picture-glance {
         padding: 10px;
       }
-      ha-card.type-picture-entity > .footer {
+      ha-card.type-picture-entity > .footer,
+      ha-card.type-picture-glance > .box {
         margin: 10px;
-        border-radius: 18px;
+        border-radius: 15px;
       }
-      ha-card.type-entities, ha-card.type-custom-bar-card, ha-card.type-entity, ha-card.type-history-graph, ha-card.type-map {
+      ha-card.type-entities, ha-card.type-custom-bar-card, ha-card.type-entity,
+      ha-card.type-history-graph, ha-card.type-map, ha-card.type-iframe,
+      ha-card.type-glance, ha-card.type-custom-button-text-card,
+      ha-card.type-custom-select-list-card {
         box-shadow: none !important;
-        margin: 30px 0;
+        margin: 25px 6px;
       }
       ha-card > #states > div > * {
         padding-top: 8px;
@@ -118,7 +176,7 @@ Light Soft UI:
         width: 95%;
         margin: 0 auto 0 5px;
       }
-      ha-card > #states > div > *:not(hui-button-row):not(hui-input-select-entity-row):not(hui-input-number-entity-row):not(hui-input-text-entity-row) {
+      ha-card > #states > div > *:not(hui-button-row):not(hui-input-select-entity-row):not(hui-input-number-entity-row):not(hui-input-text-entity-row):not(hui-cast-row) {
         display: block;
       }
       ha-card.type-media-control, ha-card.type-media-control > * {
@@ -127,21 +185,23 @@ Light Soft UI:
       }
       ha-card > #states,
       ha-card > .header-footer,
-      ha-card:not(.type-humidifier):not(.type-light):not(.type-weather-forecast) > .content {
-        box-shadow: -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+      ha-card > hui-graph-header-footer,
+      ha-card.type-glance > .entities,
+      ha-card:not(.type-humidifier):not(.type-light):not(.type-weather-forecast) > .content,
+      ha-card.type-map > #root > #map,
+      ha-card.type-iframe > #root,
+      ha-card.type-custom-select-list-card > #list {
+        box-shadow: var(--ha-card-box-shadow);
         border-radius: var(--ha-card-border-radius);
         margin: 12px;
         padding: 10px;
       }
-      ha-card.type-map > #root {
-        box-shadow: -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+      ha-card.type-iframe > #root > iframe {
         border-radius: var(--ha-card-border-radius);
-        margin: 12px;
-        padding: 10px;
       }
       ha-card.type-entity > .info {
         padding: 16px;
-        box-shadow: -8px -8px 8px 0 rgba(255,255,255,.5),8px 8px 8px 0 rgba(0,0,0,.03);
+        box-shadow: var(--ha-card-box-shadow);
         border-radius: var(--ha-card-border-radius);
         margin: 12px;
       }
@@ -160,7 +220,10 @@ Light Soft UI:
       }
       ha-card.type-custom-bar-card > .card-header,
       ha-card.type-history-graph > .card-header,
-      ha-card.type-map > .card-header {
+      ha-card.type-map > .card-header,
+      ha-card.type-iframe > .card-header,
+      ha-card.type-shopping-list > .card-header,
+      ha-card.type-glance > .card-header {
         text-align: center;
         width: 70%;
         margin: 0 auto;
@@ -176,19 +239,117 @@ Light Soft UI:
       ha-icon[data-domain="fan"][data-state="on"] {
         animation: spin 4s infinite linear;
       }
-  card-mod-view: |
-    #badges {
-      width: 90%;
-      margin: 8px auto !important;
-    }
-    #columns {
-      flex-direction: column !important;
-      margin: 0 auto;
-      max-width: 500px;
-    }
-    #columns > .column {
-      margin: 0 20px;
-    }
+  # Header
+  card-mod-root-yaml: |
+    paper-tabs:
+      $: |
+        .not-visible {
+          display: none;
+        }
+    "ha-app-layout":
+      $: |
+        #contentContainer {
+          padding-top: 70px;
+        }
+    .: |
+      app-toolbar:not(.edit-mode) {
+        height: 0;
+      }
+      .edit-mode, app-header, app-toolbar {
+        background-color: var(--primary-background-color) !important;
+        color: var(--primary-text-color) !important;
+      }
+      app-header.edit-mode {
+        border-bottom: 2px var(--primary-color) solid;
+        padding-bottom: 10px;
+      }
+      app-header[shadow] > ::before {
+        box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.3);
+      }
+      #add-view ha-svg-icon {
+        background-color: var(--primary-color) !important;
+        color: #EEE !important;
+        border-radius: 5px !important;
+      }
+      .edit-icon {
+        color: var(--primary-color) !important;
+      }
+      ha-button-menu {
+        top: 24px;
+        z-index: 2;
+        margin-left: calc(100% - 96px);
+      }
+      app-toolbar:not(.edit-mode) > [main-title] {
+        display: none;
+      }
+      menu-button[style="visibility: hidden;"] {
+        display: none;
+      }
+      ha-menu-button {
+        z-index: 2;
+        top: 24px;
+      }
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--primary-color) !important;
+        margin-left: 32px !important;
+      }
+      paper-tab[aria-selected="true"] > ha-icon {
+        color: var(--primary-color) !important;
+      }
+      paper-tab[aria-selected="true"] {
+        color: var(--primary-color) !important;
+      }
+      @media (orientation: portrait) {
+        ha-button-menu {
+          margin-left: calc(100% - 80px);
+        }
+        paper-tabs {
+          margin-left: 64px !important;
+          margin-right: 32px !important;
+        }
+        ch-header > paper-tabs,
+        app-header.edit-mode > * > paper-tabs {
+          margin-left: 10px !important;
+          margin-right: 10px !important;
+        }
+      }
+      ch-header > ha-button-menu,
+      app-toolbar.edit-mode > ha-button-menu {
+        top: unset;
+        margin-left: unset;
+      }
+      ch-header > ha-menu-button,
+      app-toolbar.edit-mode > ha-menu-button {
+        top: unset;
+        margin-left: unset;
+      }
+      ch-header > paper-tabs,
+      app-header.edit-mode > paper-tabs {
+        margin-left: 0;
+      }
+      app-toolbar a {
+        color: var(--primary-text-color) !important;
+      }
+  # Badges and columns
+  card-mod-view-yaml: |
+    hui-vertical-stack-card:
+      $: |
+        .card-header {
+          text-align: center;
+        }
+    .: |
+      #badges {
+        width: 90%;
+        margin: 8px auto !important;
+      }
+      #columns {
+        flex-direction: column !important;
+        margin: 0 auto;
+        max-width: 500px;
+      }
+      #columns > .column {
+        margin: 0 15px;
+      }
   card-mod-badge-yaml: |
     .: |
       :host {
@@ -205,35 +366,47 @@ Light Soft UI:
           {% elif is_state(config.entity, 'locked') %} var(--theme-red);
           {% else %} var(--theme-blue); {% endif %}
         --label-badge-red: teal;
-        box-shadow: -5px -5px 5px 0 rgba(255,255,255,.5), 5px 5px 5px 0 rgba(0,0,0,.03);
+        box-shadow: var(--ha-card-box-shadow);
       }
     ha-state-label-badge:
       $:
         ha-label-badge:
           $: |
             .label-badge {
-              background: none !important;
+              background: none;
             }
             .title {
               -webkit-line-clamp: 1;
               display: -webkit-box;
               -webkit-box-orient: vertical;
             }
+  # Style more info
   card-mod-more-info-yaml: |
     $: |
       .mdc-dialog {
         backdrop-filter: blur(2px);
-        background: rgba(255, 255, 255, 0.35);
+        background-color: #F3F5F7B2 !important;
+      }
+      .mdc-dialog__scrim {
+        background-color: #F3F5F7B2 !important;
       }
       .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
-        background: rgba(255, 255, 255, 0.8);
+        background: var(--primary-background-color);
         border-radius: var(--ha-card-border-radius);
+        box-shadow: var(--ha-card-box-shadow);
+        transform: scale(0.9);
+      }
+      .mdc-dialog__content {
+        padding: 36px !important;
+        padding-bottom: 36px !important;
+        transform: scale(1.11);
       }
     ha-header-bar:
       $: |
         .mdc-top-app-bar {
           background: none !important;
         }
+  # Spin fans
   card-mod-row-yaml: |
     "*:first-child":
       $: |

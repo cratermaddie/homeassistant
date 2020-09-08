@@ -1,7 +1,7 @@
-- alias: Set living room ac temperature based on climate
-  mode: restart
-  trigger:
-    - platform: state
-      entity_id: sensor.climate_living_room_set_temperature
-  action:
-    - service: rest_command.living_room_ac_temperature_set
+#- alias: Set living room ac temperature based on climate
+#  mode: restart
+#  trigger:
+#    - platform: state
+#      entity_id: sensor.climate_living_room_set_temperature
+#  action:
+#    - service: rest_command.living_room_ac_temperature_set

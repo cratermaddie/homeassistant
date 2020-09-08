@@ -1,5 +1,5 @@
-turn_off_bedroom_ac_fan:
-     sequence:
-       - service: rest_command.turn_off_bedroom_ac
-       - service: input_boolean.turn_off
-         entity_id: input_boolean.bedroom_ac_fan
+#turn_off_bedroom_ac_fan:
+#     sequence:
+#       - service: rest_command.turn_off_bedroom_ac
+#       - service: input_boolean.turn_off
+#         entity_id: input_boolean.bedroom_ac_fan

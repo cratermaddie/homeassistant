@@ -1,282 +1,121 @@
-/* global customElements*/
-/* global HTMLElement*/
-customElements.whenDefined('card-tools').then(() => {
-    var cardTools = customElements.get('card-tools');
-    
-    class FlipClockCard extends cardTools.LitElement {
-        setConfig(config) {
-            this.config = config;
-        }
-        render() {
-            return cardTools.LitHtml
-            `
-                ${this._renderStyle()}
-                ${cardTools.LitHtml `
-                    <ha-card>
-                        <div class="clock">
-                            <div class="digit tenhour">
-                                <span class="base"></span>
-                                <div class="flap over front"></div>
-                                <div class="flap over back"></div>
-                                <div class="flap under"></div>
-                            </div>
+var config;
+class ClockCard extends HTMLElement {
 
-                            <div class="digit hour">
-                                <span class="base"></span>
-                                <div class="flap over front"></div>
-                                <div class="flap over back"></div>
-                                <div class="flap under"></div>
-                            </div>
+    set hass(hass) {
+        if (!this.content) {
+            config = this.config;
+            var clock_size = config.size ? config.size : 300;
+            const card = document.createElement('ha-card');
+            this.content = document.createElement('div');
+            this.content.style.display = "flex";
+            this.content.style.alignItems = "center";
+            this.content.style.alignContent = "center";
+            this.content.style.justifyContent = "center";
+            this.content.style.padding = "5px";
+            this.content.innerHTML = `<canvas width="${clock_size}px" height="${clock_size}px"></canvas>`;
+            card.appendChild(this.content);
+            this.appendChild(card);
+            var canvas = this.content.children[0];
+            var ctx = canvas.getContext("2d");
+            var radius = canvas.height / 2;
+            ctx.translate(radius, radius);
+            radius = radius * 0.90
+            drawClock();
+            setInterval(drawClock, 1000);
 
-                            <div class="digit tenmin">
-                                <span class="base"></span>
-                                <div class="flap over front"></div>
-                                <div class="flap over back"></div>
-                                <div class="flap under"></div>
-                            </div>
-
-                            <div class="digit min">
-                                <span class="base"></span>
-                                <div class="flap over front"></div>
-                                <div class="flap over back"></div>
-                                <div class="flap under"></div>
-                            </div>
-
-                            <div class="digit tensec">
-                                <span class="base"></span>
-                                <div class="flap over front"></div>
-                                <div class="flap over back"></div>
-                                <div class="flap under"></div>
-                            </div>
-
-                            <div class="digit sec">
-                                <span class="base"></span>
-                                <div class="flap over front"></div>
-                                <div class="flap over back"></div>
-                                <div class="flap under"></div>
-                            </div>
-                        </div>
-                    </ha-card>
-                `}
-            `;
-        }
-        
-        _renderStyle() {
-            return cardTools.LitHtml `
-                <style>
-                    $flipColour: #fff;
-                    $flipColourDark: darken($flipColour, 35%);
-                    $textColour: #333;
-                    $textColourDark: darken($textColour, 35%);
-
-                    html {
-                        height: 100%;
-                    }
-
-                    body {
-                        height: 100%;
-                        background: #85D8CE;
-                        background: linear-gradient(135deg, #085078, #85D8CE);
-                    }
-
-                    .digit {
-                        position: relative;
-                      float: left;
-                      width: 10vw;
-                      height: 15vw;
-                      background-color: $flipColour;
-                      border-radius: 1vw;
-                        text-align: center;
-                      font-family: Oswald, sans-serif;
-                      font-size: 11vw;
-                    }
-
-                    .base {
-                        display: block;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        color: $textColour;
-                    }
-
-                    .flap {
-                        display: none;
-                        position: absolute;
-                        width: 100%;
-                        height: 50%;
-                        background-color: $flipColour;
-                        left: 0;
-                        top: 0;
-                        border-radius: 1vw 1vw 0 0;
-                        transform-origin: 50% 100%;
-                        backface-visibility: hidden;
-                        overflow: hidden;
-
-                        &::before {
-                            content: attr(data-content);
-                            position: absolute;
-                            left: 50%;
-                        }
-
-                        &.front::before,
-                        &.under::before {
-                            top: 100%;
-                            transform: translate(-50%, -50%);
-                        }
-
-                        &.back {
-                            transform: rotateY(180deg);
-                            &::before {
-                                top: 100%;
-                                transform:  translate(-50%, -50%) rotateZ(180deg);
-                            }
-                        }
-                    
-                        &.over {
-                            z-index: 2;
-                        }
-
-                        &.under {
-                            z-index: 1;
-                        }
-
-                        &.front {
-                            animation: flip-down-front 300ms ease-in both;
-                        }
-
-                        &.back {
-                            animation: flip-down-back 300ms ease-in both;
-                        }
-
-                        &.under {
-                            animation: fade-under 300ms ease-in both;
-                        }
-
-                    }
-
-                    @keyframes flip-down-front {
-                        0% {
-                            transform: rotateX(0deg);
-                            background-color: $flipColour;
-                            color: $textColour;
-                        }
-                        100% {
-                            transform: rotateX(-180deg);
-                            background-color: $flipColourDark;
-                            color: $textColourDark;
-                        }
-                    }
-
-                    @keyframes flip-down-back {
-                        0% {
-                            transform: rotateY(180deg) rotateX(0deg);
-                            background-color: $flipColourDark;
-                            color: $textColourDark;
-                        }
-                        100% {
-                            transform: rotateY(180deg) rotateX(180deg);
-                            background-color: $flipColour;
-                            color: $textColour;
-                        }
-                    }
-
-                    @keyframes fade-under {
-                        0% {
-                            background-color: $flipColourDark;
-                            color: $textColourDark;
-                        }
-                        100% {
-                            background-color: $flipColour;
-                            color: $textColour;
-                        }
-                    }
-
-                    .clock {
-                        position: absolute;
-                        width: 70vw;
-                        top: 50%;
-                        left: 15vw;
-                        transform: translateY(-50%);
-                        perspective: 100vw;
-                        perspective-origin: 50% 50%;
-
-                        .digit {
-                            margin-right: 1vw;
-                            &:nth-child(2n+2) { margin-right: 3.5vw; }
-                            &:last-child { margin-right: 0; }
-                        }
-
-                    }  
-                    ha-card {
-                        padding: 16px;
-                    }
-                </style>
-            `;
-        }
-        
-        set hass(hass) {
-            function flipTo(digit, n){
-                var current = digit.attr('data-num');
-                digit.attr('data-num', n);
-                digit.find('.front').attr('data-content', current);
-                digit.find('.back, .under').attr('data-content', n);
-                digit.find('.flap').css('display', 'block');
-                setTimeout(function(){
-                    digit.find('.base').text(n);
-                    digit.find('.flap').css('display', 'none');
-                }, 350);
+            function drawClock() {
+                drawFace(ctx, radius);
+                drawNumbers(ctx, radius);
+                drawTime(ctx, radius);
             }
-            
-            function jumpTo(digit, n){
-                digit.attr('data-num', n);
-                digit.find('.base').text(n);
+
+            function drawFace(ctx, radius) {
+                var grad;
+                ctx.beginPath();
+                ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary-background-color');
+                ctx.fill();
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
+                ctx.lineWidth = radius * 0.03;
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+                ctx.fillStyle = '#333';
+                ctx.fill();
             }
-            
-            function updateGroup(group, n, flip){
-                var digit1 = $('.ten'+group);
-                var digit2 = $('.'+group);
-                n = String(n);
-                if(n.length == 1) n = '0'+n;
-                var num1 = n.substr(0, 1);
-                var num2 = n.substr(1, 1);
-                if(digit1.attr('data-num') != num1){
-                    if(flip) flipTo(digit1, num1);
-                    else jumpTo(digit1, num1);
-                }
-                if(digit2.attr('data-num') != num2){
-                    if(flip) flipTo(digit2, num2);
-                    else jumpTo(digit2, num2);
+
+            function drawNumbers(ctx, radius) {
+                var ang;
+                var num;
+                ctx.font = radius * 0.15 + "px arial";
+                ctx.textBaseline = "middle";
+                ctx.textAlign = "center";
+                for (num = 1; num < 13; num++) {
+                    ang = num * Math.PI / 6;
+                    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--primary-text-color');
+                    ctx.rotate(ang);
+                    ctx.translate(0, -radius * 0.85);
+                    ctx.rotate(-ang);
+                    ctx.fillText(num.toString(), 0, 0);
+                    ctx.rotate(ang);
+                    ctx.translate(0, radius * 0.85);
+                    ctx.rotate(-ang);
                 }
             }
-            
-            function setTime(flip){
-                var t = new Date();
-                updateGroup('hour', t.getHours(), flip);
-                updateGroup('min', t.getMinutes(), flip);
-                updateGroup('sec', t.getSeconds(), flip);
+
+            function drawTime(ctx, radius) {
+                var now = new Date();
+                var local_hour = now.getHours();
+                if (config && config.time_zone) {
+                    try {
+                        var local_hour = parseInt(now.toLocaleString(navigator.language, { hour: '2-digit', hour12: true, timeZone: config.time_zone }).substr(0, 2));
+                    }
+                    catch{
+                        console.log("Analog Clock: Invalid timezone")
+                    }
+                }
+                var hour = local_hour;
+                var minute = now.getMinutes();
+                var second = now.getSeconds();
+                //hour
+                hour = hour % 12;
+                hour = (hour * Math.PI / 6) +
+                    (minute * Math.PI / (6 * 60)) +
+                    (second * Math.PI / (360 * 60));
+                drawHand(ctx, hour, radius * 0.5, radius * 0.07);
+                //minute
+                minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+                drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+                // second
+                if (!config.disable_seconds) {
+                    second = (second * Math.PI / 30);
+                    drawHand(ctx, second, radius * 0.9, radius * 0.02);
+                }
             }
-            
-            $(document).ready(function(){
-                
-                setTime(false);
-                setInterval(function(){
-                    setTime(true);
-                }, 1000);
-                
-            });
-            this.requestUpdate();
+
+            function drawHand(ctx, pos, length, width) {
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
+                ctx.beginPath();
+                ctx.lineWidth = width;
+                ctx.lineCap = "round";
+                ctx.moveTo(0, 0);
+                ctx.rotate(pos);
+                ctx.lineTo(0, -length);
+                ctx.stroke();
+                ctx.rotate(-pos);
+            }
         }
     }
-    
-    customElements.define("flip-clock-card", FlipClockCard);
-});
 
-setTimeout(() => {
-    if(customElements.get('card-tools')) return;
-    customElements.define('flip-clock-card', class extends HTMLElement{
-        setConfig() { throw new Error("Can't find card-tools. See https://github.com/thomasloven/lovelace-card-tools");}
-        
-    });
-}, 2000);
+    setConfig(config) {
+        this.config = config;
+    }
 
+    // The height of your card. Home Assistant uses this to automatically
+    // distribute all cards over the available columns.
+    getCardSize() {
+        return 3;
+    }
+}
+
+customElements.define('clock-card', ClockCard);

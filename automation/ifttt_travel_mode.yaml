@@ -20,5 +20,5 @@
   action:
     - service: input_select.select_option
       data_template:
-        entity_id: input_select.travel_mode
-        option: "{{ trigger.event.data.action.split('_')[1] | title }}"
+        entity_id: input_select.travel_mode_madison
+        option: "{{ trigger.event.data.action.split('_')[1] | title }}_madison"

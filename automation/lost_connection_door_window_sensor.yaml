@@ -1,0 +1,31 @@
+- alias: Lost connection with door or window sensor
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.front_door
+        - binary_sensor.back_door
+        - binary_sensor.east_dining_room_window
+        - binary_sensor.west_dining_room_window
+        - binary_sensor.master_bedroom_window
+        - binary_sensor.guest_bedroom_window
+        - binary_sensor.north_living_room_window
+        - binary_sensor.south_living_room_window
+        - binary_sensor.office_window
+        - binary_sensor.south_kitchen_window
+        - binary_sensor.west_kitchen_window
+  condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.attributes.assumed_state == True }}"
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data_template:
+        title: "Lost Sensor"
+        message: "Lost connection to {{ trigger.to_state.name | capitalize }}"
+        data:
+          apns_headers:
+            'apns-collapse-id': 'lost-connection'
+          push:
+            thread-id: "lost-connection"
+            critical: 1
+            volume: 1.0

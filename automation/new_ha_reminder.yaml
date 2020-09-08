@@ -2,12 +2,12 @@
   mode: restart
   trigger:
     - platform: state
-      entity_id: binary_sensor.updater
+      entity_id: binary_sensor.new_release
       to: 'on'
   action:
     - service: notify.mobile_app_madisons_iphone
       data_template:
-        message: "Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version') }} is available."
+        message: "Home Assistant {{ states('sensor.release') }} is available."
         data:
           apns_headers:
             'apns-collapse-id': 'new-ha-version-reminder'
@@ -19,5 +19,5 @@
       data_template:
         title: "New Home Assistant Version!"
         message: |
-          Home Assistant {{ state_attr('binary_sensor.updater', 'newest_version') }} is available.
+          Home Assistant {{ states('sensor.release') }} is available.
           [Change Log]({{ state_attr('binary_sensor.updater','release_notes') }})

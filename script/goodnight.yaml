@@ -4,10 +4,10 @@ goodnight:
     - service: homeassistant.update_entity
       entity_id: sensor.auto_alarm_time_ts
     - service: script.turn_off_pc
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.bedroom_ac_fan_mode
-        option: Low
+#    - service: input_select.select_option
+#      data:
+#        entity_id: input_select.bedroom_ac_fan_mode
+#        option: Low
     - service: media_player.turn_on
       entity_id: media_player.bedroom_speaker
     - wait_template: "{{ is_state('media_player.bedroom_speaker', 'idle') }}"
@@ -19,7 +19,7 @@ goodnight:
     - service: media_player.volume_set
       data_template:
         entity_id: media_player.bedroom_speaker
-        volume_level: 0.4
+        volume_level: 0.5
     - service: script.goodnight_meds
     - wait_template: "{{ states('counter.meds_counter') | int %2 == 0}}"
     - service: input_boolean.turn_off
@@ -28,9 +28,9 @@ goodnight:
     - wait_template: "{{ is_state('input_boolean.estrogen_status', 'on') }}"
     - service: light.turn_on
       data_template:
-        entity_id: light.bedroom_lights
+        entity_id: light.master_bedroom_lights
         brightness: >-
-          {% if is_state('light.bedroom_lights','on') %}
+          {% if is_state('light.master_bedroom_lights','on') %}
             26
           {% else %}
             0
@@ -44,7 +44,7 @@ goodnight:
     - service: media_player.volume_set
       data_template:
         entity_id: media_player.bedroom_speaker
-        volume_level: 0.25
+        volume_level: 0.4
     - wait_template: "{{ states.sensor.auto_alarm_time_ts.last_updated.timestamp() > states.script.goodnight.attributes.last_triggered.timestamp() }}"
       timeout: "00:00:02"
     - service: var.set
@@ -68,16 +68,7 @@ goodnight:
       entity_id: switch.air_freshener
     - service: light.turn_off
       entity_id:
-        - light.living_room_lights
-        - light.bedroom_lights
-        - light.nanoleaf
-        - light.entryway_lights
-        - light.bathroom_lights
-        - light.bedroom_closet
-        - light.kitchen_lights
-        - light.dining_area_lights
-        - light.coat_closet
-        - light.fairy_lights
+        - light.main_lights
     - service: script.turn_off_vanity
     - service: var.set
       data:
@@ -88,11 +79,11 @@ goodnight:
         entity_id: media_player.bedroom_speaker
         media_content_id: 'https://storage.googleapis.com/relaxation-sounds/babbling_brook_3600.mp3'
         media_content_type: 'music'
-    - condition: state
-      entity_id: person.armond
-      state: 'not_home'
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.living_room_ac_mode
-        option: 'Off'
+#    - condition: state
+#      entity_id: person.armond
+#      state: 'not_home'
+#    - service: input_select.select_option
+#      data:
+#        entity_id: input_select.living_room_ac_mode
+#        option: 'Off'
     - service: script.turn_off_tv

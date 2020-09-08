@@ -1,0 +1,30 @@
+#- alias: Update master bedroom ac temp
+#  mode: restart
+#  trigger:
+#    platform: state
+#    entity_id: sensor.ecobee_ecobee_set_temperatureset
+#  condition:
+#    condition: or
+#    conditions:
+#      - condition: state
+#        entity_id: var.mode
+#        state: 'sleep'
+#      - condition: state
+#        entity_id: binary_sensor.master_bedroom_occupancy
+#        state: "on"
+#      - condition: template
+#        value_template: "{{ (now().timestamp() - states.automation.bedtime_notification.attributes.last_triggered | as_timestamp) < 5400 }}"
+#  action:
+#    - service: climate.turn_on
+#      entity_id: climate.bedroom_ac
+#    - service: climate.set_hvac_mode
+#      data_template:
+#        entity_id: climate.bedroom_ac
+#        hvac_mode: cool
+#    - service: climate.set_temperature
+#      data_template:
+#        entity_id: climate.bedroom_ac
+#        temperature: "{{ states('sensor.ecobee_set_temperature') }}"
+#        hvac_mode: cool
+#    - service: automation.trigger
+#      entity_id: automation.set_master_bedroom_ac_fan_speed

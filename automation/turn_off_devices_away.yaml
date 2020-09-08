@@ -1,32 +1,16 @@
+###TODO###
 - alias: Turn off devices when away
   initial_state: true
   mode: restart
   trigger:
     platform: state
-    entity_id: var.mode
-    to: 'away'
-  condition:
-    condition: template
-    value_template: "{{ not is_state('group.home','home') }}"
+    entity_id: group.home
+    to: 'not_home'
   action:
     - service: light.turn_off
       entity_id: light.nanoleaf
     - service: light.turn_off
-      entity_id: light.entryway_lights
-    - service: light.turn_off
-      entity_id: light.bathroom_lights
-    - service: light.turn_off
-      entity_id: light.bedroom_lights
-    - service: light.turn_off
-      entity_id: light.bedroom_closet
-    - service: light.turn_off
-      entity_id: light.kitchen_lights
-    - service: light.turn_off
-      entity_id: light.dining_area_lights
-    - service: light.turn_off
-      entity_id: light.coat_closet
-    - service: light.turn_off
-      entity_id: light.desktop
+      entity_id: light.main_lights
     - service: light.turn_off
       entity_id: light.fairy_lights
     - service: switch.turn_off
@@ -34,27 +18,3 @@
     - service: script.turn_off_tv
     - service: script.turn_off_vanity
     - service: script.turn_off_diffuser
-    - service: var.set
-      data:
-        entity_id: var.living_room_ac_mode
-        value_template: "{{ states('input_select.living_room_ac_mode') }}"
-    - service: var.set
-      data:
-        entity_id: var.living_room_fan_mode
-        value_template: "{{ states('input_select.living_room_ac_fan_mode') }}"
-    - service: var.set
-      data:
-        entity_id: var.bedroom_ac_mode
-        value_template: "{{ states('input_select.bedroom_ac_mode') }}"
-    - service: var.set
-      data:
-        entity_id: var.bedroom_fan_mode
-        value_template: "{{ states('input_select.bedroom_ac_fan_mode') }}"
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.living_room_ac_mode
-        option: "Off"
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.bedroom_ac_mode
-        option: "Off"

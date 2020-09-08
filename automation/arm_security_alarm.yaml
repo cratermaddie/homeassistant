@@ -1,0 +1,19 @@
+- alias: Arm security alarm
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      to: 'arming'
+    - platform: state
+      entity_id: alarm_control_panel.home_alarm
+      to: 'pending'
+  action:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.all_devices
+        volume_level: 0.3
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.all_devices
+        media_content_id: 'http://192.168.0.2:8123/local/audio/arming.mp3'
+        media_content_type: music
