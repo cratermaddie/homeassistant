@@ -3,7 +3,7 @@ bedtime_2:
     - condition: state
       entity_id: var.mode
       state: 'home'
-    - service: script.update_travel_time
+    - service: script.update_travel_time_madison
     - service: switch.turn_off
       entity_id: switch.air_freshener
     - service: hue.hue_activate_scene

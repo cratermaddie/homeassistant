@@ -3,7 +3,7 @@
 ####################################
 homeassistant:
   customize: !include customize.yaml
-  whitelist_external_dirs:
+  allowlist_external_dirs:
     - /config/images
 
 #http:
@@ -33,6 +33,10 @@ system_health:
 discovery:
 
 cloud:
+
+media_source:
+
+image:
 
 frontend:
   themes: !include_dir_merge_named themes
@@ -188,7 +192,7 @@ logger:
 
 browser_mod:
   devices:
-    90dd968f_a0d40597:
+    9d029af0_ebc28e0e:
       name: Desktop
       camera: true
     0cedc2eb-d5dca07b:
@@ -278,7 +282,11 @@ counter:
   
 #intent_script: !include integrations/intent_script.yaml
 
-#panel_iframe:
+panel_iframe:
+  logs:
+    title: Logs
+    icon: mdi:math-log
+    url: !secret logs_url
 #  foldingathome:
 #    title: Folding@home
 #    icon: mdi:bacteria-outline

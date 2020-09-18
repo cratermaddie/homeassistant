@@ -1,5 +1,3 @@
-- platform: yr
-
 #Hat Films
 - platform: youtube
   channel_id: UC7A_dLnSAjl7uROCdoNyjzg
@@ -956,7 +954,7 @@
       entity_id: sensor.date
 
     days_smoke_free:
-      value_template: '{{ ((now().timestamp()|float  - as_timestamp("2020-8-17 00:00:00"))/60/60/24) | int }}'
+      value_template: '{{ ((now().timestamp()|float  - as_timestamp("2020-9-16 00:00:00"))/60/60/24) | int }}'
       unit_of_measurement: 'Days'
       entity_id: sensor.date
 

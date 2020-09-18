@@ -1,0 +1,191 @@
+- alias: System variables info tab controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_variables
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_disabled_automations
+          - input_boolean.system_running_automations
+          - input_boolean.system_running_scripts
+          - input_boolean.system_running_timers
+          - input_boolean.system_alerts
+          - input_boolean.system_groups
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab
+        option: "system_variables"
+        
+- alias: System disabled automations info tab controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_disabled_automations
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_variables
+          - input_boolean.system_running_automations
+          - input_boolean.system_running_scripts
+          - input_boolean.system_running_timers
+          - input_boolean.system_alerts
+          - input_boolean.system_groups
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab
+        option: "system_disabled_automations"
+        
+- alias: System running timers info tab controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_running_timers
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_variables
+          - input_boolean.system_running_automations
+          - input_boolean.system_running_scripts
+          - input_boolean.system_disabled_automations
+          - input_boolean.system_alerts
+          - input_boolean.system_groups
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab
+        option: "system_running_timers"
+        
+- alias: System running scripts info tab controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_running_scripts
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_disabled_automations
+          - input_boolean.system_running_automations
+          - input_boolean.system_variables
+          - input_boolean.system_running_timers
+          - input_boolean.system_alerts
+          - input_boolean.system_groups
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab
+        option: "system_running_scripts"
+        
+- alias: System running automations info tab controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_running_automations
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_disabled_automations
+          - input_boolean.system_variables
+          - input_boolean.system_running_scripts
+          - input_boolean.system_running_timers
+          - input_boolean.system_alerts
+          - input_boolean.system_groups
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab
+        option: "system_running_automations"
+
+- alias: System alerts info tab controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_alerts
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_disabled_automations
+          - input_boolean.system_variables
+          - input_boolean.system_running_scripts
+          - input_boolean.system_running_timers
+          - input_boolean.system_running_automations
+          - input_boolean.system_groups
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab
+        option: "system_alerts"
+
+- alias: System groups info tab controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_groups
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.system_disabled_automations
+          - input_boolean.system_variables
+          - input_boolean.system_running_scripts
+          - input_boolean.system_running_timers
+          - input_boolean.system_running_automations
+          - input_boolean.system_alerts
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.system_info_tab
+        option: "system_groups"
+
+
+
+
+- alias: system none mode switches controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.system_running_automations
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_disabled_automations
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_running_scripts
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_variables
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_running_timers
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_alerts
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.system_groups
+        to: "off"
+  condition:
+    condition: template
+    value_template: "{{ is_state('input_boolean.system_running_scripts','off') and is_state('input_boolean.system_running_automations','off') and is_state('input_boolean.system_disabled_automations','off') and is_state('input_boolean.system_variables','off') and is_state('input_boolean.system_running_timers','off') and is_state('input_boolean.system_alerts','off') and is_state('input_boolean.system_groups','off') }}"
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "{{trigger.entity_id}}"
+        
+- alias: input select system info switches
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_select.system_info_tab
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "input_boolean.{{ states('input_select.system_info_tab') }}"

@@ -1,6 +1,6 @@
 goodnight:
   sequence:
-    - service: script.update_travel_time
+    - service: script.update_travel_time_madison
     - service: homeassistant.update_entity
       entity_id: sensor.auto_alarm_time_ts
     - service: script.turn_off_pc

@@ -21,17 +21,17 @@
 - platform: ffmpeg_motion
   input: !secret west_camera_rtsp
   name: west_camera_motion
-  changes: 2
+  changes: 1
 
 - platform: ffmpeg_motion
   input: !secret east_camera_rtsp
   name: east_camera_motion
-  changes: 2
+  changes: 1
 
 - platform: ffmpeg_motion
   input: !secret print_camera_rtsp
   name: print_camera_motion
-  changes: 2
+  changes: 1
 
 - platform: template
   sensors:

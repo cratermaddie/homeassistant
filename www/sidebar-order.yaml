@@ -4,11 +4,12 @@ order:
     hide: true
   - item: calendar
     hide: true
+  - item: media browser
+    hide: true
 
 #Top 
   - item: overview
   - item: earnings
-  - item: bitwarden
   - item: octoprint
   - item: logbook
   - item: history
@@ -18,6 +19,9 @@ order:
     bottom: true
   - item: developer tools
     href: /developer-tools/state
+    bottom: true
+  - item: logs
+    href: /config/logs
     bottom: true
   - item: terminal
     bottom: true

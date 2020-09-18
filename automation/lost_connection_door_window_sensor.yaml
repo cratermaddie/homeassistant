@@ -1,5 +1,5 @@
 - alias: Lost connection with door or window sensor
-  mode: restart
+  mode: parallel
   trigger:
     - platform: state
       entity_id:

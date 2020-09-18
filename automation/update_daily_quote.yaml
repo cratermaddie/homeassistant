@@ -1,0 +1,9 @@
+- alias: Update daily quote
+  initial_state: true
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: sensor.date
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.daily_quote

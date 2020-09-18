@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<aircast>
+<common>
+<enabled>1</enabled>
+<stop_receiver>0</stop_receiver>
+<media_volume>1.0000</media_volume>
+<latency></latency>
+<codec>flac</codec>
+<artwork></artwork>
+<drift>0</drift>
+<metadata>1</metadata>
+</common>
+<main_log>info</main_log>
+<cast_log>info</cast_log>
+<util_log>warn</util_log>
+<log_limit>-1</log_limit>
+<device>
+<udn>fdef0c88dd15e7b15f9a62ba183dc367</udn>
+<name>Office speaker+</name>
+<mac>cc:cc:5d:6f:cb:2f</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>5a90b0d04e8cb2c8abe2a53a0b3b8c30</udn>
+<name>Living Room TV+</name>
+<mac>cc:cc:96:31:a5:dd</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>af4a3dc650d59735909caae5c8f1cdd8</udn>
+<name>Kitchen speaker+</name>
+<mac>cc:cc:dd:02:0f:c9</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>f23fd9230a29783785ec840659c1542d</udn>
+<name>Bathroom speaker+</name>
+<mac>cc:cc:35:d2:46:51</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>6a9f909b4677fe8a52e421cd5600eab4</udn>
+<name>Living Room Display+</name>
+<mac>cc:cc:ec:9a:c2:51</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>69689D3A-36F0-4ABB-A97E-7E4C112D9F8D</udn>
+<name>All devices+</name>
+<mac>cc:cc:fb:89:ff:67</mac>
+<enabled>1</enabled>
+</device>
+<device>
+<udn>4b62db482f4c62956768f06dbb6d08db</udn>
+<name>Bedroom speaker+</name>
+<mac>cc:cc:f1:29:60:73</mac>
+<enabled>1</enabled>
+</device>
+</aircast>
