@@ -1,0 +1,35 @@
+travel_mode_walk:
+  sequence:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode_madison
+        option: "Walk"
+
+travel_mode_train:
+  sequence:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode_madison
+        option: "Transit"
+
+travel_mode_bike:
+  sequence:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode_madison
+        option: "Bike"
+
+travel_mode_drive:
+  sequence:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode_madison
+        option: "Drive"
+
+travel_mode_uber:
+  sequence:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.travel_mode_madison
+        option: "Uber"
+

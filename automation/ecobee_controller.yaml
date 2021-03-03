@@ -1,0 +1,25 @@
+- alias: Update ecobee mode on movement change
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id:
+          - group.home
+          - calendar.personal
+          - var.mode
+          - device_tracker.armonds_iphone_app
+          - device_tracker.madisons_iphone_app
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: 
+          - input_select.ecobee_modes
+        option: >-
+          {% if is_state_attr('calendar.personal','message', 'Work') and is_state('device_tracker.armonds_iphone_app','not_home') and is_state('device_tracker.madisons_iphone_app','home') %}
+          Work
+          {% elif is_state('group.home','home') and is_state('var.mode','home') %}
+          Home
+          {% elif is_state('group.home','not_home') %}
+          Away
+          {% elif is_state('var.mode','sleep') %}
+          Sleep
+          {% endif %}

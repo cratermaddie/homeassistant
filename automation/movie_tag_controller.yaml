@@ -1,0 +1,10 @@
+#- alias: NFC Movie Tag Controller
+#  mode: restart
+#  trigger:
+#    platform: event
+#    event_type: tag_scanned
+#  action:
+#    - service: persistent_notification.create
+#      data_template:
+#        message: "NFC Tag for {{ trigger.event.data.tag_id }} scanned."
+#

@@ -16,6 +16,9 @@
         entity_id: var.mode
         state: 'home'
       - condition: state
+        entity_id: device_tracker.madisons_iphone_app
+        state: 'home'
+      - condition: state
         entity_id: input_boolean.staying_up
         state: 'off'
       - condition: numeric_state

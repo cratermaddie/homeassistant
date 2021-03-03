@@ -1,0 +1,161 @@
+- alias: Bedroom AC Off mode switches controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_off
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_mode_cool
+          - input_boolean.bedroom_ac_mode_fan
+          - input_boolean.bedroom_ac_mode_dry
+          - input_boolean.bedroom_ac_mode_auto
+    - condition: template
+      value_template: "{{ not is_state('climate.bedroom_ac','off') }}"
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.bedroom_ac
+        hvac_mode: 'off'
+
+- alias: Bedroom AC Auto mode switches controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_auto
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_mode_cool
+          - input_boolean.bedroom_ac_mode_fan
+          - input_boolean.bedroom_ac_mode_dry
+          - input_boolean.bedroom_ac_mode_off
+    - condition: template
+      value_template: "{{ not is_state('climate.bedroom_ac','auto') }}"
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.bedroom_ac
+        hvac_mode: 'auto'
+    - service: automation.trigger
+#      entity_id: automation.bedroom_ac_fan_controller
+
+
+- alias: Bedroom AC Cool mode switches controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_cool
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_mode_off
+          - input_boolean.bedroom_ac_mode_fan
+          - input_boolean.bedroom_ac_mode_dry
+          - input_boolean.bedroom_ac_mode_auto
+    - condition: template
+      value_template: "{{ not is_state('climate.bedroom_ac','cool') }}"
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.bedroom_ac
+        hvac_mode: 'cool'
+    - service: automation.trigger
+#      entity_id: automation.bedroom_ac_fan_controller
+
+- alias: Bedroom AC Fan mode switches controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_fan
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_mode_cool
+          - input_boolean.bedroom_ac_mode_off
+          - input_boolean.bedroom_ac_mode_dry
+          - input_boolean.bedroom_ac_mode_auto
+    - condition: template
+      value_template: "{{ not is_state('climate.bedroom_ac','fan_only') }}"
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.bedroom_ac
+        hvac_mode: 'fan_only'
+    - service: automation.trigger
+#      entity_id: automation.bedroom_ac_fan_controller
+
+- alias: Bedroom AC Dry mode switches controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_dry
+        to: "on"
+  condition: "{{ not is_state('climate.bedroom_ac','dry') }}"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_mode_cool
+          - input_boolean.bedroom_ac_mode_fan
+          - input_boolean.bedroom_ac_mode_off
+          - input_boolean.bedroom_ac_mode_auto
+    - condition: template
+      value_template: "{{ not is_state('climate.bedroom_ac','dry') }}"
+    - service: climate.set_hvac_mode
+      data:
+        entity_id: climate.bedroom_ac
+        hvac_mode: 'dry'
+    - service: automation.trigger
+#      entity_id: automation.bedroom_ac_fan_controller
+    
+- alias: Bedroom AC none mode switches controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_dry
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_cool
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_fan
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_off
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_mode_auto
+        to: "off"
+  condition:
+    condition: template
+    value_template: "{{ is_state('input_boolean.bedroom_ac_mode_dry','off') and is_state('input_boolean.bedroom_ac_mode_cool','off') and is_state('input_boolean.bedroom_ac_mode_auto','off') and is_state('input_boolean.bedroom_ac_mode_fan','off') and is_state('input_boolean.bedroom_ac_mode_off','off') }}"
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "{{trigger.entity_id}}"
+        
+- alias: Bedroom AC mode responder
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: climate.bedroom_ac
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: >-
+          {% if is_state('climate.bedroom_ac','off') %}
+          input_boolean.bedroom_ac_mode_off
+          {% elif is_state('climate.bedroom_ac','cool') %}
+          input_boolean.bedroom_ac_mode_cool
+          {% elif is_state('climate.bedroom_ac','fan_only') %}
+          input_boolean.bedroom_ac_mode_fan
+          {% elif is_state('climate.bedroom_ac','dry') %}
+          input_boolean.bedroom_ac_mode_dry
+          {% elif is_state('climate.bedroom_ac','auto') %}
+          input_boolean.bedroom_ac_mode_auto
+          {% endif %}

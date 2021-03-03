@@ -30,7 +30,9 @@ goodnight_tomorrow_summary:
           {% if is_birthday %}
           {{ state_attr('calendar.contacts','message') }}!
           {% endif %}
-          {% if is_event and is_state('input_boolean.alarm_manual_mode','off') %}
+          {% if is_state('input_boolean.sleeping_in','on') %}
+          You're sleeping in so no alarm.
+          {% elif is_event and is_state('input_boolean.alarm_manual_mode','off') %}
           Your first event tomorrow is {{ state_attr('calendar.personal_trigger','message') }} at {{ event_time }} so I'll wake you up around 
           {% elif is_state('input_boolean.alarm_manual_mode','off') %}
           You don't have any events tomorrow. So you can sleep in until around 
@@ -39,7 +41,9 @@ goodnight_tomorrow_summary:
           {% else %}
           You don't have any events tomorrow and your manual alarm is set to
           {% endif %}
-          {{ alarm_time }} in about {{ ((states('sensor.auto_alarm_time_ts') | int - now().timestamp()) / 3600 ) | round }} hours. 
+          {% if is_state('input_boolean.sleeping_in','off') %}
+          {{ alarm_time }} in about {{ ((states('sensor.auto_alarm_time_ts') | int - now().timestamp()) / 3600 ) | round }} hours.
+          {% endif %}
           Tomorrow is {{ weekday }} the {% if day | int == 1 or day | int == 21 or day | int == 31 %}{{ day }}st{% elif day | int == 2 or day | int == 22 %}{{ day }}nd{% elif day | int == 3 or day | int == 23 %}{{ day }}rd{% else %}{{ day }}th{% endif %} of {{ month }} and the weather will be {{ summary }} with a high of {{ high }} and a low of {{ low }}. 
           {{ [
             "Goodnight",

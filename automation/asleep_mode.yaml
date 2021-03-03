@@ -1,12 +1,12 @@
-- alias: Assume asleep 2 hours after going to bed
-  mode: restart
-  trigger:
-    platform: state
-    entity_id: var.mode
-    to: 'sleep'
-    for: "02:00:00"
-  action:
-    - service: switch.turn_off
-      entity_id: switch.diffuser
-    - service: switch.turn_on
-      entity_id: switch.diffuser
+#- alias: Assume asleep 2 hours after going to bed
+#  mode: restart
+#  trigger:
+#    platform: state
+#    entity_id: var.mode
+#    to: 'sleep'
+#    for: "02:00:00"
+#  action:
+#    - service: switch.turn_off
+#      entity_id: switch.diffuser
+#    - service: switch.turn_on
+#      entity_id: switch.diffuser

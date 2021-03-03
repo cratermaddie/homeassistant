@@ -1,5 +1,7 @@
 goodnight:
   sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.bedroom_ac_fan_low
     - service: script.update_travel_time_madison
     - service: homeassistant.update_entity
       entity_id: sensor.auto_alarm_time_ts
@@ -21,11 +23,15 @@ goodnight:
         entity_id: media_player.bedroom_speaker
         volume_level: 0.5
     - service: script.goodnight_meds
-    - wait_template: "{{ states('counter.meds_counter') | int %2 == 0}}"
+    - wait_template: >-
+        {% set meds_morning = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_morning' %}
+        {% set meds_noon = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_noon' %}
+        {% set meds_evening = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_evening' %}
+        {{ is_state(meds_evening, 'on') }}
     - service: input_boolean.turn_off
       entity_id: input_boolean.meds_status
     - service: script.goodnight_e
-    - wait_template: "{{ is_state('input_boolean.estrogen_status', 'on') }}"
+    - wait_template: "{{ is_state('input_boolean.estrogen_status', 'on') or (not is_state('sensor.active_day_of_week','thursday')) }}"
     - service: light.turn_on
       data_template:
         entity_id: light.master_bedroom_lights
@@ -69,7 +75,8 @@ goodnight:
     - service: light.turn_off
       entity_id:
         - light.main_lights
-    - service: script.turn_off_vanity
+
+#    - service: script.turn_off_vanity
     - service: var.set
       data:
         entity_id: var.time_asleep
@@ -86,4 +93,4 @@ goodnight:
 #      data:
 #        entity_id: input_select.living_room_ac_mode
 #        option: 'Off'
-    - service: script.turn_off_tv
+#    - service: script.turn_off_tv

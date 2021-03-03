@@ -38,9 +38,10 @@ media_source:
 
 image:
 
+my:
+
 frontend:
   themes: !include_dir_merge_named themes
-  javascript_version: latest
   extra_module_url:
     - /hacsfiles/custom-sidebar/custom-sidebar.js
     - /local/custom_icons.js
@@ -115,7 +116,6 @@ alarm_control_panel:
       trigger_time: 0
     armed_home:
       arming_time: 0
-      delay_time: 0
 
 #climate:
 #  - platform: generic_thermostat
@@ -170,30 +170,28 @@ nintendo_wishlist:
 
 #cSpell:enable
 
-shell_command:
-  delete_gtfs: rm gtfs/google_transit.sqlite
+#shell_command:
+#  delete_gtfs: rm gtfs/google_transit.sqlite
 
-airvisual:
-    api_key: !secret airvisual_api_key
-    geographies:
-        latitude: !secret home_lat
-        longitude: !secret home_lon
-
-downloader:
-  download_dir: gtfs
+#downloader:
+#  download_dir: gtfs
     
 updater:
   include_used_components: true
 
 logger:
   default: warning
-#  logs:
-#    custom_components.ph_notification_scrape: debug
+  logs:
+    # log level for HA core
+    homeassistant.core: debug
 
 browser_mod:
   devices:
-    9d029af0_ebc28e0e:
+    057ccd42-f31faaea:
       name: Desktop
+      camera: true
+    89b8efe5_85346523:
+      name: Personal Work
       camera: true
     0cedc2eb-d5dca07b:
       name: Madison's iPhone
@@ -232,6 +230,14 @@ camera:
   - platform: unsplash
     api_key: !secret unsplash_access_key
     orientation: landscape
+  - platform: mjpeg
+    name: CR-X OctoPrint
+    still_image_url: http://octopi-cr-x.local/webcam/?action=snapshot
+    mjpeg_url: http://octopi-cr-x.local/webcam/?action=stream
+  - platform: mjpeg
+    name: DaVinci OctoPrint
+    still_image_url: http://octopi-xyz.local/webcam/?action=snapshot
+    mjpeg_url: http://octopi-xyz.local/webcam/?action=stream
 
 twilio:
   account_sid: !secret twilio_sid
@@ -256,9 +262,9 @@ google:
   client_id: !secret google_id
   client_secret: !secret google_secret
     
-icloud:
-  - username: !secret old_apple_email
-    password: !secret apple_password
+#icloud:
+#  - username: !secret old_apple_email
+#    password: !secret apple_password
 
 noonlight:
   id: !secret noonlight_id
@@ -296,14 +302,20 @@ panel_iframe:
 #    icon: mdi:shield-half-full
 #    url: !secret bitwarden_url
 #  octoprint:
-#    title: OctoPrint
+#    title: CR-X OctoPrint
 #    icon: mdi:printer-3d
-#    url: !secret octoprint_host
+#    url: http://octopi-cr-x.local/
 
-#octoprint:
-#  host: !secret octoprint_host
-#  port:
-#  ssl: true
-#  api_key: !secret octoprint_api_key
-#  name: da Vinci nano
-#  number_of_tools: 1
+octoprint:
+  - host: !secret cr_x_octoprint_host
+    bed: true
+    ssl: false
+    api_key: !secret octoprint_api_key
+    name: CR-X
+    number_of_tools: 2
+  - host: !secret xyz_octoprint_host
+    bed: true
+    ssl: false
+    api_key: !secret xyz_octoprint_api_key
+    name: DaVinci Nano
+    number_of_tools: 1

@@ -3,6 +3,9 @@ goodnight_e:
     - condition: state
       entity_id: input_boolean.estrogen_status
       state: 'off'
+    - condition: state
+      entity_id: sensor.active_day_of_week
+      state: 'thursday'
     - service: tts.google_translate_say
       entity_id: media_player.bedroom_speaker
       data_template:

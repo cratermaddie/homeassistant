@@ -11,28 +11,53 @@ aurora_brightness:
     - "Dim"
     - "Off"
 
-hue_scene:
+hue_scene_madison:
+  name: Scene
+  options:
+    - ""
+  initial: ""
+  icon: mdi:palette
+
+hue_scene_armond:
   name: Scene
   options:
     - ""
   initial: ""
   icon: mdi:palette
   
-hue_room:
+hue_room_madison:
   name: Room
   options:
     - ""
     - "Living room"
-    - "Master Bedroom"
-    - "Dining Room"
+    - "Bedroom"
+    - "Closet"
+    - "Guest bedroom"
+    - "Guest closet"
     - "Kitchen"
-    - "Guest Bedroom"
+    - "Dining room"
+    - "Office"
     - "Bathroom"
     - "Hallway"
-    - "Office"
+
   initial: ""
   icon: mdi:floor-plan
   
+hue_room_armond:
+  name: Room
+  options:
+    - ""
+    - "Living room"
+    - "Bedroom"
+    - "Closet"
+    - "Guest bedroom"
+    - "Guest closet"
+    - "Kitchen"
+    - "Dining room"
+    - "Office"
+    - "Bathroom"
+    - "Hallway"
+
 travel_mode_madison:
   name: Travel Mode
   options:
@@ -78,3 +103,12 @@ system_info_tab:
     - "system_running_timers"
     - "system_alerts"
     - "system_groups"
+
+ecobee_modes:
+  name: Thermostat Mode
+  icon: mdi:thermostat-box
+  options:
+    - "Home"
+    - "Away"
+    - "Work"
+    - "Sleep"

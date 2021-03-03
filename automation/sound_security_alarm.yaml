@@ -5,11 +5,17 @@
     entity_id: alarm_control_panel.home_alarm
     to: 'triggered'
   action:
+    - service: media_player.media_pause
+      data:
+        entity_id: media_player.all_devices
     - service: light.turn_on
       data:
         entity_id: light.main_lights
         rgb_color: [255,255,255]
         brightness: 255
+    - service: media_player.turn_on
+      entity_id: media_player.all_devices
+    - wait_template: "{{ is_state('media_player.all_devices', 'idle') }}"
     - service: media_player.volume_set
       data:
         entity_id: media_player.all_devices
@@ -21,13 +27,18 @@
         media_content_type: music
     - service: notify.mobile_app_madisons_iphone
       data:
+        title: "ALARM"
         message: "The alarm has been triggered!"
         data:
+          apns_headers:
+            'apns-collapse-id': 'alarm'
           push:
-            category: "dryer"
-            thread-id: "laundry-reminder"
-            sound: 'buzzer.wav'
-    - service: notify.mobile_app_madisons_iphone
+            thread-id: "alarm"
+            sound: 
+              name: default
+              critical: 1
+              volume: 1.0
+    - service: notify.mobile_app_iphone
       data:
         title: "ALARM"
         message: "The alarm has been triggered!"
@@ -36,8 +47,9 @@
             'apns-collapse-id': 'alarm'
           push:
             thread-id: "alarm"
-#            sound: 'googlealarmnotif.wav'
-            critical: 1
-            volume: 1.0
+            sound: 
+              name: default
+              critical: 1
+              volume: 1.0
     - service: switch.turn_on
       entity_id: switch.noonlight_switch

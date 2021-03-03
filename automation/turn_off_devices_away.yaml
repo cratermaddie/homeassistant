@@ -16,5 +16,5 @@
     - service: switch.turn_off
       entity_id: switch.air_freshener
     - service: script.turn_off_tv
-    - service: script.turn_off_vanity
-    - service: script.turn_off_diffuser
+#    - service: script.turn_off_vanity
+#    - service: script.turn_off_diffuser

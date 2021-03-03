@@ -8,7 +8,7 @@ cancel_nap:
         entity_id: script.snooze
     - service: hue.hue_activate_scene
       data:
-        group_name: "Master Bedroom"
+        group_name: "Bedroom"
         scene_name: "Relax"
     - service: var.set
       data:

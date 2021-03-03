@@ -1,7 +1,12 @@
 goodnight_meds:
   sequence:
     - condition: template
-      value_template: "{{ (states('counter.meds_counter') | int % 2) != 0 }}"
+      value_template: >-
+        {% set meds_morning = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_morning' %}
+        {% set meds_noon = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_noon' %}
+        {% set meds_evening = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_evening' %}
+
+        {{ is_state(meds_morning, 'off') or is_state(meds_evening, 'off') }}
     - service: tts.google_translate_say
       entity_id: media_player.bedroom_speaker
       data_template:

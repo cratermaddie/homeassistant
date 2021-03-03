@@ -1,12 +1,12 @@
-- alias: download new gtfs
-  mode: restart
-  trigger:
-    platform: time_pattern
-    hours: '0'
-  action:
-    - service: shell_command.delete_gtfs
-    - service: downloader.download_file
-      data:
-        url: 'https://www.transitchicago.com/downloads/sch_data/google_transit.zip'
-        filename: google_transit.zip
-        overwrite: true
+#- alias: download new gtfs
+#  mode: restart
+#  trigger:
+#    platform: time_pattern
+#    hours: '0'
+#  action:
+#    - service: shell_command.delete_gtfs
+#    - service: downloader.download_file
+#      data:
+#        url: 'https://www.transitchicago.com/downloads/sch_data/google_transit.zip'
+#        filename: google_transit.zip
+#        overwrite: true

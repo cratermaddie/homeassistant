@@ -1,0 +1,34 @@
+- alias: Update ecobee mode select on state change
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: climate.thermostat
+  condition:
+    condition: template
+    value_template: "{{ not (state_attr('climate.thermostat','preset_mode') in states('input_select.ecobee_modes')) }}"
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: 
+          - input_select.ecobee_modes
+        option: "{{ state_attr('climate.thermostat','preset_mode') }}"
+    - service: climate.set_preset_mode
+      data:
+        entity_id: climate.thermostat
+        preset_mode: "{{ states('input_select.ecobee_modes') }}"
+
+- alias: Update ecobee mode on state change
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_select.ecobee_modes
+  action:
+    - service: climate.set_preset_mode
+      data:
+        entity_id: climate.thermostat
+        preset_mode: "{{ states('input_select.ecobee_modes') }}"
+    - service: input_select.select_option
+      data:
+        entity_id: 
+          - input_select.ecobee_modes
+        option: "{{ state_attr('climate.thermostat','preset_mode') }}"

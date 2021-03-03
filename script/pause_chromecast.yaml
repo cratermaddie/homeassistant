@@ -1,4 +1,4 @@
 pause_chromecast:
   sequence:
     - service: media_player.media_pause
-      entity_id: media_player.living_room_tv
+      entity_id:  media_player.bedroom_chromecast

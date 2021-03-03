@@ -5,7 +5,16 @@ bedtime_3:
       state: 'home'
     - service: light.turn_off
       entity_id:
-        - light.main_lights
+        - light.living_room_lights
+        - light.guest_bedroom_lights
+        - light.bathroom_lights
+        - light.hallway_lights
+        - light.kitchen_lights
+        - light.dining_room_lights
+        - light.office_lights
+        - light.master_bedroom_closet_lights
+        - light.guest_bedroom_closet_lights
+        - light.office_closet_lights
     - service: script.turn_off_pc
     - condition: template
-      value_template: "{{ not is_state('media_player.apple_tv','playing') and not is_state('media_player.living_room_tv','playing') }}"
+      value_template: "{{ not is_state('media_player.apple_tv','playing') and not is_state(' media_player.bedroom_chromecast','playing') }}"

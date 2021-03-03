@@ -2,6 +2,6 @@ wifi_qr:
   sequence:
     - service: media_player.play_media
       data:
-        entity_id: media_player.living_room_tv
+        entity_id:  media_player.living_room_chromecast
         media_content_id: !secret wifi_qr_url
         media_content_type: 'image/jpg'

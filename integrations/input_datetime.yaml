@@ -1,3 +1,6 @@
 manual_alarm:
   has_date: false
   has_time: true
+smoking_date:
+  has_date: true
+  has_time: false

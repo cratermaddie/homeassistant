@@ -16,7 +16,7 @@
       state: 'below_horizon'
     - service: hue.hue_activate_scene
       data:
-        group_name: "Dining Room"
+        group_name: "Dining room"
         scene_name: "Bright"
     - service: hue.hue_activate_scene
       data:

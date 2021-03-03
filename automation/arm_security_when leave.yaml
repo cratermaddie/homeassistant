@@ -1,0 +1,12 @@
+###TODO###
+- alias: arm security when leave
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: group.home
+      to: not_home
+  action:
+    service: alarm_control_panel.alarm_arm_away
+    data:
+      entity_id: alarm_control_panel.home_alarm
+      code: !secret alarm_code

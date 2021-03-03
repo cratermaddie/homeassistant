@@ -1,0 +1,4 @@
+laundry_done:
+  sequence:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.laundry_reminder

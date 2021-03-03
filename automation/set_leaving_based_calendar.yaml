@@ -1,0 +1,13 @@
+- alias: set leaving based on calendar
+  mode: restart
+  trigger:
+    platform: state
+    entity_id: calendar.personal_trigger
+  action:
+    service: >
+      {% if '2254 N Avers' in state_attr('calendar.personal_trigger','location') %}
+        input_boolean.turn_on
+      {% else %}
+        input_boolean.turn_off
+      {% endif %}
+    entity_id: input_boolean.staying_home_madison

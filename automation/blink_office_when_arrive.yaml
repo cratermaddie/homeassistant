@@ -1,0 +1,22 @@
+- alias: Blink the office when someone gets home
+  initial_state: true
+  mode: restart
+  trigger:
+    - platform: zone
+      entity_id: device_tracker.madisons_iphone_app
+      zone: zone.home
+      event: enter
+    - platform: zone
+      entity_id: device_tracker.armonds_iphone_app
+      zone: zone.home
+      event: enter
+  condition:
+    condition: state
+    entity_id: binary_sensor.office_occupancy
+    state: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.office_lights
+        flash: 'short'

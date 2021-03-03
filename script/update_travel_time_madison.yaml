@@ -3,11 +3,11 @@ update_travel_time_madison:
     - service: homeassistant.update_entity
       data_template:
         entity_id: >-
-          {% if is_state('input_select.travel_mode', 'Drive') %}
+          {% if is_state('input_select.travel_mode_madison', 'Drive') %}
             sensor.drive_to_next_cal_event_madison
-          {% elif is_state('input_select.travel_mode', 'Walk') %}
+          {% elif is_state('input_select.travel_mode_madison', 'Walk') %}
             sensor.walk_to_next_cal_event_madison
-          {% elif is_state('input_select.travel_mode', 'Transit') %}
+          {% elif is_state('input_select.travel_mode_madison', 'Transit') %}
             sensor.transit_to_next_cal_event_madison
           {% else %}
             sensor.bike_to_next_cal_event_madison

@@ -1,0 +1,10 @@
+###TODO###
+living_room_netflix:
+  sequence:
+    - service: webostv.command
+      data:
+        entity_id:  media_player.living_room_tv_lgos
+        command: "system.launcher/launch"
+        payload:
+          id: netflix
+

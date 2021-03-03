@@ -1,0 +1,99 @@
+- alias: Bedroom Fan med mode switches controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_medium
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_fan_low
+          - input_boolean.bedroom_ac_fan_off
+          - input_boolean.bedroom_ac_fan_high
+    - condition: template
+      value_template: "{{ not is_state_attr('climate.bedroom_ac','fan_mode','medium') }}"
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.bedroom_ac
+        fan_mode: 'medium'
+
+- alias: Bedroom Fan low mode switches controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_low
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_fan_medium
+          - input_boolean.bedroom_ac_fan_off
+          - input_boolean.bedroom_ac_fan_high
+    - condition: template
+      value_template: "{{ not is_state_attr('climate.bedroom_ac','fan_mode','low') }}"
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.bedroom_ac
+        fan_mode: 'low'
+
+- alias: Bedroom Fan High mode switches controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_high
+        to: "on"
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: 
+          - input_boolean.bedroom_ac_fan_low
+          - input_boolean.bedroom_ac_fan_off
+          - input_boolean.bedroom_ac_fan_medium
+    - condition: template
+      value_template: "{{ not is_state_attr('climate.bedroom_ac','fan_mode','high') }}"
+    - service: climate.set_fan_mode
+      data:
+        entity_id: climate.bedroom_ac
+        fan_mode: 'high'
+    
+- alias: Bedroom Fan none mode switches controller
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_high
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_low
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_off
+        to: "off"
+      - platform: state
+        entity_id: input_boolean.bedroom_ac_fan_medium
+        to: "off"
+  condition:
+    condition: template
+    value_template: "{{ is_state('input_boolean.bedroom_ac_fan_high','off') and is_state('input_boolean.bedroom_ac_fan_low','off') and is_state('input_boolean.bedroom_ac_fan_off','off') and is_state('input_boolean.bedroom_ac_fan_medium','off') }}"
+  action:
+    - service: input_boolean.turn_on
+      data_template:
+        entity_id: "{{trigger.entity_id}}"
+
+- alias: Bedroom AC fan responder
+  mode: restart
+  trigger:
+      - platform: state
+        entity_id: climate.bedroom_ac
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: >-
+          {% if is_state_attr('climate.bedroom_ac','fan_mode','low') %}
+          input_boolean.bedroom_ac_fan_low
+          {% elif is_state_attr('climate.bedroom_ac','fan_mode','medium') %}
+          input_boolean.bedroom_ac_fan_medium
+          {% elif is_state_attr('climate.bedroom_ac','fan_mode','high') %}
+          input_boolean.bedroom_ac_fan_high
+          {% endif %}

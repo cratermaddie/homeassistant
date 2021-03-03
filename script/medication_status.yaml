@@ -1,0 +1,7 @@
+medication_status:
+  sequence:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: >-
+          {% set meds_var = 'input_boolean.' + as_timestamp(states('sensor.date'))|timestamp_custom('%A')|lower + '_meds_' + ('morning' if (states('sensor.time')|regex_replace(find=':.*$', replace='', ignorecase=False)|int) >= 10 else '') + ('noon' if (states('sensor.time')|regex_replace(find=':.*$', replace='', ignorecase=False)|int) >= 12 else '') + ('evening' if (states('sensor.time')|regex_replace(find=':.*$', replace='', ignorecase=False)|int) >= 22 else '') %}
+          {{ meds_var }}

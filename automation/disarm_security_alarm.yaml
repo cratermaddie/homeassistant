@@ -3,17 +3,33 @@
   trigger:
     - platform: state
       entity_id: alarm_control_panel.home_alarm
-      from: 'armed_away'
       to: 'disarmed'
   action:
+    - service: media_player.turn_off
+      entity_id: media_player.all_devices
+    - service: media_player.turn_on
+      entity_id: media_player.all_devices
+    - wait_template: "{{ is_state('media_player.all_devices', 'idle') }}"
+    - service: var.set
+      data:
+        entity_id: var.volume_temp
+        value_template: "{{ state_attr('media_player.all_devices', 'volume_level')| float | round(2)}}"
     - service: media_player.volume_set
       data:
         entity_id: media_player.all_devices
         volume_level: 0.5
     - service: tts.google_translate_say
       data:
-        entity_id: media_player.office_speaker
-        message: Alarm disarmed. Welcome home.
+        entity_id: media_player.all_devices
+        message: Alarm disarmed.
+    - wait_template: "{{ is_state('media_player.all_devices', 'playing') }}"
+      timeout: "00:02:00"
+    - wait_template: "{{ is_state('media_player.all_devices', 'idle') }}"
+      timeout: "00:02:00"
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.all_devices
+        volume_level: "{{ states('var.volume_temp')| float }}"
     - service: media_player.turn_off
       entity_id: media_player.all_devices
     - service: switch.turn_off

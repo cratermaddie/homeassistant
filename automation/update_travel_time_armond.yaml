@@ -6,7 +6,7 @@
       entity_id: sensor.travel_update_trigger_armond
       to: "True"
     - platform: state
-      entity_id: calendar.personal_trigger
+      entity_id: calendar.armond_trigger
     - platform: state
       entity_id: input_select.travel_mode_armond
     - platform: state

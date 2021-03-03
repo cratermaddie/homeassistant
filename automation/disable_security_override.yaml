@@ -1,0 +1,29 @@
+- alias: disable security override after time limit
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id:
+        - input_boolean.security_system_override
+      to: 'on'
+  action:
+    - wait_for_trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.back_door
+          - binary_sensor.west_kitchen_window
+          - binary_sensor.south_kitchen_window
+          - binary_sensor.guest_bedroom_window
+          - binary_sensor.master_bedroom_window
+          - binary_sensor.front_door
+          - binary_sensor.east_dining_room_window
+          - binary_sensor.west_dining_room_window
+          - binary_sensor.north_living_room_window
+          - binary_sensor.south_living_room_window
+          - binary_sensor.office_window
+        to: 'on'
+      timeout:
+        minutes: 5
+    - delay:
+        minutes: 5
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.security_system_override

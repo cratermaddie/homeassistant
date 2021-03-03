@@ -1,149 +1,234 @@
-###TODO###
-- alias: Set hue scenes input select when room changes to bedroom
+- alias: Set madison hue scenes input select when room changes
   mode: restart
   trigger:
     platform: state
-    entity_id: input_select.hue_room
-  condition:
-    condition: state
-    entity_id: input_select.hue_room
-    state: Bedroom
+    entity_id: input_select.hue_room_madison
   action:
-    service: input_select.set_options
-    data_template:
-      entity_id: input_select.hue_scene
-      options:
-        - ""
-        - Savanna sunset
-        - Tropical twilight
-        - Artic aurora
-        - Spring blossom
-        - Relax
-        - Read
-        - Concentrate
-        - Energize
-        - Bright
-        - Dimmed
-        - Nightlight
-        - Bedtime
-        - Filming
-        
-- alias: Set hue scenes input select when room changes to living room
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: input_select.hue_room_madison
+          state: "Bedroom"
+        sequence:
+          - service: input_select.set_options
+            data_template:
+              entity_id: input_select.hue_scene_madison
+              options:
+                - ""
+                - Savanna sunset
+                - Tropical twilight
+                - Artic aurora
+                - Spring blossom
+                - Relax
+                - Read
+                - Concentrate
+                - Energize
+                - Bright
+                - Dimmed
+                - Nightlight
+                - Bedtime
+                - Filming
+      - conditions:
+        - condition: state
+          entity_id: input_select.hue_room_madison
+          state: "Living room"
+        sequence:
+          - service: input_select.set_options
+            data_template:
+              entity_id: input_select.hue_scene_madison
+              options:
+                - ""
+                - Savanna sunset
+                - Tropical twilight
+                - Artic aurora
+                - Spring blossom
+                - Relax
+                - Read
+                - Concentrate
+                - Energize
+                - Bright
+                - Dimmed
+                - Nightlight
+                - Filming
+      - conditions:
+        - condition: state
+          entity_id: input_select.hue_room_madison
+          state: "Office"
+        sequence:
+          - service: input_select.set_options
+            data_template:
+              entity_id: input_select.hue_scene_madison
+              options:
+                - ""
+                - Savanna sunset
+                - Tropical twilight
+                - Artic aurora
+                - Spring blossom
+                - Relax
+                - Read
+                - Concentrate
+                - Energize
+                - Bright
+                - Dimmed
+                - Nightlight
+      - conditions:
+          condition: or
+          conditions:
+            - condition: state
+              entity_id: input_select.hue_room_madison
+              state: "Dining room"
+            - condition: state
+              entity_id: input_select.hue_room_madison
+              state: "Kitchen"
+            - condition: state
+              entity_id: input_select.hue_room_madison
+              state: "Hallway"
+            - condition: state
+              entity_id: input_select.hue_room_madison
+              state: "Closet"
+            - condition: state
+              entity_id: input_select.hue_room_madison
+              state: "Guest closet"
+            - condition: state
+              entity_id: input_select.hue_room_madison
+              state: "Bathroom"
+            - condition: state
+              entity_id: input_select.hue_room_madison
+              state: "Guest bedroom"
+            - condition: state
+              entity_id: input_select.hue_room_madison
+              state: "Office closet"
+        sequence:
+          - service: input_select.set_options
+            data_template:
+              entity_id: input_select.hue_scene_madison
+              options:
+                - ""
+                - Bright
+                - Dimmed
+                - Nightlight
+      default:
+          - service: input_select.set_options
+            data_template:
+              entity_id: input_select.hue_scene_madison
+              options:
+                - ""
+
+
+
+
+- alias: Set armond hue scenes input select when room changes
   mode: restart
   trigger:
     platform: state
-    entity_id: input_select.hue_room
-  condition:
-    condition: state
-    entity_id: input_select.hue_room
-    state: Living room
+    entity_id: input_select.hue_room_armond
   action:
-    service: input_select.set_options
-    data_template:
-      entity_id: input_select.hue_scene
-      options:
-        - ""
-        - Savanna sunset
-        - Tropical twilight
-        - Artic aurora
-        - Spring blossom
-        - Relax
-        - Read
-        - Concentrate
-        - Energize
-        - Bright
-        - Dimmed
-        - Nightlight
-        - Filming
-        
-- alias: Set hue scenes input select when room changes to bathroom
-  mode: restart
-  trigger:
-    platform: state
-    entity_id: input_select.hue_room
-  condition:
-    condition: state
-    entity_id: input_select.hue_room
-    state: Bathroom
-  action:
-    service: input_select.set_options
-    data_template:
-      entity_id: input_select.hue_scene
-      options:
-        - ""
-        - Bright
-        - Dimmed
-        - Nightlight
-        
-- alias: Set hue scenes input select when room changes to entryway
-  mode: restart
-  trigger:
-    platform: state
-    entity_id: input_select.hue_room
-  condition:
-    condition: state
-    entity_id: input_select.hue_room
-    state: Entryway
-  action:
-    service: input_select.set_options
-    data_template:
-      entity_id: input_select.hue_scene
-      options:
-        - ""
-        - Bright
-        - Dimmed
-        - Nightlight
-        
-- alias: Set hue scenes input select when room changes to dining area
-  mode: restart
-  trigger:
-    platform: state
-    entity_id: input_select.hue_room
-  condition:
-    condition: state
-    entity_id: input_select.hue_room
-    state: Dining area
-  action:
-    service: input_select.set_options
-    data_template:
-      entity_id: input_select.hue_scene
-      options:
-        - ""
-        - Bright
-        - Dimmed
-        - Nightlight
-        
-- alias: Set hue scenes input select when room changes to kitchen
-  mode: restart
-  trigger:
-    platform: state
-    entity_id: input_select.hue_room
-  condition:
-    condition: state
-    entity_id: input_select.hue_room
-    state: Kitchen
-  action:
-    service: input_select.set_options
-    data_template:
-      entity_id: input_select.hue_scene
-      options:
-        - ""
-        - Bright
-        - Dimmed
-        - Nightlight
-        
-- alias: Set hue scenes input select when room changes to empty
-  mode: restart
-  trigger:
-    platform: state
-    entity_id: input_select.hue_room
-  condition:
-    condition: state
-    entity_id: input_select.hue_room
-    state: ""
-  action:
-    service: input_select.set_options
-    data_template:
-      entity_id: input_select.hue_scene
-      options:
-        - ""
+    - choose:
+      - conditions:
+        - condition: state
+          entity_id: input_select.hue_room_armond
+          state: "Bedroom"
+        sequence:
+          - service: input_select.set_options
+            data_template:
+              entity_id: input_select.hue_scene_armond
+              options:
+                - ""
+                - Savanna sunset
+                - Tropical twilight
+                - Artic aurora
+                - Spring blossom
+                - Relax
+                - Read
+                - Concentrate
+                - Energize
+                - Bright
+                - Dimmed
+                - Nightlight
+                - Bedtime
+                - Filming
+      - conditions:
+        - condition: state
+          entity_id: input_select.hue_room_armond
+          state: "Living room"
+        sequence:
+          - service: input_select.set_options
+            data_template:
+              entity_id: input_select.hue_scene_armond
+              options:
+                - ""
+                - Savanna sunset
+                - Tropical twilight
+                - Artic aurora
+                - Spring blossom
+                - Relax
+                - Read
+                - Concentrate
+                - Energize
+                - Bright
+                - Dimmed
+                - Nightlight
+                - Filming
+      - conditions:
+        - condition: state
+          entity_id: input_select.hue_room_armond
+          state: "Office"
+        sequence:
+          - service: input_select.set_options
+            data_template:
+              entity_id: input_select.hue_scene_armond
+              options:
+                - ""
+                - Savanna sunset
+                - Tropical twilight
+                - Artic aurora
+                - Spring blossom
+                - Relax
+                - Read
+                - Concentrate
+                - Energize
+                - Bright
+                - Dimmed
+                - Nightlight
+      - conditions:
+          condition: or
+          conditions:
+            - condition: state
+              entity_id: input_select.hue_room_armond
+              state: "Dining room"
+            - condition: state
+              entity_id: input_select.hue_room_armond
+              state: "Kitchen"
+            - condition: state
+              entity_id: input_select.hue_room_armond
+              state: "Hallway"
+            - condition: state
+              entity_id: input_select.hue_room_armond
+              state: "Closet"
+            - condition: state
+              entity_id: input_select.hue_room_armond
+              state: "Guest closet"
+            - condition: state
+              entity_id: input_select.hue_room_armond
+              state: "Bathroom"
+            - condition: state
+              entity_id: input_select.hue_room_armond
+              state: "Guest bedroom"
+            - condition: state
+              entity_id: input_select.hue_room_armond
+              state: "Office closet"
+        sequence:
+          - service: input_select.set_options
+            data_template:
+              entity_id: input_select.hue_scene_armond
+              options:
+                - ""
+                - Bright
+                - Dimmed
+                - Nightlight
+      default:
+          - service: input_select.set_options
+            data_template:
+              entity_id: input_select.hue_scene_armond
+              options:
+                - ""

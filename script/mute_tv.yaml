@@ -1,0 +1,6 @@
+mute_tv:
+  sequence:
+    - service: webostv.button
+      data:
+        entity_id: media_player.living_room_tv_lgos
+        button: MUTE

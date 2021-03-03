@@ -15,6 +15,7 @@
     - light.living_room_1
     - light.living_room_2
     - light.living_room_3
+    - light.living_room_4
 
 - platform: group
   name: Dining Room Lights
@@ -32,6 +33,7 @@
     - light.master_bedroom_2
     - light.master_bedroom_3
     - light.bedside_lamp
+    - light.bedside_table_lamp
 
 - platform: group
   name: Master Bedroom Closet Lights
@@ -56,6 +58,8 @@
     - light.bathroom_1
     - light.bathroom_2
     - light.bathroom_3
+    - light.bathroom_overhead_light
+    - light.shower_light
 
 - platform: group
   name: Hallway Lights
@@ -93,6 +97,9 @@
     - light.kitchen_lights
     - light.dining_room_lights
     - light.office_lights
+    - light.master_bedroom_closet_lights
+    - light.guest_bedroom_closet_lights
+    - light.office_closet_lights
 
 - platform: group
   name: Accessory Lights

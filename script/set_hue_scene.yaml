@@ -1,18 +1,37 @@
-set_hue_scene:
+set_hue_scene_madison:
   alias: "Set Scene:"
   sequence:
     - service: hue.hue_activate_scene
       data_template:
-        group_name: "{{ states('input_select.hue_room') }}"
-        scene_name: "{{ states('input_select.hue_scene') }}"
+        group_name: "{{ states('input_select.hue_room_madison') }}"
+        scene_name: "{{ states('input_select.hue_scene_madison') }}"
     - service: input_select.select_option
       data:
         entity_id:
-          - input_select.hue_room
-          - input_select.hue_scene
+          - input_select.hue_room_madison
+          - input_select.hue_scene_madison
         option: ""
     - service: input_select.set_options
       data_template:
-        entity_id: input_select.hue_scene
+        entity_id: input_select.hue_scene_madison
+        options:
+          - ""
+
+set_hue_scene_armond:
+  alias: "Set Scene:"
+  sequence:
+    - service: hue.hue_activate_scene
+      data_template:
+        group_name: "{{ states('input_select.hue_room_armond') }}"
+        scene_name: "{{ states('input_select.hue_scene_armond') }}"
+    - service: input_select.select_option
+      data:
+        entity_id:
+          - input_select.hue_room_armond
+          - input_select.hue_scene_armond
+        option: ""
+    - service: input_select.set_options
+      data_template:
+        entity_id: input_select.hue_scene_armond
         options:
           - ""
