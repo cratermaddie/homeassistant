@@ -40,6 +40,9 @@ image:
 
 my:
 
+#system_log:
+#  fire_event: true
+
 frontend:
   themes: !include_dir_merge_named themes
   extra_module_url:
@@ -99,6 +102,7 @@ smartthinq:
 
 tts:
   - platform: google_translate
+    service_name: google_translate_say
 #    base_url: !secret local_base_url
 
 apple_tv:
@@ -111,31 +115,11 @@ alarm_control_panel:
     code: !secret alarm_code
     arming_time: 60
     delay_time: 20
-    trigger_time: 4
+    trigger_time: 20
     disarmed:
       trigger_time: 0
     armed_home:
       arming_time: 0
-
-#climate:
-#  - platform: generic_thermostat
-#    name: Living Room
-#    heater: switch.living_room_ac_cool
-#    target_sensor: sensor.coat_closet_sensor_temperature
-#    ac_mode: true
-#    keep_alive:
-#      minutes: 10
-#    min_cycle_duration:
-#      minutes: 2
-#  - platform: generic_thermostat
-#    name: Bedroom
-#    heater: switch.bedroom_ac_cool
-#    target_sensor: sensor.bedroom_closet_sensor_temperature
-#    ac_mode: true
-#    keep_alive:
-#      minutes: 10
-#    min_cycle_duration:
-#      minutes: 2
 
 sonoff:
   username: !secret sonoff_email
@@ -177,24 +161,22 @@ nintendo_wishlist:
 #  download_dir: gtfs
     
 updater:
-  include_used_components: true
 
 logger:
   default: warning
-  logs:
-    # log level for HA core
-    homeassistant.core: debug
+#  logs:
+#    custom_components.flight_status: debug
 
-browser_mod:
-  devices:
-    057ccd42-f31faaea:
-      name: Desktop
-      camera: true
-    89b8efe5_85346523:
-      name: Personal Work
-      camera: true
-    0cedc2eb-d5dca07b:
-      name: Madison's iPhone
+#browser_mod:
+#  devices:
+#    057ccd42-f31faaea:
+#      name: Desktop
+#      camera: true
+#    89b8efe5_85346523:
+#      name: Personal Work
+#      camera: true
+#    0cedc2eb-d5dca07b:
+#      name: Madison's iPhone
 
 wake_on_lan:
 
@@ -297,10 +279,6 @@ panel_iframe:
 #    title: Folding@home
 #    icon: mdi:bacteria-outline
 #    url: !secret folding_url
-#  bitwarden:
-#    title: Bitwarden
-#    icon: mdi:shield-half-full
-#    url: !secret bitwarden_url
 #  octoprint:
 #    title: CR-X OctoPrint
 #    icon: mdi:printer-3d

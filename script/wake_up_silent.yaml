@@ -22,6 +22,10 @@ wake_up_silent:
       entity_id: automation.aurora_controller_hourly
     - service: input_boolean.turn_on
       entity_id: input_boolean.meds_status
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.home_alarm
+        code: !secret alarm_code
 #    - service: input_boolean.turn_off
 #      entity_id: input_boolean.alarm_manual_mode
     - service: script.turn_on_desktop_work

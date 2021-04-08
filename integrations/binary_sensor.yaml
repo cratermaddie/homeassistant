@@ -43,7 +43,29 @@
       new_release:
         value_template: "{{ states('sensor.current_version') != states('sensor.release') }}"
         icon_template: mdi:arrow-up-bold-circle-outline
-      bed_right_invert:
+      bed_right_occupied:
           value_template: "{{ is_state('binary_sensor.bed_right', 'off') }}"
-      bed_left_invert:
+      bed_left_occupied:
           value_template: "{{ is_state('binary_sensor.bed_left', 'off') }}"
+      ord_faa_err:
+        value_template: "{{ states('binary_sensor.ord_arrival_delay') or states('binary_sensor.ord_closure') or states('binary_sensor.ord_departure_delay') or states('binary_sensor.ord_ground_delay') or states('binary_sensor.ord_ground_stop') }}"
+      mdw_faa_err:
+        value_template: "{{ states('binary_sensor.mdw_arrival_delay') or states('binary_sensor.mdw_closure') or states('binary_sensor.mdw_departure_delay') or states('binary_sensor.mdw_ground_delay') or states('binary_sensor.mdw_ground_stop') }}"
+      going_to_ord_madison:
+        value_template: >-
+          {{ ('ORD' in state_attr('calendar.personal_trigger','location')) or ("O'Hare International Airport" in state_attr('calendar.personal_trigger','location')) }}
+      going_to_mdw_madison:
+        value_template: >-
+          {{ ('MDW' in state_attr('calendar.personal_trigger','location')) or ("Midway International Airport" in state_attr('calendar.personal_trigger','location')) }}
+      going_to_airport_madison:
+        value_template: >-
+          {{ states('binary_sensor.going_to_ord_madison') or states('binary_sensor.going_to_mdw_madison') }}
+      going_to_ord_armond:
+        value_template: >-
+          {{ ('ORD' in state_attr('calendar.personal_trigger','location')) or ("O'Hare International Airport" in state_attr('calendar.personal_trigger','location')) }}
+      going_to_mdw_armond:
+        value_template: >-
+          {{ ('MDW' in state_attr('calendar.personal_trigger','location')) or ("Midway International Airport" in state_attr('calendar.personal_trigger','location')) }}
+      going_to_airport_armond:
+        value_template: >-
+          {{ states('binary_sensor.going_to_ord_armond') or states('binary_sensor.going_to_mdw_armond') }}

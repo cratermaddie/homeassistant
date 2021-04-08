@@ -3,6 +3,7 @@
   trigger:
     - platform: state
       entity_id: alarm_control_panel.home_alarm
+      from: 'arm_away'
       to: 'disarmed'
   action:
     - service: media_player.turn_off
@@ -18,10 +19,11 @@
       data:
         entity_id: media_player.all_devices
         volume_level: 0.5
-    - service: tts.google_translate_say
+    - service: media_player.play_media
       data:
         entity_id: media_player.all_devices
-        message: Alarm disarmed.
+        media_content_id: 'http://192.168.0.2:8123/local/audio/success.mp3'
+        media_content_type: music
     - wait_template: "{{ is_state('media_player.all_devices', 'playing') }}"
       timeout: "00:02:00"
     - wait_template: "{{ is_state('media_player.all_devices', 'idle') }}"

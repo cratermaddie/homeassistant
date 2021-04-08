@@ -1,0 +1,23 @@
+esphome:
+  name: living-room-media-scanner
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  ssid: "Crater Network"
+  password: "kelp-subside-keep"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Living-Room-Media-Scanner"
+    password: "ugMdHWvYskEw"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:

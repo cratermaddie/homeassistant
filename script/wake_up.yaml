@@ -18,6 +18,10 @@ wake_up:
         value: "home"
     - service: input_boolean.turn_on
       entity_id: input_boolean.awake
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.home_alarm
+        code: !secret alarm_code
     - service: automation.trigger
       entity_id: automation.aurora_controller_hourly
     - service: input_boolean.turn_on

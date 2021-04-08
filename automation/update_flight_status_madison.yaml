@@ -1,0 +1,13 @@
+- alias: Update flight status madison
+  initial_state: true
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sesnor.going_to_ord_madison
+      to: "on"
+    - platform: state
+      entity_id: binary_sesnor.going_to_mdw_madison
+      to: "on"
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.madison_flight_status

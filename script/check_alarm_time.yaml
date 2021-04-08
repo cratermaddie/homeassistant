@@ -17,7 +17,7 @@ check_alarm_time:
       entity_id: media_player.bedroom_speaker
       data_template:
         message: >-
-          {% set day_offset = 0 if (0<=now().hour<=7) else 1 %}
+          {% set day_offset = 0 if (0<=now().hour<=5) else 1 %}
           {% set is_event = now().timestamp() | timestamp_custom('%d') | int + day_offset == as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%d') | int %}
           {% set alarm_time = (states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-H')) if (0 <= states('sensor.auto_alarm_time_ts') | int % 3600 <= 59) else (states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-H %M')) %}
 

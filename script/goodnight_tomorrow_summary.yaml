@@ -4,7 +4,7 @@ goodnight_tomorrow_summary:
       entity_id: media_player.bedroom_speaker
       data_template:
         message: >-
-          {% set day_offset = 0 if (0<=now().hour<=7) else 1 %}
+          {% set day_offset = 0 if (0<=now().hour<=5) else 1 %}
           
           {% set weekday = (now().timestamp()|float +86400 )|timestamp_custom('%A') if day_offset else (now().timestamp()|float )|timestamp_custom('%A') %}
           {% set month = (now().timestamp()|float +86400 )|timestamp_custom('%B') if day_offset else (now().timestamp()|float )|timestamp_custom('%B') %}
@@ -30,7 +30,9 @@ goodnight_tomorrow_summary:
           {% if is_birthday %}
           {{ state_attr('calendar.contacts','message') }}!
           {% endif %}
-          {% if is_state('input_boolean.sleeping_in','on') %}
+          {% if is_state('input_boolean.sleeping_in','on') and is_event %}
+          You're sleeping in so no alarm but your first event tomorrow is {{ state_attr('calendar.personal_trigger','message') }} at {{ event_time }}
+          {% elif is_state('input_boolean.sleeping_in','off') and (not is_event)%}
           You're sleeping in so no alarm.
           {% elif is_event and is_state('input_boolean.alarm_manual_mode','off') %}
           Your first event tomorrow is {{ state_attr('calendar.personal_trigger','message') }} at {{ event_time }} so I'll wake you up around 

@@ -11,7 +11,7 @@
       entity_id: input_select.travel_mode
       state: 'Transit'
     - condition: state
-      entity_id: input_boolean.staying_home
+      entity_id: input_boolean.staying_home_madison
       state: 'off'
     - condition: template
       value_template: "{{ 'YES' in states('sensor.cubs_result') }}"

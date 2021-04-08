@@ -6,7 +6,7 @@
     to: "True"
   condition:
     condition: state
-    entity_id: input_boolean.staying_home
+    entity_id: input_boolean.staying_home_madison
     state: 'off'
   action:
     - service: light.turn_on

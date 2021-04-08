@@ -47,7 +47,7 @@ bedtime_2:
     - service: media_player.turn_off
       entity_id: media_player.bedroom_speaker
     - condition: template
-      value_template: "{{ (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%H') | int < 9) and (((now().hour > 7) and ((now().timestamp() + 86400) | timestamp_custom('%d') == as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%d'))) or ((0 <= now().hour <= 7) and (now().day == as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%d')))) }}"
+      value_template: "{{ (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%H') | int < 9) and (((now().hour >= 5) and ((now().timestamp() + 86400) | timestamp_custom('%d') == as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%d'))) or ((0 <= now().hour <= 7) and (now().day == as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%d')))) }}"
     - delay:
         minutes: 1
     - service: media_player.turn_on

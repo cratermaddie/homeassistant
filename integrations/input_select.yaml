@@ -108,6 +108,7 @@ ecobee_modes:
   name: Thermostat Mode
   icon: mdi:thermostat-box
   options:
+    - ""
     - "Home"
     - "Away"
     - "Work"

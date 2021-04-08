@@ -8,7 +8,7 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: input_boolean.staying_home
+        entity_id: input_boolean.staying_home_madison
         state: 'off'
       - condition: state
         entity_id: var.mode
@@ -44,7 +44,7 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: input_boolean.staying_home
+        entity_id: input_boolean.staying_home_madison
         state: 'off'
       - condition: state
         entity_id: var.mode

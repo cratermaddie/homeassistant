@@ -1,0 +1,17 @@
+- alias: Daily smoke free notification
+  mode: restart
+  trigger:
+    platform: time_pattern
+    hours: '10'
+  action:
+    - service: notify.mobile_app_iphone
+      data:
+        title: >-
+          You have been smoke free for {{ states('sensor.days_smoke_free') }} day{{ "s" if (states('sensor.days_smoke_free') | int > 1) }}!
+        message: "Madison is so proud of you 💕"
+        data:
+          apns_headers:
+            'apns-collapse-id': 'smoke-free'
+          push:
+            thread-id: "smoke-free"
+#            sound: 'ballgame.wav'

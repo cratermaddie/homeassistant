@@ -1,0 +1,13 @@
+- alias: Update flight status armond
+  initial_state: true
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sesnor.going_to_ord_armond
+      to: "on"
+    - platform: state
+      entity_id: binary_sesnor.going_to_mdw_armond
+      to: "on"
+  action:
+    - service: homeassistant.update_entity
+      entity_id: sensor.armond_flight_status

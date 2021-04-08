@@ -1,0 +1,25 @@
+- alias: Template error notification
+  mode: restart
+  trigger:
+    platform: event
+    event_type: system_log_event
+  condition:
+    condition: template
+    value_template: '{{ "template" in trigger.event.data.message[0] }}'
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data_template:
+        title: "Template Error"
+        message: "{{ trigger.event.data.message }}"
+        data:
+          apns_headers:
+            'apns-collapse-id': 'template-error'
+          push:
+            thread-id: 'template-error'
+          url: "https://zrsqlvxxl1b7t0y6mjrm1krverd8k231.ui.nabu.casa/config/logs"
+    - service: persistent_notification.create
+      data_template:
+        title: "Template Error"
+        message: |
+          {{ trigger.event.data.message }}
+          [View Vogs](https://zrsqlvxxl1b7t0y6mjrm1krverd8k231.ui.nabu.casa/config/logs)

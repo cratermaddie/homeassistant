@@ -5,15 +5,12 @@
       entity_id:
         - binary_sensor.front_door
         - binary_sensor.back_door
-        - binary_sensor.east_dining_room_window
-        - binary_sensor.west_dining_room_window
+        - binary_sensor.wyze_group
         - binary_sensor.master_bedroom_window
-        - binary_sensor.guest_bedroom_window
         - binary_sensor.north_living_room_window
         - binary_sensor.south_living_room_window
         - binary_sensor.office_window
         - binary_sensor.south_kitchen_window
-        - binary_sensor.west_kitchen_window
   condition:
     - condition: template
       value_template: "{{ trigger.to_state.attributes.battery_level < 60 }}"

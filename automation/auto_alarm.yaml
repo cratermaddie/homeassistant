@@ -13,9 +13,6 @@
       - condition: state
         entity_id: input_boolean.sleeping_in
         state: 'off'
-      - condition: numeric_state
-        entity_id: sensor.uptime
-        above: 0.1
       - condition: state
         entity_id: script.set_nap
         state: 'off'
@@ -26,6 +23,10 @@
 #    - condition: state
 #      entity_id: input_boolean.awake
 #      state: 'off'
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.home_alarm
+        code: !secret alarm_code
     - service: hue.hue_activate_scene
       data:
         group_name: "Bedroom"
