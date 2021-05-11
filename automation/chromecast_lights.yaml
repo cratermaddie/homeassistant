@@ -1,38 +1,38 @@
-#- alias: Set living room lights depending on chromecast state
-#  mode: restart
-#  trigger:
-#    - platform: state
-#      entity_id: media_player.living_room_tv
-#      to: 'paused'
-#    - platform: state
-#      entity_id: media_player.living_room_tv
-#      to: 'playing'
-#    - platform: state
-#      entity_id: media_player.living_room_tv
-#      to: 'off'
-#  condition:
-#    condition: and
-#    conditions:
-#      - condition: state
-#        entity_id: var.mode
-#        state: 'home'
-#      - condition: state
-#        entity_id: light.living_room_lights
-#        state: 'on'
-#      - condition: template
-#        value_template: "{{ is_state_attr('light.living_room_lights', 'brightness', 26) or is_state_attr('light.living_room_lights', 'brightness', 144) or is_state_attr('light.living_room_lights', 'brightness', None) }}"
-#  action:
-#    - service: hue.hue_activate_scene
-#      data_template:
-#        group_name: "Living room"
-#        scene_name: >-
-#          {% if is_state('media_player.living_room_tv','playing') %}
-#            Dimmed
-#          {% else %}
-#            Relax
-#          {% endif %}
+- alias: Set living room lights depending on chromecast state
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: media_player.living_room_chromecast
+      to: 'paused'
+    - platform: state
+      entity_id: media_player.living_room_chromecast
+      to: 'playing'
+    - platform: state
+      entity_id: media_player.living_room_chromecast
+      to: 'off'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: var.mode
+        state: 'home'
+      - condition: state
+        entity_id: light.living_room_lights
+        state: 'on'
+      - condition: template
+        value_template: "{{ is_state_attr('light.living_room_lights', 'brightness', 26) or is_state_attr('light.living_room_lights', 'brightness', 144) or is_state_attr('light.living_room_lights', 'brightness', None) }}"
+  action:
+    - service: hue.hue_activate_scene
+      data_template:
+        group_name: "Living room"
+        scene_name: >-
+          {% if is_state('media_player.living_room_chromecast','playing') %}
+            Dimmed
+          {% else %}
+            Relax
+          {% endif %}
 #    - condition: state
-#      entity_id: media_player.living_room_tv
+#      entity_id: media_player.living_room_chromecast
 #      state: 'playing'
 #    - service: light.turn_off
 #      entity_id: light.entryway_lights

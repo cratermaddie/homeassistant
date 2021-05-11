@@ -12,6 +12,7 @@ order:
   - item: madison desktop
   - item: madison mobile
   - item: armond mobile
+  - item: OctoPrint
   - item: earnings
   - item: logbook
   - item: history

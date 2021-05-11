@@ -288,6 +288,7 @@
 - platform: time_date
   display_options:
     - 'time'
+    - 'time_utc'
     - 'date'
 
 - platform: igdb_game_image
@@ -381,6 +382,13 @@
 #    hours: 1460
 #  entities:
 #    - sensor.mv_rank_scrape
+
+- platform: sun2
+  monitored_conditions:
+    - sunrise
+    - sunset
+    - solar_noon
+    - max_elevation
 
 - platform: template
   sensors:

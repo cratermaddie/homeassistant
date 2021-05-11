@@ -6,14 +6,14 @@ bedtime_3:
     - service: light.turn_off
       entity_id:
         - light.living_room_lights
-        - light.guest_bedroom_lights
+        - light.vanity_room_lights
         - light.bathroom_lights
         - light.hallway_lights
         - light.kitchen_lights
         - light.dining_room_lights
         - light.office_lights
-        - light.master_bedroom_closet_lights
-        - light.guest_bedroom_closet_lights
+        - light.bedroom_closet_lights
+        - light.vanity_room_closet_lights
         - light.office_closet_lights
     - service: script.turn_off_pc
     - condition: template

@@ -12,7 +12,7 @@
         entity_id: var.mode
         state: 'home'
       - condition: template
-        value_template: "{{ ((as_timestamp(state_attr('calendar.personal_trigger','start_time'))) - (states('sensor.travel_to_next_event') | int * 60)) - (now().timestamp()) >= 3600 }}"
+        value_template: "{{ ((as_timestamp(state_attr('calendar.personal_trigger','start_time'))) - (states('sensor.travel_to_next_event_madison') | int * 60)) - (now().timestamp()) >= 3600 }}"
   action:
     - wait_template: "{{ state_attr(trigger.entity_id, 'title') }}"
     - service: notify.mobile_app_madisons_iphone

@@ -127,4 +127,4 @@
   action:
     - service: input_boolean.turn_on
       data_template:
-        entity_id: "input_boolean.travel_{{ states('input_select.travel_mode') | lower }}_madison"
+        entity_id: "input_boolean.travel_{{ states('input_select.travel_mode_madison') | lower }}_madison"

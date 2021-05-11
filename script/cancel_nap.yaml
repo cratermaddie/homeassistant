@@ -18,9 +18,9 @@ cancel_nap:
       data:
         entity_id: alarm_control_panel.home_alarm
         code: !secret alarm_code
-#    - service: input_boolean.turn_on
-#      data:
-#        entity_id: input_boolean.awake
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.awake
 #    - service: automation.trigger
 #      entity_id: automation.set_aurora_brightness_on_sun_position
 #    - service: automation.trigger

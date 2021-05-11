@@ -5,7 +5,7 @@ snooze:
         entity_id: var.mode
         value: "sleep"
     - service: light.turn_off
-      entity_id: light.master_bedroom_lights
+      entity_id: light.bedroom_lights
     - service: light.turn_off
       entity_id: light.nanoleaf
     - service: input_boolean.turn_off

@@ -1,0 +1,22 @@
+- alias: CR-X Print Complete Notification
+  mode: parallel
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.cr_x_job_percentage
+      to: '100'
+  condition:
+    condition: state
+    entity_id: input_boolean.awake
+    state: 'on'
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data_template:
+        title: "CR-X Complete"
+        message: "The print on the CR-X has finished"
+        data:
+          apns_headers:
+            'apns-collapse-id': 'cr-x-complete'
+          push:
+            thread-id: "cr-x-complete"
+            sound: 'file_done.wav'

@@ -3,11 +3,18 @@
   trigger:
     - platform: state
       entity_id: alarm_control_panel.home_alarm
-      from: 'arm_away'
       to: 'disarmed'
   action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.back_door_alarm_sounding_blink, switch.back_door_alarm_arming_blink, switch.back_door_alarm_disarmed, switch.back_door_alarm_arming, switch.back_door_alarm_armed
+    - service: switch.turn_on
+      data:
+        entity_id: switch.back_door_alarm_disarmed
     - service: media_player.turn_off
       entity_id: media_player.all_devices
+    - condition: template
+      value_template: '{{ trigger.from_state.state != "armed_home" }}'
     - service: media_player.turn_on
       entity_id: media_player.all_devices
     - wait_template: "{{ is_state('media_player.all_devices', 'idle') }}"
@@ -35,4 +42,5 @@
     - service: media_player.turn_off
       entity_id: media_player.all_devices
     - service: switch.turn_off
-      entity_id: switch.noonlight_switch
+      data:
+        entity_id: switch.noonlight_switch

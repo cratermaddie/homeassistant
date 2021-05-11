@@ -1,0 +1,23 @@
+where_is_armond:
+  sequence:
+    - service: notify.mobile_app_madisons_iphone
+      data:
+        title: "Armond's Location"
+        message: >-
+          {% if distance('device_tracker.armonds_iphone_app', 'zone.home') < 1 %}
+            Armond is home
+          {% else %}
+            Armond is near {{ state_attr('sensor.armonds_iphone_geocoded_location','Name') }}
+          {% endif %}
+        data:
+          apns_headers:
+            'apns-collapse-id': 'armond-location'
+          push:
+            thread-id: "armond-location"
+            category: map
+#            sound: 'googlealarmnotif.wav'
+          action_data:
+            latitude: "{{ state_attr('device_tracker.armonds_iphone_app','latitude') }}"
+            longitude: "{{ state_attr('device_tracker.armonds_iphone_app','longitude') }}"
+            shows_points_of_interest: true
+            shows_user_location: true

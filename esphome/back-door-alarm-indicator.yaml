@@ -1,0 +1,75 @@
+esphome:
+  name: back-door-alarm-indicator
+  platform: ESP8266
+  board: d1_mini
+
+wifi:
+  ssid: "Crater Network"
+  password: "kelp-subside-keep"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Back-Door-Alarm-Indicator"
+    password: "sc5UyYteFYXa"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+switch:
+  - platform: gpio
+    name: "Back Door Alarm Armed"
+    pin: 2
+    id: armed
+  - platform: gpio
+    name: "Back Door Alarm Arming"
+    pin: 4
+    id: arming
+  - platform: gpio
+    name: "Back Door Alarm Disarmed"
+    pin: 5
+    id: disarmed
+    
+  - platform: template
+    name: "Back Door Alarm Arming Blink"
+    optimistic: yes
+    id: armtemp
+    turn_on_action:
+    - while:
+        condition:
+          lambda: 'return true;'
+        then:
+        - switch.turn_on: arming
+        - delay: 500ms 
+        - switch.turn_off: arming
+        - delay: 500ms
+    turn_off_action:
+    - switch.turn_off: arming
+    
+  - platform: template
+    name: "Back Door Alarm Sounding Blink"
+    optimistic: yes
+    id: soundtemp
+    turn_on_action:
+    - while:
+        condition:
+          lambda: 'return true;'
+        then:
+        - switch.turn_on: armed
+        - switch.turn_on: arming
+        - switch.turn_on: disarmed
+        - delay: 500ms 
+        - switch.turn_off: armed
+        - switch.turn_off: arming
+        - switch.turn_off: disarmed
+        - delay: 500ms
+    turn_off_action:
+      - switch.turn_off: armed
+      - switch.turn_off: arming
+      - switch.turn_off: disarmed

@@ -6,7 +6,7 @@ bedtime_1:
     - service: light.turn_on
       data:
         entity_id:
-          - light.master_bedroom_lights
+          - light.bedroom_lights
           - light.bathroom_lights
           - light.hallway_lights
           - light.living_room_lights

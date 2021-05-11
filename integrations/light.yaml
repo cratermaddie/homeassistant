@@ -5,7 +5,7 @@
 - platform: group
   name: Kitchen Lights
   entities:
-    - light.kitchen
+    - light.kitchen_1
     - light.kitchen_2
     - light.kitchen_3
 
@@ -27,7 +27,7 @@
     - light.dining_room_5
 
 - platform: group
-  name: Master Bedroom Lights
+  name: Bedroom Lights
   entities:
     - light.master_bedroom_1
     - light.master_bedroom_2
@@ -36,19 +36,19 @@
     - light.bedside_table_lamp
 
 - platform: group
-  name: Master Bedroom Closet Lights
+  name: Bedroom Closet Lights
   entities:
     - light.master_closet
 
 - platform: group
-  name: Guest Bedroom Lights
+  name: Vanity Room Lights
   entities:
     - light.guest_bedroom_1
     - light.guest_bedroom_2
     - light.guest_bedroom_3
 
 - platform: group
-  name: Guest Bedroom Closet Lights
+  name: Vanity Room Closet Lights
   entities:
     - light.guest_closet
 
@@ -79,26 +79,32 @@
     - light.office_closet
 
 - platform: group
+  name: Bedroom Fairy Lights
+  entities:
+    - light.fairy_lights_bedroom_01
+    - light.fairy_lights_bedroom_02
+
+- platform: group
   name: Fairy Lights
   entities:
-    - light.fairy_lights_bedroom
-    - light.fairy_lights_living_room
-    - light.fairy_lights_art
-    - light.fairy_lights_photo
+#    - light.bedroom_fairy_lights
+#    - light.fairy_lights_living_room
+    - light.bedroom_fairy_lights
+    - light.fairy_lights_office
 
 - platform: group
   name: Main Lights
   entities:
     - light.living_room_lights
-    - light.master_bedroom_lights
-    - light.guest_bedroom_lights
+    - light.bedroom_lights
+    - light.vanity_room_lights
     - light.bathroom_lights
     - light.hallway_lights
     - light.kitchen_lights
     - light.dining_room_lights
     - light.office_lights
-    - light.master_bedroom_closet_lights
-    - light.guest_bedroom_closet_lights
+    - light.bedroom_closet_lights
+    - light.vanity_room_closet_lights
     - light.office_closet_lights
 
 - platform: group
@@ -107,18 +113,18 @@
     - light.fairy_lights
     - light.nanoleaf
 
-- platform: switch
-  name: Fairy Lights Art
-  entity_id: switch.fairy_lights_art
-
-- platform: switch
-  name: Fairy Lights Bedroom
-  entity_id: switch.fairy_lights_bedroom
-
-- platform: switch
-  name: Fairy Lights Living Room
-  entity_id: switch.fairy_lights_living_room
-
-- platform: switch
-  name: Fairy Lights Photo
-  entity_id: switch.fairy_lights_photo
+#- platform: switch
+#  name: Fairy Lights Office
+#  entity_id: switch.fairy_lights_office
+#
+#- platform: switch
+#  name: Fairy Lights Bedroom
+#  entity_id: switch.fairy_lights_bedroom
+#
+#- platform: switch
+#  name: Fairy Lights Living Room
+#  entity_id: switch.fairy_lights_living_room
+#
+#- platform: switch
+#  name: Fairy Lights Photo
+#  entity_id: switch.fairy_lights_photo

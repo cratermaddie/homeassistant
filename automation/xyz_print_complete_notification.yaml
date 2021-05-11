@@ -1,0 +1,22 @@
+- alias: XYZ Print Complete Notification
+  mode: parallel
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.davinci_nano_job_percentage
+      to: '100'
+  condition:
+    condition: state
+    entity_id: input_boolean.awake
+    state: 'on'
+  action:
+    - service: notify.mobile_app_madisons_iphone
+      data_template:
+        title: "daVinci Nano Complete"
+        message: "The print on the daVinci Nano has finished"
+        data:
+          apns_headers:
+            'apns-collapse-id': 'xyz-complete'
+          push:
+            thread-id: "xyz-complete"
+            sound: 'file_done.wav'

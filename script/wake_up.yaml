@@ -33,6 +33,6 @@ wake_up:
       entity_id: sun.sun
       state: below_horizon
     - service: light.turn_on
-      entity_id: light.fairy_lights_bedroom
-    - service: light.turn_on
-      entity_id: light.fairy_lights_photo
+      entity_id: light.bedroom_fairy_lights
+#    - service: light.turn_on
+#      entity_id: light.fairy_lights_photo

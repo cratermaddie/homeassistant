@@ -2,13 +2,13 @@
   mode: restart
   trigger:
     - platform: state
-      entity_id: sensor.google_cal_leave_trigger
+      entity_id: sensor.google_cal_leave_trigger_madison
       to: "True"
   condition:
     condition: and
     conditions:
     - condition: state
-      entity_id: input_select.travel_mode
+      entity_id: input_select.travel_mode_madison
       state: 'Transit'
     - condition: state
       entity_id: input_boolean.staying_home_madison
@@ -19,7 +19,7 @@
     - delay:
         minutes: 2
     - condition: state
-      entity_id: input_select.travel_mode
+      entity_id: input_select.travel_mode_madison
       state: 'Transit'
     - service: notify.mobile_app_madisons_iphone
       data:

@@ -1,0 +1,22 @@
+- alias: turn off hvac when window or door open
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.back_door 
+        - binary_sensor.south_kitchen_window
+        - binary_sensor.master_bedroom_window
+        - binary_sensor.front_door
+        - binary_sensor.wyze_group
+        - binary_sensor.north_living_room_window
+        - binary_sensor.south_living_room_window
+        - binary_sensor.office_window
+      to: 'on'
+      for:
+        minutes: 5
+  action:
+    - service: climate.set_hvac_mode
+      target:
+        entity_id: climate.thermostat
+      data:
+        hvac_mode: fan_only

@@ -1,0 +1,11 @@
+- alias: Turn off office outlet if it gets too hot
+  mode: restart
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.office_temperature
+    above: 25
+    for:
+       minutes: 15
+  action:
+    - service: switch.turn_off
+      entity_id: switch.office_outlet
