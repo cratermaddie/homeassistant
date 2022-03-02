@@ -9,6 +9,7 @@ wins_armond:
   name: Wins Armond
   icon: mdi:trophy-outline
   min: 0
+  max: 9999
   mode: box
   unit_of_measurement: wins
 
@@ -16,5 +17,6 @@ wins_madison:
   name: Wins Madison
   icon: mdi:trophy-outline
   min: 0
+  max: 9999
   mode: box
   unit_of_measurement: wins
