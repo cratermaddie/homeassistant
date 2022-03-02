@@ -1,0 +1,5 @@
+turn_on_announce_time:
+  sequence:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.announce_time

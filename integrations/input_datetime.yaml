@@ -4,3 +4,6 @@ manual_alarm:
 smoking_date:
   has_date: true
   has_time: false
+drinking_date:
+  has_date: true
+  has_time: false

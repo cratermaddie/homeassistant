@@ -1,129 +1,129 @@
-- alias: track sunday pills
-  mode: restart
-  trigger:
-    platform: event
-    event_type: tag_scanned
-  condition: '{{ "sunday" in trigger.event.data.tag_id }}'
-  action:
-    service: input_boolean.turn_on
-    data:
-      entity_id: >
-        {% if is_state('input_boolean.sunday_meds_morning','off') %}
-        input_boolean.sunday_meds_morning
-        {% elif is_state('input_boolean.sunday_meds_noon','off') %}
-        input_boolean.sunday_meds_noon
-        {% else %}
-        input_boolean.sunday_meds_evening
-        {% endif %}
-
-- alias: track Monday pills
-  mode: restart
-  trigger:
-    platform: event
-    event_type: tag_scanned
-  condition: '{{ "monday" in trigger.event.data.tag_id }}'
-  action:
-    service: input_boolean.turn_on
-    data:
-      entity_id: >
-        {% if is_state('input_boolean.monday_meds_morning','off') %}
-        input_boolean.monday_meds_morning
-        {% elif is_state('input_boolean.monday_meds_noon','off') %}
-        input_boolean.monday_meds_noon
-        {% else %}
-        input_boolean.monday_meds_evening
-        {% endif %}
-
-- alias: track tuesday pills
-  mode: restart
-  trigger:
-    platform: event
-    event_type: tag_scanned
-  condition: '{{ "tuesday" in trigger.event.data.tag_id }}'
-  action:
-    service: input_boolean.turn_on
-    data:
-      entity_id: >
-        {% if is_state('input_boolean.tuesday_meds_morning','off') %}
-        input_boolean.tuesday_meds_morning
-        {% elif is_state('input_boolean.tuesday_meds_noon','off') %}
-        input_boolean.tuesday_meds_noon
-        {% else %}
-        input_boolean.tuesday_meds_evening
-        {% endif %}
-
-- alias: track wednesday pills
-  mode: restart
-  trigger:
-    platform: event
-    event_type: tag_scanned
-  condition: '{{ "wednesday" in trigger.event.data.tag_id }}'
-  action:
-    service: input_boolean.turn_on
-    data:
-      entity_id: >
-        {% if is_state('input_boolean.wednesday_meds_morning','off') %}
-        input_boolean.wednesday_meds_morning
-        {% elif is_state('input_boolean.wednesday_meds_noon','off') %}
-        input_boolean.wednesday_meds_noon
-        {% else %}
-        input_boolean.wednesday_meds_evening
-        {% endif %}
-
-- alias: track thursday pills
-  mode: restart
-  trigger:
-    platform: event
-    event_type: tag_scanned
-  condition: '{{ "thursday" in trigger.event.data.tag_id }}'
-  action:
-    service: input_boolean.turn_on
-    data:
-      entity_id: >
-        {% if is_state('input_boolean.thursday_meds_morning','off') %}
-        input_boolean.thursday_meds_morning
-        {% elif is_state('input_boolean.thursday_meds_noon','off') %}
-        input_boolean.thursday_meds_noon
-        {% else %}
-        input_boolean.thursday_meds_evening
-        {% endif %}
-
-- alias: track friday pills
-  mode: restart
-  trigger:
-    platform: event
-    event_type: tag_scanned
-  condition: '{{ "friday" in trigger.event.data.tag_id }}'
-  action:
-    service: input_boolean.turn_on
-    data:
-      entity_id: >
-        {% if is_state('input_boolean.friday_meds_morning','off') %}
-        input_boolean.friday_meds_morning
-        {% elif is_state('input_boolean.friday_meds_noon','off') %}
-        input_boolean.friday_meds_noon
-        {% else %}
-        input_boolean.friday_meds_evening
-        {% endif %}
-
-- alias: track saturday pills
-  mode: restart
-  trigger:
-    platform: event
-    event_type: tag_scanned
-  condition: '{{ "saturday" in trigger.event.data.tag_id }}'
-  action:
-    service: input_boolean.turn_on
-    data:
-      entity_id: >
-        {% if is_state('input_boolean.saturday_meds_morning','off') %}
-        input_boolean.saturday_meds_morning
-        {% elif is_state('input_boolean.saturday_meds_noon','off') %}
-        input_boolean.saturday_meds_noon
-        {% else %}
-        input_boolean.saturday_meds_evening
-        {% endif %}
-
+#- alias: track sunday pills
+#  mode: restart
+#  trigger:
+#    platform: event
+#    event_type: tag_scanned
+#  condition: '{{ "sunday" in trigger.event.data.tag_id }}'
+#  action:
+#    service: input_boolean.turn_on
+#    data:
+#      entity_id: >
+#        {% if is_state('input_boolean.sunday_meds_morning','off') %}
+#        input_boolean.sunday_meds_morning
+#        {% elif is_state('input_boolean.sunday_meds_noon','off') %}
+#        input_boolean.sunday_meds_noon
+#        {% else %}
+#        input_boolean.sunday_meds_evening
+#        {% endif %}
+#
+#- alias: track Monday pills
+#  mode: restart
+#  trigger:
+#    platform: event
+#    event_type: tag_scanned
+#  condition: '{{ "monday" in trigger.event.data.tag_id }}'
+#  action:
+#    service: input_boolean.turn_on
+#    data:
+#      entity_id: >
+#        {% if is_state('input_boolean.monday_meds_morning','off') %}
+#        input_boolean.monday_meds_morning
+#        {% elif is_state('input_boolean.monday_meds_noon','off') %}
+#        input_boolean.monday_meds_noon
+#        {% else %}
+#        input_boolean.monday_meds_evening
+#        {% endif %}
+#
+#- alias: track tuesday pills
+#  mode: restart
+#  trigger:
+#    platform: event
+#    event_type: tag_scanned
+#  condition: '{{ "tuesday" in trigger.event.data.tag_id }}'
+#  action:
+#    service: input_boolean.turn_on
+#    data:
+#      entity_id: >
+#        {% if is_state('input_boolean.tuesday_meds_morning','off') %}
+#        input_boolean.tuesday_meds_morning
+#        {% elif is_state('input_boolean.tuesday_meds_noon','off') %}
+#        input_boolean.tuesday_meds_noon
+#        {% else %}
+#        input_boolean.tuesday_meds_evening
+#        {% endif %}
+#
+#- alias: track wednesday pills
+#  mode: restart
+#  trigger:
+#    platform: event
+#    event_type: tag_scanned
+#  condition: '{{ "wednesday" in trigger.event.data.tag_id }}'
+#  action:
+#    service: input_boolean.turn_on
+#    data:
+#      entity_id: >
+#        {% if is_state('input_boolean.wednesday_meds_morning','off') %}
+#        input_boolean.wednesday_meds_morning
+#        {% elif is_state('input_boolean.wednesday_meds_noon','off') %}
+#        input_boolean.wednesday_meds_noon
+#        {% else %}
+#        input_boolean.wednesday_meds_evening
+#        {% endif %}
+#
+#- alias: track thursday pills
+#  mode: restart
+#  trigger:
+#    platform: event
+#    event_type: tag_scanned
+#  condition: '{{ "thursday" in trigger.event.data.tag_id }}'
+#  action:
+#    service: input_boolean.turn_on
+#    data:
+#      entity_id: >
+#        {% if is_state('input_boolean.thursday_meds_morning','off') %}
+#        input_boolean.thursday_meds_morning
+#        {% elif is_state('input_boolean.thursday_meds_noon','off') %}
+#        input_boolean.thursday_meds_noon
+#        {% else %}
+#        input_boolean.thursday_meds_evening
+#        {% endif %}
+#
+#- alias: track friday pills
+#  mode: restart
+#  trigger:
+#    platform: event
+#    event_type: tag_scanned
+#  condition: '{{ "friday" in trigger.event.data.tag_id }}'
+#  action:
+#    service: input_boolean.turn_on
+#    data:
+#      entity_id: >
+#        {% if is_state('input_boolean.friday_meds_morning','off') %}
+#        input_boolean.friday_meds_morning
+#        {% elif is_state('input_boolean.friday_meds_noon','off') %}
+#        input_boolean.friday_meds_noon
+#        {% else %}
+#        input_boolean.friday_meds_evening
+#        {% endif %}
+#
+#- alias: track saturday pills
+#  mode: restart
+#  trigger:
+#    platform: event
+#    event_type: tag_scanned
+#  condition: '{{ "saturday" in trigger.event.data.tag_id }}'
+#  action:
+#    service: input_boolean.turn_on
+#    data:
+#      entity_id: >
+#        {% if is_state('input_boolean.saturday_meds_morning','off') %}
+#        input_boolean.saturday_meds_morning
+#        {% elif is_state('input_boolean.saturday_meds_noon','off') %}
+#        input_boolean.saturday_meds_noon
+#        {% else %}
+#        input_boolean.saturday_meds_evening
+#        {% endif %}
+#
 - alias: track estrogen
   mode: restart
   trigger:
@@ -148,37 +148,34 @@
       entity_id: >
         input_boolean.rogaine_status
 
+- alias: track pills
+  mode: restart
+  trigger:
+    - platform: event
+      event_type: tag_scanned
+  condition: '{{ "meds" in trigger.event.data.tag_id }}'
+  action:
+    service: script.medication_status
+
+- alias: track pills ios
+  mode: restart
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: DISMISS_MEDS
+  action:
+    service: script.medication_status
+
 - alias: reset meds
   mode: restart
   trigger:
-    - platform: time
-      at: '00:00:00'
-  condition:
-    condition: time
-    weekday:
-    - sun
+    - platform: state
+      entity_id: sensor.active_day_of_week
   action:
     service: input_boolean.turn_off
     entity_id:
-      - input_boolean.sunday_meds_morning
-      - input_boolean.sunday_meds_noon
-      - input_boolean.sunday_meds_evening
-      - input_boolean.monday_meds_morning
-      - input_boolean.monday_meds_noon
-      - input_boolean.monday_meds_evening
-      - input_boolean.tuesday_meds_morning
-      - input_boolean.tuesday_meds_noon
-      - input_boolean.tuesday_meds_evening
-      - input_boolean.wednesday_meds_morning
-      - input_boolean.wednesday_meds_noon
-      - input_boolean.wednesday_meds_evening
-      - input_boolean.thursday_meds_morning
-      - input_boolean.thursday_meds_noon
-      - input_boolean.thursday_meds_evening
+      - input_boolean.meds_morning
+      - input_boolean.meds_noon
+      - input_boolean.meds_evening
       - input_boolean.estrogen_status
-      - input_boolean.friday_meds_morning
-      - input_boolean.friday_meds_noon
-      - input_boolean.friday_meds_evening
-      - input_boolean.saturday_meds_morning
-      - input_boolean.saturday_meds_noon
-      - input_boolean.saturday_meds_evening

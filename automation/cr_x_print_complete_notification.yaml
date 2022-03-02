@@ -3,8 +3,8 @@
   trigger:
     - platform: state
       entity_id:
-        - sensor.cr_x_job_percentage
-      to: '100'
+        - sensor.cr_x_time_remaining
+      to: '0'
   condition:
     condition: state
     entity_id: input_boolean.awake

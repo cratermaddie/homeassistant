@@ -2,12 +2,8 @@ goodnight_meds:
   sequence:
     - condition: template
       value_template: >-
-        {% set meds_morning = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_morning' %}
-        {% set meds_noon = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_noon' %}
-        {% set meds_evening = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_evening' %}
-
-        {{ is_state(meds_morning, 'off') or is_state(meds_evening, 'off') }}
-    - service: tts.google_translate_say
+        {{ is_state('input_boolean.meds_evening', 'off') }}
+    - service: tts.cloud_say
       entity_id: media_player.bedroom_speaker
       data_template:
         message: "You still need to take your meds."

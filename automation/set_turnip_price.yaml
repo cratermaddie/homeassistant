@@ -1,12 +1,12 @@
-- alias: Set turnip price
-  mode: restart
-  trigger:
-    platform: event
-    event_type: ios.notification_action_fired
-    event_data:
-      actionName: UPDATE_TURNIP
-  action:
-      - service: input_number.set_value
-        data_template:
-          entity_id: '{{"input_number."+(now().timestamp()|timestamp_custom("%A")|lower)+("_am" if (now().hour|int <12) else "_pm") }}'
-          value: '{{ trigger.event.data["textInput"] }}'
+#- alias: Set turnip price
+#  mode: restart
+#  trigger:
+#    platform: event
+#    event_type: ios.notification_action_fired
+#    event_data:
+#      actionName: UPDATE_TURNIP
+#  action:
+#      - service: input_number.set_value
+#        data_template:
+#          entity_id: '{{"input_number."+(now().timestamp()|timestamp_custom("%A")|lower)+("_am" if (now().hour|int <12) else "_pm") }}'
+#          value: '{{ trigger.event.data["textInput"] }}'

@@ -1,0 +1,7 @@
+reset_drinking_date:
+  alias: "Reset"
+  sequence:
+    - service: input_datetime.set_datetime
+      data:
+        entity_id: input_datetime.drinking_date
+        timestamp: "{{ now().timestamp() }}"

@@ -1,110 +1,20 @@
-master_bedroom_ac_temperature:
+bedroom_ac_temperature:
   name: Sleep Temperature
   min: 10
   max: 25
   step: 1
   mode: box
 
-sunday_price:
-  name: Sunday Price
-  icon: mdi:calendar
+wins_armond:
+  name: Wins Armond
+  icon: mdi:trophy-outline
   min: 0
-  max: 500
   mode: box
-  unit_of_measurement: bells
+  unit_of_measurement: wins
 
-monday_am:
-  name: Monday Morning
-  icon: mdi:weather-sunny
+wins_madison:
+  name: Wins Madison
+  icon: mdi:trophy-outline
   min: 0
-  max: 500
   mode: box
-  unit_of_measurement: bells
-
-monday_pm:
-  name: Monday Evening
-  icon: mdi:weather-night
-  min: 0
-  max: 500
-  mode: box
-  unit_of_measurement: bells
-
-tuesday_am:
-  name: Tuesday Morning
-  icon: mdi:weather-sunny
-  min: 0
-  max: 500
-  mode: box
-  unit_of_measurement: bells
-
-tuesday_pm:
-  name: Tuesday Evening
-  icon: mdi:weather-night
-  min: 0
-  max: 500
-  mode: box
-  unit_of_measurement: bells
-
-wednesday_am:
-  name: Wednesday Morning
-  icon: mdi:weather-sunny
-  min: 0
-  max: 500
-  mode: box
-  unit_of_measurement: bells
-
-wednesday_pm:
-  name: Wedsnesday Evening
-  icon: mdi:weather-night
-  min: 0
-  max: 500
-  mode: box
-  unit_of_measurement: bells
-
-thursday_am:
-  name: Thursday Morning
-  icon: mdi:weather-sunny
-  min: 0
-  max: 500
-  mode: box
-  unit_of_measurement: bells
-
-thursday_pm:
-  name: Thursday Evening
-  icon: mdi:weather-night
-  min: 0
-  max: 500
-  mode: box
-  unit_of_measurement: bells
-
-friday_am:
-  name: Friday Morning
-  icon: mdi:weather-sunny
-  min: 0
-  max: 500
-  mode: box
-  unit_of_measurement: bells
-
-friday_pm:
-  name: Friday Evening
-  icon: mdi:weather-night
-  min: 0
-  max: 500
-  mode: box
-  unit_of_measurement: bells
-
-saturday_am:
-  name: Saturday Morning
-  icon: mdi:weather-sunny
-  min: 0
-  max: 500
-  mode: box
-  unit_of_measurement: bells
-
-saturday_pm:
-  name: Saturday Evening
-  icon: mdi:weather-night
-  min: 0
-  max: 500
-  mode: box
-  unit_of_measurement: bells
+  unit_of_measurement: wins

@@ -13,10 +13,10 @@
 - platform: wyzesense
   device: auto
 
-- platform: octoprint
-  monitored_conditions:
-    - Printing
-    - Printing Error
+#- platform: octoprint
+#  monitored_conditions:
+#    - Printing
+#    - Printing Error
 
 - platform: ffmpeg_motion
   input: !secret west_camera_rtsp
@@ -29,9 +29,9 @@
   changes: 1
 
 - platform: ffmpeg_motion
-  input: !secret print_camera_rtsp
-  name: print_camera_motion
-  changes: 1
+  input: !secret street_camera_rtsp
+  name: street_camera_motion
+  changes: 9
 
 - platform: template
   sensors:
@@ -47,6 +47,10 @@
           value_template: "{{ is_state('binary_sensor.bed_right', 'off') }}"
       bed_left_occupied:
           value_template: "{{ is_state('binary_sensor.bed_left', 'off') }}"
+      front_door_locked:
+          value_template: "{{ is_state('binary_sensor.front_door_unlocked', 'off') }}"
+      back_door_locked:
+          value_template: "{{ is_state('binary_sensor.back_door_unlocked', 'off') }}"
       ord_faa_err:
         value_template: "{{ states('binary_sensor.ord_arrival_delay') or states('binary_sensor.ord_closure') or states('binary_sensor.ord_departure_delay') or states('binary_sensor.ord_ground_delay') or states('binary_sensor.ord_ground_stop') }}"
       mdw_faa_err:
@@ -69,3 +73,12 @@
       going_to_airport_armond:
         value_template: >-
           {{ states('binary_sensor.going_to_ord_armond') or states('binary_sensor.going_to_mdw_armond') }}
+      late_alarm_flag:
+        value_template: >-
+          {{ (states('sensor.auto_alarm_time_ts') | int > as_timestamp(state_attr("calendar.personal_trigger", "start_time"))) and (states('sensor.auto_alarm_time_ts') | int | timestamp_custom('%-d') | int == as_timestamp(state_attr("calendar.personal_trigger", "start_time")) | int | timestamp_custom('%-d') |int) }}
+      playing_steam_game:
+        value_template: >-
+          {{ not state_attr('sensor.steam_76561197991761979', 'game') == none }}
+      bedroom_ac_exists:
+        value_template: >-
+          {{states('climate.bedroom_ac') != "unknown"}}

@@ -11,13 +11,15 @@
         state: 'away'
   action:
     - service: light.turn_on
-      entity_id: light.fairy_lights_office
+      target:
+        entity_id: light.fairy_lights_office
 #    - service: light.turn_on
 #      entity_id: light.fairy_lights_art
     - condition: state
       entity_id: var.mode
       state: 'home'
     - service: light.turn_on
-      entity_id: light.bedroom_fairy_lights
+      target:
+        entity_id: light.bedroom_fairy_lights
 #    - service: light.turn_on
 #      entity_id: light.fairy_lights_photo

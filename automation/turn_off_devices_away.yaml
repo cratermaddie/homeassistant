@@ -7,14 +7,21 @@
     entity_id: group.home
     to: 'not_home'
   action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.announce_time
     - service: light.turn_off
-      entity_id: light.nanoleaf
+      target:
+        entity_id: light.nanoleaf
     - service: light.turn_off
-      entity_id: light.main_lights
+      target:
+        entity_id: light.main_lights
     - service: light.turn_off
-      entity_id: light.fairy_lights
-    - service: switch.turn_off
-      entity_id: switch.air_freshener
-    - service: script.turn_off_tv
+      target:
+        entity_id: light.fairy_lights
+#    - service: switch.turn_off
+#      target:
+#        entity_id: switch.air_freshener
+#    - service: script.turn_off_tv
 #    - service: script.turn_off_vanity
 #    - service: script.turn_off_diffuser

@@ -1,0 +1,9 @@
+- alias: turn on announce time when playing game on steam
+  mode: restart
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.playing_steam_game
+      to: 'on'
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.announce_time

@@ -1,7 +1,7 @@
 ###TODO###
-turn_off_tv:
-  sequence:
-    - service: switch.turn_off
-      entity_id: switch.tv
-    - service: switch.turn_on
-      entity_id: switch.tv
+#turn_off_tv:
+#  sequence:
+#    - service: switch.turn_off
+#      entity_id: switch.tv
+#    - service: switch.turn_on
+#      entity_id: switch.tv

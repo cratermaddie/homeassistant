@@ -48,6 +48,7 @@ frontend:
   extra_module_url:
     - /hacsfiles/custom-sidebar/custom-sidebar.js
     - /local/custom_icons.js
+    - /local/card-mod.js
 
 recorder:
   db_url: !secret db_url
@@ -197,9 +198,8 @@ webostv:
 
 camera:
   - platform: ffmpeg
-    name: Printer Camera
-    input: !secret print_camera_rtsp
-    extra_arguments: "-vf 'rotate=0.5'"
+    name: Street Camera
+    input: !secret street_camera_rtsp
   - platform: ffmpeg
     name: West Camera
     input: !secret west_camera_rtsp
@@ -228,7 +228,49 @@ twilio:
 #microsoft_face:
 #  api_key: !secret microsoft_face_api_key
 #  azure_region: northcentralus
-#  
+
+#image_processing:
+#  - platform: doods
+#    scan_interval: 10800
+#    url: "http://192.168.0.2:8080"
+#    detector: default
+#    source:
+#      - entity_id: camera.street_camera
+#    file_out:
+#      - "/media/{{ camera_entity.split('.')[1] }}_latest.jpg"
+#      - "/media/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+#    confidence: 50
+#    labels:
+#      - person
+#      - car
+#      - truck
+#      - bicycle
+#      - motorcycle
+#      - bus
+#      - dog
+#  - platform: deepstack_object
+#    ip_address: localhost
+#    port: 80
+#    # custom_model: mask
+#    # confidence: 80
+#    save_file_folder: /config/snapshots/
+#    save_file_format: png
+#    save_timestamped_file: True
+#    always_save_latest_file: True
+#    scale: 0.75
+#    # roi_x_min: 0.35
+#    roi_x_max: 0.8
+#    #roi_y_min: 0.4
+#    roi_y_max: 0.8
+#    targets:
+#      - target: person
+#      - target: vehicle
+#        confidence: 60
+#      - target: car
+#        confidence: 40
+#    source:
+#      - entity_id: camera.local_file
+
 #image_processing:
 #  - platform: microsoft_face_detect
 #    scan_interval: 9999
@@ -254,17 +296,6 @@ noonlight:
   api_endpoint: https://api.noonlight.com/platform/v1
   token_endpoint: https://noonlight.konnected.io/ha/token
     
-#google_assistant:
-#  service_account: !include SERVICE_ACCOUNT.json
-#  project_id: !secret google_assistant_project_id
-#  report_state: true
-#  exposed_domains:
-#    - script
-    
-counter:
-  meds_counter:
-    minimum: 0
-    
 #conversation:
 #  intents: !include integrations/intent.yaml
   
@@ -284,16 +315,16 @@ panel_iframe:
 #    icon: mdi:printer-3d
 #    url: http://octopi-cr-x.local/
 
-octoprint:
-  - host: !secret cr_x_octoprint_host
-    bed: true
-    ssl: false
-    api_key: !secret octoprint_api_key
-    name: CR-X
-    number_of_tools: 2
-  - host: !secret xyz_octoprint_host
-    bed: true
-    ssl: false
-    api_key: !secret xyz_octoprint_api_key
-    name: DaVinci Nano
-    number_of_tools: 1
+#octoprint:
+#  - host: !secret cr_x_octoprint_host
+#    bed: true
+#    ssl: false
+#    api_key: !secret octoprint_api_key
+#    name: CR-X
+#    number_of_tools: 2
+#  - host: !secret xyz_octoprint_host
+#    bed: true
+#    ssl: false
+#    api_key: !secret xyz_octoprint_api_key
+#    name: DaVinci Nano
+#    number_of_tools: 1

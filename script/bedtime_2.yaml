@@ -4,8 +4,6 @@ bedtime_2:
       entity_id: var.mode
       state: 'home'
     - service: script.update_travel_time_madison
-    - service: switch.turn_off
-      entity_id: switch.air_freshener
     - service: hue.hue_activate_scene
       data:
         group_name: "Bedroom"
@@ -25,7 +23,7 @@ bedtime_2:
       data_template:
         entity_id: media_player.bedroom_speaker
         volume_level: 0.8
-    - service: tts.google_translate_say
+    - service: tts.cloud_say
       entity_id: media_player.bedroom_speaker
       data:
         message: 'Time to go to bed.'
@@ -61,7 +59,7 @@ bedtime_2:
       data_template:
         entity_id: media_player.living_room_speaker
         volume_level: 0.8
-    - service: tts.google_translate_say
+    - service: tts.cloud_say
       entity_id: media_player.living_room_speaker
       data_template:
         message: "Remember, you have {{ state_attr('calendar.personal_trigger','message') }} at {{ (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | int | timestamp_custom('%-H')) if (0 <= as_timestamp(state_attr('calendar.personal_trigger','start_time')) % 3600 <= 59) else (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%-H %M')) }} tomorrow."

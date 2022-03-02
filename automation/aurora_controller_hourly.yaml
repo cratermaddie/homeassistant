@@ -1,34 +1,34 @@
-- alias: Aurora Controller Hourly
-  mode: restart
-  trigger:
-    - platform: time_pattern
-      hours: '*'
-  condition:
-    condition: and
-    conditions:
-    - condition: state
-      entity_id: var.mode
-      state: 'home'
-    - condition: state
-      entity_id: input_boolean.awake
-      state: 'on'
-    - condition: state
-      entity_id: input_boolean.bedtime
-      state: 'off'
-  action:
-    - service: var.set
-      data:
-        entity_id: var.aurora_temp
-        value_template: "{{ state_attr('light.nanoleaf', 'effect') }}"
-    - service: script.aurora_thermometer
-    - delay:
-        minutes: 1
-    - condition: state
-      entity_id: var.mode
-      state: 'home'
-    - service_template: >
-        {%- if is_state('input_select.aurora_mode', 'Weather') -%}
-        script.aurora_weather
-        {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
-        script.aurora_manual
-        {% endif %}
+#- alias: Aurora Controller Hourly
+#  mode: restart
+#  trigger:
+#    - platform: time_pattern
+#      hours: '*'
+#  condition:
+#    condition: and
+#    conditions:
+#    - condition: state
+#      entity_id: var.mode
+#      state: 'home'
+#    - condition: state
+#      entity_id: input_boolean.awake
+#      state: 'on'
+#    - condition: state
+#      entity_id: input_boolean.bedtime
+#      state: 'off'
+#  action:
+#    - service: var.set
+#      data:
+#        entity_id: var.aurora_temp
+#        value_template: "{{ state_attr('light.nanoleaf', 'effect') }}"
+#    - service: script.aurora_thermometer
+#    - delay:
+#        minutes: 1
+#    - condition: state
+#      entity_id: var.mode
+#      state: 'home'
+#    - service_template: >
+#        {%- if is_state('input_select.aurora_mode', 'Weather') -%}
+#        script.aurora_weather
+#        {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
+#        script.aurora_manual
+#        {% endif %}

@@ -12,3 +12,7 @@
   host: !secret lg_tv_ip
   name: living_room_tv_lgos
   filename: webostv.conf
+
+- platform: hass_agent_notifier
+  name: "Desktop HASS.Agent"
+  resource: http://192.168.0.3:5115/notify

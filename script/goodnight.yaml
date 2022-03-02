@@ -2,14 +2,17 @@ goodnight:
   sequence:
     - service: input_boolean.turn_on
       entity_id: input_boolean.bedroom_ac_fan_low
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.announce_time
     - service: script.update_travel_time_madison
     - service: homeassistant.update_entity
       entity_id: sensor.auto_alarm_time_ts
     - service: script.turn_off_pc
-#    - service: input_select.select_option
-#      data:
-#        entity_id: input_select.bedroom_ac_fan_mode
-#        option: Low
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.ecobee_modes
+        option: Sleep
     - service: media_player.turn_on
       entity_id: media_player.bedroom_speaker
     - wait_template: "{{ is_state('media_player.bedroom_speaker', 'idle') }}"
@@ -23,18 +26,12 @@ goodnight:
         entity_id: media_player.bedroom_speaker
         volume_level: 0.5
     - service: script.goodnight_meds
-    - wait_template: >-
-        {% set meds_morning = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_morning' %}
-        {% set meds_noon = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_noon' %}
-        {% set meds_evening = 'input_boolean.' + states('sensor.active_day_of_week') + '_meds_evening' %}
-        {{ is_state(meds_evening, 'on') }}
+    - wait_template: "{{ is_state('input_boolean.meds_evening','on') }}"
       timeout: "00:05:00"
     - service: script.goodnight_rogaine
     - wait_template: >-
         {{ is_state('input_boolean.rogaine_status', 'on') }}
       timeout: "00:05:00"
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.meds_status
     - service: input_boolean.turn_off
       entity_id: input_boolean.rogaine_status
     - service: script.goodnight_e
@@ -68,9 +65,6 @@ goodnight:
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.awake
-    - service: input_boolean.turn_off
-      data:
-        entity_id: input_boolean.meds_status
     - service: script.reset_estrogen
     - service: input_boolean.turn_off
       data:
@@ -78,11 +72,14 @@ goodnight:
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.staying_up
-    - service: switch.turn_off
-      entity_id: switch.air_freshener
     - service: light.turn_off
-      entity_id:
-        - light.main_lights
+      target:
+        entity_id:
+          - light.main_lights
+    - service: light.turn_off
+      target:
+        entity_id:
+          - light.fairy_lights
     - service: alarm_control_panel.alarm_arm_home
       data:
         entity_id: alarm_control_panel.home_alarm

@@ -1,0 +1,61 @@
+good_morning:
+  sequence:
+    - service: script.turn_off
+      data:
+        entity_id: script.set_nap
+    - service: script.turn_off
+      data:
+        entity_id: script.snooze
+    - service: hue.hue_activate_scene
+      data:
+        group_name: "Bedroom"
+        scene_name: "Relax"
+    - service: var.set
+      data:
+        entity_id: var.mode
+        value: "home"
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.home_alarm
+        code: !secret alarm_code
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.awake
+    - service: tts.cloud_say
+      entity_id: media_player.bedroom_speaker
+      data_template:
+        message: >-
+          {% set space = "" %}
+
+          {% set weekday = (now().timestamp()|float )|timestamp_custom('%A') %}
+          {% set month = (now().timestamp()|float )|timestamp_custom('%B') %}
+          {% set day = (now().timestamp()|float )|timestamp_custom('%-d') %}
+          {% set minute = (now().timestamp()|float )|timestamp_custom('%-M') if ((now().timestamp()|float )|timestamp_custom('%-M')|int != 0) else 'hours'  %}
+          {% set is_birthday = (now().timestamp() | timestamp_custom('%d') | int  == as_timestamp(state_attr('calendar.contacts','start_time')) | timestamp_custom('%d') | int) and (now().timestamp() | timestamp_custom('%m') | int == as_timestamp(state_attr('calendar.contacts','start_time')) | timestamp_custom('%m') | int) %}
+          {% set is_event = now().timestamp() | timestamp_custom('%d') | int  == as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%d') | int %}
+          {% set is_holiday = now().timestamp() | timestamp_custom('%d') | int  == as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%d') | int and (now().timestamp() | timestamp_custom('%m') | int == as_timestamp(state_attr('calendar.holidays_in_united_states','start_time')) | timestamp_custom('%m') | int) %}
+
+          {% set event_time = (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | int | timestamp_custom('%-H')) if (0 <= as_timestamp(state_attr('calendar.personal_trigger','start_time')) % 3600 <= 59) else (as_timestamp(state_attr('calendar.personal_trigger','start_time')) | timestamp_custom('%-H %M')) %}
+          {% set summary = states('sensor.dark_sky_summary_0d') | replace('.', '') | lower %}
+          {% set high = states('sensor.dark_sky_daytime_high_temperature_0d') | int %}
+          {% set low = states('sensor.dark_sky_overnight_low_temperature_0d') | int %}
+
+          Good morning Madison! It is currently {{ (now().timestamp()|float )|timestamp_custom('%-H') }} {{ minute }} on {{ weekday }} the {% if day | int == 1 or day | int == 21 or day | int == 31 %}{{ day }}st{% elif day | int == 2 or day | int == 22 %}{{ day }}nd{% elif day | int == 3 or day | int == 23 %}{{ day }}rd{% else %}{{ day }}th{% endif %} of {{ month }}. {{ space }}Today's weather will be {{ summary }} with a high of {{ high }} and a low of {{ low }}. {{ space }}
+          {%- if is_holiday -%}
+          Today is {{ state_attr('calendar.holidays_in_united_states','message') | replace(" (regional holiday)","") }}. {{ space }}
+          {%- endif -%}
+          {%- if not is_holiday and is_birthday -%}
+          Today is {{ space }}
+          {%- elif is_birthday -%}
+          and{{ space }}
+          {%- endif -%}
+          {%- if is_birthday -%}
+          {{ state_attr('calendar.contacts','message') }}! {{ space }}
+          {%- endif -%}
+          {%- if is_event -%}
+          {{ state_attr('calendar.personal_trigger','message') }} starts at {{ event_time }}. {{ space }}
+          {%- endif -%}
+          {{- [
+          "Have a good one",
+          "Have a good day",
+          "Enjoy your day"] | random -}}!

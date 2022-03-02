@@ -3,23 +3,20 @@
   trigger:
     - platform: time
       at: '10:00:00'
-    - platform: time
-      at: '12:00:00'
+#    - platform: time
+#      at: '12:00:00'
     - platform: time
       at: '22:00:00'
 #    - platform: zone
 #      entity_id: device_tracker.madisons_iphone_app
 #      zone: zone.home
 #      event: enter
-#  condition:
-#    condition: and
-#    conditions:
-#    - condition: template
-#      value_template: "{{ (states('counter.meds_counter') | int % 2) != 0 }}"
-#    - condition: time
-#      after: '18:59:59'
   condition: >-
-    {% set meds_var = 'input_boolean.' + states('sensor.day_of_week') + '_meds_' + ('morning' if 0 <= (states('sensor.time')|regex_replace(find=':.*$', replace='', ignorecase=False)|int) <= 10 else '') + ('noon' if 11 <= (states('sensor.time')|regex_replace(find=':.*$', replace='', ignorecase=False)|int) <= 15 else '') + ('evening' if 15 <= (states('sensor.time')|regex_replace(find=':.*$', replace='', ignorecase=False)|int) <= 22 else '') %}
+    {% if 7 <= (states('sensor.time')|regex_replace(find=':.*$', replace='', ignorecase=False)|int) <= 13 %}
+      {% set meds_var = 'input_boolean.meds_morning' %}
+    {% else %}
+      {% set meds_var = 'input_boolean.meds_evening' %}
+    {% endif %}
     {{ is_state(meds_var, 'off') }}
   action:
     - service: notify.mobile_app_madisons_iphone

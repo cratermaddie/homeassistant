@@ -4,17 +4,18 @@ bedtime_3:
       entity_id: var.mode
       state: 'home'
     - service: light.turn_off
-      entity_id:
-        - light.living_room_lights
-        - light.vanity_room_lights
-        - light.bathroom_lights
-        - light.hallway_lights
-        - light.kitchen_lights
-        - light.dining_room_lights
-        - light.office_lights
-        - light.bedroom_closet_lights
-        - light.vanity_room_closet_lights
-        - light.office_closet_lights
+      target:
+        entity_id:
+          - light.living_room_lights
+          - light.vanity_room_lights
+          - light.bathroom_lights
+          - light.hallway_lights
+          - light.kitchen_lights
+          - light.dining_room_lights
+          - light.office_lights
+          - light.bedroom_closet_lights
+          - light.vanity_room_closet_lights
+          - light.office_closet_lights
     - service: script.turn_off_pc
     - condition: template
       value_template: "{{ not is_state('media_player.apple_tv','playing') and not is_state(' media_player.bedroom_chromecast','playing') }}"

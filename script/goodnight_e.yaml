@@ -6,9 +6,10 @@ goodnight_e:
     - condition: state
       entity_id: sensor.active_day_of_week
       state: 'thursday'
-    - service: tts.google_translate_say
+    - service: tts.cloud_say
       entity_id: media_player.bedroom_speaker
       data_template:
         message: "You still need to take your estrogen."
     - service: light.turn_on
-      entity_id: light.bathroom_lights
+      target:
+        entity_id: light.bathroom_lights

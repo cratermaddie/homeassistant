@@ -12,5 +12,5 @@
 #  action:
 #    service: input_number.set_value
 #    data_template:
-#      entity_id: input_number.master_bedroom_ac_temperature
+#      entity_id: input_number.bedroom_ac_temperature
 #      value: "{{ states('sensor.ecobee_set_temp') }}"

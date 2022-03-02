@@ -19,22 +19,34 @@
 #        service: script.turn_off_tv
         
     aquarium:
-      value_template: "{{ is_state('switch.aquarium_day', 'on') }}"
+      value_template: "{{ is_state('light.aquarium_day', 'on') }}"
       turn_on:
-        - service: switch.turn_on
-          entity_id: switch.aquarium_day
-        - service: switch.turn_off
-          entity_id: switch.aquarium_night
+        - service: light.turn_on
+          entity_id: light.aquarium_day
+        - service: light.turn_off
+          entity_id: light.aquarium_night
       turn_off:
-        - service: switch.turn_off
-          entity_id: switch.aquarium_day
-        - service: switch.turn_on
-          entity_id: switch.aquarium_night
+        - service: light.turn_off
+          entity_id: light.aquarium_day
+        - service: light.turn_on
+          entity_id: light.aquarium_night
     bathroom_fan:
       value_template: "{{ is_state('light.bathroom_fan', 'on') }}"
       turn_on:
         - service: light.turn_on
-          entity_id: light.bathroom_fan
+          target:
+            entity_id: light.bathroom_fan
       turn_off:
         - service: light.turn_off
-          entity_id: light.bathroom_fan
+          target:
+            entity_id: light.bathroom_fan
+    aquarium_sludge_control:
+      value_template: "{{ is_state('light.aquarium_sludge_control', 'on') }}"
+      turn_on:
+        - service: light.turn_on
+          target:
+            entity_id: light.aquarium_sludge_control
+      turn_off:
+        - service: light.turn_off
+          target:
+            entity_id: light.aquarium_sludge_control

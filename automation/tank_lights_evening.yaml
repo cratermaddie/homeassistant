@@ -4,7 +4,7 @@
     platform: sun
     event: sunset
   action:
-    - service: switch.turn_off
-      entity_id: switch.aquarium_day
-    - service: switch.turn_on
-      entity_id: switch.aquarium_night
+    - service: light.turn_off
+      entity_id: light.aquarium_day
+    - service: light.turn_on
+      entity_id: light.aquarium_night

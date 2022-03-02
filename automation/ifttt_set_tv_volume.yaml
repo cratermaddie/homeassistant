@@ -1,0 +1,15 @@
+- alias: Set TV volume from ifttt
+  mode: restart
+  trigger:
+      platform: event
+      event_type: ifttt_webhook_received
+      event_data:
+        action: volume_service
+  action:
+  - service: webostv.command
+    target:
+      entity_id:  media_player.living_room_tv_lgos
+    data:
+      command: "audio/setVolume"
+      payload:
+        volume: '{{ trigger.event.data.volume | int }}'

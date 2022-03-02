@@ -1,31 +1,31 @@
-- alias: Reset turnip prices every week
-  mode: restart
-  trigger:
-    - platform: time
-      at: '00:00:00'
-  condition:
-    condition: time
-    weekday:
-    - sun
-  action:
-      - service: input_number.set_value
-        data:
-          entity_id:
-            - input_number.sunday_price
-            - input_number.monday_am
-            - input_number.monday_pm
-            - input_number.tuesday_am
-            - input_number.tuesday_pm
-            - input_number.wednesday_am
-            - input_number.wednesday_pm
-            - input_number.thursday_am
-            - input_number.thursday_pm
-            - input_number.friday_am
-            - input_number.friday_pm
-            - input_number.saturday_am
-            - input_number.saturday_pm
-          value: 0
-      - service: input_select.select_option
-        data:
-          entity_id: input_select.previous_turnip_pattern
-          option: "I don't know"
+#- alias: Reset turnip prices every week
+#  mode: restart
+#  trigger:
+#    - platform: time
+#      at: '00:00:00'
+#  condition:
+#    condition: time
+#    weekday:
+#    - sun
+#  action:
+#      - service: input_number.set_value
+#        data:
+#          entity_id:
+#            - input_number.sunday_price
+#            - input_number.monday_am
+#            - input_number.monday_pm
+#            - input_number.tuesday_am
+#            - input_number.tuesday_pm
+#            - input_number.wednesday_am
+#            - input_number.wednesday_pm
+#            - input_number.thursday_am
+#            - input_number.thursday_pm
+#            - input_number.friday_am
+#            - input_number.friday_pm
+#            - input_number.saturday_am
+#            - input_number.saturday_pm
+#          value: 0
+#      - service: input_select.select_option
+#        data:
+#          entity_id: input_select.previous_turnip_pattern
+#          option: "I don't know"

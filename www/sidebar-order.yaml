@@ -4,8 +4,8 @@ order:
     hide: true
   - item: calendar
     hide: true
-#  - item: media browser
-#    hide: true
+  - item: media browser
+    hide: true
 
 #Top 
   - item: overview
@@ -14,14 +14,19 @@ order:
   - item: armond mobile
   - item: OctoPrint
   - item: earnings
-  - item: logbook
-  - item: history
+
 
 #Bottom
   - item: visual studio
     bottom: true
   - item: developer tools
     href: /developer-tools/state
+    bottom: true
+  - item: ESPHome
+    bottom: true
+  - item: logbook
+    bottom: true
+  - item: history
     bottom: true
   - item: logs
     href: /config/logs

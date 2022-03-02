@@ -14,7 +14,7 @@ laundry_timer_remaining:
       data_template:
         entity_id: media_player.living_room_display
         volume_level: 0.8
-    - service: tts.google_translate_say
+    - service: tts.cloud_say
       entity_id: media_player.living_room_display
       data_template:
         message: >-

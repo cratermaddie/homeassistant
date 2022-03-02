@@ -10,8 +10,8 @@ wake_up:
         {% else %}
           script.wake_up_google_home
         {% endif %}
-    - service: automation.trigger
-      entity_id: automation.set_aurora_brightness_on_sun_position
+#    - service: automation.trigger
+#      entity_id: automation.set_aurora_brightness_on_sun_position
     - service: var.set
       data:
         entity_id: var.mode
@@ -22,10 +22,8 @@ wake_up:
       data:
         entity_id: alarm_control_panel.home_alarm
         code: !secret alarm_code
-    - service: automation.trigger
-      entity_id: automation.aurora_controller_hourly
-    - service: input_boolean.turn_on
-      entity_id: input_boolean.meds_status
+#    - service: automation.trigger
+#      entity_id: automation.aurora_controller_hourly
 #    - service: input_boolean.turn_off
 #      entity_id: input_boolean.alarm_manual_mode
     - service: script.turn_on_desktop_work
@@ -33,6 +31,7 @@ wake_up:
       entity_id: sun.sun
       state: below_horizon
     - service: light.turn_on
-      entity_id: light.bedroom_fairy_lights
+      target:
+        entity_id: light.bedroom_fairy_lights
 #    - service: light.turn_on
 #      entity_id: light.fairy_lights_photo

@@ -1,0 +1,23 @@
+- alias: Turn on office speakers do not disturb when at work
+  mode: parallel
+  trigger:
+    - platform: template
+      value_template: "{{ is_state_attr('calendar.personal','message','Work') }}"
+  action:
+    - service: switch.turn_on
+      target:
+        entity_id:
+        - switch.office_speaker_do_not_disturb
+        - switch.madison_s_echo_flex_do_not_disturb_switch
+
+- alias: Turn off office speakers do not disturb when off work
+  mode: parallel
+  trigger:
+    - platform: template
+      value_template: "{{ not is_state_attr('calendar.personal','message','Work') }}"
+  action:
+    - service: switch.turn_off
+      target:
+        entity_id:
+        - switch.office_speaker_do_not_disturb
+        - switch.madison_s_echo_flex_do_not_disturb_switch

@@ -29,9 +29,9 @@
 - platform: group
   name: Bedroom Lights
   entities:
-    - light.master_bedroom_1
-    - light.master_bedroom_2
-    - light.master_bedroom_3
+    - light.bedroom_1
+    - light.bedroom_2
+    - light.bedroom_3
     - light.bedside_lamp
     - light.bedside_table_lamp
 
@@ -43,9 +43,9 @@
 - platform: group
   name: Vanity Room Lights
   entities:
-    - light.guest_bedroom_1
-    - light.guest_bedroom_2
-    - light.guest_bedroom_3
+    - light.vanity_room_1
+    - light.vanity_room_2
+    - light.vanity_room_3
 
 - platform: group
   name: Vanity Room Closet Lights
@@ -79,17 +79,10 @@
     - light.office_closet
 
 - platform: group
-  name: Bedroom Fairy Lights
-  entities:
-    - light.fairy_lights_bedroom_01
-    - light.fairy_lights_bedroom_02
-
-- platform: group
   name: Fairy Lights
   entities:
-#    - light.bedroom_fairy_lights
-#    - light.fairy_lights_living_room
-    - light.bedroom_fairy_lights
+    - light.fairy_lights_bedroom
+    - light.fairy_lights_plants
     - light.fairy_lights_office
 
 - platform: group

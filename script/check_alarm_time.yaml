@@ -13,7 +13,7 @@ check_alarm_time:
       data_template:
         entity_id: media_player.bedroom_speaker
         volume_level: 0.4
-    - service: tts.google_translate_say
+    - service: tts.cloud_say
       entity_id: media_player.bedroom_speaker
       data_template:
         message: >-

@@ -10,7 +10,7 @@
 #        entity_id: var.mode
 #        state: 'sleep'
 #      - condition: state
-#        entity_id: binary_sensor.master_bedroom_occupancy
+#        entity_id: binary_sensor.bedroom_occupancy
 #        state: "on"
 #      - condition: template
 #        value_template: "{{ (now().timestamp() - states.automation.bedtime_notification.attributes.last_triggered | as_timestamp) < 5400 }}"
@@ -27,4 +27,4 @@
 #        temperature: "{{ states('sensor.ecobee_set_temperature') }}"
 #        hvac_mode: cool
 #    - service: automation.trigger
-#      entity_id: automation.set_master_bedroom_ac_fan_speed
+#      entity_id: automation.set_bedroom_ac_fan_speed

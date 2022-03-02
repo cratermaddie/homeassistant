@@ -1,0 +1,9 @@
+win_armond:
+  sequence:
+    - service: input_number.increment
+      entity_id: input_number.wins_armond
+
+win_madison:
+  sequence:
+    - service: input_number.increment
+      entity_id: input_number.wins_madison
