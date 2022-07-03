@@ -1,58 +1,58 @@
-- alias: Show nanoleaf scene to leave for next event
-  mode: restart
-  trigger:
-    platform: state
-    entity_id: sensor.nanoleaf_leave_trigger
-    to: "True"
-  condition:
-    condition: state
-    entity_id: input_boolean.staying_home_madison
-    state: 'off'
-  action:
-    - service: light.turn_on
-      data_template:
-        entity_id: light.nanoleaf
-        effect: 'Mild alert'
-    - delay:
-        seconds: 30
-    - condition: state
-      entity_id: var.mode
-      state: 'home'
-    - service_template: >
-        {%- if is_state('input_select.aurora_mode', 'Weather') -%}
-        script.aurora_weather
-        {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
-        script.aurora_manual
-        {% endif %}
-    - delay: '00:09:30'
-    - service: light.turn_on
-      data_template:
-        entity_id: light.nanoleaf
-        effect: 'Medium alert'
-    - delay:
-        seconds: 30
-    - condition: state
-      entity_id: var.mode
-      state: 'home'
-    - service_template: >
-        {%- if is_state('input_select.aurora_mode', 'Weather') -%}
-        script.aurora_weather
-        {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
-        script.aurora_manual
-        {% endif %}
-    - delay: '00:09:30'
-    - service: light.turn_on
-      data_template:
-        entity_id: light.nanoleaf
-        effect: 'Error'
-    - delay:
-        seconds: 30
-    - condition: state
-      entity_id: var.mode
-      state: 'home'
-    - service_template: >
-        {%- if is_state('input_select.aurora_mode', 'Weather') -%}
-        script.aurora_weather
-        {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
-        script.aurora_manual
-        {% endif %}
+#- alias: Show nanoleaf scene to leave for next event
+#  mode: restart
+#  trigger:
+#    platform: state
+#    entity_id: sensor.nanoleaf_leave_trigger
+#    to: "True"
+#  condition:
+#    condition: state
+#    entity_id: input_boolean.staying_home_madison
+#    state: 'off'
+#  action:
+#    - service: light.turn_on
+#      data_template:
+#        entity_id: light.nanoleaf
+#        effect: 'Mild alert'
+#    - delay:
+#        seconds: 30
+#    - condition: state
+#      entity_id: var.mode
+#      state: 'home'
+#    - service_template: >
+#        {%- if is_state('input_select.aurora_mode', 'Weather') -%}
+#        script.aurora_weather
+#        {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
+#        script.aurora_manual
+#        {% endif %}
+#    - delay: '00:09:30'
+#    - service: light.turn_on
+#      data_template:
+#        entity_id: light.nanoleaf
+#        effect: 'Medium alert'
+#    - delay:
+#        seconds: 30
+#    - condition: state
+#      entity_id: var.mode
+#      state: 'home'
+#    - service_template: >
+#        {%- if is_state('input_select.aurora_mode', 'Weather') -%}
+#        script.aurora_weather
+#        {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
+#        script.aurora_manual
+#        {% endif %}
+#    - delay: '00:09:30'
+#    - service: light.turn_on
+#      data_template:
+#        entity_id: light.nanoleaf
+#        effect: 'Error'
+#    - delay:
+#        seconds: 30
+#    - condition: state
+#      entity_id: var.mode
+#      state: 'home'
+#    - service_template: >
+#        {%- if is_state('input_select.aurora_mode', 'Weather') -%}
+#        script.aurora_weather
+#        {%- elif is_state('input_select.aurora_mode', 'Manual') -%}
+#        script.aurora_manual
+#        {% endif %}

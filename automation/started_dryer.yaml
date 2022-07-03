@@ -2,9 +2,9 @@
   mode: restart
   trigger:
     platform: event
-    event_type: ios.notification_action_fired
+    event_type: mobile_app_notification_action
     event_data:
-      actionName: START_DRYER
+      action: START_DRYER
   action:
     service: timer.start
     entity_id: timer.dryer

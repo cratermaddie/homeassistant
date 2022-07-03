@@ -3,8 +3,8 @@ mode:
   friendly_name: 'Mode'
 temp:
   friendly_name: 'Temp'
-aurora_temp:
-  friendly_name: 'Aurora Value'
+#aurora_temp:
+#  friendly_name: 'Aurora Value'
 nap_duration:
   friendly_name: 'Nap Duration'
 volume_temp:

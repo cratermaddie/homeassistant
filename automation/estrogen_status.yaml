@@ -6,9 +6,9 @@
       event_data:
         action: estrogen_service
     - platform: event
-      event_type: ios.notification_action_fired
+      event_type: mobile_app_notification_action
       event_data:
-        actionName: DISMISS_E
+        action: DISMISS_E
   action:
     service: input_boolean.turn_on
     data:

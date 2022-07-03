@@ -1,17 +1,17 @@
-- alias: Disarm alarm when we get home
-  initial_state: true
-  mode: restart
-  trigger:
-    - platform: zone
-      entity_id: device_tracker.madisons_iphone_app
-      zone: zone.home
-      event: enter
-    - platform: zone
-      entity_id: device_tracker.armonds_iphone_app
-      zone: zone.home
-      event: enter
-  action:
-    - service: alarm_control_panel.alarm_disarm
-      data:
-        entity_id: alarm_control_panel.home_alarm
-        code: !secret alarm_code
+#- alias: Disarm alarm when we get home
+#  initial_state: true
+#  mode: restart
+#  trigger:
+#    - platform: zone
+#      entity_id: device_tracker.madisons_iphone_app
+#      zone: zone.home
+#      event: enter
+#    - platform: zone
+#      entity_id: device_tracker.armonds_iphone_app
+#      zone: zone.home
+#      event: enter
+#  action:
+#    - service: alarm_control_panel.alarm_disarm
+#      data:
+#        entity_id: alarm_control_panel.home_alarm
+#        code: !secret alarm_code

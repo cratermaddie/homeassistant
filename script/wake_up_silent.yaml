@@ -8,10 +8,10 @@ wake_up_silent:
       data_template:
         entity_id: media_player.bedroom_speaker
         volume_level: 0.5
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.aurora_brightness
-        option: 'Bright'
+#    - service: input_select.select_option
+#      data:
+#        entity_id: input_select.aurora_brightness
+#        option: 'Bright'
     - service: var.set
       data:
         entity_id: var.mode
@@ -20,10 +20,10 @@ wake_up_silent:
       entity_id: input_boolean.awake
     - service: automation.trigger
       entity_id: automation.aurora_controller_hourly
-    - service: alarm_control_panel.alarm_disarm
-      data:
-        entity_id: alarm_control_panel.home_alarm
-        code: !secret alarm_code
+#    - service: alarm_control_panel.alarm_disarm
+#      data:
+#        entity_id: alarm_control_panel.home_alarm
+#        code: !secret alarm_code
 #    - service: input_boolean.turn_off
 #      entity_id: input_boolean.alarm_manual_mode
     - service: script.turn_on_desktop_work

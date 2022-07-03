@@ -40,22 +40,3 @@ push:
           activationMode: 'background'
           authenticationRequired: false
           destructive: false
-    - name: Refill pills
-      identifier: 'refill-pills'
-      actions:
-        - identifier: 'REFILL_PILLS'
-          title: 'Refilled'
-          activationMode: 'background'
-          authenticationRequired: false
-          destructive: false
-    - name: Update Turnips
-      identifier: 'turnip'
-      actions:
-        - identifier: 'UPDATE_TURNIP'
-          title: 'Update Turnip Prices'
-          activationMode: 'background'
-          authenticationRequired: false
-          destructive: false
-          behavior: 'textInput'
-          textInputButtonTitle: 'Update'
-          textInputPlaceholder: ' '

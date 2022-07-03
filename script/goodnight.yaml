@@ -28,12 +28,12 @@ goodnight:
     - service: script.goodnight_meds
     - wait_template: "{{ is_state('input_boolean.meds_evening','on') }}"
       timeout: "00:05:00"
-    - service: script.goodnight_rogaine
-    - wait_template: >-
-        {{ is_state('input_boolean.rogaine_status', 'on') }}
-      timeout: "00:05:00"
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.rogaine_status
+#    - service: script.goodnight_rogaine
+#    - wait_template: >-
+#        {{ is_state('input_boolean.rogaine_status', 'on') }}
+#      timeout: "00:05:00"
+#    - service: input_boolean.turn_off
+#      entity_id: input_boolean.rogaine_status
     - service: script.goodnight_e
     - wait_template: "{{ is_state('input_boolean.estrogen_status', 'on') or (not is_state('sensor.active_day_of_week','thursday')) }}"
       timeout: "00:05:00"
@@ -80,10 +80,10 @@ goodnight:
       target:
         entity_id:
           - light.fairy_lights
-    - service: alarm_control_panel.alarm_arm_home
-      data:
-        entity_id: alarm_control_panel.home_alarm
-        code: !secret alarm_code
+#    - service: alarm_control_panel.alarm_arm_home
+#      data:
+#        entity_id: alarm_control_panel.home_alarm
+#        code: !secret alarm_code
 #    - service: script.turn_off_vanity
     - service: var.set
       data:

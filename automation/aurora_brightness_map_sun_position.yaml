@@ -1,20 +1,20 @@
-- alias: Set aurora brightness on sun position
-  mode: restart
-  trigger:
-    - platform: sun
-      event: sunset
-    - platform: sun
-      event: sunrise
-    - platform: state
-      entity_id: light.nanoleaf
-      to: 'on'
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.aurora_brightness
-        option: >-
-          {% if is_state("sun.sun", "above_horizon") %}
-          Bright
-          {% else %}
-          Dim
-          {% endif %}
+#- alias: Set aurora brightness on sun position
+#  mode: restart
+#  trigger:
+#    - platform: sun
+#      event: sunset
+#    - platform: sun
+#      event: sunrise
+#    - platform: state
+#      entity_id: light.nanoleaf
+#      to: 'on'
+#  action:
+#    - service: input_select.select_option
+#      data_template:
+#        entity_id: input_select.aurora_brightness
+#        option: >-
+#          {% if is_state("sun.sun", "above_horizon") %}
+#          Bright
+#          {% else %}
+#          Dim
+#          {% endif %}

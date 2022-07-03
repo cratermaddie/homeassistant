@@ -136,17 +136,17 @@
       entity_id: >
         input_boolean.estrogen_status
 
-- alias: track rogaine
-  mode: restart
-  trigger:
-    platform: event
-    event_type: tag_scanned
-  condition: '{{ "rogaine" in trigger.event.data.tag_id }}'
-  action:
-    service: input_boolean.turn_on
-    data:
-      entity_id: >
-        input_boolean.rogaine_status
+#- alias: track rogaine
+#  mode: restart
+#  trigger:
+#    platform: event
+#    event_type: tag_scanned
+#  condition: '{{ "rogaine" in trigger.event.data.tag_id }}'
+#  action:
+#    service: input_boolean.turn_on
+#    data:
+#      entity_id: >
+#        input_boolean.rogaine_status
 
 - alias: track pills
   mode: restart
@@ -161,9 +161,9 @@
   mode: restart
   trigger:
     platform: event
-    event_type: ios.notification_action_fired
+    event_type: mobile_app_notification_action
     event_data:
-      actionName: DISMISS_MEDS
+      action: DISMISS_MEDS
   action:
     service: script.medication_status
 

@@ -1,20 +1,20 @@
-set_aurora_effects:
-  url: !secret input_select_set_options
-  method: POST
-  headers:
-    content-type: application/json
-    Authorization: !secret bearer_token
-  content_type: application/json
-  payload: >-
-    {
-      "entity_id": "input_select.aurora_effects",
-      "options": [
-        {%- for effect in state_attr('light.nanoleaf','effect_list') %}
-        {% if loop.first %}"Off", {% endif %}"{{ effect }}"{% if not loop.last %}, {% endif %}
-        {%- endfor %}
-      ]
-    }
-
+#set_aurora_effects:
+#  url: !secret input_select_set_options
+#  method: POST
+#  headers:
+#    content-type: application/json
+#    Authorization: !secret bearer_token
+#  content_type: application/json
+#  payload: >-
+#    {
+#      "entity_id": "input_select.aurora_effects",
+#      "options": [
+#        {%- for effect in state_attr('light.nanoleaf','effect_list') %}
+#        {% if loop.first %}"Off", {% endif %}"{{ effect }}"{% if not loop.last %}, {% endif %}
+#        {%- endfor %}
+#      ]
+#    }
+#
 #turn_on_bedroom_ac:
 #  url: !secret google_assistant_url
 #  method: POST

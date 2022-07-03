@@ -1,6 +1,6 @@
-- platform: nanoleaf
-  host: !secret nanoleaf_ip
-  token: !secret nanoleaf_token
+#- platform: nanoleaf
+#  host: !secret nanoleaf_ip
+#  token: !secret nanoleaf_token
 
 - platform: group
   name: Kitchen Lights

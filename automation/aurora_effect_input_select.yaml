@@ -1,29 +1,29 @@
-- alias: Update aurora effect based on input select
-  mode: restart
-  trigger:
-    - platform: state
-      entity_id: input_select.aurora_effects
-  action:
-    - condition: template
-      value_template: "{{ not is_state('input_select.aurora_effects','Off') }}"
-    - service: light.turn_on
-      data_template:
-        entity_id: light.nanoleaf
-        effect: "{{ states('input_select.aurora_effects') }}"
-        brightness: "{{ states('sensor.aurora_brightness_map')|int }}"
-      
-- alias: Update input select based on aurora effect
-  mode: restart
-  trigger:
-    - platform: state
-      entity_id: light.nanoleaf
-  action:
-    service: input_select.select_option
-    data_template:
-      entity_id: input_select.aurora_effects
-      option: >-
-        {% if not is_state('light.nanoleaf','off') %}
-          {{ state_attr('light.nanoleaf','effect') }}
-        {% else %}
-          Off
-        {% endif %}
+#- alias: Update aurora effect based on input select
+#  mode: restart
+#  trigger:
+#    - platform: state
+#      entity_id: input_select.aurora_effects
+#  action:
+#    - condition: template
+#      value_template: "{{ not is_state('input_select.aurora_effects','Off') }}"
+#    - service: light.turn_on
+#      data_template:
+#        entity_id: light.nanoleaf
+#        effect: "{{ states('input_select.aurora_effects') }}"
+#        brightness: "{{ states('sensor.aurora_brightness_map')|int }}"
+#      
+#- alias: Update input select based on aurora effect
+#  mode: restart
+#  trigger:
+#    - platform: state
+#      entity_id: light.nanoleaf
+#  action:
+#    service: input_select.select_option
+#    data_template:
+#      entity_id: input_select.aurora_effects
+#      option: >-
+#        {% if not is_state('light.nanoleaf','off') %}
+#          {{ state_attr('light.nanoleaf','effect') }}
+#        {% else %}
+#          Off
+#        {% endif %}

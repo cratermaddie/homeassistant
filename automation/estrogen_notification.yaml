@@ -27,6 +27,8 @@
           apns_headers:
             'apns-collapse-id': 'estrogen-reminder'
           push:
-            category: "estrogen"
             thread-id: "estrogen-reminder"
             sound: 'medical.wav'
+          actions:
+            - action: "DISMISS_E"
+              title: "Taken"

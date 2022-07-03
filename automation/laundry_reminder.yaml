@@ -21,6 +21,8 @@
           apns_headers:
             'apns-collapse-id': 'laundry-reminder'
           push:
-            category: "washer"
             thread-id: "laundry-reminder"
             sound: 'wash.wav'
+          actions:
+            - action: "START_WASHER"
+              title: "Started washer"

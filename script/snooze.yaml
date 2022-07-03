@@ -7,9 +7,9 @@ snooze:
     - service: light.turn_off
       target:
         entity_id: light.bedroom_lights
-    - service: light.turn_off
-      target:
-        entity_id: light.nanoleaf
+#    - service: light.turn_off
+#      target:
+#        entity_id: light.nanoleaf
     - service: input_boolean.turn_off
       entity_id: input_boolean.awake
     - delay: "00:20:00"

@@ -23,10 +23,10 @@
 #    - condition: state
 #      entity_id: input_boolean.awake
 #      state: 'off'
-    - service: alarm_control_panel.alarm_disarm
-      data:
-        entity_id: alarm_control_panel.home_alarm
-        code: !secret alarm_code
+#    - service: alarm_control_panel.alarm_disarm
+#      data:
+#        entity_id: alarm_control_panel.home_alarm
+#        code: !secret alarm_code
     - service: hue.hue_activate_scene
       data:
         group_name: "Bedroom"

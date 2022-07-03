@@ -1,55 +1,56 @@
-aurora_weather:
-  sequence:
-    - condition: state
-      entity_id: var.mode
-      state: 'home'
-    - service: light.turn_on
-      data_template:
-        entity_id: light.nanoleaf
-        effect: >
-          {% if states("sensor.yr_symbol")|regex_match("[0-9]", ignorecase=False) %}
-          {{
-            ( "Sunny",
-              "Clear Skies",
-              "Partly Cloudy",
-              "Black and White",
-              "Rain",
-              "Lightning",
-              "Sleet",
-              "Snow",
-              "Rain",
-              "Rain",
-              "Lightning",
-              "Sleet",
-              "Snow",
-              "Thunder",
-              "Fog",
-              "Lightning",
-              "Lighting",
-              "Lightning",
-              "Lightning",
-              "Lightning",
-              "Lightning",
-              "Lightning",
-              "Lightning",
-              "Lightning",
-              "Lightning",
-              "Lightning",
-              "Lightning",
-              "Lightning",
-              "Lightning",
-              "Rain",
-              "Rain",
-              "Sleet",
-              "Sleet",
-              "Snow",
-              "Snow",
-              "Rain",
-              "Sleet",
-              "Sleet",
-              "Snow",
-              "Snow" )[states("sensor.yr_symbol")|int-1] }}
-          {% else %}
-          Error
-          {% endif %}
-        brightness: "{{ states('sensor.aurora_brightness_map')|int }}"
+#aurora_weather:
+#  sequence:
+#    - condition: state
+#      entity_id: var.mode
+#      state: 'home'
+#    - service: light.turn_on
+#      data_template:
+#        entity_id: light.nanoleaf
+#        effect: >
+#          {% if states("sensor.yr_symbol")|regex_match("[0-9]", ignorecase=False) %}
+#          {{
+#            ( "Sunny",
+#              "Clear Skies",
+#              "Partly Cloudy",
+#              "Black and White",
+#              "Rain",
+#              "Lightning",
+#              "Sleet",
+#              "Snow",
+#              "Rain",
+#              "Rain",
+#              "Lightning",
+#              "Sleet",
+#              "Snow",
+#              "Thunder",
+#              "Fog",
+#              "Lightning",
+#              "Lighting",
+#              "Lightning",
+#              "Lightning",
+#              "Lightning",
+#              "Lightning",
+#              "Lightning",
+#              "Lightning",
+#              "Lightning",
+#              "Lightning",
+#              "Lightning",
+#              "Lightning",
+#              "Lightning",
+#              "Lightning",
+#              "Rain",
+#              "Rain",
+#              "Sleet",
+#              "Sleet",
+#              "Snow",
+#              "Snow",
+#              "Rain",
+#              "Sleet",
+#              "Sleet",
+#              "Snow",
+#              "Snow" )[states("sensor.yr_symbol")|int-1] }}
+#          {% else %}
+#          Error
+#          {% endif %}
+#        brightness: "{{ states('sensor.aurora_brightness_map')|int }}"
+#

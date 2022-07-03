@@ -1,9 +1,13 @@
 win_armond:
   sequence:
+    - condition: template
+      value_template: "{{ now().timestamp() - state_attr('script.win_armond', 'last_triggered') | as_timestamp > 100 }}"
     - service: input_number.increment
       entity_id: input_number.wins_armond
 
 win_madison:
   sequence:
+    - condition: template
+      value_template: "{{ now().timestamp() - state_attr('script.win_madison', 'last_triggered') | as_timestamp > 100 }}"
     - service: input_number.increment
       entity_id: input_number.wins_madison

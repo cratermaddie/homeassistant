@@ -8,10 +8,10 @@
   platform: twilio_sms
   from_number: !secret twilio_number
 
-- platform: webostv
-  host: !secret lg_tv_ip
-  name: living_room_tv_lgos
-  filename: webostv.conf
+#- platform: webostv
+#  host: !secret lg_tv_ip
+#  name: living_room_tv_lgos
+#  filename: webostv.conf
 
 - platform: hass_agent_notifier
   name: "Desktop HASS.Agent"

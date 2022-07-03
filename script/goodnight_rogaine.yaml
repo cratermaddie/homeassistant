@@ -1,9 +1,9 @@
-goodnight_rogaine:
-  sequence:
-    - condition: template
-      value_template: >-
-        {{ is_state('input_boolean.rogaine_status', 'off') }}
-    - service: tts.cloud_say
-      entity_id: media_player.bedroom_speaker
-      data_template:
-        message: "You still need to do your hair treatment."
+#goodnight_rogaine:
+#  sequence:
+#    - condition: template
+#      value_template: >-
+#        {{ is_state('input_boolean.rogaine_status', 'off') }}
+#    - service: tts.cloud_say
+#      entity_id: media_player.bedroom_speaker
+#      data_template:
+#        message: "You still need to do your hair treatment."

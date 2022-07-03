@@ -10,9 +10,9 @@
     - service: input_boolean.turn_off
       target:
         entity_id: input_boolean.announce_time
-    - service: light.turn_off
-      target:
-        entity_id: light.nanoleaf
+#    - service: light.turn_off
+#      target:
+#        entity_id: light.nanoleaf
     - service: light.turn_off
       target:
         entity_id: light.main_lights

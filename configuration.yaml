@@ -80,11 +80,11 @@ timer: !include integrations/timer.yaml
 ####################################
 #        Manual Integrations       #
 ####################################
-spotify:
-  client_id: !secret spotify_id
-  client_secret: !secret spotify_secret
+#spotify:
+#  client_id: !secret spotify_id
+#  client_secret: !secret spotify_secret
 
-breaking_changes:
+#breaking_changes:
 
 stream:
 
@@ -110,17 +110,17 @@ apple_tv:
   - host: !secret apple_tv_ip
     login_id: !secret apple_tv_login_id
 
-alarm_control_panel:
-  - platform: manual
-    name: Home Alarm
-    code: !secret alarm_code
-    arming_time: 60
-    delay_time: 20
-    trigger_time: 20
-    disarmed:
-      trigger_time: 0
-    armed_home:
-      arming_time: 0
+#alarm_control_panel:
+#  - platform: manual
+#    name: Home Alarm
+#    code: !secret alarm_code
+#    arming_time: 60
+#    delay_time: 20
+#    trigger_time: 20
+#    disarmed:
+#      trigger_time: 0
+#    armed_home:
+#      arming_time: 0
 
 sonoff:
   username: !secret sonoff_email
@@ -133,22 +133,14 @@ nintendo_wishlist:
   country: US
   wishlist:
     - FAST RMX
-    - Return of the Obra Dinn
     - "The Experiment: Escape Room"
-    - Superliminal
-    - STAR WARS Episode I Racer
-    - Undertale
     - Untitled Goose Game
-    - Overcooked Special Edition
     - Katamari Damacy REROLL
     - "The Legend of Zelda: Link’s Awakening"
     - "Phoenix Wright: Ace Attorney Trilogy"
-    - Spyro Reignited Trilogy
-    - Superliminal
     - Kirby Star Allies
     - Super Mario Odyssey
     - New Super Mario Bros. U Deluxe
-    - The Jackbox Party Pack
     - Luigi’s Mansion 3
     - Cuphead
 
@@ -160,7 +152,7 @@ nintendo_wishlist:
 #downloader:
 #  download_dir: gtfs
     
-updater:
+#updater:
 
 logger:
   default: warning
@@ -180,20 +172,20 @@ logger:
 
 wake_on_lan:
 
-webostv:
-  host: !secret lg_tv_ip
-  name: Living Room TV
-  turn_on_action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: !secret lg_tv_mac
-      broadcast_address: !secret lg_tv_ip
-  customize:
-    sources:
-      - livetv
-      - youtube
-      - amazon
-      - netflix
+#webostv:
+#  host: !secret lg_tv_ip
+#  name: Living Room TV
+#  turn_on_action:
+#    service: wake_on_lan.send_magic_packet
+#    data:
+#      mac: !secret lg_tv_mac
+#      broadcast_address: !secret lg_tv_ip
+#  customize:
+#    sources:
+#      - livetv
+#      - youtube
+#      - amazon
+#      - netflix
 
 camera:
   - platform: ffmpeg
@@ -208,17 +200,14 @@ camera:
 #  - platform: local_file
 #    file_path: /config/images/mail_and_packages/mail_today.gif
 #    name: mail_usps
-  - platform: unsplash
-    api_key: !secret unsplash_access_key
-    orientation: landscape
-  - platform: mjpeg
-    name: CR-X OctoPrint
-    still_image_url: http://octopi-cr-x.local/webcam/?action=snapshot
-    mjpeg_url: http://octopi-cr-x.local/webcam/?action=stream
-  - platform: mjpeg
-    name: DaVinci OctoPrint
-    still_image_url: http://octopi-xyz.local/webcam/?action=snapshot
-    mjpeg_url: http://octopi-xyz.local/webcam/?action=stream
+#  - platform: mjpeg
+#    name: CR-X OctoPrint
+#    still_image_url: http://octopi-cr-x.local/webcam/?action=snapshot
+#    mjpeg_url: http://octopi-cr-x.local/webcam/?action=stream
+#  - platform: mjpeg
+#    name: DaVinci OctoPrint
+#    still_image_url: http://octopi-xyz.local/webcam/?action=snapshot
+#    mjpeg_url: http://octopi-xyz.local/webcam/?action=stream
 
 twilio:
   account_sid: !secret twilio_sid
@@ -281,9 +270,9 @@ twilio:
 #    source:
 #      - entity_id: camera.wyze_cam
 
-google:
-  client_id: !secret google_id
-  client_secret: !secret google_secret
+#google:
+#  client_id: !secret google_id
+#  client_secret: !secret google_secret
     
 #icloud:
 #  - username: !secret old_apple_email

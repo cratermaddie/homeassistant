@@ -1,21 +1,21 @@
-- alias: trigger security alarm
-  mode: single
-  trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.back_door 
-        - binary_sensor.south_kitchen_window
-        - binary_sensor.bedroom_window
-        - binary_sensor.front_door
-        - binary_sensor.wyze_group
-        - binary_sensor.north_living_room_window
-        - binary_sensor.south_living_room_window
-        - binary_sensor.office_window
-      to: 'on'
-  condition:
-    condition: state
-    entity_id: input_boolean.security_system_override
-    state: 'off'
-  action:
-    - service: alarm_control_panel.alarm_trigger
-      entity_id: alarm_control_panel.home_alarm
+#- alias: trigger security alarm
+#  mode: single
+#  trigger:
+#    - platform: state
+#      entity_id:
+#        - binary_sensor.back_door 
+#        - binary_sensor.south_kitchen_window
+#        - binary_sensor.bedroom_window
+#        - binary_sensor.front_door
+#        - binary_sensor.wyze_group
+#        - binary_sensor.north_living_room_window
+#        - binary_sensor.south_living_room_window
+#        - binary_sensor.office_window
+#      to: 'on'
+#  condition:
+#    condition: state
+#    entity_id: input_boolean.security_system_override
+#    state: 'off'
+#  action:
+#    - service: alarm_control_panel.alarm_trigger
+#      entity_id: alarm_control_panel.home_alarm

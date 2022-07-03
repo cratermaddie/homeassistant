@@ -89,10 +89,10 @@
       target:
         entity_id:
           - light.fairy_lights
-    - service: alarm_control_panel.alarm_arm_home
-      data:
-        entity_id: alarm_control_panel.home_alarm
-        code: !secret alarm_code
+#    - service: alarm_control_panel.alarm_arm_home
+#      data:
+#        entity_id: alarm_control_panel.home_alarm
+#        code: !secret alarm_code
 #    - service: script.turn_off_vanity
     - service: var.set
       data:

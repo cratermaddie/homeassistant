@@ -12,6 +12,8 @@
         message: "Dryer is done!"
         data:
           push:
-            category: "laundry-done"
             thread-id: "laundry-reminder"
             sound: 'buzzer.wav'
+          actions:
+            - action: "LAUNDRY_DONE"
+              title: "Done"

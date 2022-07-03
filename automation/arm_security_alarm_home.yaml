@@ -1,13 +1,13 @@
-- alias: Arm security alarm home
-  mode: restart
-  trigger:
-    - platform: state
-      entity_id: alarm_control_panel.home_alarm
-      to: 'armed_home'
-  action:
-    - service: switch.turn_off
-      data:
-        entity_id: switch.back_door_alarm_sounding_blink, switch.back_door_alarm_arming_blink, switch.back_door_alarm_disarmed, switch.back_door_alarm_arming, switch.back_door_alarm_armed, switch.front_door_alarm_sounding_blink, switch.front_door_alarm_arming_blink, switch.front_door_alarm_disarmed, switch.front_door_alarm_arming, switch.front_door_alarm_armed
-    - service: switch.turn_on
-      data:
-        entity_id: switch.back_door_alarm_armed, switch.front_door_alarm_armed
+#- alias: Arm security alarm home
+#  mode: restart
+#  trigger:
+#    - platform: state
+#      entity_id: alarm_control_panel.home_alarm
+#      to: 'armed_home'
+#  action:
+#    - service: switch.turn_off
+#      data:
+#        entity_id: switch.back_door_alarm_sounding_blink, switch.back_door_alarm_arming_blink, switch.back_door_alarm_disarmed, switch.back_door_alarm_arming, switch.back_door_alarm_armed, switch.front_door_alarm_sounding_blink, switch.front_door_alarm_arming_blink, switch.front_door_alarm_disarmed, switch.front_door_alarm_arming, switch.front_door_alarm_armed
+#    - service: switch.turn_on
+#      data:
+#        entity_id: switch.back_door_alarm_armed, switch.front_door_alarm_armed

@@ -26,8 +26,8 @@
           apns_headers:
             'apns-collapse-id': 'medication-reminder'
           push:
-            category: "meds"
             thread-id: "medication-reminder"
             sound: 'medical.wav'
-          action_data: 
-            id: "meds"
+          actions:
+            - action: "DISMISS_MEDS"
+              title: "Taken"

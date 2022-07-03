@@ -15,3 +15,6 @@
             category: "dryer"
             thread-id: "laundry-reminder"
             sound: 'buzzer.wav'
+          actions:
+            - action: "START_DRYER"
+              title: "Started dryer"

@@ -1,17 +1,17 @@
-- platform: trend
-  sensors:
-    ph_rank_trend:
-      entity_id: sensor.ph_ranking_scrape
-      invert : true
-      max_samples: 6
+#- platform: trend
+#  sensors:
+#    ph_rank_trend:
+#      entity_id: sensor.ph_ranking_scrape
+#      invert : true
+#      max_samples: 6
+#
+#    mv_rank_trend:
+#      entity_id: sensor.mv_rank_scrape
+#      invert : true
+#      max_samples: 6
 
-    mv_rank_trend:
-      entity_id: sensor.mv_rank_scrape
-      invert : true
-      max_samples: 6
-
-- platform: wyzesense
-  device: auto
+#- platform: wyzesense
+#  device: auto
 
 #- platform: octoprint
 #  monitored_conditions:
@@ -35,18 +35,10 @@
 
 - platform: template
   sensors:
-      apple_tv_paused:
-        value_template: >-
-          {{ is_state('media_player.apple_tv', 'paused') }}
-        delay_on:
-          minutes: 30
-      new_release:
-        value_template: "{{ states('sensor.current_version') != states('sensor.release') }}"
-        icon_template: mdi:arrow-up-bold-circle-outline
-      bed_right_occupied:
-          value_template: "{{ is_state('binary_sensor.bed_right', 'off') }}"
-      bed_left_occupied:
-          value_template: "{{ is_state('binary_sensor.bed_left', 'off') }}"
+#      bed_right_occupied:
+#          value_template: "{{ is_state('binary_sensor.bed_right', 'off') }}"
+#      bed_left_occupied:
+#          value_template: "{{ is_state('binary_sensor.bed_left', 'off') }}"
       front_door_locked:
           value_template: "{{ is_state('binary_sensor.front_door_unlocked', 'off') }}"
       back_door_locked:

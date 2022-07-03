@@ -2,7 +2,7 @@
 #  mode: restart
 #  trigger:
 #    platform: event
-#    event_type: ios.notification_action_fired
+#    event_type: mobile_app_notification_action
 #    event_data:
 #      actionName: UPDATE_TURNIP
 #  action:
