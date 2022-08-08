@@ -1,0 +1,21 @@
+- alias: Send sleep notification if I am still awake
+  mode: restart
+  trigger:
+    - platform: time
+      at: '1:30:00'
+  condition:
+    condition: state
+    entity_id: device_tracker.madisons_iphone_app
+    state: 'home'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.medication_lights_blinker
+    - service: notify.mobile_app_madisons_iphone
+      data:
+        message: "Take your sleep meds!"
+        data:
+          group: "sleep-medication-reminder"
+          tag: "sleep-medication-reminder"
+          push:
+            sound: 'medical.wav'

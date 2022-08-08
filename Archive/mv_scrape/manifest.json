@@ -1,0 +1,10 @@
+{
+    "domain": "mv_scrape",
+    "name": "MV Scrape",
+    "documentation": "",
+    "requirements": ["beautifulsoup4==4.8.2"],
+    "dependencies": [],
+    "after_dependencies": ["rest"],
+    "version": "1.0.0",
+    "codeowners": ["@cratermaddie"]
+  }

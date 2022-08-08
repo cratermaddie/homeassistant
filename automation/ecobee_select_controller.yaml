@@ -2,20 +2,17 @@
   mode: restart
   trigger:
       - platform: state
-        entity_id: sensor.hvac_mode
+        entity_id: climate.thermostat
+        attribute: preset_mode
   condition:
     - condition: template
-      value_template: "{{ not is_state('sensor.hvac_mode','temp') }}"
+      value_template: "{{ not is_state_attr('climate.thermostat','preset_mode', 'temp') }}"
   action:
     - service: input_select.select_option
       data:
         entity_id: 
           - input_select.ecobee_modes
         option: "{{ state_attr('climate.thermostat','preset_mode') }}"
-#    - service: climate.set_preset_mode
-#      data:
-#        entity_id: climate.thermostat
-#        preset_mode: "{{ states('input_select.ecobee_modes') }}"
 
 - alias: Update ecobee mode on state change
   mode: restart
@@ -30,12 +27,6 @@
       data:
         entity_id: climate.thermostat
         preset_mode: "{{ states('input_select.ecobee_modes') }}"
-#    - service: input_select.select_option
-#      data:
-#        entity_id: 
-#          - input_select.ecobee_modes
-#        option: "{{ state_attr('climate.thermostat','preset_mode') }}"
-
 
 - alias: revert ecobee select if blank is selected
   mode: restart
@@ -45,7 +36,7 @@
         to: ''
   condition:
     - condition: template
-      value_template: "{{ not is_state('sensor.hvac_mode','temp') }}"
+      value_template: "{{ not is_state_attr('climate.thermostat','preset_mode', 'temp') }}"
   action:
     - service: input_select.select_option
       data:
@@ -57,7 +48,8 @@
   mode: restart
   trigger:
       - platform: state
-        entity_id: sensor.hvac_mode
+        entity_id: climate.thermostat
+        attribute: preset_mode
         to: 'temp'
   action:
     - service: input_select.select_option

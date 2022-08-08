@@ -1,4 +1,3 @@
-###TODO###
 - alias: Send notification when dryer is done
   mode: restart
   trigger:
@@ -7,13 +6,57 @@
     event_data:
       entity_id: timer.dryer
   action:
-    - service: notify.mobile_app_madisons_iphone
-      data:
-        message: "Dryer is done!"
-        data:
-          push:
-            thread-id: "laundry-reminder"
-            sound: 'buzzer.wav'
-          actions:
-            - action: "LAUNDRY_DONE"
-              title: "Done"
+    - choose:
+        - conditions: >
+            {{ (is_state('device_tracker.madisons_iphone_app', 'home') and is_state('device_tracker.armonds_iphone_app', 'home')) or (is_state('device_tracker.madisons_iphone_app', 'not_home') and is_state('device_tracker.armonds_iphone_app', 'not_home')) }}
+          sequence:
+            - service: notify.mobile_app_madisons_iphone
+              data:
+                message: "Dryer is done!"
+                data:
+                  group: "laundry-reminder"
+                  tag: "laundry-reminder"
+                  push:
+                    sound: 'buzzer.wav'
+                  actions:
+                    - action: "LAUNDRY_DONE"
+                      title: "Done"
+            - service: notify.mobile_app_iphone
+              data:
+                message: "Dryer is done!"
+                data:
+                  group: "laundry-reminder"
+                  tag: "laundry-reminder"
+                  push:
+                    sound: 'buzzer.wav'
+                  actions:
+                    - action: "LAUNDRY_DONE"
+                      title: "Done"
+        - conditions: >
+            {{ is_state('device_tracker.madisons_iphone_app', 'home') and is_state('device_tracker.armonds_iphone_app', 'not_home') }}
+          sequence:
+            - service: notify.mobile_app_madisons_iphone
+              data:
+                message: "Dryer is done!"
+                data:
+                  group: "laundry-reminder"
+                  tag: "laundry-reminder"
+                  push:
+                    sound: 'buzzer.wav'
+                  actions:
+                    - action: "LAUNDRY_DONE"
+                      title: "Done"
+        - conditions: >
+            {{ is_state('device_tracker.madisons_iphone_app', 'not_home') and is_state('device_tracker.armonds_iphone_app', 'home') }}
+          sequence:
+            - service: notify.mobile_app_iphone
+              data:
+                message: "Dryer is done!"
+                data:
+                  group: "laundry-reminder"
+                  tag: "laundry-reminder"
+                  push:
+                    sound: 'buzzer.wav'
+                  actions:
+                    - action: "LAUNDRY_DONE"
+                      title: "Done"

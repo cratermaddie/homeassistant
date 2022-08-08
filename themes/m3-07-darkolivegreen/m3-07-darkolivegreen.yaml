@@ -540,7 +540,6 @@ M3-07-DarkOliveGreen:
       # theme-sys-ha-secondary-text-color: var(--theme-text-secondary-color)
       theme-sys-ha-disabled-text-color: var(--theme-sys-elevation-surface-neutral5)
       theme-sys-ha-secondary-text-color: var(--theme-sys-color-secondary)
-      theme-sys-ha-disabled-text-color: var(--theme-sys-color-surface-variant)
 
       theme-sys-ha-primary-icon-color: var(--theme-primary-text-color)
 
@@ -553,7 +552,6 @@ M3-07-DarkOliveGreen:
       theme-sys-ha-card-background-color: var(--theme-sys-elevation-surface-neutral1)
 
       theme-sys-ha-card-background-color-active: rgb(255, 255, 255, 0.08)
-      theme-sys-ha-card-background-color-active: rgb(255, 255, 255, 0.2)
       theme-sys-ha-card-background-color-inactive: rgb(0, 0, 0, 0.08)
       theme-sys-ha-card-background-color-undefined: rgb(0, 0, 0, 0.7)
       theme-sys-ha-card-background-color-unavailable: rgb(0, 0, 0, 0.7)
@@ -859,14 +857,12 @@ M3-07-DarkOliveGreen:
       
       # Primary color is header for instance with view menu
       theme-sys-ha-primary-color: 'var(--theme-sys-color-primary)'
-      theme-sys-ha-accent-color: 'var(--theme-text-primary-color-accent-40)'
       theme-sys-ha-light-primary-color: 'var(--theme-ref-palette-primary90)'
       theme-sys-ha-dark-primary-color: 'var(--theme-ref-palette-primary10)'
 
       # Set text colors
       theme-sys-ha-primary-text-color: var(--theme-sys-color-on-surface)
       theme-sys-ha-secondary-text-color: var(--theme-sys-color-secondary) #var(--theme-text-secondary-color)
-      theme-sys-ha-disabled-text-color: var(--theme-sys-elevation-surface-neutral5)
 
       theme-sys-ha-primary-icon-color: var(--theme-text-primary-color)
       theme-sys-ha-secondary-icon-color: var(--theme-text-secondary-color)
@@ -876,13 +872,11 @@ M3-07-DarkOliveGreen:
       
       # Card state colors
       theme-sys-ha-card-background-color: var(--theme-sys-color-background)
-      theme-sys-ha-card-background-color-active: white #rgb(255, 255, 255, 1)
       theme-sys-ha-card-background-color-inactive: rgb(0, 0, 0, 0.05)
       theme-sys-ha-card-background-color-undefined: rgb(0, 0, 0, 0.2)
       theme-sys-ha-card-background-color-unavailable: rgb(0, 0, 0, 0.2)
 
       # Accent colors
-      theme-sys-ha-accent-color: var(--theme-sys-color-tertiary-container)
       theme-sys-ha-on-accent-color: var(--theme-sys-color-on-tertiary-container)
 
       # Neumorphic colors for shadows
@@ -1078,8 +1072,6 @@ M3-07-DarkOliveGreen:
   # Home Assistant Badges/Labels
   # - Map m3 error color to the red badge label
   # ----------------------------------------------------------------------------
-  label-badge-text-color: var(--primary-text-color) #var(--theme-sys-color-on-error) #
-  ha-label-badge-label-color: var(--theme-sys-color-on-error)
   
   #
   # Material Design 2 Web colors

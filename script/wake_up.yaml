@@ -1,9 +1,8 @@
 wake_up:
   sequence:
-    - service: hue.hue_activate_scene
-      data:
-        group_name: "Bedroom"
-        scene_name: "Energize"
+    - service: scene.turn_on
+      target:
+        entity_id: scene.bedroom_energize
     - service_template: >
         {% if is_state('media_player.bedroom_speaker','unavailable') %}
           script.wake_up_iphone
@@ -18,10 +17,10 @@ wake_up:
         value: "home"
     - service: input_boolean.turn_on
       entity_id: input_boolean.awake
-#    - service: alarm_control_panel.alarm_disarm
-#      data:
-#        entity_id: alarm_control_panel.home_alarm
-#        code: !secret alarm_code
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.home_alarm
+        code: !secret alarm_code
 #    - service: automation.trigger
 #      entity_id: automation.aurora_controller_hourly
 #    - service: input_boolean.turn_off

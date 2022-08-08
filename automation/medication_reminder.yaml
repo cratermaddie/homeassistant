@@ -19,14 +19,16 @@
     {% endif %}
     {{ is_state(meds_var, 'off') }}
   action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.medication_lights_blinker
     - service: notify.mobile_app_madisons_iphone
       data:
         message: "Take your meds!"
         data:
-          apns_headers:
-            'apns-collapse-id': 'medication-reminder'
+          group: "medication-reminder"
+          tag: "medication-reminder"
           push:
-            thread-id: "medication-reminder"
             sound: 'medical.wav'
           actions:
             - action: "DISMISS_MEDS"

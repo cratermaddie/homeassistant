@@ -1,0 +1,13 @@
+- alias: Send notification if I have not taken my medication
+  mode: restart
+  trigger:
+    - platform: state
+      to: 'on'
+      entity_id:
+        - input_boolean.meds_evening
+        - input_boolean.meds_morning
+        - input_boolean.meds_noon
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.medication_lights_blinker

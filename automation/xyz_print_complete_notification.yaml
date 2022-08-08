@@ -15,8 +15,7 @@
         title: "daVinci Nano Complete"
         message: "The print on the daVinci Nano has finished"
         data:
-          apns_headers:
-            'apns-collapse-id': 'xyz-complete'
+          group: "xyz-complete"
+          tag: "xyz-complete"
           push:
-            thread-id: "xyz-complete"
             sound: 'file_done.wav'

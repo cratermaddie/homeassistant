@@ -1,17 +1,17 @@
-- alias: Rice cooker notification
-  mode: parallel
-  trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.rice_cooker
-      to: 'off'
-  action:
-    - service: notify.mobile_app_madisons_iphone
-      data_template:
-        title: "Rice is done!"
-        message: "Enjoy your rice"
-        data:
-          apns_headers:
-            'apns-collapse-id': 'rice-cooker'
-          push:
-            thread-id: "rice-cooker"
+#- alias: Rice cooker notification
+#  mode: parallel
+#  trigger:
+#    - platform: state
+#      entity_id:
+#        - binary_sensor.rice_cooker
+#      to: 'off'
+#  action:
+#    - service: notify.mobile_app_madisons_iphone
+#      data_template:
+#        title: "Rice is done!"
+#        message: "Enjoy your rice"
+#        data:
+#          apns_headers:
+#            'apns-collapse-id': 'rice-cooker'
+#          push:
+#            thread-id: "rice-cooker"

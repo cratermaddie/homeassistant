@@ -16,6 +16,8 @@
       - condition: state
         entity_id: script.set_nap
         state: 'off'
+      - condition: template
+        value_template: "{{ ((now().timestamp() - as_timestamp(state_attr('script.goodnight', 'last_triggered'))) > 500) and ((now().timestamp() - as_timestamp(state_attr('automation.quiet_goodnight', 'last_triggered'))) > 500) }}"
   action:
 #    - delay:
 #        minutes: >-
@@ -27,10 +29,9 @@
 #      data:
 #        entity_id: alarm_control_panel.home_alarm
 #        code: !secret alarm_code
-    - service: hue.hue_activate_scene
-      data:
-        group_name: "Bedroom"
-        scene_name: "Dimmed"
+    - service: scene.turn_on
+      target:
+        entity_id: scene.bedroom_dimmed
     - delay:
         seconds: 1
     - service: light.turn_off

@@ -1,37 +1,36 @@
-- alias: send notification if ph video is removed
-  mode: restart
-  trigger:
-    - platform: state
-      entity_id: sensor.free_videos
-    - platform: state
-      entity_id: sensor.for_sale_videos
-  condition:
-    condition: and
-    conditions:
-      - condition: template
-        value_template: >
-          {{ trigger.to_state.state|int < trigger.from_state.state|int }}
-      - condition: template
-        value_template: >
-          {{ not (is_state('sensor.free_videos','0') or is_state('sensor.for_sale_videos','0')) }}
-  action:
-    - service: notify.mobile_app_madisons_iphone
-      data_template:
-        message: >-
-          PH Video Removed!
-        data:
-          apns_headers:
-            'apns-collapse-id': 'ph-removal-reminder'
-          push:
-            sound: 'SwTest1_Haptic.caf'
-            thread-id: 'ph-removal-reminder'
-    - service: notify.mobile_app_armonds_iphone
-      data_template:
-        message: >-
-          PH Video Removed!
-        data:
-          apns_headers:
-            'apns-collapse-id': 'ph-removal-reminder'
-          push:
-            sound: 'SwTest1_Haptic.caf'
-            thread-id: 'ph-removal-reminder'
+#- alias: send notification if ph video is removed
+#  mode: restart
+#  trigger:
+#    - platform: state
+#      entity_id: sensor.free_videos
+#    - platform: state
+#      entity_id: sensor.for_sale_videos
+#  condition:
+#    condition: and
+#    conditions:
+#      - condition: template
+#        value_template: >
+#          {{ trigger.to_state.state|int < trigger.from_state.state|int }}
+#      - condition: template
+#        value_template: >
+#          {{ not (is_state('sensor.free_videos','0') or is_state('sensor.for_sale_videos','0')) }}
+#  action:
+#    - service: notify.mobile_app_madisons_iphone
+#      data_template:
+#        message: >-
+#          PH Video Removed!
+#        data:
+#          group: "ph-removal-reminder"
+#          tag: "ph-removal-reminder"
+#
+#          push:
+#            sound: 'SwTest1_Haptic.caf'
+#    - service: notify.mobile_app_armonds_iphone
+#      data_template:
+#        message: >-
+#          PH Video Removed!
+#        data:
+#          group: "ph-removal-reminder"
+#          tag: "ph-removal-reminder"
+#          push:
+#            sound: 'SwTest1_Haptic.caf'

@@ -131,7 +131,6 @@ Google Theme:
       paper-slider-secondary-color: var(--light-primary-color)
       # Labels
       label-badge-background-color: rgb(32, 33, 36)
-      label-badge-text-color: rgb(198, 203, 210)
       label-badge-red: rgb(208, 101, 104)
       label-badge-green: rgb(128, 200, 132)
       label-badge-blue: rgb(138, 180, 248)

@@ -1,0 +1,10 @@
+{
+    "domain": "ph_notification_scrape",
+    "name": "PH Notification Scrape",
+    "documentation": "",
+    "requirements": ["beautifulsoup4==4.8.2"],
+    "dependencies": [],
+    "version": "1.0.0",
+    "after_dependencies": ["rest"],
+    "codeowners": ["@cratermaddie"]
+  }

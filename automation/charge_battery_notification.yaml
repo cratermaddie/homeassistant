@@ -20,8 +20,7 @@
       data_template:
         message: "Your battery is at {{ states('sensor.battery_level') }}%. You may want to charge it before {{ state_attr('calendar.personal_trigger','message') }}."
         data:
-          apns_headers:
-            'apns-collapse-id': 'charge-reminder'
+          group: "charge-reminder"
+          tag: "charge-reminder"
           push:
             sound: 'low_power.caf'
-            thread-id: 'charge-reminder'

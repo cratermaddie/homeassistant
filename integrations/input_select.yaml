@@ -1,15 +1,15 @@
-#aurora_mode:
-#  name: Aurora Mode
-#  options:
-#    - "Weather"
-#    - "Manual"
-#  
-#aurora_brightness:
-#  name: Aurora Brightness
-#  options:
-#    - "Bright"
-#    - "Dim"
-#    - "Off"
+aurora_mode:
+  name: Aurora Mode
+  options:
+    - "Clock"
+    - "Manual"
+  
+aurora_brightness:
+  name: Aurora Brightness
+  options:
+    - "Bright"
+    - "Dim"
+    - "Off"
 
 hue_scene_madison:
   name: Scene

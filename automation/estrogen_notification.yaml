@@ -24,10 +24,9 @@
       data:
         message: "Take your estrogen!"
         data:
-          apns_headers:
-            'apns-collapse-id': 'estrogen-reminder'
+          group: "estrogen-reminder"
+          tag: "estrogen-reminder"
           push:
-            thread-id: "estrogen-reminder"
             sound: 'medical.wav'
           actions:
             - action: "DISMISS_E"

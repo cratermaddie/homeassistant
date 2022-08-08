@@ -9,10 +9,9 @@
       data_template:
         message: "Home Assistant {{ states('sensor.home_assistant_website') }} is available."
         data:
-          apns_headers:
-            'apns-collapse-id': 'new-ha-version-reminder'
+          group: "new-ha-version-reminder"
+          tag: "new-ha-version-reminder"
           push:
-            thread-id: 'new-ha-version-reminder'
             sound: '3rdParty_Success_Haptic.caf'
           url: "{{ states('sensor.change_log_url') }}"
     - service: persistent_notification.create

@@ -1,0 +1,19 @@
+- alias: start laundry timer from nfc tag
+  mode: restart
+  trigger:
+    platform: event
+    event_type: tag_scanned
+  condition: '{{ "washer-tag" in trigger.event.data.tag_id }}'
+  action:
+    service: timer.start
+    entity_id: timer.laundry
+
+- alias: start dryer timer from nfc tag
+  mode: restart
+  trigger:
+    platform: event
+    event_type: tag_scanned
+  condition: '{{ "dryer-tag" in trigger.event.data.tag_id }}'
+  action:
+    service: timer.start
+    entity_id: timer.dryer

@@ -5,10 +5,9 @@ wake_up_iphone:
         title: "Wake up!"
         message: "Bedroom speaker was unavailable"
         data:
-          apns_headers:
-            'apns-collapse-id': 'wake-up'
+          group: "wake-up"
+          tag: "wake-up"
           push:
-            thread-id: "wake-up"
             sound: 'googlealarmnotif.wav'
-            critical: 1
+            interruption-level: critical
             volume: 1.0

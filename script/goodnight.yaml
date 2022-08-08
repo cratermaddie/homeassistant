@@ -80,20 +80,20 @@ goodnight:
       target:
         entity_id:
           - light.fairy_lights
-#    - service: alarm_control_panel.alarm_arm_home
-#      data:
-#        entity_id: alarm_control_panel.home_alarm
-#        code: !secret alarm_code
-#    - service: script.turn_off_vanity
+    - service: alarm_control_panel.alarm_arm_home
+      data:
+        entity_id: alarm_control_panel.home_alarm
+        code: !secret alarm_code
+    - service: script.turn_off_vanity
     - service: var.set
       data:
         entity_id: var.time_asleep
         value_template: '{{ now().timestamp() | int }}'
     - service: media_player.play_media
       data:
-        entity_id: media_player.bedroom_speaker
-        media_content_id: 'https://storage.googleapis.com/relaxation-sounds/babbling_brook_3600.mp3'
-        media_content_type: 'music'
+        media_content_id: spotify:episode:3pE4uKFwCzd5TA2A6t4rHr
+        media_content_type: music
+        source: "Bedroom speaker"
 #    - condition: state
 #      entity_id: person.armond
 #      state: 'not_home'

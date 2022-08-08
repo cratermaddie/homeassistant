@@ -62,7 +62,7 @@ automation: !include_dir_merge_list automation
 script: !include_dir_merge_named script
 #scene: !include scenes.yaml
 sensor: !include integrations/sensor.yaml
-ios: !include integrations/ios_config.yaml
+#ios: !include integrations/ios_config.yaml
 input_select: !include integrations/input_select.yaml
 device_tracker: !include integrations/device_tracker.yaml
 input_boolean: !include integrations/input_boolean.yaml
@@ -110,17 +110,17 @@ apple_tv:
   - host: !secret apple_tv_ip
     login_id: !secret apple_tv_login_id
 
-#alarm_control_panel:
-#  - platform: manual
-#    name: Home Alarm
-#    code: !secret alarm_code
-#    arming_time: 60
-#    delay_time: 20
-#    trigger_time: 20
-#    disarmed:
-#      trigger_time: 0
-#    armed_home:
-#      arming_time: 0
+alarm_control_panel:
+  - platform: manual
+    name: Home Alarm
+    code: !secret alarm_code
+    arming_time: 60
+    delay_time: 20
+    trigger_time: 20
+    disarmed:
+      trigger_time: 0
+    armed_home:
+      arming_time: 0
 
 sonoff:
   username: !secret sonoff_email
@@ -157,7 +157,7 @@ nintendo_wishlist:
 logger:
   default: warning
 #  logs:
-#    custom_components.flight_status: debug
+#    custom_components.google_geocode_custom: debug
 
 #browser_mod:
 #  devices:

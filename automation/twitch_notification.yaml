@@ -1,30 +1,30 @@
-- alias: Send notification when twitch streamer goes live
-  initial_state: true
-  mode: restart
-  trigger:
-    platform: state
-    entity_id: sensor.hatfilms,sensor.upisnotjump,sensor.squidgame,sensor.yogscast
-    to: streaming
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: var.mode
-        state: 'home'
-      - condition: template
-        value_template: "{{ ((as_timestamp(state_attr('calendar.personal_trigger','start_time'))) - (states('sensor.travel_to_next_event_madison') | int * 60)) - (now().timestamp()) >= 3600 }}"
-  action:
-    - wait_template: "{{ state_attr(trigger.entity_id, 'title') }}"
-    - service: notify.mobile_app_madisons_iphone
-      data_template:
-        message: >
-          {{ state_attr(trigger.entity_id, 'friendly_name') }} is live with {{ state_attr(trigger.entity_id, 'title') }}{{ '!' if state_attr(trigger.entity_id, 'title')[-1] != '!' else '' }}
-        data:
-          apns_headers:
-            'apns-collapse-id': '{{ trigger.from_state.attributes.friendly_name }}-reminder'
-          attachment:
-            url: '{{ trigger.from_state.attributes.entity_picture }}'
-            hide-thumbnail: false
-          push:
-            thread-id: "twitch-notification"
-            sound: 'film.wav'
+#- alias: Send notification when twitch streamer goes live
+#  initial_state: true
+#  mode: restart
+#  trigger:
+#    platform: state
+#    entity_id: sensor.hatfilms,sensor.upisnotjump,sensor.squidgame,sensor.yogscast
+#    to: streaming
+#  condition:
+#    condition: and
+#    conditions:
+#      - condition: state
+#        entity_id: var.mode
+#        state: 'home'
+#      - condition: template
+#        value_template: "{{ ((as_timestamp(state_attr('calendar.personal_trigger','start_time'))) - (states('sensor.travel_to_next_event_madison') | int * 60)) - (now().timestamp()) >= 3600 }}"
+#  action:
+#    - wait_template: "{{ state_attr(trigger.entity_id, 'title') }}"
+#    - service: notify.mobile_app_madisons_iphone
+#      data_template:
+#        message: >
+#          {{ state_attr(trigger.entity_id, 'friendly_name') }} is live with {{ state_attr(trigger.entity_id, 'title') }}{{ '!' if state_attr(trigger.entity_id, 'title')[-1] != '!' else '' }}
+#        data:
+#          apns_headers:
+#            'apns-collapse-id': '{{ trigger.from_state.attributes.friendly_name }}-reminder'
+#          attachment:
+#            url: '{{ trigger.from_state.attributes.entity_picture }}'
+#            hide-thumbnail: false
+#          push:
+#            thread-id: "twitch-notification"
+#            sound: 'film.wav'

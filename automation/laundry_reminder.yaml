@@ -18,10 +18,9 @@
       data:
         message: "Don't forget to do laundry!"
         data:
-          apns_headers:
-            'apns-collapse-id': 'laundry-reminder'
+          group: "laundry-reminder"
+          tag: "laundry-reminder"
           push:
-            thread-id: "laundry-reminder"
             sound: 'wash.wav'
           actions:
             - action: "START_WASHER"

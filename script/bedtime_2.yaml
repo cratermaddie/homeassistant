@@ -4,10 +4,9 @@ bedtime_2:
       entity_id: var.mode
       state: 'home'
     - service: script.update_travel_time_madison
-    - service: hue.hue_activate_scene
-      data:
-        group_name: "Bedroom"
-        scene_name: "Bedtime"
+    - service: scene.turn_on
+      target:
+        entity_id: scene.bedroom_bedtime
 #    - service: light.turn_on
 #      data:
 #        entity_id: light.nanoleaf

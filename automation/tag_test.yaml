@@ -1,0 +1,12 @@
+- alias: nfc tag test
+  mode: restart
+  trigger:
+    platform: event
+    event_type: tag_scanned
+  condition: '{{ "tag-test" in trigger.event.data.tag_id }}'
+  action:
+    - service: persistent_notification.create
+      data_template:
+        title: "Test Tag Scanned"
+        message: |
+          Scanner ID: {{ trigger.event.data.device_id }}

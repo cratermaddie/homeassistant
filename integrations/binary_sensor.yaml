@@ -39,10 +39,10 @@
 #          value_template: "{{ is_state('binary_sensor.bed_right', 'off') }}"
 #      bed_left_occupied:
 #          value_template: "{{ is_state('binary_sensor.bed_left', 'off') }}"
-      front_door_locked:
-          value_template: "{{ is_state('binary_sensor.front_door_unlocked', 'off') }}"
-      back_door_locked:
-          value_template: "{{ is_state('binary_sensor.back_door_unlocked', 'off') }}"
+#      front_door_locked:
+#          value_template: "{{ is_state('binary_sensor.front_door_unlocked', 'off') }}"
+#      back_door_locked:
+#          value_template: "{{ is_state('binary_sensor.back_door_unlocked', 'off') }}"
       ord_faa_err:
         value_template: "{{ states('binary_sensor.ord_arrival_delay') or states('binary_sensor.ord_closure') or states('binary_sensor.ord_departure_delay') or states('binary_sensor.ord_ground_delay') or states('binary_sensor.ord_ground_stop') }}"
       mdw_faa_err:

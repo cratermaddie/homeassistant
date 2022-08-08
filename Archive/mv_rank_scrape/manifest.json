@@ -1,0 +1,10 @@
+{
+    "domain": "mv_rank_scrape",
+    "name": "MV Rank Scrape",
+    "documentation": "",
+    "requirements": ["beautifulsoup4==4.8.2"],
+    "dependencies": [],
+    "after_dependencies": ["rest"],
+    "version": "1.0.0",
+    "codeowners": ["@cratermaddie"]
+  }

@@ -6,18 +6,17 @@ cancel_nap:
     - service: script.turn_off
       data:
         entity_id: script.snooze
-    - service: hue.hue_activate_scene
-      data:
-        group_name: "Bedroom"
-        scene_name: "Relax"
+    - service: scene.turn_on
+      target:
+        entity_id: scene.bedrooom_relax
     - service: var.set
       data:
         entity_id: var.mode
         value: "home"
-#    - service: alarm_control_panel.alarm_disarm
-#      data:
-#        entity_id: alarm_control_panel.home_alarm
-#        code: !secret alarm_code
+    - service: alarm_control_panel.alarm_disarm
+      data:
+        entity_id: alarm_control_panel.home_alarm
+        code: !secret alarm_code
     - service: input_boolean.turn_on
       data:
         entity_id: input_boolean.awake

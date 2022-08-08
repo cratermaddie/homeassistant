@@ -1,0 +1,9 @@
+{
+    "domain": "payment_scrape",
+    "name": "Payment Scrape",
+    "documentation": "",
+    "requirements": ["beautifulsoup4==4.8.2"],
+    "dependencies": [],
+    "after_dependencies": ["rest"],
+    "codeowners": ["@cratermaddie"]
+  }

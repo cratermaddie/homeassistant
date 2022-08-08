@@ -3,14 +3,12 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.back_door 
-        - binary_sensor.south_kitchen_window
-        - binary_sensor.bedroom_window
+        - binary_sensor.back_door
         - binary_sensor.front_door
-        - binary_sensor.wyze_group
-        - binary_sensor.north_living_room_window
-        - binary_sensor.south_living_room_window
         - binary_sensor.office_window
+        - binary_sensor.vanity_room_window
+        - binary_sensor.west_kitchen_window
+        - binary_sensor.north_living_room_window
       to: 'on'
       for:
         minutes: 5

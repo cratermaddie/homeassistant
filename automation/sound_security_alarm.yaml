@@ -1,62 +1,66 @@
-#- alias: Sound security alarm
-#  mode: restart
-#  trigger:
-#    platform: state
-#    entity_id: alarm_control_panel.home_alarm
-#    to: 'triggered'
-#  action:
-#    - service: switch.turn_off
-#      data:
-#        entity_id: switch.back_door_alarm_sounding_blink, switch.back_door_alarm_arming_blink, switch.back_door_alarm_disarmed, switch.back_door_alarm_arming, switch.back_door_alarm_armed, switch.front_door_alarm_sounding_blink, switch.front_door_alarm_arming_blink, switch.front_door_alarm_disarmed, switch.front_door_alarm_arming, switch.front_door_alarm_armed
-#    - service: switch.turn_on
-#      data:
-#        entity_id: switch.back_door_alarm_sounding_blink, switch.front_door_alarm_sounding_blink
-#    - service: media_player.media_pause
-#      data:
-#        entity_id: media_player.all_devices
-#    - service: light.turn_on
-#      data:
-#        entity_id: light.main_lights
-#        rgb_color: [255,255,255]
-#        brightness: 255
-#    - service: media_player.turn_on
-#      entity_id: media_player.all_devices
-#    - wait_template: "{{ is_state('media_player.all_devices', 'idle') }}"
-#    - service: media_player.volume_set
-#      data:
-#        entity_id: media_player.all_devices
-#        volume_level: 1.0
-#    - service: media_player.play_media
-#      data:
-#        entity_id: media_player.all_devices
-#        media_content_id: 'http://192.168.0.2:8123/local/audio/security_alarm.mp3'
-#        media_content_type: music
-#    - service: notify.mobile_app_madisons_iphone
-#      data:
-#        title: "ALARM"
-#        message: "The alarm has been triggered!"
-#        data:
-#          apns_headers:
-#            'apns-collapse-id': 'alarm'
-#          push:
-#            thread-id: "alarm"
-#            sound: 
-#              name: default
-#              critical: 1
-#              volume: 1.0
-#    - service: notify.mobile_app_iphone
-#      data:
-#        title: "ALARM"
-#        message: "The alarm has been triggered!"
-#        data:
-#          apns_headers:
-#            'apns-collapse-id': 'alarm'
-#          push:
-#            thread-id: "alarm"
-#            sound: 
-#              name: default
-#              critical: 1
-#              volume: 1.0
-#    - service: switch.turn_on
-#      data:
-#        entity_id: switch.noonlight_switch
+- alias: Sound security alarm
+  mode: restart
+  trigger:
+    platform: state
+    entity_id: alarm_control_panel.home_alarm
+    to: 'triggered'
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.back_door_alarm_sounding_blink, switch.back_door_alarm_arming_blink, switch.back_door_alarm_disarmed, switch.back_door_alarm_arming, switch.back_door_alarm_armed, switch.front_door_alarm_sounding_blink, switch.front_door_alarm_arming_blink, switch.front_door_alarm_disarmed, switch.front_door_alarm_arming, switch.front_door_alarm_armed
+    - service: switch.turn_on
+      data:
+        entity_id: switch.back_door_alarm_sounding_blink, switch.front_door_alarm_sounding_blink
+    - service: media_player.media_pause
+      data:
+        entity_id: media_player.all_devices
+    - service: light.turn_on
+      data:
+        entity_id: light.main_lights
+        rgb_color: [255,255,255]
+        brightness: 255
+    - service: media_player.turn_on
+      entity_id: media_player.all_devices
+    - wait_template: "{{ is_state('media_player.all_devices', 'idle') }}"
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.all_devices
+        volume_level: 1.0
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.all_devices
+        media_content_id: 'http://192.168.0.2:8123/local/audio/security_alarm.mp3'
+        media_content_type: music
+    - service: notify.mobile_app_madisons_iphone
+      data:
+        title: "ALARM"
+        message: "The alarm has been triggered!"
+        data:
+          title: "Armed"
+          message: "The security system is now armed"
+          data:
+            group: "alarm"
+            tag: "alarm"
+            push:
+              sound:
+                name: default
+                critical: 1
+                volume: 1.0
+    - service: notify.mobile_app_iphone
+      data:
+        title: "ALARM"
+        message: "The alarm has been triggered!"
+        data:
+          title: "Armed"
+          message: "The security system is now armed"
+          data:
+            group: "alarm"
+            tag: "alarm"
+            push:
+              sound:
+                name: default
+                critical: 1
+                volume: 1.0
+    - service: switch.turn_on
+      data:
+        entity_id: switch.noonlight_switch

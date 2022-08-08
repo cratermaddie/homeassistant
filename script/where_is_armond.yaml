@@ -10,12 +10,8 @@ where_is_armond:
             Armond is near {{ state_attr('sensor.armonds_iphone_geocoded_location','Name') }}
           {% endif %}
         data:
-          apns_headers:
-            'apns-collapse-id': 'armond-location'
-          push:
-            thread-id: "armond-location"
-            category: map
-#            sound: 'googlealarmnotif.wav'
+          group: "armond-location"
+          tag: "armond-location"
           action_data:
             latitude: "{{ state_attr('device_tracker.armonds_iphone_app','latitude') }}"
             longitude: "{{ state_attr('device_tracker.armonds_iphone_app','longitude') }}"

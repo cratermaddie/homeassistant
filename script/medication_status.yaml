@@ -1,5 +1,8 @@
 medication_status:
   sequence:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.medication_lights_blinker
     - service: input_boolean.turn_on
       data:
         entity_id: >-

@@ -1,0 +1,12 @@
+- alias: Toggle workbench light on mini switch
+  mode: restart
+  trigger:
+    platform: event
+    event_type: deconz_event    
+    event_data:
+      id: smart_switch
+      event: 1002
+  action:
+    - service: light.toggle
+      target:
+        entity_id: light.workbench

@@ -15,8 +15,7 @@
         title: "CR-X Complete"
         message: "The print on the CR-X has finished"
         data:
-          apns_headers:
-            'apns-collapse-id': 'cr-x-complete'
+          group: "cr-x-complete"
+          tag: "cr-x-complete"
           push:
-            thread-id: "cr-x-complete"
             sound: 'file_done.wav'
